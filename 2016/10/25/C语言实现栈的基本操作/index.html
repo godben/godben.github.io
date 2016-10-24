@@ -4,23 +4,35 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>生命不息，折腾不止 | godben&#39;s blog</title>
+    <title>C语言实现栈的基本操作 | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="耗时半个月，踩了无数坑，查了不计其数的资料，最终将博客搭建成功，之前博客是51CTO的，总感觉用着别人的东西很不爽，而且51CTO博客的页面有些过时，不支持屏幕自适应，在移动端体验效果很差。因此怀着一颗生命不息，折腾不止的心开始搭建拥有自主产权的博客，最初打算用Bootstrap+Django+mysql搭建">
+    <meta name="description" content="#include
+#include
+#include
+#includetypedef struct Node{    int data;    struct Node  pNext;}NODE,  PNODE;
+typedef struct Stack{    PNODE pTop;    PNODE pBottom;}STACK,  PSTACK;     //PSTACK等价于struct S">
 <meta property="og:type" content="article">
-<meta property="og:title" content="生命不息，折腾不止">
-<meta property="og:url" content="http://yoursite.com/2016/10/21/生命不息，折腾不止/index.html">
+<meta property="og:title" content="C语言实现栈的基本操作">
+<meta property="og:url" content="http://yoursite.com/2016/10/25/C语言实现栈的基本操作/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="耗时半个月，踩了无数坑，查了不计其数的资料，最终将博客搭建成功，之前博客是51CTO的，总感觉用着别人的东西很不爽，而且51CTO博客的页面有些过时，不支持屏幕自适应，在移动端体验效果很差。因此怀着一颗生命不息，折腾不止的心开始搭建拥有自主产权的博客，最初打算用Bootstrap+Django+mysql搭建">
-<meta property="og:updated_time" content="2016-10-24T16:17:29.953Z">
+<meta property="og:description" content="#include
+#include
+#include
+#includetypedef struct Node{    int data;    struct Node  pNext;}NODE,  PNODE;
+typedef struct Stack{    PNODE pTop;    PNODE pBottom;}STACK,  PSTACK;     //PSTACK等价于struct S">
+<meta property="og:updated_time" content="2016-10-24T16:16:52.755Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="生命不息，折腾不止">
-<meta name="twitter:description" content="耗时半个月，踩了无数坑，查了不计其数的资料，最终将博客搭建成功，之前博客是51CTO的，总感觉用着别人的东西很不爽，而且51CTO博客的页面有些过时，不支持屏幕自适应，在移动端体验效果很差。因此怀着一颗生命不息，折腾不止的心开始搭建拥有自主产权的博客，最初打算用Bootstrap+Django+mysql搭建">
+<meta name="twitter:title" content="C语言实现栈的基本操作">
+<meta name="twitter:description" content="#include
+#include
+#include
+#includetypedef struct Node{    int data;    struct Node  pNext;}NODE,  PNODE;
+typedef struct Stack{    PNODE pTop;    PNODE pBottom;}STACK,  PSTACK;     //PSTACK等价于struct S">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -80,20 +92,53 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/10/21/生命不息，折腾不止/" title="生命不息，折腾不止" itemprop="url">生命不息，折腾不止</a>
+      <a href="/2016/10/25/C语言实现栈的基本操作/" title="C语言实现栈的基本操作" itemprop="url">C语言实现栈的基本操作</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-10-21T14:58:12.301Z" itemprop="datePublished"> 发表于 2016-10-21</time>
+    <time datetime="2016-10-24T16:08:09.670Z" itemprop="datePublished"> 发表于 2016-10-25</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>耗时半个月，踩了无数坑，查了不计其数的资料，最终将博客搭建成功，之前博客是51CTO的，总感觉用着别人的东西很不爽，而且51CTO博客的页面有些过时，不支持屏幕自适应，在移动端体验效果很差。因此怀着一颗生命不息，折腾不止的心开始搭建拥有自主产权的博客，最初打算用Bootstrap+Django+mysql搭建 <a id="more"></a>，由于时间有限，不能将过多时间耗在这上面，所以就放弃了这种组合，改用了比较流行的Hexo博客框架，由于之前对hexo和git都不了解，所以边学边做，每走一步就踩个坑，当最后执行了“hexo d”后，刷新，成功了！那种feel就像你对心仪的女孩说：在一起吧。女孩说：好啊。（瞎猜的–!）。博客整体已经完成，剩下的细节一步一步进行完善，旧博客的文章也会迁移过来。</p>
+		<p>#include<stdio.h></stdio.h></p>
+<p>#include<malloc.h></malloc.h></p>
+<p>#include<stdlib.h></stdlib.h></p>
+<p>#include<stdbool.h><br>typedef struct Node<br>{<br>    int data;<br>    struct Node <em> pNext;<br>}NODE, </em> PNODE;</stdbool.h></p>
+<p>typedef struct Stack<br>{<br>    PNODE pTop;<br>    PNODE pBottom;<br>}STACK, <em> PSTACK;     //PSTACK等价于struct STACK </em><br>  <a id="more"></a><br>void init(PSTACK); //初始化栈<br>void push(PSTACK, int );  //压栈<br>void traverse(PSTACK);    //遍历<br>bool pop(PSTACK pS,int * pVal);   //出栈<br>void clear(PSTACK pS);    //清空栈</p>
+<p>int main(void)<br>{<br>    STACK S;  //STACK等价于struct Stack<br>    int val;<br>    init(&amp;S);  //造出空栈</p>
+<pre><code>push(&amp;S, 1);  //压栈
+push(&amp;S, 2);
+push(&amp;S, 3);
+push(&amp;S, 4);
+push(&amp;S, 5);
+push(&amp;S, 6);
+
+traverse(&amp;S); //遍历输出
+</code></pre><p>/<em><br>    if(pop(&amp;S,&amp;val))<br>    {<br>        printf(“出栈成功，出栈的元素是%d\n”, val);<br>    }<br>    else<br>    {<br>        printf(“出栈失败！\n”);<br>    }
+</em>/<br>    clear(&amp;S);<br>    traverse(&amp;S);</p>
+<pre><code>return 0;
+</code></pre><p>}</p>
+<p>void init(PSTACK pS)<br>{<br>    pS-&gt;pTop = (PNODE)malloc(sizeof(NODE));<br>    if(NULL == pS-&gt;pTop)<br>    {<br>        printf(“动态内存分配失败\n”);<br>        exit(-1);<br>    }<br>    else<br>    {<br>        pS-&gt;pBottom = pS-&gt;pTop;<br>        pS-&gt;pTop-&gt;pNext = NULL;<br>    }<br>}</p>
+<p>void push(PSTACK pS, int val)<br>{<br>    PNODE pNew = (PNODE)malloc(sizeof(NODE));  //创建新的节点<br>    pNew-&gt;data = val;  //将val的值赋给新节点的数据域<br>    pNew-&gt;pNext = pS-&gt;pTop; //将新节点的指针域指向下一个节点.pS-&gt;Top不能改写成pS-&gt;Bottom<br>    pS-&gt;pTop = pNew; //pTop指向新节点<br>    return;<br>}</p>
+<p>void traverse(PSTACK pS)<br>{<br>    PNODE p = pS-&gt;pTop;<br>    while(p != pS-&gt;pBottom)<br>    {<br>        printf(“%d “, p-&gt;data);<br>        p = p-&gt;pNext;<br>    }<br>    printf(“\n”);<br>    return;<br>}</p>
+<p>bool empty(PSTACK pS)<br>{<br>    if(pS-&gt;pTop == pS-&gt;pBottom)<br>    {<br>        return true;<br>    }<br>    else<br>    {<br>        return false;<br>    }<br>}</p>
+<p>bool pop(PSTACK pS,int <em> pVal)<br>{<br>    if(empty(pS))<br>    {<br>        return false;<br>    }<br>    else<br>    {<br>        PNODE r = pS-&gt;pTop;
+        </em>pVal = r-&gt;data;<br>        pS-&gt;pTop = r-&gt;pNext;<br>        free(r);<br>        r = NULL;<br>        return true;<br>    }<br>}</p>
+<p>//清空栈<br>void clear(PSTACK pS)<br>{<br>    if(empty(pS))        //如果<br>    {<br>        return;<br>    }<br>    else<br>    {<br>        PNODE p = pS-&gt;pTop;  //定义元素p指向栈顶元素<br>        PNODE q = NULL；     //定义元素q，初始值为空</p>
+<pre><code>    while(p !=pS-&gt;pBottom)    //如果栈不为空
+    {
+        q = p-&gt;pNext;        //q指向p的下一个元素
+        free(p);            //释放p所指向的栈顶元素
+        p = q;               //将q所指向的元素赋给p
+    }
+    pS-&gt;pTop = pS-&gt;pBottom;      
+}
+</code></pre><p>}</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -102,7 +147,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Hexo/">Hexo</a><a href="/tags/github/">github</a>
+  <span></span> <a href="/tags/C/">C</a><a href="/tags/数据结构/">数据结构</a><a href="/tags/栈/">栈</a>
   </div>
 
 </div>
@@ -111,7 +156,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/10/21/生命不息，折腾不止/" data-title="生命不息，折腾不止 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/10/25/C语言实现栈的基本操作/" data-title="C语言实现栈的基本操作 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -124,20 +169,20 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/10/25/C语言实现栈的基本操作/" title="C语言实现栈的基本操作">
-  <strong>上一篇：</strong><br/>
-  <span>
-  C语言实现栈的基本操作</span>
+
+<div class="next">
+<a href="/2016/10/21/生命不息，折腾不止/"  title="生命不息，折腾不止">
+ <strong>下一篇：</strong><br/> 
+ <span>生命不息，折腾不止
+</span>
 </a>
 </div>
-
 
 </nav>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/10/21/生命不息，折腾不止/" data-title="生命不息，折腾不止" data-url="http://yoursite.com/2016/10/21/生命不息，折腾不止/"></div>
+	<div class="ds-thread" data-thread-key="2016/10/25/C语言实现栈的基本操作/" data-title="C语言实现栈的基本操作" data-url="http://yoursite.com/2016/10/25/C语言实现栈的基本操作/"></div>
 </section>
 
 
