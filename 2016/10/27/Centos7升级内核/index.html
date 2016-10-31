@@ -11,22 +11,37 @@
     
 
     
-    <meta name="description" content="更新前，内核版本为：[root@localhost ~]uname -r[root@localhost ~]3.10.0-327.10.1.el7.x86_64
+    <meta name="description" content="更新前，内核版本为：
+
+[root@localhost ~]uname -r[root@localhost ~]3.10.0-327.10.1.el7.x86_64
+
 升级的方法：
-1、导入key[root@localhost ~]rpm –import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org">
+1、导入key
+
+[root@localhost ~]rpm –import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Centos7升级内核">
 <meta property="og:url" content="http://yoursite.com/2016/10/27/Centos7升级内核/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="更新前，内核版本为：[root@localhost ~]uname -r[root@localhost ~]3.10.0-327.10.1.el7.x86_64
+<meta property="og:description" content="更新前，内核版本为：
+
+[root@localhost ~]uname -r[root@localhost ~]3.10.0-327.10.1.el7.x86_64
+
 升级的方法：
-1、导入key[root@localhost ~]rpm –import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org">
-<meta property="og:updated_time" content="2016-10-27T13:01:25.171Z">
+1、导入key
+
+[root@localhost ~]rpm –import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org">
+<meta property="og:updated_time" content="2016-10-31T13:10:09.520Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos7升级内核">
-<meta name="twitter:description" content="更新前，内核版本为：[root@localhost ~]uname -r[root@localhost ~]3.10.0-327.10.1.el7.x86_64
+<meta name="twitter:description" content="更新前，内核版本为：
+
+[root@localhost ~]uname -r[root@localhost ~]3.10.0-327.10.1.el7.x86_64
+
 升级的方法：
-1、导入key[root@localhost ~]rpm –import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org">
+1、导入key
+
+[root@localhost ~]rpm –import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -101,14 +116,35 @@
 </header>
 	<div class="article-content">
 		
-		<p>更新前，内核版本为：<br>[root@localhost ~]uname -r<br>[root@localhost ~]3.10.0-327.10.1.el7.x86_64</p>
+		<p>更新前，内核版本为：</p>
+<blockquote>
+<p>[root@localhost ~]uname -r<br>[root@localhost ~]3.10.0-327.10.1.el7.x86_64</p>
+</blockquote>
 <p>升级的方法：</p>
-<p>1、导入key<br>[root@localhost ~]rpm –import <a href="https://www.elrepo.org/RPM-GPG-KEY-elrepo.org" target="_blank" rel="external">https://www.elrepo.org/RPM-GPG-KEY-elrepo.org</a><br><a id="more"></a><br>2、安装elrepo的yum源<br>[root@localhost ~]rpm -Uvh <a href="http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm" target="_blank" rel="external">http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm</a>  </p>
-<p>3、安装内核<br>[root@localhost ~]yum –enablerepo=elrepo-kernel install  kernel-ml-devel kernel-ml</p>
-<p>4、查看默认启动顺序<br>[root@localhost ~]awk -F\’ ‘$1==”menuentry “ {print $2}’ /etc/grub2.cfg<br>CentOS Linux (4.4.4-1.el7.elrepo.x86_64) 7 (Core)<br>CentOS Linux (3.10.0-327.10.1.el7.x86_64) 7 (Core)<br>CentOS Linux (0-rescue-c52097a1078c403da03b8eddeac5080b) 7 (Core)</p>
-<p>默认启动的顺序是从0开始，新内核是从头插入（目前位置在0，而4.4.4的是在1），所以需要选择0。<br>[root@localhost ~]grub2-set-default 0  </p>
-<p>然后reboot重启，使用新的内核，下面是重启后使用的内核版本:<br>[root@localhost ~]uname -r<br>[root@localhost ~]4.4.4-1.el7.elrepo.x86_64  </p>
-<p>5、删除旧的内核<br>[root@localhost ~]yum remove kernel</p>
+<p>1、导入key</p>
+<blockquote>
+<p>[root@localhost ~]rpm –import <a href="https://www.elrepo.org/RPM-GPG-KEY-elrepo.org" target="_blank" rel="external">https://www.elrepo.org/RPM-GPG-KEY-elrepo.org</a><br><a id="more"></a><br>2、安装elrepo的yum源<br>[root@localhost ~]rpm -Uvh <a href="http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm" target="_blank" rel="external">http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm</a>  </p>
+</blockquote>
+<p>3、安装内核</p>
+<blockquote>
+<p>[root@localhost ~]yum –enablerepo=elrepo-kernel install  kernel-ml-devel kernel-ml</p>
+</blockquote>
+<p>4、查看默认启动顺序</p>
+<blockquote>
+<p>[root@localhost ~]awk -F\’ ‘$1==”menuentry “ {print $2}’ /etc/grub2.cfg<br>CentOS Linux (4.4.4-1.el7.elrepo.x86_64) 7 (Core)<br>CentOS Linux (3.10.0-327.10.1.el7.x86_64) 7 (Core)<br>CentOS Linux (0-rescue-c52097a1078c403da03b8eddeac5080b) 7 (Core)</p>
+</blockquote>
+<p>默认启动的顺序是从0开始，新内核是从头插入（目前位置在0，而4.4.4的是在1），所以需要选择0。</p>
+<blockquote>
+<p>[root@localhost ~]grub2-set-default 0  </p>
+</blockquote>
+<p>然后reboot重启，使用新的内核，下面是重启后使用的内核版本:</p>
+<blockquote>
+<p>[root@localhost ~]uname -r<br>[root@localhost ~]4.4.4-1.el7.elrepo.x86_64  </p>
+</blockquote>
+<p>5、删除旧的内核</p>
+<blockquote>
+<p>[root@localhost ~]yum remove kernel</p>
+</blockquote>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -179,15 +215,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Centos/" title="Centos">Centos<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Kernel/" title="Kernel">Kernel<sup>1</sup></a></li>
+				<li><a href="/tags/Kernel/" title="Kernel">Kernel<sup>2</sup></a></li>
 			
 		
 			
@@ -203,15 +235,19 @@
 			
 		
 			
+				<li><a href="/tags/Centos/" title="Centos">Centos<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/FileSystem/" title="FileSystem">FileSystem<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/FileSystem/" title="FileSystem">FileSystem<sup>1</sup></a></li>
 			
 		
 			

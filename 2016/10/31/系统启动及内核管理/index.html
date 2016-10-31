@@ -4,19 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>godben&#39;s blog</title>
+    <title>系统启动及内核管理 | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta property="og:type" content="website">
-<meta property="og:title" content="godben's blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+    <meta name="description" content="一、知识整理 1、nohup 命令：不挂断地运行命令，远程连接当断网或断开shell时还可以继续运行。无论是否将nohup命令的输出重定向到终端，输出都将附加到当前目录下的nohup.out文件中，如果当前不可写，则重定向到家目录nohup.out文件，除非定义了输出文件。nohup COMMAND 输出重定向至文件nohup COMMAND &amp;amp; 使用jobs查看任务，按后台任务关闭方式关">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统启动及内核管理">
+<meta property="og:url" content="http://yoursite.com/2016/10/31/系统启动及内核管理/index.html">
 <meta property="og:site_name" content="godben's blog">
+<meta property="og:description" content="一、知识整理 1、nohup 命令：不挂断地运行命令，远程连接当断网或断开shell时还可以继续运行。无论是否将nohup命令的输出重定向到终端，输出都将附加到当前目录下的nohup.out文件中，如果当前不可写，则重定向到家目录nohup.out文件，除非定义了输出文件。nohup COMMAND 输出重定向至文件nohup COMMAND &amp;amp; 使用jobs查看任务，按后台任务关闭方式关">
+<meta property="og:updated_time" content="2016-10-31T13:40:01.914Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="godben's blog">
+<meta name="twitter:title" content="系统启动及内核管理">
+<meta name="twitter:description" content="一、知识整理 1、nohup 命令：不挂断地运行命令，远程连接当断网或断开shell时还可以继续运行。无论是否将nohup命令的输出重定向到终端，输出都将附加到当前目录下的nohup.out文件中，如果当前不可写，则重定向到家目录nohup.out文件，除非定义了输出文件。nohup COMMAND 输出重定向至文件nohup COMMAND &amp;amp; 使用jobs查看任务，按后台任务关闭方式关">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -72,12 +76,10 @@
 </div>
     </header>
     <div id="container">
-      <div id="main">
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
   <h1 itemprop="name">
     
       <a href="/2016/10/31/系统启动及内核管理/" title="系统启动及内核管理" itemprop="url">系统启动及内核管理</a>
@@ -91,9 +93,9 @@
     
   </p>
 </header>
-    <div class="article-content">
-        
-        <h3 id="一、知识整理"><a href="#一、知识整理" class="headerlink" title="一、知识整理"></a>一、知识整理</h3><p><strong> 1、nohup 命令：</strong><br>不挂断地运行命令，远程连接当断网或断开shell时还可以继续运行。无论是否将nohup命令的输出重定向到终端，输出都将附加到当前目录下的nohup.out文件中，如果当前不可写，则重定向到家目录nohup.out文件，除非定义了输出文件。<br>nohup COMMAND 输出重定向至文件<br>nohup COMMAND &amp; 使用jobs查看任务，按后台任务关闭方式关闭。</p>
+	<div class="article-content">
+		
+		<h3 id="一、知识整理"><a href="#一、知识整理" class="headerlink" title="一、知识整理"></a>一、知识整理</h3><p><strong> 1、nohup 命令：</strong><br>不挂断地运行命令，远程连接当断网或断开shell时还可以继续运行。无论是否将nohup命令的输出重定向到终端，输出都将附加到当前目录下的nohup.out文件中，如果当前不可写，则重定向到家目录nohup.out文件，除非定义了输出文件。<br>nohup COMMAND 输出重定向至文件<br>nohup COMMAND &amp; 使用jobs查看任务，按后台任务关闭方式关闭。</p>
 <p><strong> 2、设置和调节nice值： </strong></p>
 <blockquote>
 <p>[root@localhost ~]# nice -n -5 ping 127.0.0.1<br>PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.<br>64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.039ms<br>64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.058ms<br> PID USER     PR  NI    VIRT    RES    SHR S  %CPU %MEM  TIME+ COMMAND<br> 6533 root15  -5  114380692    560 S   0.0  0.10:00.01 ping    [root@localhost ~]# nice -5 ping  127.0.0.1</p>
@@ -157,14 +159,9 @@
 <blockquote>
 <p>[root@centos68 mnt]# sync<br>[root@centos68 mnt]# sync</p>
 </blockquote>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
+  
+	</div>
+		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 
@@ -177,333 +174,39 @@
 
 
 
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/10/31/系统启动及内核管理/" data-title="系统启动及内核管理 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  </div>
+	
+	</div>
 
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/10/31/系统启动及内核管理/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/10/31/系统启动及内核管理/" data-count-type="comments">&nbsp;</a>
-	
-</div>
 
 </footer>
 
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/10/31/TCPIP、Http、Socket的区别/" title="TCP/IP、Http、Socket的区别" itemprop="url">TCP/IP、Http、Socket的区别</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-10-31T11:43:13.006Z" itemprop="datePublished"> 发表于 2016-10-31</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>网络由下往上分为：</p>
-<blockquote>
-<p>物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。</p>
-</blockquote>
-<p><img src="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/45205997.jpg" alt=""><br>如上图，IP协议对应于网络层；TCP协议对应于传输层；而HTTP协议对应于应用层；<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/10/31/TCPIP、Http、Socket的区别/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/TCP-IP/">TCP/IP</a><a href="/tags/HTTP/">HTTP</a><a href="/tags/Socket/">Socket</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
+   	       
+	</article>
 	
-	  	<span></span>
-		<a href="/2016/10/31/TCPIP、Http、Socket的区别/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/10/31/TCPIP、Http、Socket的区别/" data-count-type="comments">&nbsp;</a>
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/10/31/TCPIP、Http、Socket的区别/"  title="TCP/IP、Http、Socket的区别">
+ <strong>下一篇：</strong><br/> 
+ <span>TCP/IP、Http、Socket的区别
+</span>
+</a>
+</div>
+
+</nav>
+
 	
-</div>
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/10/31/系统启动及内核管理/" data-title="系统启动及内核管理" data-url="http://yoursite.com/2016/10/31/系统启动及内核管理/"></div>
+</section>
 
-</footer>
 
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/10/27/Unix directory hierarchy history/" title="Unix directory hierarchy history" itemprop="url">Unix directory hierarchy history</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-10-27T10:22:02.670Z" itemprop="datePublished"> 发表于 2016-10-27</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h3><p>As a beginner user of Unix or Linux, people would frequently get confused about the use of different directories of the system.<br><img src="http://p1.bqimg.com/4851/a9c57e33d074271a.jpg" alt=""><br>For example, there is a /bin directory under root(/), it is used to store binary files. However, there are /usr/bin and /usr/local/bin under /usr which are used for storing binary files as well. Some systems even have /opt/bin. What are the differences among them?<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/10/27/Unix directory hierarchy history/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/FileSystem/">FileSystem</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/10/27/Unix directory hierarchy history/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/10/27/Unix directory hierarchy history/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/10/27/Centos7升级内核/" title="Centos7升级内核" itemprop="url">Centos7升级内核</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-10-27T10:12:27.515Z" itemprop="datePublished"> 发表于 2016-10-27</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>更新前，内核版本为：</p>
-<blockquote>
-<p>[root@localhost ~]uname -r<br>[root@localhost ~]3.10.0-327.10.1.el7.x86_64</p>
-</blockquote>
-<p>升级的方法：</p>
-<p>1、导入key</p>
-<blockquote>
-<p>[root@localhost ~]rpm –import <a href="https://www.elrepo.org/RPM-GPG-KEY-elrepo.org">https://www.elrepo.org/RPM-GPG-KEY-elrepo.org</a><br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/10/27/Centos7升级内核/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Centos/">Centos</a><a href="/tags/Kernel/">Kernel</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/10/27/Centos7升级内核/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/10/27/Centos7升级内核/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/10/25/详解Linux运维工程师必备技能/" title="详解Linux运维工程师必备技能" itemprop="url">详解Linux运维工程师必备技能</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-10-24T16:08:09.670Z" itemprop="datePublished"> 发表于 2016-10-25</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>首先说下运维种类：有办公网系统运维（就是网管），有IDC外网运维，外网运维里又分网站运维、游戏运维、IDC运维（装系统排障），监控运维（盯着监控）。我强烈建议大家选择linux网站运维路线，这个路线绝对是最好的，会了网站运维了去做别的运维岗位绝对也是信手拈来的，网站运维需要的技术点更多，因此，我以我工作的网站运维岗位说说运维都需要啥。</p>
-<p>1、选择linux系统<br>选择linux系统，建议选用CentOS或redhat，特别是CentOS在互联网企业中用得非常多，当然还会有其它版本的，但初学者还是选择一种学透再换更好，因为centos或redhat这两个版本基本是一样的，而centos是开源无版权的，选择CentOS建议选择CentOS6.6 x86_64位版本学习，不要选择7，因为7企业里用的还很少，掌握主流就是最好的。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/10/25/详解Linux运维工程师必备技能/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Linux运维/">Linux运维</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/10/25/详解Linux运维工程师必备技能/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/10/25/详解Linux运维工程师必备技能/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/10/21/生命不息，折腾不止/" title="生命不息，折腾不止" itemprop="url">生命不息，折腾不止</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-10-21T14:58:12.301Z" itemprop="datePublished"> 发表于 2016-10-21</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>耗时半个月，踩了无数坑，查了不计其数的资料，最终将博客搭建成功，之前博客是51CTO的，总感觉用着别人的东西很不爽，而且51CTO博客的页面有些过时，不支持屏幕自适应，在移动端体验效果很差。因此怀着一颗生命不息，折腾不止的心开始搭建拥有自主产权的博客，最初打算用Bootstrap+Django+mysql搭建
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/10/21/生命不息，折腾不止/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Hexo/">Hexo</a><a href="/tags/github/">github</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/10/21/生命不息，折腾不止/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/10/21/生命不息，折腾不止/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-
-</div>
+</div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
 <div id="asidepart">
@@ -709,8 +412,95 @@ $(document).ready(function(){
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
 
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"godben"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
 
 
 
@@ -779,4 +569,4 @@ var _hmt = _hmt || [];
 <!-- Tiny_search End -->
 
   </body>
- </html>
+</html>
