@@ -93,72 +93,12 @@
 </header>
     <div class="article-content">
         
-        <h3 id="一、知识整理"><a href="#一、知识整理" class="headerlink" title="一、知识整理"></a>一、知识整理</h3><p><strong> 1、nohup 命令：</strong><br>不挂断地运行命令，远程连接当断网或断开shell时还可以继续运行。无论是否将nohup命令的输出重定向到终端，输出都将附加到当前目录下的nohup.out文件中，如果当前不可写，则重定向到家目录nohup.out文件，除非定义了输出文件。<br>nohup COMMAND 输出重定向至文件<br>nohup COMMAND &amp; 使用jobs查看任务，按后台任务关闭方式关闭。</p>
-<p><strong> 2、设置和调节nice值： </strong></p>
-<blockquote>
-<p>[root@localhost ~]# nice -n -5 ping 127.0.0.1<br>PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.<br>64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.039ms<br>64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.058ms<br> PID USER     PR  NI    VIRT    RES    SHR S  %CPU %MEM  TIME+ COMMAND<br> 6533 root15  -5  114380692    560 S   0.0  0.10:00.01 ping    [root@localhost ~]# nice -5 ping  127.0.0.1</p>
-</blockquote>
-<p>设置nice为5.<br>renice：调整nice值，普通用户只能调大自己进程的nice值，即降低程序优先级；</p>
-<blockquote>
-<p>[root@localhost ~]# renice +5 -p 6578<br>6578 (process ID) old priority 5, new priority 5<br>[root@localhost ~]# renice 7 -p 6578<br>6578 (process ID) old priority 5, new priority 7<br>[root@localhost ~]# renice -2 -p 6578<br>6578 (process ID) old priority 7, new priority -2</p>
-</blockquote>
-<p><strong> 3、rc#.d登录等级： </strong><br>K和S开头的服务，数字越小，越先运行。<br>ramdisk虚拟内存盘技术：使用缓冲和缓存来加速对磁盘上的文件访问：centos6中为initramfs功能，文件为/boot/initramfs，若损坏可使用mkinitrd可以生成,命令如下：</p>
-<blockquote>
-<p>[root@centos68 boot]# mkinitrd initramfs-`uname -r`.img `uname -r`</p>
-</blockquote>
-<p><strong> 4、查看运行级别： </strong></p>
-<blockquote>
-<p>[root@centos68 boot]# who -r<br>        运行级别 3 2016-09-08 04:51<br>[root@centos68 boot]# runlevel<br>N 3<br>runlevel显示上次启动级别和本次启动级别</p>
-</blockquote>
-<p>5、<strong> 查看/boot/initramfs.***.img文件 </strong></p>
-<blockquote>
-<p>[root@centos68 ~]# file initramfs-2.6.32-642.el6.x86_64.img<br>initramfs-2.6.32-642.el6.x86_64.img: gzip compressed data, from Unix, last modified: Sat Sep 10 01:02:33<br>2016, max compression<br>[root@centos68 ~]# mv initramfs-2.6.32-642.el6.x86_64.img initramfs-2.6.32-642.el6.x86_64.img.gz<br>[root@centos68 ~]# gunzip initramfs-2.6.32-642.el6.x86_64.img.gz<br>[root@centos68 ~]# file initramfs-2.6.32-642.el6.x86_64.img<br>initramfs-2.6.32-642.el6.x86_64.img: ASCII cpio archive (SVR4 with no CRC)</p>
-<p>[root@centos68 ~]# cpio -vt &lt;  initramfs-2.6.32-642.el6.x86_64.img<br>-rwxr-xr-x   1 root     root       587041 Sep 10 01:02 lib64/libm-2.12.so<br>-rwxr-xr-x   1 root     root      1491968 Sep 10 01:02 lib64/liblvm2cmd.so.2.02<br>-rwxr-xr-x   1 root     root        12688 Dec  8  2011 lib64/libfipscheck.so.1.1.0<br>lrwxrwxrwx   1 root     root           15 Sep 10 01:02 lib64/libacl.so.1 -&gt; libacl.so.1.1.0<br>lrwxrwxrwx   1 root     root           17 Sep 10 01:02 lib64/libaudit.so.1 -&gt; libaudit.so.1.0.0<br>-rwxr-xr-x   1 root     root       272008 Sep 10 01:02 lib64/libreadline.so.6.0<br>140255 块</p>
-</blockquote>
-<p>可以查看文件中的内容，此文件给内核驱动磁盘提供了必要文件。</p>
-<p><strong> 6、centos5在文件/etc/inittab中</strong><br>定义了ctrl alt delete重启，在虚拟机中用insert代替delete。在centos6中是/etc/init/control-alt-delete.conf文件。在centos5中inittab定义的信息在centos6中分散放置，详情可以由inittab查看。终端mingetty定义respawn，不能被杀死，centos6中定义在/etc/init/serial.conf中，可以更改F10为第六个终端等，按照格式写即可。</p>
-<h3 id="二、命令详解和事例"><a href="#二、命令详解和事例" class="headerlink" title="二、命令详解和事例"></a>二、命令详解和事例</h3><p><strong> 1、系统启动流程：</strong> </p>
-<p><strong> 第一步：加电自检，加载BIOS</strong><br>加电自检POST（power-on-self-test），是BIOS（basic input and output system）功能的一个部分，负责完成对CPU、主板、内存、硬盘等硬件情况监测。BIOS是集成在主板上的一个ROM芯片中，其中保存着计算机最重要的基本输入/输出程序、系统信息设置和自检程序等；而用户设定保存的各种参数信息是保存在RAM芯片中的，由UPS持续供电，这个设置叫CMOS。</p>
-<p><strong> 第二步：读取MBR</strong><br>磁盘第0磁道第一个扇区被称为MBR（master boot record），即主要引导记录，大小512字节，存放了预启动信息、分区表信息。而前446个字节就是boot loader，系统找到MBR后，就会将其复制到物理内存中。</p>
-<p><strong> 第三步：Boot Loader</strong><br>boot loader就是在操作系统内核运行前运行的一段小程序，通过将这段小程序放入物理内存，我们可以初始化硬件设备、建立内存空间的映射图，从而将系统的软硬件环境带到一个合适的状态，以便最终调用操作系统内核，而boot loader驱动的便是boot目录，内有内核和假文件系统initramfs的映像。<br>关于legacy grub典型grub的stage1、stage1.5和stage2：stage1就是MBR，有第一个扇区512字节的内容，作用就是bootloader的作用；stage1.5是后面27个扇区的内容，用于识别boot分区，以进行stage2，stage2用于打印选择内核界面、加密、运行grub.conf文件等，选择界面出现说明stage2已经完成。</p>
-<p><strong> 第四步：加载内核</strong><br>根据grub设定的内核映像所在路径，读取内核映像并解压缩，以加载内核。此时的问题就是，真正的根分区并不在boot目录下，系统启动需要的一些lib文件也并不在boot目录下，内核要启动根分区就得加载根分区的驱动，由于内核大小和开机速度限制，以及不同的主机不同的根文件系统的限制，boot并没有那么多驱动。此时就要借助一个假文件系统initramfs作为中介，此文件是安装系统的时候就生成的，按照主机的硬件情况存入必要的驱动，给内核驱动真正的根系统提供/proc /sys /dev等文件，因此内核便可以启动真正的rootfs来替换掉假文件系统，也就可以进行后续步骤。</p>
-<p><strong> 第五步：系统的第一个进程init</strong><br>内核和分区被加载完成后，第一个运行的进程是/sbin/init，该文件会读取/etc/inittab文件，并依据此文件来进行初始化工作。inittab文件的作用是设定运行等级。init程序的类型：Upstart：init，centOS6；配置文件：/etc/fstab，/etc/init/*.conf。</p>
-<p><strong> 步骤六：系统初始化</strong><br>init执行/etc/rc.d/rc.sysinit系统初始化脚本：设置主机名，设置欢迎界面，激活udev和selinux，挂载fstab文件中定义的文件系统，检测根文件系统并以读写方式重新挂载根文件系统，设置系统时钟，激活swap，根据/etc/sysctl.conf文件设置内核参数，激活lvm及raid设备，加载额外设备的驱动程序等。</p>
-<p><strong> 步骤七：启动内核模块</strong><br>依据/etc/modules.conf文件或/etc/modules.d目录下的文件来装载内核模块。</p>
-<p><strong> 步骤八：执行不同级别的脚本程序：</strong><br>根据运行等级不同，运行rc0.d到rc6.d中的相应脚本程序，来完成相应的初始化工作和启动相应的服务。</p>
-<p><strong> 步骤九：执行rc.local</strong><br>rc.local就是在一切初始化工作后，Linux留给用户进行个性化的地方，是开机启动的最后一个文件，可以把想设置和启动的东西放在这里。正常级别下，最后启动的服务S99local没有链接至/etc/rc.d/init.d一个服务脚本，而是指向了/etc/rc.d/rc.local脚本。</p>
-<p><strong> 步骤十：登录</strong><br>mingetty tty-6-login。执行/bin/login，启动登录程序，输入账号密码登录系统。</p>
-<p><strong> 2、chkconfig命令，图形化命令：</strong><br>ntsysv<br>查看服务在所有级别的启动或关闭设定情形：chkconfig [–list] [name]<br>添加服务：chkconfig –add name<br>删除服务：chkconfig –del name<br>修改指定的连接类型 chkconfig [–level levels] name <on|off|reset>级别省略表示2345</on|off|reset></p>
-<p><strong> 3、grub命令行接口：</strong><br>在grub.conf文件被破坏或有错误时，开机会进入grub命令行，也可以在选择内核时按c进入，也可以在命令行输入grub命令进入；grub命令行用于更改内核特性，开机参数，也可以指定内核和虚根文件等,输入help查看可以使用的命令。如果.conf文件损坏，可以添加如下两行，支持tab键补全：<br>kernel (hd0,0)/vmlinuz.2.6.13….  root=/dev/sda2  max_loop=100 selinux=0 init=/bin/bash rhgb quiet<br>initrd (hd0,0)/initramfs…..img<br>或者将(hd0,0)取出，单独成行：<br>root (hd0,0)<br>kernel /vmlinuz.2.6.13….  root=/dev/sda2  max_loop=100 selinux=0 init=/bin/bash rhgb quiet<br>initrd /initramfs…..img<br>最后boot重新开机。参数中rhgb不显示最后的加载图像，只显示启动情况；quiet隐藏内核加载信息，及初始化信息，只显示之后的开启服务信息。kernel和initrd前直接是根目录的原因：（hd0,0）指第一块磁盘的第一个分区，当刚开机的时候，只有boot，因此默认把boot当做根，当通过虚根识别了真正的rootfs后，才挂载为boot。</p>
-<p><strong> 4、grub.conf配置文件：</strong><br>default=#设定默认启动的菜单项；从0开始；<br>timeout=#指定菜单项等待选项选择的时长<br>splashimage=(hd#,#)/PATH/TO/XPM_FILE：菜单背景图文件路径<br>hiddenmenu隐藏选择菜单，不点击按键5秒后便跳过<br>password [–md5] STRING:启动菜单编辑认证，p键输入密码才可以进入编辑内核，即a、c、e三个模式，不影响开机。<br>title TITLE定义菜单标题<br>root (hd#,#)  给定stage2和内核的位置<br>kernel 启动的内核<br>initrd 虚根文件<br>password [–md5] STRING 选择内核后，需要输入密码。</p>
-<p><strong> 5、安装或者修复grub：</strong><br>第一种方法：在命令行或修复模式grub-install –root-directory=/PATH /dev/sd？；第二种方法：使用grub命令，依次输入root（hd#，#）和setup（hd#）。</p>
-<blockquote>
-<p>[root@centos68 ~]# grub-install –root-directory=/ /dev/sda<br>Installation finished. No error reported.<br>This is the contents of the device map //boot/grub/device.map.<br>Check if this is correct or not. If any of the lines is incorrect,<br>fix it and re-run the script `grub-install’.<br>(fd0) /dev/fd0<br>(hd0) /dev/sda<br>[root@centos68 ~]# grub<br>Probing devices to guess BIOS drives. This may take a long time.<br>    GNU GRUB  version 0.97  (640K lower / 3072K upper memory)<br> [ Minimal BASH-like line editing is supported.  For the first word, TAB<br>   lists possible command completions.  Anywhere else TAB lists the possible<br>   completions of a device/filename.]<br>grub&gt; root (hd0,0)<br>root (hd0,0)<br> Filesystem type is ext2fs, partition type 0x83<br>grub&gt; setup (hd0)<br>setup (hd0)<br> Checking if “/boot/grub/stage1” exists… no<br> Checking if “/grub/stage1” exists… yes<br> Checking if “/grub/stage2” exists… yes<br> Checking if “/grub/e2fs_stage1_5” exists… yes<br> Running “embed /grub/e2fs_stage1_5 (hd0)”…  27 sectors are embedded.<br>succeeded<br> Running “install /grub/stage1 (hd0) (hd0)1+27 p (hd0,0)/grub/stage2 /grub/grub.conf”… succeeded<br>Done.</p>
-</blockquote>
-<h3 id="三、课后练习"><a href="#三、课后练习" class="headerlink" title="三、课后练习"></a>三、课后练习</h3><p><strong> 1、添加一个系统服务</strong><br>设置启动级别和开机启动：<br>写一个脚本，添加如下行：<br>#! /bin/bash<br># chkconfig: 2345 10 90<br># description: A<br>其中chkconfig一行定义了启动级别和启动顺序和关闭顺序,此优先级是按照字符顺序，跟数组大小无关；<br>放入/etc/init.d/目录下，使用chkconfig –add <em>.sh添加服务<br>使用chkconfig –list 查看服务启动级别<br>使用chkconfig –level # </em>.sh更改启动级别<br>ntsysv图形化界面，更改当前级别是否启动，–level=#更改指定级别；<br>使用service *.sh restart|stop|status|restart管理服务。</p>
-<p><strong> 2、自制Linux系统：</strong> </p>
-<p><strong>步骤一</strong>：添加一块单独的硬盘，此硬盘是单个文件，以便于单独使用运行：<br><img src="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/98282116.jpg" alt=""><br><strong>步骤二</strong>：分区，挂载；<br>将此磁盘为两分区，一个作为boot使用，一个作为根目录使用；然后挂载：<br><img src="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/87247793.jpg" alt=""><br>注意：boot的挂载点名称一定要使用boot，因为grub生成时，已经决定名称不能变化了。</p>
-<p><strong>步骤三</strong>：恢复内核，生成grub，注意文件参数的顺序：</p>
-<blockquote>
-<p>[root@centos68 mnt]# cp /boot/vmlinuz-2.6.32-642.el6.x86_64  ./boot/<br>[root@centos68 mnt]# cp /boot/initramfs-2.6.32-642.el6.x86_64.img  ./boot/<br>[root@centos68 mnt]# grub-install –root-directory=/mnt/ /dev/sdb<br>Probing devices to guess BIOS drives. This may take a long time.<br>Installation finished. No error reported.<br>This is the contents of the device map /mnt//boot/grub/device.map.<br>Check if this is correct or not. If any of the lines is incorrect,<br>fix it and re-run the script `grub-install’.<br>(fd0) /dev/fd0<br>(hd0) /dev/sda<br>(hd1) /dev/sdb<br>[root@centos68 mnt]# vim boot/grub/grub.conf<br>[root@centos68 mnt]# cat boot/grub/grub.conf<br>default=0<br>timeout=5<br>title zizhicentos<br>kernel (hd0,0)/vmlinuz-2.6.32-642.el6.x86_64 root=/dev/sda2  selinux=0  init=/bin/bash<br>initrd (hd0,0)/initramfs-2.6.32-642.el6.x86_64.img</p>
-</blockquote>
-<p><strong>步骤四</strong>：创建必要配置文件和目录：</p>
-<blockquote>
-<p>[root@centos68 sysroot]# ls<br>bin  boot  dev  etc  home  lib  lib64  media  mnt  proc  root  sbin  sys  usr  var<br>[root@centos68 mnt]# vim sysroot/etc/fstab<br>[root@centos68 mnt]# cat sysroot/etc/fstab<br>/dev/sda2  /  ext4   defaults 1 1<br>/dev/sda1  /boot  ext4  defaults  1 2</p>
-</blockquote>
-<p><strong>步骤五</strong>：使用脚本复制命令及其相关的库文件并检测：<br>脚本内容如下</p>
-<blockquote>
-<p>[root@centos68 mnt]# cat ~/copycmd0.sh<br>#!/bin/bash<br>ch_root=”/mnt/sysroot”<br>[ ! -d $ch_root ] &amp;&amp; mkdir $ch_root<br>bincopy() {<br>    if which $1 &amp;&gt;/dev/null; then<br>        local cmd_path=`which –skip-alias $1`<br>        local bin_dir=`dirname $cmd_path`<br>        [ -d ${ch_root}${bin_dir} ] || mkdir -p ${ch_root}${bin_dir}<br>        [ -f ${ch_root}${cmd_path} ] || cp -f $cmd_path ${ch_root}${bin_dir}<br>        return 0<br>    else<br>        echo “Command not found.”<br>        return 1<br>    fi<br>}<br>libcopy() {<br>    local lib_list=$(ldd `which –skip-alias $1` | grep -Eo ‘/[^[:space:]]+’)<br>    for loop in $lib_list;do<br>        local lib_dir=`dirname $loop`<br>        [ -d ${ch_root}${lib_dir} ] || mkdir -p  ${ch_root}${lib_dir}<br>        [ -f ${ch_root}${loop} ] || cp -f $loop ${ch_root}${lib_dir}<br>    done<br>}<br>read -p “Please input a command or quit: “ command<br>while [ “$command” != “quit” ];do<br>    if bincopy $command ;then<br>        libcopy $command<br>    fi<br>    read -p “Please input a command or quit: “ command<br>done</p>
-<p>[root@centos68 ~]# ./copycmd0.sh<br>Please input a command or quit: /bin/bash<br>Please input a command or quit: /bin/ls<br>Please input a command or quit: /bin/hostname<br>Please input a command or quit: /bin/mount<br>Please input a command or quit: quit<br>[root@centos68 sysroot]# cd lib64/<br>[root@centos68 lib64]# ls<br>ld-linux-x86-64.so.2  libblkid.so.1  libdl.so.2       libselinux.so.1  libuuid.so.1<br>libacl.so.1           libcap.so.2    libpthread.so.0  libsepol.so.1<br>libattr.so.1          libc.so.6      librt.so.1       libtinfo.so.5<br>[root@centos68 mnt]# chroot sysroot/<br>bash-4.1# ls<br>bin  boot  dev etc  home  lib lib64  media  mnt  proc  root  sbin  sys  usr  var</p>
-</blockquote>
-<p><strong>步骤六</strong>：将做好的磁盘单独作为一个系统运行并调试：</p>
-<blockquote>
-<p>[root@centos68 mnt]# sync<br>[root@centos68 mnt]# sync<br><img src="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/84994843.jpg" alt=""><br><img src="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/97429541.jpg" alt=""></p>
-</blockquote>
-
+        <h3 id="一、知识整理"><a href="#一、知识整理" class="headerlink" title="一、知识整理"></a>一、知识整理</h3><p><strong> 1、nohup 命令：</strong><br>不挂断地运行命令，远程连接当断网或断开shell时还可以继续运行。无论是否将nohup命令的输出重定向到终端，输出都将附加到当前目录下的nohup.out文件中，如果当前不可写，则重定向到家目录nohup.out文件，除非定义了输出文件。<br>nohup COMMAND 输出重定向至文件<br>nohup COMMAND &amp; 使用jobs查看任务，按后台任务关闭方式关闭。<br>
         
         
         <p class="article-more-link">
+          
+            <a href="/2016/10/31/系统启动及内核管理/#more">阅读更多</a>
           
        </p>
     </div>
@@ -524,6 +464,10 @@
 			
 		
 			
+				<li><a href="/tags/Centos/" title="Centos">Centos<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/TCP-IP/" title="TCP/IP">TCP/IP<sup>1</sup></a></li>
 			
 		
@@ -536,7 +480,7 @@
 			
 		
 			
-				<li><a href="/tags/Centos/" title="Centos">Centos<sup>1</sup></a></li>
+				<li><a href="/tags/FileSystem/" title="FileSystem">FileSystem<sup>1</sup></a></li>
 			
 		
 			
@@ -545,10 +489,6 @@
 		
 			
 				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/FileSystem/" title="FileSystem">FileSystem<sup>1</sup></a></li>
 			
 		
 			
