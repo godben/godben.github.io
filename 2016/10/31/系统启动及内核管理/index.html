@@ -17,10 +17,15 @@
 <meta property="og:url" content="http://yoursite.com/2016/10/31/系统启动及内核管理/index.html">
 <meta property="og:site_name" content="godben's blog">
 <meta property="og:description" content="一、知识整理 1、nohup 命令：不挂断地运行命令，远程连接当断网或断开shell时还可以继续运行。无论是否将nohup命令的输出重定向到终端，输出都将附加到当前目录下的nohup.out文件中，如果当前不可写，则重定向到家目录nohup.out文件，除非定义了输出文件。nohup COMMAND 输出重定向至文件nohup COMMAND &amp;amp; 使用jobs查看任务，按后台任务关闭方式关">
-<meta property="og:updated_time" content="2016-10-31T13:40:01.914Z">
+<meta property="og:image" content="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/98282116.jpg">
+<meta property="og:image" content="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/87247793.jpg">
+<meta property="og:image" content="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/84994843.jpg">
+<meta property="og:image" content="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/97429541.jpg">
+<meta property="og:updated_time" content="2016-10-31T13:43:31.614Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="系统启动及内核管理">
 <meta name="twitter:description" content="一、知识整理 1、nohup 命令：不挂断地运行命令，远程连接当断网或断开shell时还可以继续运行。无论是否将nohup命令的输出重定向到终端，输出都将附加到当前目录下的nohup.out文件中，如果当前不可写，则重定向到家目录nohup.out文件，除非定义了输出文件。nohup COMMAND 输出重定向至文件nohup COMMAND &amp;amp; 使用jobs查看任务，按后台任务关闭方式关">
+<meta name="twitter:image" content="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/98282116.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -139,9 +144,7 @@
 </blockquote>
 <h3 id="三、课后练习"><a href="#三、课后练习" class="headerlink" title="三、课后练习"></a>三、课后练习</h3><p><strong> 1、添加一个系统服务</strong><br>设置启动级别和开机启动：<br>写一个脚本，添加如下行：<br>#! /bin/bash<br># chkconfig: 2345 10 90<br># description: A<br>其中chkconfig一行定义了启动级别和启动顺序和关闭顺序,此优先级是按照字符顺序，跟数组大小无关；<br>放入/etc/init.d/目录下，使用chkconfig –add <em>.sh添加服务<br>使用chkconfig –list 查看服务启动级别<br>使用chkconfig –level # </em>.sh更改启动级别<br>ntsysv图形化界面，更改当前级别是否启动，–level=#更改指定级别；<br>使用service *.sh restart|stop|status|restart管理服务。</p>
 <p><strong> 2、自制Linux系统：</strong> </p>
-<p><strong>步骤一</strong>：添加一块单独的硬盘，此硬盘是单个文件，以便于单独使用运行：</p>
-<p><strong>步骤二</strong>：分区，挂载；<br>将此磁盘为两分区，一个作为boot使用，一个作为根目录使用；然后挂载：</p>
-<p>注意：boot的挂载点名称一定要使用boot，因为grub生成时，已经决定名称不能变化了。</p>
+<p><strong>步骤一</strong>：添加一块单独的硬盘，此硬盘是单个文件，以便于单独使用运行：<br><img src="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/98282116.jpg" alt=""><br><strong>步骤二</strong>：分区，挂载；<br>将此磁盘为两分区，一个作为boot使用，一个作为根目录使用；然后挂载：<br><img src="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/87247793.jpg" alt=""><br>注意：boot的挂载点名称一定要使用boot，因为grub生成时，已经决定名称不能变化了。</p>
 <p><strong>步骤三</strong>：恢复内核，生成grub，注意文件参数的顺序：</p>
 <blockquote>
 <p>[root@centos68 mnt]# cp /boot/vmlinuz-2.6.32-642.el6.x86_64  ./boot/<br>[root@centos68 mnt]# cp /boot/initramfs-2.6.32-642.el6.x86_64.img  ./boot/<br>[root@centos68 mnt]# grub-install –root-directory=/mnt/ /dev/sdb<br>Probing devices to guess BIOS drives. This may take a long time.<br>Installation finished. No error reported.<br>This is the contents of the device map /mnt//boot/grub/device.map.<br>Check if this is correct or not. If any of the lines is incorrect,<br>fix it and re-run the script `grub-install’.<br>(fd0) /dev/fd0<br>(hd0) /dev/sda<br>(hd1) /dev/sdb<br>[root@centos68 mnt]# vim boot/grub/grub.conf<br>[root@centos68 mnt]# cat boot/grub/grub.conf<br>default=0<br>timeout=5<br>title zizhicentos<br>kernel (hd0,0)/vmlinuz-2.6.32-642.el6.x86_64 root=/dev/sda2  selinux=0  init=/bin/bash<br>initrd (hd0,0)/initramfs-2.6.32-642.el6.x86_64.img</p>
@@ -157,7 +160,7 @@
 </blockquote>
 <p><strong>步骤六</strong>：将做好的磁盘单独作为一个系统运行并调试：</p>
 <blockquote>
-<p>[root@centos68 mnt]# sync<br>[root@centos68 mnt]# sync</p>
+<p>[root@centos68 mnt]# sync<br>[root@centos68 mnt]# sync<br><img src="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/84994843.jpg" alt=""><br><img src="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/97429541.jpg" alt=""></p>
 </blockquote>
   
 	</div>
@@ -245,15 +248,15 @@
 			
 		
 			
-				<li><a href="/tags/FileSystem/" title="FileSystem">FileSystem<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/FileSystem/" title="FileSystem">FileSystem<sup>1</sup></a></li>
 			
 		
 			
