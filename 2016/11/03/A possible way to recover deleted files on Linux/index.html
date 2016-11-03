@@ -4,23 +4,29 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>生命不息，折腾不止 | godben&#39;s blog</title>
+    <title>A possible way to recover deleted files on Linux | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="耗时半个月，踩了无数坑，查了不计其数的资料，最终将博客搭建成功，之前博客是51CTO的，总感觉用着别人的东西很不爽，而且51CTO博客的页面有些过时，不支持屏幕自适应，在移动端体验效果很差。因此怀着一颗生命不息，折腾不止的心开始搭建拥有自主产权的博客，最初打算用Bootstrap+Django+mysql搭建">
+    <meta name="description" content="Last week I was generating a MD5 sum for an virtual machine image on one OpenNebula server:
+
+# ls -l test.img-rw-r--r-- 1 root root 10486808576 Oct 12 02:21 test.img# md5sum test.img">
 <meta property="og:type" content="article">
-<meta property="og:title" content="生命不息，折腾不止">
-<meta property="og:url" content="http://yoursite.com/2016/10/21/生命不息，折腾不止/index.html">
+<meta property="og:title" content="A possible way to recover deleted files on Linux">
+<meta property="og:url" content="http://yoursite.com/2016/11/03/A possible way to recover deleted files on Linux/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="耗时半个月，踩了无数坑，查了不计其数的资料，最终将博客搭建成功，之前博客是51CTO的，总感觉用着别人的东西很不爽，而且51CTO博客的页面有些过时，不支持屏幕自适应，在移动端体验效果很差。因此怀着一颗生命不息，折腾不止的心开始搭建拥有自主产权的博客，最初打算用Bootstrap+Django+mysql搭建">
-<meta property="og:updated_time" content="2016-10-27T12:55:30.404Z">
+<meta property="og:description" content="Last week I was generating a MD5 sum for an virtual machine image on one OpenNebula server:
+
+# ls -l test.img-rw-r--r-- 1 root root 10486808576 Oct 12 02:21 test.img# md5sum test.img">
+<meta property="og:updated_time" content="2016-11-03T11:58:28.776Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="生命不息，折腾不止">
-<meta name="twitter:description" content="耗时半个月，踩了无数坑，查了不计其数的资料，最终将博客搭建成功，之前博客是51CTO的，总感觉用着别人的东西很不爽，而且51CTO博客的页面有些过时，不支持屏幕自适应，在移动端体验效果很差。因此怀着一颗生命不息，折腾不止的心开始搭建拥有自主产权的博客，最初打算用Bootstrap+Django+mysql搭建">
+<meta name="twitter:title" content="A possible way to recover deleted files on Linux">
+<meta name="twitter:description" content="Last week I was generating a MD5 sum for an virtual machine image on one OpenNebula server:
+
+# ls -l test.img-rw-r--r-- 1 root root 10486808576 Oct 12 02:21 test.img# md5sum test.img">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -82,20 +88,66 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/10/21/生命不息，折腾不止/" title="生命不息，折腾不止" itemprop="url">生命不息，折腾不止</a>
+      <a href="/2016/11/03/A possible way to recover deleted files on Linux/" title="A possible way to recover deleted files on Linux" itemprop="url">A possible way to recover deleted files on Linux</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-10-21T14:58:12.301Z" itemprop="datePublished"> 发表于 2016-10-21</time>
+    <time datetime="2016-11-03T09:38:57.324Z" itemprop="datePublished"> 发表于 2016-11-03</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>耗时半个月，踩了无数坑，查了不计其数的资料，最终将博客搭建成功，之前博客是51CTO的，总感觉用着别人的东西很不爽，而且51CTO博客的页面有些过时，不支持屏幕自适应，在移动端体验效果很差。因此怀着一颗生命不息，折腾不止的心开始搭建拥有自主产权的博客，最初打算用Bootstrap+Django+mysql搭建<a id="more"></a>，由于时间有限，不能将过多时间耗在这上面，所以就放弃了这种组合，改用了比较流行的Hexo博客框架，由于之前对hexo和git都不了解，所以边学边做，每走一步就踩个坑，当最后执行了“hexo d”后，刷新，成功了！那种feel就像你对心仪的女孩说：在一起吧。女孩说：好啊。（瞎猜的–!）。博客整体已经完成，剩下的细节一步一步进行完善，旧博客的文章也会迁移过来。</p>
+		<p>Last week I was generating a MD5 sum for an virtual machine image on one OpenNebula server:</p>
+<blockquote>
+<p><code># ls -l test.img</code><br><code>-rw-r--r-- 1 root root 10486808576 Oct 12 02:21 test.img</code><br><code># md5sum test.img</code></p>
+</blockquote>
+<a id="more"></a>
+<p>At the same time I was clearing the files on the server on another terminal and deleted the above image file mistakenly with :</p>
+<blockquote>
+<p><code># rm test.img</code></p>
+</blockquote>
+<p>Since this image file is 10GB, it took some time to remove this file from the server, so I used the Ctrl+Z command to suspend the remove command.</p>
+<blockquote>
+<p>[1]+  Stopped                 md5sum test.img</p>
+</blockquote>
+<p>By doing this, we can recover the deleted image file later. The rationale here is if other programs are accessing the file, the OS will not delete the file indeed(even you execute the rm command). So if we suspend the md5sum command before the completion of rm command, then the test.img file will be held by md5sum and will not be removed by rm command.</p>
+<p>We can execute jobs to see the md5sum process:</p>
+<blockquote>
+<p><code># jobs -l</code><br>[1]+ 30888 Stopped                 md5sum test.img</p>
+<p><code># ls -l /proc/30888/fd</code><br>total 0<br>lrwx—— 1 root root 64 Oct 22 04:04 0 -&gt; /dev/pts/3<br>lrwx—— 1 root root 64 Oct 22 04:04 1 -&gt; /dev/pts/3<br>lrwx—— 1 root root 64 Oct 22 04:04 2 -&gt; /dev/pts/3<br>lr-x—— 1 root root 64 Oct 22 04:04 3 -&gt; /root/test.img (deleted)</p>
+</blockquote>
+<p>Now we can use cp command to recover the file:</p>
+<blockquote>
+<p><code># cp /proc/30888/fd/3 save.img</code><br><code>ls -l save.img</code><br>-rw-r–r– 1 root root 10486808576 Oct 22 06:11 save.img</p>
+</blockquote>
+<p>If you mistakenly delete text files, you can try to use grep command to recover deleted files; if you mistakenly delete exe/doc/png/jpg/gif files, you can use third party ext2/ext3 file recovery tools such as TestDisk, PhotoRec to recover deleted files.</p>
+<h2 id="水平有限翻译仅供参考"><a href="#水平有限翻译仅供参考" class="headerlink" title="水平有限翻译仅供参考"></a>水平有限翻译仅供参考</h2><p>上周我在OpenNebula服务器上为一个虚拟机镜像生成MD5：</p>
+<blockquote>
+<p><code># ls -l test.img</code><br><code>-rw-r--r-- 1 root root 10486808576 Oct 12 02:21 test.img</code><br><code># md5sum test.img</code></p>
+</blockquote>
+<p>与此同时我在其它终端清理服务器上的文件并且错误的删除了上述镜像文件：</p>
+<blockquote>
+<p><code># rm test.img</code></p>
+</blockquote>
+<p>因为这个镜像文件大小为10GB，所以需要花一些时间从服务器上移除，因此我使用Ctrl+Z命令挂起（暂停）删除命令。</p>
+<blockquote>
+<p>[1]+  Stopped                 md5sum test.img</p>
+</blockquote>
+<p>通过这个操作，我们可以恢复刚刚删除的镜像文件。其原理就是如果其他程序访问这个文件，操作系统就不会删除这个文件（即使你已经执行了rm命令）。因此，如果我们在rm命令执行完之前挂起md5sum,然后这个test.img文件将被md5sum挂起并且不会被rm命令删除。</p>
+<p>我们可以执行jobs命令来看一下md5sum进程：</p>
+<blockquote>
+<p><code># jobs -l</code><br>[1]+ 30888 Stopped                 md5sum test.img</p>
+<p><code># ls -l /proc/30888/fd</code><br>total 0<br>lrwx—— 1 root root 64 Oct 22 04:04 0 -&gt; /dev/pts/3<br>lrwx—— 1 root root 64 Oct 22 04:04 1 -&gt; /dev/pts/3<br>lrwx—— 1 root root 64 Oct 22 04:04 2 -&gt; /dev/pts/3<br>lr-x—— 1 root root 64 Oct 22 04:04 3 -&gt; /root/test.img (deleted)</p>
+</blockquote>
+<p>现在我们可以使用cp命令来恢复这个文件：</p>
+<blockquote>
+<p><code># cp /proc/30888/fd/3 save.img</code><br><code>ls -l save.img</code><br>-rw-r–r– 1 root root 10486808576 Oct 22 06:11 save.img</p>
+</blockquote>
+<p>如果你错误的删除了文本文件，你可以尝试使用grep命令来恢复被删除的文件；如果你错误的删除了 exe/doc/png/jpg/gif 文件，你可以使用第三方 ext2/ext3文件恢复工具，例如TestDisk, PhotoRec来恢复被删除的文件。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -104,7 +156,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Hexo/">Hexo</a><a href="/tags/github/">github</a>
+  <span></span> <a href="/tags/Linux/">Linux</a>
   </div>
 
 </div>
@@ -113,7 +165,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/10/21/生命不息，折腾不止/" data-title="生命不息，折腾不止 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/11/03/A possible way to recover deleted files on Linux/" data-title="A possible way to recover deleted files on Linux | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -126,20 +178,20 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/10/25/详解Linux运维工程师必备技能/" title="详解Linux运维工程师必备技能">
-  <strong>上一篇：</strong><br/>
-  <span>
-  详解Linux运维工程师必备技能</span>
+
+<div class="next">
+<a href="/2016/11/02/Shortest command on Linux/"  title="Shortest command on Linux">
+ <strong>下一篇：</strong><br/> 
+ <span>Shortest command on Linux
+</span>
 </a>
 </div>
-
 
 </nav>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/10/21/生命不息，折腾不止/" data-title="生命不息，折腾不止" data-url="http://yoursite.com/2016/10/21/生命不息，折腾不止/"></div>
+	<div class="ds-thread" data-thread-key="2016/11/03/A possible way to recover deleted files on Linux/" data-title="A possible way to recover deleted files on Linux" data-url="http://yoursite.com/2016/11/03/A possible way to recover deleted files on Linux/"></div>
 </section>
 
 
