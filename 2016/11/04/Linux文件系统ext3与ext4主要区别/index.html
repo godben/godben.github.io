@@ -4,23 +4,29 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>生命不息，折腾不止 | godben&#39;s blog</title>
+    <title>Linux文件系统ext3与ext4主要区别 | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="耗时半个月，踩了无数坑，查了不计其数的资料，最终将博客搭建成功，之前博客是51CTO的，总感觉用着别人的东西很不爽，而且51CTO博客的页面有些过时，不支持屏幕自适应，在移动端体验效果很差。因此怀着一颗生命不息，折腾不止的心开始搭建拥有自主产权的博客，最初打算用Bootstrap+Django+mysql搭建">
+    <meta name="description" content="很长一段时间以来，ext3是很多linux发行版默认的文件系统，现在ext4已经发布，并且已经有发行版开始使用ext4作为默认的文件系统了（其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目）。
+ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接">
 <meta property="og:type" content="article">
-<meta property="og:title" content="生命不息，折腾不止">
-<meta property="og:url" content="http://yoursite.com/2016/10/21/生命不息，折腾不止/index.html">
+<meta property="og:title" content="Linux文件系统ext3与ext4主要区别">
+<meta property="og:url" content="http://yoursite.com/2016/11/04/Linux文件系统ext3与ext4主要区别/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="耗时半个月，踩了无数坑，查了不计其数的资料，最终将博客搭建成功，之前博客是51CTO的，总感觉用着别人的东西很不爽，而且51CTO博客的页面有些过时，不支持屏幕自适应，在移动端体验效果很差。因此怀着一颗生命不息，折腾不止的心开始搭建拥有自主产权的博客，最初打算用Bootstrap+Django+mysql搭建">
-<meta property="og:updated_time" content="2016-10-27T12:55:30.404Z">
+<meta property="og:description" content="很长一段时间以来，ext3是很多linux发行版默认的文件系统，现在ext4已经发布，并且已经有发行版开始使用ext4作为默认的文件系统了（其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目）。
+ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接">
+<meta property="og:image" content="http://images.51cto.com/files/uploadimg/20120508/1058140.png">
+<meta property="og:image" content="http://images.51cto.com/files/uploadimg/20120508/1058141.jpg">
+<meta property="og:updated_time" content="2016-11-04T14:28:26.862Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="生命不息，折腾不止">
-<meta name="twitter:description" content="耗时半个月，踩了无数坑，查了不计其数的资料，最终将博客搭建成功，之前博客是51CTO的，总感觉用着别人的东西很不爽，而且51CTO博客的页面有些过时，不支持屏幕自适应，在移动端体验效果很差。因此怀着一颗生命不息，折腾不止的心开始搭建拥有自主产权的博客，最初打算用Bootstrap+Django+mysql搭建">
+<meta name="twitter:title" content="Linux文件系统ext3与ext4主要区别">
+<meta name="twitter:description" content="很长一段时间以来，ext3是很多linux发行版默认的文件系统，现在ext4已经发布，并且已经有发行版开始使用ext4作为默认的文件系统了（其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目）。
+ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接">
+<meta name="twitter:image" content="http://images.51cto.com/files/uploadimg/20120508/1058140.png">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -82,20 +88,43 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/10/21/生命不息，折腾不止/" title="生命不息，折腾不止" itemprop="url">生命不息，折腾不止</a>
+      <a href="/2016/11/04/Linux文件系统ext3与ext4主要区别/" title="Linux文件系统ext3与ext4主要区别" itemprop="url">Linux文件系统ext3与ext4主要区别</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-10-21T14:58:12.301Z" itemprop="datePublished"> 发表于 2016-10-21</time>
+    <time datetime="2016-11-04T14:19:22.892Z" itemprop="datePublished"> 发表于 2016-11-04</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>耗时半个月，踩了无数坑，查了不计其数的资料，最终将博客搭建成功，之前博客是51CTO的，总感觉用着别人的东西很不爽，而且51CTO博客的页面有些过时，不支持屏幕自适应，在移动端体验效果很差。因此怀着一颗生命不息，折腾不止的心开始搭建拥有自主产权的博客，最初打算用Bootstrap+Django+mysql搭建<a id="more"></a>，由于时间有限，不能将过多时间耗在这上面，所以就放弃了这种组合，改用了比较流行的Hexo博客框架，由于之前对hexo和git都不了解，所以边学边做，每走一步就踩个坑，当最后执行了“hexo d”后，刷新，成功了！那种feel就像你对心仪的女孩说：在一起吧。女孩说：好啊。（瞎猜的–!）。博客整体已经完成，剩下的细节一步一步进行完善，旧博客的文章也会迁移过来。</p>
+		<p>很长一段时间以来，ext3是很多linux发行版默认的文件系统，现在ext4已经发布，并且已经有发行版开始使用ext4作为默认的文件系统了（其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目）。</p>
+<p>ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接块，二级间接块，三级间接块，如下图：</p>
+<a id="more"></a>
+<p><img src="http://images.51cto.com/files/uploadimg/20120508/1058140.png" alt=""></p>
+<p>其中point本来也是数据块，现在拿来做数据块的索引用，其中ext3的头文件定义为：__u32 i_block[EXT3_N_BLOCKS];/* Pointers to blocks */，所以可以计算ext3文件系统的极限：</p>
+<p><strong>最大分区：</strong><br>因为定义的是无符号32位数，所以可能定位的block范围为2^32，也就是4G，如果一个block大小为4KB，所以为4G * 4KB = 16TB</p>
+<p><strong>最大文件：</strong><br>前面直接指向12个数据块，一级间接块最大为block size / 4，block size就是数据块的大小，因为一个索引是4个字节，所以除以4，这样计算下来，最大的文件可以使用的总块数为:12 + (block size/4) + (block size/4)^2 + (block size/4)^3，如果block size大小为4K，则为(12 + 2^10 + 2^20 + 2^30) * 2^12 约等于4T。</p>
+<p>为了突破ext3这个大小限制，ext4使用了48位的数据块索引空间，同时使用了如下结构代替inode索引的方式：<br>struct ext3_extent {<br>__u32 ee_block; /* first logical block extent covers */<br>__u16 ee_len;   /* number of blocks covered by extent */<br>__u16 ee_start_hi; /* high 16 bits of physical block */<br>__u32 ee_start; /* low 32 bigs of physical block */<br>};</p>
+<p>用这样查找数据块的时候就不是每个块建立一个索引，而且使用连续的数据块，也就是分别指示起始位置，以及连续的块数，这样在大文件的时候，磁盘io效率以及 查找数据块效率上都有很大的提高，所以ext4的文件系统也比ext3出色。因为使了48位的索引空间，所以在4KB块大小的情况下，文件系统的极限是 2^48 * 4KB = 1EB，不过，目前由于工具的限制，只能使用16TB的分区。</p>
+<h2 id="EXT3与EXT4的主要区别"><a href="#EXT3与EXT4的主要区别" class="headerlink" title="EXT3与EXT4的主要区别"></a>EXT3与EXT4的主要区别</h2><p>Linux kernel自2.6.28开始正式支持新的文件系统 Ext4。 Ext4是Ext3的改进版，修改了Ext3中部分重要的数据结构，而不仅仅像Ext3对Ext2那样，只是增加了一个日志功能而已。Ext4 可以提供更佳的性能和可靠性，还有更为丰富的功能：</p>
+<p><strong>1.与Ext3兼容。</strong><br>执行若干条命令，就能从Ext3在线迁移到Ext4，而无须重新格式化磁盘或重新安装系统。原有Ext3数据结构照样保留，Ext4作用于新数据，当然，整个文件系统因此也就获得了Ext4所支持的更大容量。</p>
+<p><strong>2.更大的文件系统和更大的文件。</strong><br>较之Ext3目前所支持的最大16TB文件系统和最大2TB文件，Ext4分别支持1EB（1,048,576TB，1EB=1024PB，1PB=1024TB）的文件系统，以及16TB 的文件。</p>
+<p><strong>3.无限数量的子目录。</strong><br>Ext3目前只支持32,000个子目录，而Ext4支持无限数量的子目录。</p>
+<p><strong>4.Extents。</strong><br>Ext3 采用间接块映射，当操作大文件时，效率极其低下。比如一个 100MB 大小的文件，在Ext3中要建立25,600个数据块（每个数据块大小为 4KB）的映射表。而Ext4引入了现代文件系统中流行的extents概念，每个 extent 为一组连续的数据块，上述文件则表示为“该文件数据保存在接下来的25,600个数据块中”，提高了不少效率。</p>
+<p><strong>5.多块分配。</strong><br>当写入数据到 Ext3 文件系统中时，Ext3 的数据块分配器每次只能分配一个 4KB 的块，写一个 100MB 文件就要调用 25,600 次数据块分配器，而 Ext4 的多块分配器“multiblock allocator”（mballoc） 支持一次调用分配多个数据块。</p>
+<p><strong>6.延迟分配。</strong><br>Ext3的数据块分配策略是尽快分配，而 Ext4 和其它现代文件操作系统的策略是尽可能地延迟分配，直到文件在 cache 中写完才开始分配数据块并写入磁盘，这样就能优化整个文件的数据块分配，与前两种特性搭配起来可以显著提升性能。</p>
+<p><strong>7.快速fsck。</strong><br>以前执行 fsck 第一步就会很慢，因为它要检查所有的 inode，现在 Ext4 给每个组的 inode 表中都添加了一份未使用 inode 的列表，今后 fsck Ext4 文件系统就可以跳过它们而只去检查那些在用的 inode 了。</p>
+<p><strong>8.日志校验。</strong><br>日志是最常用的部分，也极易导致磁盘硬件故障，而从损坏的日志中恢复数据会导致更多的数据损坏。Ext4的日志校验功能可以很方便地判断日志数据是否损坏，而且它将 Ext3 的两阶段日志机制合并成一个阶段，在增加安全性的同时提高了性能。</p>
+<p><strong>9.“无日志”（No Journaling）模式。</strong><br>日志总归有一些开销，Ext4允许关闭日志，以便某些有特殊需求的用户可以借此提升性能。</p>
+<p><strong>10.在线碎片整理。</strong><br>尽管延迟分配、多块分配和extents能有效减少文件系统碎片，但碎片还是不可避免会产生。Ext4支持在线碎片整理，并将提供e4defrag工具进行个别文件或整个文件系统的碎片整理。</p>
+<p><strong>11.inode 相关特性。</strong><br>Ext4 支持更大的inode，较之Ext3默认的inode大小128字节，Ext4为了在 inode 中容纳更多的扩展属性（如纳秒时间戳或inode版本），默认inode大小为256字节。Ext4 还支持快速扩展属性（fast extended attributes）和inode保留（inodes reservation）。</p>
+<p><strong>12.持久预分配（Persistent preallocation）。</strong><br>P2P 软件为了保证下载文件有足够的空间存放，常常会预先创建一个与所下载文件大小相同的空文件，以免未来的数小时或数天之内磁盘空间不足导致下载失败。 Ext4在文件系统层面实现了持久预分配并提供相应的API（libc 中的 posix_fallocate()），比应用软件自己实现更有效率。</p>
+<p><strong>13.默认启用 barrier。</strong><br>磁盘上配有内部缓存，以便重新调整批量数据的写操作顺序，优化写入性能，因此文件系统必须在日志数据写入磁盘之后才能写commit记录，若commit 记录写入在先，而日志有可能损坏，那么就会影响数据完整性。Ext4默认启用barrier，只有当barrier之前的数据全部写入磁盘，才能写 barrier之后的数据。（可通过“mount -o barrier=0″命令禁用该特性。）</p>
+<p><img src="http://images.51cto.com/files/uploadimg/20120508/1058141.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -104,7 +133,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Hexo/">Hexo</a><a href="/tags/github/">github</a>
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/FileSystem/">FileSystem</a>
   </div>
 
 </div>
@@ -113,7 +142,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/10/21/生命不息，折腾不止/" data-title="生命不息，折腾不止 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/11/04/Linux文件系统ext3与ext4主要区别/" data-title="Linux文件系统ext3与ext4主要区别 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -126,20 +155,20 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/10/25/详解Linux运维工程师必备技能/" title="详解Linux运维工程师必备技能">
-  <strong>上一篇：</strong><br/>
-  <span>
-  详解Linux运维工程师必备技能</span>
+
+<div class="next">
+<a href="/2016/11/03/DNS学习笔记/"  title="DNS学习笔记">
+ <strong>下一篇：</strong><br/> 
+ <span>DNS学习笔记
+</span>
 </a>
 </div>
-
 
 </nav>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/10/21/生命不息，折腾不止/" data-title="生命不息，折腾不止" data-url="http://yoursite.com/2016/10/21/生命不息，折腾不止/"></div>
+	<div class="ds-thread" data-thread-key="2016/11/04/Linux文件系统ext3与ext4主要区别/" data-title="Linux文件系统ext3与ext4主要区别" data-url="http://yoursite.com/2016/11/04/Linux文件系统ext3与ext4主要区别/"></div>
 </section>
 
 
