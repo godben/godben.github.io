@@ -4,29 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Linux文件系统ext3与ext4主要区别 | godben&#39;s blog</title>
+    <title>虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别 | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="很长一段时间以来，ext3是很多linux发行版默认的文件系统，现在ext4已经发布，并且已经有发行版开始使用ext4作为默认的文件系统了（其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目）。
-ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接">
+    <meta name="description" content="虚拟化技术：百度百科中的定义是这样的：虚拟化是一个广义的术语，在计算机方面通常是指计算元件在虚拟的基础上而不是真实的基础上运行。虚拟化技术可以扩大硬件的容量，简化软件的重新配置过程。CPU的虚拟化技术可以单CPU模拟多CPU并行，允许一个平台同时运行多个操作系统，并且应用程序都可以在相互独立的空间内运行而互不影响，从而显著提高计算机的工作效率。这个定义已经比较完整了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux文件系统ext3与ext4主要区别">
-<meta property="og:url" content="http://yoursite.com/2016/11/04/Linux文件系统ext3与ext4主要区别/index.html">
+<meta property="og:title" content="虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别">
+<meta property="og:url" content="http://yoursite.com/2016/11/06/虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="很长一段时间以来，ext3是很多linux发行版默认的文件系统，现在ext4已经发布，并且已经有发行版开始使用ext4作为默认的文件系统了（其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目）。
-ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接">
-<meta property="og:image" content="http://images.51cto.com/files/uploadimg/20120508/1058140.png">
-<meta property="og:image" content="http://images.51cto.com/files/uploadimg/20120508/1058141.jpg">
-<meta property="og:updated_time" content="2016-11-04T14:28:26.862Z">
+<meta property="og:description" content="虚拟化技术：百度百科中的定义是这样的：虚拟化是一个广义的术语，在计算机方面通常是指计算元件在虚拟的基础上而不是真实的基础上运行。虚拟化技术可以扩大硬件的容量，简化软件的重新配置过程。CPU的虚拟化技术可以单CPU模拟多CPU并行，允许一个平台同时运行多个操作系统，并且应用程序都可以在相互独立的空间内运行而互不影响，从而显著提高计算机的工作效率。这个定义已经比较完整了。">
+<meta property="og:image" content="http://images.cnitblog.com/blog/382146/201411/171310170501018.gif">
+<meta property="og:image" content="http://images.cnitblog.com/blog/382146/201411/171339004723536.gif">
+<meta property="og:updated_time" content="2016-11-06T04:58:14.032Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux文件系统ext3与ext4主要区别">
-<meta name="twitter:description" content="很长一段时间以来，ext3是很多linux发行版默认的文件系统，现在ext4已经发布，并且已经有发行版开始使用ext4作为默认的文件系统了（其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目）。
-ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接">
-<meta name="twitter:image" content="http://images.51cto.com/files/uploadimg/20120508/1058140.png">
+<meta name="twitter:title" content="虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别">
+<meta name="twitter:description" content="虚拟化技术：百度百科中的定义是这样的：虚拟化是一个广义的术语，在计算机方面通常是指计算元件在虚拟的基础上而不是真实的基础上运行。虚拟化技术可以扩大硬件的容量，简化软件的重新配置过程。CPU的虚拟化技术可以单CPU模拟多CPU并行，允许一个平台同时运行多个操作系统，并且应用程序都可以在相互独立的空间内运行而互不影响，从而显著提高计算机的工作效率。这个定义已经比较完整了。">
+<meta name="twitter:image" content="http://images.cnitblog.com/blog/382146/201411/171310170501018.gif">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -88,43 +85,25 @@ ext3还是使用15个inode来查找数据块，前12个为直接数据块，直�
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/04/Linux文件系统ext3与ext4主要区别/" title="Linux文件系统ext3与ext4主要区别" itemprop="url">Linux文件系统ext3与ext4主要区别</a>
+      <a href="/2016/11/06/虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别/" title="虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别" itemprop="url">虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-04T14:19:22.892Z" itemprop="datePublished"> 发表于 2016-11-04</time>
+    <time datetime="2016-11-06T04:54:34.529Z" itemprop="datePublished"> 发表于 2016-11-06</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>很长一段时间以来，ext3是很多linux发行版默认的文件系统，现在ext4已经发布，并且已经有发行版开始使用ext4作为默认的文件系统了（其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目）。</p>
-<p>ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接块，二级间接块，三级间接块，如下图：</p>
-<a id="more"></a>
-<p><img src="http://images.51cto.com/files/uploadimg/20120508/1058140.png" alt=""></p>
-<p>其中point本来也是数据块，现在拿来做数据块的索引用，其中ext3的头文件定义为：__u32 i_block[EXT3_N_BLOCKS];/* Pointers to blocks */，所以可以计算ext3文件系统的极限：</p>
-<p><strong>最大分区：</strong><br>因为定义的是无符号32位数，所以可能定位的block范围为2^32，也就是4G，如果一个block大小为4KB，所以为4G * 4KB = 16TB</p>
-<p><strong>最大文件：</strong><br>前面直接指向12个数据块，一级间接块最大为block size / 4，block size就是数据块的大小，因为一个索引是4个字节，所以除以4，这样计算下来，最大的文件可以使用的总块数为:12 + (block size/4) + (block size/4)^2 + (block size/4)^3，如果block size大小为4K，则为(12 + 2^10 + 2^20 + 2^30) * 2^12 约等于4T。</p>
-<p>为了突破ext3这个大小限制，ext4使用了48位的数据块索引空间，同时使用了如下结构代替inode索引的方式：<br>struct ext3_extent {<br>__u32 ee_block; /* first logical block extent covers */<br>__u16 ee_len;   /* number of blocks covered by extent */<br>__u16 ee_start_hi; /* high 16 bits of physical block */<br>__u32 ee_start; /* low 32 bigs of physical block */<br>};</p>
-<p>用这样查找数据块的时候就不是每个块建立一个索引，而且使用连续的数据块，也就是分别指示起始位置，以及连续的块数，这样在大文件的时候，磁盘io效率以及 查找数据块效率上都有很大的提高，所以ext4的文件系统也比ext3出色。因为使了48位的索引空间，所以在4KB块大小的情况下，文件系统的极限是 2^48 * 4KB = 1EB，不过，目前由于工具的限制，只能使用16TB的分区。</p>
-<h2 id="EXT3与EXT4的主要区别"><a href="#EXT3与EXT4的主要区别" class="headerlink" title="EXT3与EXT4的主要区别"></a>EXT3与EXT4的主要区别</h2><p>Linux kernel自2.6.28开始正式支持新的文件系统 Ext4。 Ext4是Ext3的改进版，修改了Ext3中部分重要的数据结构，而不仅仅像Ext3对Ext2那样，只是增加了一个日志功能而已。Ext4 可以提供更佳的性能和可靠性，还有更为丰富的功能：</p>
-<p><strong>1.与Ext3兼容。</strong><br>执行若干条命令，就能从Ext3在线迁移到Ext4，而无须重新格式化磁盘或重新安装系统。原有Ext3数据结构照样保留，Ext4作用于新数据，当然，整个文件系统因此也就获得了Ext4所支持的更大容量。</p>
-<p><strong>2.更大的文件系统和更大的文件。</strong><br>较之Ext3目前所支持的最大16TB文件系统和最大2TB文件，Ext4分别支持1EB（1,048,576TB，1EB=1024PB，1PB=1024TB）的文件系统，以及16TB 的文件。</p>
-<p><strong>3.无限数量的子目录。</strong><br>Ext3目前只支持32,000个子目录，而Ext4支持无限数量的子目录。</p>
-<p><strong>4.Extents。</strong><br>Ext3 采用间接块映射，当操作大文件时，效率极其低下。比如一个 100MB 大小的文件，在Ext3中要建立25,600个数据块（每个数据块大小为 4KB）的映射表。而Ext4引入了现代文件系统中流行的extents概念，每个 extent 为一组连续的数据块，上述文件则表示为“该文件数据保存在接下来的25,600个数据块中”，提高了不少效率。</p>
-<p><strong>5.多块分配。</strong><br>当写入数据到 Ext3 文件系统中时，Ext3 的数据块分配器每次只能分配一个 4KB 的块，写一个 100MB 文件就要调用 25,600 次数据块分配器，而 Ext4 的多块分配器“multiblock allocator”（mballoc） 支持一次调用分配多个数据块。</p>
-<p><strong>6.延迟分配。</strong><br>Ext3的数据块分配策略是尽快分配，而 Ext4 和其它现代文件操作系统的策略是尽可能地延迟分配，直到文件在 cache 中写完才开始分配数据块并写入磁盘，这样就能优化整个文件的数据块分配，与前两种特性搭配起来可以显著提升性能。</p>
-<p><strong>7.快速fsck。</strong><br>以前执行 fsck 第一步就会很慢，因为它要检查所有的 inode，现在 Ext4 给每个组的 inode 表中都添加了一份未使用 inode 的列表，今后 fsck Ext4 文件系统就可以跳过它们而只去检查那些在用的 inode 了。</p>
-<p><strong>8.日志校验。</strong><br>日志是最常用的部分，也极易导致磁盘硬件故障，而从损坏的日志中恢复数据会导致更多的数据损坏。Ext4的日志校验功能可以很方便地判断日志数据是否损坏，而且它将 Ext3 的两阶段日志机制合并成一个阶段，在增加安全性的同时提高了性能。</p>
-<p><strong>9.“无日志”（No Journaling）模式。</strong><br>日志总归有一些开销，Ext4允许关闭日志，以便某些有特殊需求的用户可以借此提升性能。</p>
-<p><strong>10.在线碎片整理。</strong><br>尽管延迟分配、多块分配和extents能有效减少文件系统碎片，但碎片还是不可避免会产生。Ext4支持在线碎片整理，并将提供e4defrag工具进行个别文件或整个文件系统的碎片整理。</p>
-<p><strong>11.inode 相关特性。</strong><br>Ext4 支持更大的inode，较之Ext3默认的inode大小128字节，Ext4为了在 inode 中容纳更多的扩展属性（如纳秒时间戳或inode版本），默认inode大小为256字节。Ext4 还支持快速扩展属性（fast extended attributes）和inode保留（inodes reservation）。</p>
-<p><strong>12.持久预分配（Persistent preallocation）。</strong><br>P2P 软件为了保证下载文件有足够的空间存放，常常会预先创建一个与所下载文件大小相同的空文件，以免未来的数小时或数天之内磁盘空间不足导致下载失败。 Ext4在文件系统层面实现了持久预分配并提供相应的API（libc 中的 posix_fallocate()），比应用软件自己实现更有效率。</p>
-<p><strong>13.默认启用 barrier。</strong><br>磁盘上配有内部缓存，以便重新调整批量数据的写操作顺序，优化写入性能，因此文件系统必须在日志数据写入磁盘之后才能写commit记录，若commit 记录写入在先，而日志有可能损坏，那么就会影响数据完整性。Ext4默认启用barrier，只有当barrier之前的数据全部写入磁盘，才能写 barrier之后的数据。（可通过“mount -o barrier=0″命令禁用该特性。）</p>
-<p><img src="http://images.51cto.com/files/uploadimg/20120508/1058141.jpg" alt=""></p>
+		<p><strong>虚拟化技术</strong>：百度百科中的定义是这样的：虚拟化是一个广义的术语，在计算机方面通常是指计算元件在虚拟的基础上而不是真实的基础上运行。虚拟化技术可以扩大硬件的容量，简化软件的重新配置过程。CPU的虚拟化技术可以单CPU模拟多CPU并行，允许一个平台同时运行多个操作系统，并且应用程序都可以在相互独立的空间内运行而互不影响，从而显著提高计算机的工作效率。这个定义已经比较完整了。<br><a id="more"></a><br><strong>（完）全虚拟化技术</strong>：完全虚拟化技术又叫硬件辅助虚拟化技术，最初所使用的虚拟化技术就是全虚拟化（Full Virtualization)技术，它在虚拟机（VM）和硬件之间加了一个软件层–Hypervisor，或者叫做虚拟机管理程序（VMM）。hypervisor 可以划分为两大类。首先是类型 1，这种 hypervisor 是直接运行在物理硬件之上的。其次是类型 2，这种 hypervisor 运行在另一个操作系统（运行在物理硬件之上）中。类型 1 hypervisor 的一个例子是基于内核的虚拟机（KVM —— 它本身是一个基于操作系统的 hypervisor）。类型 2 hypervisor 包括 QEMU 和 WINE。</p>
+<p>因为运行在虚拟机上的操作系统通过Hypervisor来最终分享硬件，所以虚拟机发出的指令需经过Hypervisor捕获并处理。为此每个客户操作系统（Guest OS）所发出的指令都要被翻译成CPU能识别的指令格式，这里的客户操作系统即是运行的虚拟机，所以Hypervisor的工作负荷会很大，因此会占用一定的资源，所以在性能方面不如裸机。但是运行速度要快于硬件模拟。全虚拟化最大的优点就是运行在虚拟机上的操作系统没有经过任何修改，唯一的限制就是操作系统必须能够支持底层的硬件，不过目前的操作系统一般都能支持底层硬件，所以这个限制就变得微不足道了。全虚拟化技术如图1所示。</p>
+<p><img src="http://images.cnitblog.com/blog/382146/201411/171310170501018.gif" alt="图1：全虚拟化技术"></p>
+<p><strong>半/准虚拟化技术</strong>：半虚拟化技术是后来才出现的技术，半虚拟化技术英文是paravirtualization，也叫做准虚拟化技术，现在比较热门，它就是在全虚拟化的基础上，把客户操作系统进行了修改，增加了一个专门的API，这个API可以将客户操作系统发出的指令进行最优化，即不需要Hypervisor耗费一定的资源进行翻译操作，因此Hypervisor的工作负担变得非常的小，因此整体的性能也有很大的提高。不过缺点就是，要修改包含该API的操作系统，但是对于某些不含该API的操作系统（主要是windows）来说，就不行能用这种方法。半/准虚拟化技术如图2所示。</p>
+<p><img src="http://images.cnitblog.com/blog/382146/201411/171339004723536.gif" alt="图2：半/准虚拟化技术"></p>
+<p>随着硬件虚拟化技术的逐渐演化，运行于Intel平台的全虚拟化的性能已经超过了准虚拟化产品，这一点在64位的操作系统上表现的更为明显。加之，全虚拟化不需要对客户机操作系统做任何修改的固有优势。可以预言，基于硬件的全虚拟化产品将是未来虚拟化技术的核心。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -133,7 +112,7 @@ ext3还是使用15个inode来查找数据块，前12个为直接数据块，直�
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/FileSystem/">FileSystem</a>
+  <span></span> <a href="/tags/Virtualization/">Virtualization</a><a href="/tags/VMWARE/">VMWARE</a>
   </div>
 
 </div>
@@ -142,7 +121,7 @@ ext3还是使用15个inode来查找数据块，前12个为直接数据块，直�
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/11/04/Linux文件系统ext3与ext4主要区别/" data-title="Linux文件系统ext3与ext4主要区别 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/11/06/虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别/" data-title="虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -155,19 +134,11 @@ ext3还是使用15个inode来查找数据块，前12个为直接数据块，直�
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/11/04/Big file transfer in Linux/" title="Big file transfer in Linux">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Big file transfer in Linux</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/11/03/DNS学习笔记/"  title="DNS学习笔记">
+<a href="/2016/11/06/非root用户正常使用wireshark方法/"  title="非root用户正常使用wireshark方法">
  <strong>下一篇：</strong><br/> 
- <span>DNS学习笔记
+ <span>非root用户正常使用wireshark方法
 </span>
 </a>
 </div>
@@ -176,7 +147,7 @@ ext3还是使用15个inode来查找数据块，前12个为直接数据块，直�
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/11/04/Linux文件系统ext3与ext4主要区别/" data-title="Linux文件系统ext3与ext4主要区别" data-url="http://yoursite.com/2016/11/04/Linux文件系统ext3与ext4主要区别/"></div>
+	<div class="ds-thread" data-thread-key="2016/11/06/虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别/" data-title="虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别" data-url="http://yoursite.com/2016/11/06/虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别/"></div>
 </section>
 
 
