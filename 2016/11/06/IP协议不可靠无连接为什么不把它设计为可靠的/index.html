@@ -4,37 +4,28 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Markdown——入门指南 | godben&#39;s blog</title>
+    <title>IP协议不可靠无连接 为什么不把它设计为可靠的? | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="导语：
-
-Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。">
+    <meta name="description" content="因特网使用的IP协议是无连接的，因此其传输是不可靠的。这样容易使人们感到因特网很不可靠，那为什么当初不直接把它设计为可靠的?
+先打一个比方。邮局寄送的平信很像无连接的IP数据报。每封平信可能走不同的传送路径，同时平信也不保证不丢失。当我们发现收信人没有收到寄出的平信时，去找邮局索赔是没有用的。邮局会说：“平信不保证不丢失。怕丢失就请你寄挂号信”。但是大家并不会将所有的信件都用挂号方式邮寄，这是因为">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Markdown——入门指南">
-<meta property="og:url" content="http://yoursite.com/2016/11/02/Markdown——入门指南/index.html">
+<meta property="og:title" content="IP协议不可靠无连接 为什么不把它设计为可靠的?">
+<meta property="og:url" content="http://yoursite.com/2016/11/06/IP协议不可靠无连接为什么不把它设计为可靠的/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="导语：
-
-Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/6aee7dbbjw1eqft66xcg3j21kw12mdub.jpg">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/6aee7dbbgw1eq320claw3j21kw0kjdpc.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/6aee7dbbgw1effeaclhiyj20eh09cwez.jpg">
-<meta property="og:image" content="http://ww4.sinaimg.cn/large/6aee7dbbgw1effew5aftij20d80bz3yw.jpg">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/6aee7dbbgw1effezhonxlj20e009c3yu.jpg">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/6aee7dbbgw1efffa67voyj20ix0ctq3n.jpg">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/6aee7dbbgw1effg1lsa97j20lt0a8dgs.jpg">
-<meta property="og:updated_time" content="2016-11-02T09:25:00.946Z">
+<meta property="og:description" content="因特网使用的IP协议是无连接的，因此其传输是不可靠的。这样容易使人们感到因特网很不可靠，那为什么当初不直接把它设计为可靠的?
+先打一个比方。邮局寄送的平信很像无连接的IP数据报。每封平信可能走不同的传送路径，同时平信也不保证不丢失。当我们发现收信人没有收到寄出的平信时，去找邮局索赔是没有用的。邮局会说：“平信不保证不丢失。怕丢失就请你寄挂号信”。但是大家并不会将所有的信件都用挂号方式邮寄，这是因为">
+<meta property="og:image" content="http://img.bitscn.com/upimg/allimg/c150406/142R92541921Z-13918.jpg">
+<meta property="og:updated_time" content="2016-11-06T04:38:37.915Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Markdown——入门指南">
-<meta name="twitter:description" content="导语：
-
-Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。">
-<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/6aee7dbbjw1eqft66xcg3j21kw12mdub.jpg">
+<meta name="twitter:title" content="IP协议不可靠无连接 为什么不把它设计为可靠的?">
+<meta name="twitter:description" content="因特网使用的IP协议是无连接的，因此其传输是不可靠的。这样容易使人们感到因特网很不可靠，那为什么当初不直接把它设计为可靠的?
+先打一个比方。邮局寄送的平信很像无连接的IP数据报。每封平信可能走不同的传送路径，同时平信也不保证不丢失。当我们发现收信人没有收到寄出的平信时，去找邮局索赔是没有用的。邮局会说：“平信不保证不丢失。怕丢失就请你寄挂号信”。但是大家并不会将所有的信件都用挂号方式邮寄，这是因为">
+<meta name="twitter:image" content="http://img.bitscn.com/upimg/allimg/c150406/142R92541921Z-13918.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -96,66 +87,47 @@ Markdown 是一种轻量级的「标记语言」，它的优点很多，目前�
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/02/Markdown——入门指南/" title="Markdown——入门指南" itemprop="url">Markdown——入门指南</a>
+      <a href="/2016/11/06/IP协议不可靠无连接为什么不把它设计为可靠的/" title="IP协议不可靠无连接 为什么不把它设计为可靠的?" itemprop="url">IP协议不可靠无连接 为什么不把它设计为可靠的?</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-02T08:52:26.974Z" itemprop="datePublished"> 发表于 2016-11-02</time>
+    <time datetime="2016-11-06T04:36:09.242Z" itemprop="datePublished"> 发表于 2016-11-06</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p><strong>导语：</strong></p>
-<blockquote>
-<p>Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。<br><a id="more"></a></p>
-</blockquote>
-<p><img src="http://ww3.sinaimg.cn/large/6aee7dbbjw1eqft66xcg3j21kw12mdub.jpg" alt="Ulysses for Mac"></p>
-<h2 id="一-认识-Markdown"><a href="#一-认识-Markdown" class="headerlink" title="一.认识 Markdown"></a>一.认识 Markdown</h2><p>在刚才的导语里提到，Markdown 是一种用来写作的轻量级「标记语言」，它用简洁的语法代替排版，而不像一般我们用的字处理软件 Word 或 Pages 有大量的排版、字体设置。它使我们专心于码字，用「标记」语法，来代替常见的排版格式。例如此文从内容到格式，甚至插图，键盘就可以通通搞定了。目前来看，支持 Markdown 语法的编辑器有很多，包括很多网站（例如简书）也支持了 Markdown 的文字录入。Markdown 从写作到完成，导出格式随心所欲，你可以导出 HTML 格式的文件用来网站发布，也可以十分方便的导出 PDF 格式，这种格式写出的简历更能得到 HR 的好感。甚至可以利用 CloudApp 这种云服务工具直接上传至网页用来分享你的文章，全球最大的轻博客平台 Tumblr，也支持 Mou 这类 Markdown 工具的直接上传。</p>
-<h3 id="Markdown-官方文档"><a href="#Markdown-官方文档" class="headerlink" title="Markdown 官方文档"></a>Markdown 官方文档</h3><blockquote>
-<ul>
-<li><a href="http://daringfireball.net/projects/markdown/syntax" title="Title" target="_blank" rel="external">创始人 John Gruber 的 Markdown 语法说明</a> </li>
-<li><a href="http://wowubuntu.com/markdown/#list" title="Title" target="_blank" rel="external">Markdown 中文版语法说明</a> </li>
-</ul>
-</blockquote>
-<h3 id="使用-Markdown-的优点"><a href="#使用-Markdown-的优点" class="headerlink" title="使用 Markdown 的优点"></a>使用 Markdown 的优点</h3><ul>
-<li>专注你的文字内容而不是排版样式，安心写作。</li>
-<li>轻松的导出 HTML、PDF 和本身的 .md 文件。</li>
-<li>纯文本内容，兼容所有的文本编辑器与字处理软件。</li>
-<li>随时修改你的文章版本，不必像字处理软件生成若干文件版本导致混乱。</li>
-<li>可读、直观、学习成本低。</li>
-</ul>
-<h3 id="使用-Markdown-的误区"><a href="#使用-Markdown-的误区" class="headerlink" title="使用 Markdown 的误区"></a>使用 Markdown 的误区</h3><blockquote>
-<p><em>We believe that writing is about content, about what you want to say – not about fancy formatting. </em><br>我们坚信写作写的是内容，所思所想，而不是花样格式。<br>— Ulysses for Mac</p>
-<ul>
-<li>Markdown 旨在简洁、高效，也由于 Markdown 的易读易写，人们用不同的编程语言实现了多个版本的解析器和生成器，这就导致了目前不同的 Markdown 工具集成了不同的功能（基础功能大致相同），例如 &gt; 流程图与时序图，复杂表格与复杂公式的呈现，虽然功能的丰富并没有什么本质的缺点，但终归有些背离初衷，何况在编写的过程中很费神，不如使用专业的工具撰写来的更有效率，所以如果你需实现复杂功能，专&gt; 业的图形界面工具会更加方便。当然，如果你对折腾这些不同客户端对 Markdown 的定制所带来高阶功能感到愉悦的话，那也是无可厚非的。</li>
-</ul>
-</blockquote>
-<p><img src="http://ww2.sinaimg.cn/large/6aee7dbbgw1eq320claw3j21kw0kjdpc.jpg" alt="flowchart.js on Github（使用 Markdown 绘制流程图）"></p>
-<h2 id="二-Markdown-语法的简要规则"><a href="#二-Markdown-语法的简要规则" class="headerlink" title="二.Markdown 语法的简要规则"></a>二.Markdown 语法的简要规则</h2><h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p><img src="http://ww1.sinaimg.cn/large/6aee7dbbgw1effeaclhiyj20eh09cwez.jpg" alt="标题"></p>
-<p>标题是每篇文章都需要也是最常用的格式，在 Markdown 中，如果一段文字被定义为标题，只要在这段文字前加 # 号即可。</p>
-<p># 一级标题</p>
-<p>## 二级标题</p>
-<p>### 三级标题</p>
-<p>以此类推，总共六级标题，建议在井号后加一个空格，这是最标准的 Markdown 语法。</p>
-<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>熟悉 HTML 的同学肯定知道有序列表与无序列表的区别，在 Markdown 下，列表的显示只需要在文字前加上 - 或 * 即可变为无序列表，有序列表则直接在文字前加1. 2. 3. 符号要和文字之间加上一个字符的空格。<br><img src="http://ww4.sinaimg.cn/large/6aee7dbbgw1effew5aftij20d80bz3yw.jpg" alt="无序列表与有序列表"></p>
-<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>如果你需要引用一小段别处的句子，那么就要用引用的格式。</p>
-<blockquote>
-<p>例如这样</p>
-</blockquote>
-<p>只需要在文本前加入 &gt; 这种尖括号（大于号）即可</p>
-<p><img src="http://ww3.sinaimg.cn/large/6aee7dbbgw1effezhonxlj20e009c3yu.jpg" alt="引用"></p>
-<h3 id="图片与链接"><a href="#图片与链接" class="headerlink" title="图片与链接"></a>图片与链接</h3><p>插入链接与插入图片的语法很像，区别在一个 !号<br>图片为：<img src="" alt="">{ImgCap}{/ImgCap}</p>
-<p>链接为：[ ]( )</p>
-<p>插入图片的地址需要图床，这里推荐围脖图床修复计划 与 CloudApp 的服务，生成URL地址即可。<br><img src="http://ww2.sinaimg.cn/large/6aee7dbbgw1efffa67voyj20ix0ctq3n.jpg" alt="URL 与图片"></p>
-<h3 id="粗体与斜体"><a href="#粗体与斜体" class="headerlink" title="粗体与斜体"></a>粗体与斜体</h3><p>Markdown 的粗体和斜体也非常简单，用两个 * 包含一段文本就是粗体的语法，用一个 * 包含一段文本就是斜体的语法。<br>例如：<strong>这里是粗体</strong> <em>这里是斜体</em></p>
-<h3 id="代码框"><a href="#代码框" class="headerlink" title="代码框"></a>代码框</h3><p>如果你是个程序猿，需要在文章里优雅的引用代码框，在 Markdown下实现也非常简单，只需要用两个 ` 把中间的代码包裹起来。图例：<br><img src="http://ww3.sinaimg.cn/large/6aee7dbbgw1effg1lsa97j20lt0a8dgs.jpg" alt=""></p>
-<h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><p>分割线的语法只需要三个 * 号，例如：</p>
-<hr>
-<p>文／Te_Lee（简书作者）<br>原文链接：<a href="http://www.jianshu.com/p/1e402922ee32/#" target="_blank" rel="external">http://www.jianshu.com/p/1e402922ee32/#</a><br>著作权归作者所有，转载请联系作者获得授权，并标注“简书作者”。</p>
+		<p>因特网使用的IP协议是无连接的，因此其传输是不可靠的。这样容易使人们感到因特网很不可靠，那为什么当初不直接把它设计为可靠的?</p>
+<p>先打一个比方。邮局寄送的平信很像无连接的IP数据报。每封平信可能走不同的传送路径，同时平信也不保证不丢失。当我们发现收信人没有收到寄出的平信时，去找邮局索赔是没有用的。邮局会说：“平信不保证不丢失。怕丢失就请你寄挂号信”。但是大家并不会将所有的信件都用挂号方式邮寄，这是因为邮局从来不会随意地将平信丢弃，而丢失平信的概率并不大，况且寄挂号信要多花些钱，还要去邮局排队，太麻烦。总之，尽管寄平信有可能会丢失，但绝大多数的信件还是平信，因为寄平信方便、便宜。<br><a id="more"></a><br>我们知道，传统的电信网的最主要的用途是进行电话通信。普通的电话机很简单，没有什么智能，因此电信公司就不得不把电信网设计得非常好，这种电信网可以保证用户通话时的通信质量。这点对使用非常简单的电话机的用户则是非常方便的。但电信公司为了建设能够确保传输质量的电信网则付出了巨大的代价(使用昂贵的程控交换机和网管系统)。</p>
+<p>数据的传送显然必须是非常可靠的。当初美国国防部在设计 ARPANET 时有一个很重要的讨论内容就是：“谁应当负责数据传输的可靠性?”这时出现了两种对立的意见。一种意见是主张应当像电信网那样，由通信网络负责数据传输的可靠性(因为电信网的发展历史及其技术水平已经证明了人们可以将网络设计得相当可靠)。但另一种意见则坚决主张由用户的主机负责数据传输的可靠性。这里最重要的理由是：这样可以使计算机网络便宜、灵活，同时还可以满足军事上的各种特殊的需求。</p>
+<p>下面用一个简单例子来说明这一问题。</p>
+<p>设主机 A 通过因特网向主机 B 传送文件(如下图所示)。怎样才能实现文件数据的可靠传输呢?</p>
+<p><img src="http://img.bitscn.com/upimg/allimg/c150406/142R92541921Z-13918.jpg" alt=""></p>
+<p>如按照电信网的思路，就是设法(这需要花费相当多的钱)将不可靠的因特网做成为可靠的因特网。</p>
+<p>但设计计算机网络的人采用另外一种思路，即设法实现端到端的可靠传输。</p>
+<p>提出这种思路的人认为，计算机网络和电信网的一个重大区别就是终端设备的性能差别很大。电信网的终端是非常简单的、没有什么智能的电话机。因此电信网的不可靠必然会严重地影响人们利用电话的通信。但计算机网络的终端是有很多智能的主机。这样就使得计算机网络和电信网有两个重要区别。第一，即使传送数据的因特网有一些缺陷(如造成比特差错或分组丢失)，但具有很多智能的终端主机仍然有办法实现可靠的数据传输(例如，能够及时发现差错并通知发送方重传刚才出错的数据)。第二，即使网络可以实现 100% 地无差错传输，端到端的数据传输仍然有可能出现差错。</p>
+<p>为了说明这点，我们可以用一个简单例子来说明这个问题。这就是主机 A 向主机 B 传送一个文件的情况。</p>
+<p>文件是通过一个文件系统存储在主机 A 的硬盘中。主机 B 也有一个文件系统，用来接收和存储从 A 发送过来的文件。应用层使用的应用程序现在就是文件传送程序，这个程序一部分在主机 A 运行，另一部分在主机 B 运行。</p>
+<p><strong>现在讨论文件传送的大致步骤：</strong></p>
+<p>(1)主机 A 的文件传送程序调用文件系统将文件从硬盘中读出。然后文件系统将文件传递给文件传送程序。</p>
+<p>(2)主机 A 请求数据通信系统将文件传送到主机 B。这里包括使用一些通信协议和将数据文件划分为适当大小的分组。</p>
+<p>(3)通信网络将这些数据分组逐个传送给主机 B。</p>
+<p>(4)在主机 B，数据通信协议将收到的数据传递给文件传送应用程序在主机 B 运行的那一部分。</p>
+<p>(5)在主机 B，文件传送程序请求主机 B 的文件系统将收到的数据写到主机 B 的硬盘中。</p>
+<p><strong>在以上的几个步骤中，都存在使数据受到损伤的一些因素。例如：</strong></p>
+<p>(1)虽然文件原来是正确写在主机 A 的硬盘上，但在读出后就可能出现差错(如在磁盘存储系统中的硬件出现了故障)。</p>
+<p>(2)文件系统、文件传送程序或数据通信系统的软件在对文件中的数据进行缓存或复制的过程中都有可能出现故障。</p>
+<p>(3)主机 A 或 B 的硬件处理机或存储器在主机 A 或 B 进行数据缓存或复制的过程中也有可能出现故障。</p>
+<p>(4)通信系统在传输数据分组时有可能产生检测不出来的比特差错或甚至丢失某些分组。</p>
+<p>(5)主机 A 或 B 都有可能在进行数据处理的过程中突然崩溃。</p>
+<p>由此可看出，即使对于这样一个简单的文件传送任务，仅仅使通信网络非常可靠并不能保证文件从主机 A 硬盘到主机 B 硬盘的传送是可靠的。也就是说，花费很多的钱将通信网络做成为非常可靠的，对传送计算机数据来说是得不偿失的。既然现在的终端设备有智能，就应当把网络设计得简单些，而让具有智能的终端来完成“使传输变得可靠”的任务。</p>
+<p>于是，计算机网络的设计者采用了一种策略，这就是“端到端的可靠传输”。更具体些，就是在运输层使用面向连接的 TCP 协议，它可保证端到端的可靠传输。只要主机 B 的 TCP 发现了数据的传输有差错，就告诉主机 A 将出现差错的那部分数据重传，直到这部分数据正确传送到主机 B 为止。而 TCP 发现不了数据有差错的概率是很小的。采用这样的建网策略，既可以使网络部分价格便宜和灵活可靠，又能够保证端到端的可靠传输。</p>
+<p>这样，我们可以这样想像，将因特网的范围稍微扩大一些，即扩大到主机中的运输层。由于运输层使用了 TCP 协议，使得端到端的数据传输成为可靠的，因此这样扩大了范围的因特网就成为可靠的网络。</p>
+<p>因此，说“因特网提供的数据传输是不可靠的”或“因特网提供的数据传输是可靠的”这两种说法都可以在文献中找到，问题是是怎样界定因特网的范围。如果说因特网提供的数据传输是不可靠的，那么这里的因特网指的是不包括主机在内的网络(仅有下三层)。说因特网提供的数据传输是可靠的，就表明因特网的范围已经扩大到主机的运输层。</p>
+<p>再回到通过邮局寄平信的例子。当我们寄出一封平信后，可以等待收信人的确认(通过他的回信)。如果隔了一些日子还没有收到回信，我们可以将该信件再寄一次。这就是将“端到端的可靠传输”的原理用于寄信的例子。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -164,7 +136,7 @@ Markdown 是一种轻量级的「标记语言」，它的优点很多，目前�
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Markdown/">Markdown</a>
+  <span></span> <a href="/tags/TCP-IP/">TCP/IP</a>
   </div>
 
 </div>
@@ -173,7 +145,7 @@ Markdown 是一种轻量级的「标记语言」，它的优点很多，目前�
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/11/02/Markdown——入门指南/" data-title="Markdown——入门指南 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/11/06/IP协议不可靠无连接为什么不把它设计为可靠的/" data-title="IP协议不可靠无连接 为什么不把它设计为可靠的? | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -186,19 +158,11 @@ Markdown 是一种轻量级的「标记语言」，它的优点很多，目前�
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/11/02/Shortest command on Linux/" title="Shortest command on Linux">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Shortest command on Linux</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/10/31/系统启动及内核管理/"  title="系统启动及内核管理">
+<a href="/2016/11/04/Big file transfer in Linux/"  title="Big file transfer in Linux">
  <strong>下一篇：</strong><br/> 
- <span>系统启动及内核管理
+ <span>Big file transfer in Linux
 </span>
 </a>
 </div>
@@ -207,7 +171,7 @@ Markdown 是一种轻量级的「标记语言」，它的优点很多，目前�
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/11/02/Markdown——入门指南/" data-title="Markdown——入门指南" data-url="http://yoursite.com/2016/11/02/Markdown——入门指南/"></div>
+	<div class="ds-thread" data-thread-key="2016/11/06/IP协议不可靠无连接为什么不把它设计为可靠的/" data-title="IP协议不可靠无连接 为什么不把它设计为可靠的?" data-url="http://yoursite.com/2016/11/06/IP协议不可靠无连接为什么不把它设计为可靠的/"></div>
 </section>
 
 
