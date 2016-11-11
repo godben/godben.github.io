@@ -1,0 +1,586 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>CentOS启动流程学习笔记 | godben&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="godben">
+    
+
+    
+    <meta name="description" content="一、Linux内核的组成相关概念：   Linux系统的组成部分：内核+根文件系统   内核：进程管理、内存管理、网络协议栈、文件系统、驱动程序。   IPC(Inter-Process Communication进程间通信):就是指多个进程之间相互通信，交换信息的方法。Linux IPC基本上都是从Unix平台上继承而来的。主要包括最初的Unix IPC，System V IPC以及基于Sock">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS启动流程学习笔记">
+<meta property="og:url" content="http://yoursite.com/2016/11/11/CentOS启动流程学习笔记/index.html">
+<meta property="og:site_name" content="godben's blog">
+<meta property="og:description" content="一、Linux内核的组成相关概念：   Linux系统的组成部分：内核+根文件系统   内核：进程管理、内存管理、网络协议栈、文件系统、驱动程序。   IPC(Inter-Process Communication进程间通信):就是指多个进程之间相互通信，交换信息的方法。Linux IPC基本上都是从Unix平台上继承而来的。主要包括最初的Unix IPC，System V IPC以及基于Sock">
+<meta property="og:image" content="http://p1.bqimg.com/4851/bc1a70f5e5302e81.png">
+<meta property="og:image" content="http://p1.bqimg.com/4851/183ffcffe2baa736.png">
+<meta property="og:image" content="http://p1.bqimg.com/4851/7df3646da489d0fa.png">
+<meta property="og:image" content="http://p1.bqimg.com/4851/146104c0c528937b.png">
+<meta property="og:image" content="http://p1.bqimg.com/4851/b14bb0d285d16de7.png">
+<meta property="og:image" content="http://p1.bqimg.com/4851/15c6ecc63decccbc.png">
+<meta property="og:image" content="http://p1.bqimg.com/4851/c875d900b63b98b5.png">
+<meta property="og:updated_time" content="2016-11-11T08:20:40.029Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS启动流程学习笔记">
+<meta name="twitter:description" content="一、Linux内核的组成相关概念：   Linux系统的组成部分：内核+根文件系统   内核：进程管理、内存管理、网络协议栈、文件系统、驱动程序。   IPC(Inter-Process Communication进程间通信):就是指多个进程之间相互通信，交换信息的方法。Linux IPC基本上都是从Unix平台上继承而来的。主要包括最初的Unix IPC，System V IPC以及基于Sock">
+<meta name="twitter:image" content="http://p1.bqimg.com/4851/bc1a70f5e5302e81.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="godben&#39;s blog" title="godben&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="godben&#39;s blog">godben&#39;s blog</a></h1>
+				<h2 class="blog-motto">博观而约取 厚积而薄发</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/photo/index.html">摄影</a></li>
+					
+						<li><a href="/about">留言板</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/11/11/CentOS启动流程学习笔记/" title="CentOS启动流程学习笔记" itemprop="url">CentOS启动流程学习笔记</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
+		
+  <p class="article-time">
+    <time datetime="2016-11-11T08:02:14.723Z" itemprop="datePublished"> 发表于 2016-11-11</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<h3 id="一、Linux内核的组成"><a href="#一、Linux内核的组成" class="headerlink" title="一、Linux内核的组成"></a>一、Linux内核的组成</h3><p><strong>相关概念：</strong><br>   Linux系统的组成部分：内核+根文件系统<br>   内核：进程管理、内存管理、网络协议栈、文件系统、驱动程序。<br>   IPC(Inter-Process Communication进程间通信):就是指多个进程之间相互通信，交换信息的方法。Linux IPC基本上都是从Unix平台上继承而来的。主要包括最初的Unix IPC，System V IPC以及基于Socket的IPC。另外，Linux也支持POSIX IPC。<br><a id="more"></a><br><strong>运行中的系统环境可分为两层：内核空间、用户空间</strong><br>内核空间：内核代码（系统调用）<br>用户空间：应用程序（进程或线程）</p>
+<p><strong>内核设计流派：</strong><br>单内核设计：把所有的功能集成于同一个程序；（Linux）<br>微内核设计：每种功能都使用一个单独的子系统实现；（Windows solarls）</p>
+<p><strong>Linux内核特点：</strong><br>（1）支持模块化：.KO（kernel object）<br>（2）支持模块运动时动态装载或卸载</p>
+<p><strong>组成部分：</strong><br>核心文件：/boot/Vmliuz-VERSION-release<br> ramdirk:<br> CentOS5:/boot/initrd-VERSION-release.img<br> CentOS6,7:/boot/initramfs-VERSION-release.img</p>
+<h3 id="二、CentOS系统启动流程"><a href="#二、CentOS系统启动流程" class="headerlink" title="二、CentOS系统启动流程"></a>二、CentOS系统启动流程</h3><p>总体启动顺序：</p>
+<blockquote>
+<p>POST(加电自检)–&gt;Boot Sequence(BIOS:基本输入输出系统)–&gt;Boot Loader(MBR:主引导记录)–&gt;Kernel(ramdisk)–&gt;rootfs(根文件系统)–&gt;switchchroot–&gt;/sbin/init/(/etc/inittab /etc/init/*.conf)–&gt;设定运行级别–&gt;系统初始化脚本–&gt;关闭启动相应服务–&gt;启动终端 </p>
+</blockquote>
+<h3 id="各流程细化说明："><a href="#各流程细化说明：" class="headerlink" title="各流程细化说明："></a>各流程细化说明：</h3><p><strong>1、POST加电自检  </strong><br>主要是检测硬件设别是否能正常的运行，然而实现自检功能主要是由镶嵌在主板芯片(CMOS)上的BIOS(basic input output system)程序，检测没问题之后进行硬件设备的初始化。   </p>
+<p><strong>2、Boot Sequence(启动管理程序):选择启动顺序加载MBR</strong><br>Boot Sequence是一个程序，它依赖于某个硬盘硬件，准确的说是第一个硬盘扇区的MBR，从而按次序查找各引导设备。</p>
+<p><strong>3、MBR引导，bootloader引导加载器，启动程序</strong><br>MBR(Master Boot Record)：此记录在0磁道1扇区，总共为512字节，前446字节为bootloder，后64字节为分区表信息，主分区加上扩展分区不能大于四个，最后2个字节为校验信息，为55AA。提供一个菜单，允许用户选择要启动的系统或不同的内核版本；把用户选定的内核装载到RAM中的特定空间中，解压、展开，而后把系统控制权移交给内核。</p>
+<p><strong>4、kernel内核实现</strong><br>kernel自身初始化，实现功能，借助ramdisk探测可识别的程序，以自读方式挂载根文件系统，运行应用程序：/sbin/init</p>
+<p><strong>5、/sbin/init/管理用户空间服务进程</strong><br>设定运行级别，进行初始化脚本，关闭或启动相应的程序，启动终端。   </p>
+<div align="center"><br><img src="http://p1.bqimg.com/4851/bc1a70f5e5302e81.png" alt=""><br></div>
+
+<p>GRUB（GRand Unified Bootloader）加载内核，就是MBR中的前 446 个字节，是BooTLoader的一种，它的作用是要选择要启动的内核。<br>GRUB相关说明：</p>
+<div align="center"><br><img src="http://p1.bqimg.com/4851/183ffcffe2baa736.png" alt=""><br></div>
+
+<p>主要是由device.map，menulst，stage1,stage2,以及一系列的stage1_5组成。<br>device.map：存放的是内核文件的根分区<br>menu.lis：为菜单列表，里面为可选择的菜单列表，存放于stage2中。<br>stage：用于grub引导程序过大，所以分2段引导，第一段存放在MBR中，第二段存放于内核文件系统中，第一段引导完成后可以找到第二段。 但是，第二段是存放于内核文件系统中的，此时还没有格式化文件系统，如何可以访问到第二段的menu.lst，就需要借助于中间层 stage1_5，有它来协助 stage1 段来访问stage2阶段。stage1_5通常位于stage1 字段后的 63 个扇区。 由于stage2 在内存中存放可以使用的文件系统不确定，所以这就是有多个stage1_5 的原因。</p>
+<p>Grub Legacy：分三阶段<br>stage1：存放在MBR上<br>stage1_5：存放在MBR之后的扇区，让stage1中的bootloader能识别stage2所在的分区上的文件系统；<br>stage2：磁盘分区（/boot/grub/）<br>   引导加载程序先读取MBR上的gurb第一阶段，由于MBR很小只有512字节采用grub这种方式引导程序，随后读取扇区中的stage1.5阶段，读取1.5阶段以后从而就能驱动第二阶段stage2所在的磁盘分区，stage2是存放在磁盘分区上的还包括了内核文件及ramdisk等都在这个分区上存放的；这就是为什么通过Bootloader之grub就能够加载内核文件的原因。<br>  注意：当前硬件平台，主板BIOS必须能识别硬盘，然后BIOS才能加载硬盘中的Bootloader，磁盘中的Bootloader自身加载完以后，就能够识别当前主机上的硬盘设备了。<br>但硬盘设备能识别，并不代表硬盘上的文件系统能识别，因为文件系统是额外附加的一层软件组织的文件结构，所以要能够对接一种文件系统，必须要用到文件系统驱动；对应的应用程序必须能识别和理解这样的文件系统才可以，这种程序就称为文件系统驱动；grub的1.5阶段就是给gurb提供了文件系统驱动的，从而就能够访问对应的第二阶段和内核所在的分区了，这通常是一个基本磁盘分区；所以grub第二阶段以及内核和ramdisk文件通常都会放在一个基本磁盘分区上；因为grub驱动不了逻辑卷这种高级接口。<br> stage2一般是挂载至/boot/grub/目录下；grub也有自己的配置文件：/boot/grub/grub.conf且通常有个符号链接文件：/etc/grub.conf；<br> stage2的功用：<br> （1）提供菜单或交互式接口；<br> （2）能加载用户选择的内核或操作系统；<br> （3）为菜单通过了保护机制。</p>
+<div align="center"><br><img src="http://p1.bqimg.com/4851/7df3646da489d0fa.png" alt=""><br></div>
+
+<p><strong>进入单用户模式： </strong><br>1）编辑grub菜单，选定要编辑的title，而后使用e命令<br>2）在选定的kernel后附加1 ，s 或single<br>3）在kernel所在的行，键入b键      </p>
+<p><strong>演示：</strong></p>
+<div align="center"><br><img src="http://p1.bqimg.com/4851/146104c0c528937b.png" alt=""><br></div>
+
+
+<p><strong>6、根切换</strong><br>  在挂载根文件系统时为了避免内核中有bug或操作过程中有bug导致根文件系统被损坏，先只读挂载根文件系统，加载完成后才读写挂载，完成整个挂载根文件系统后，直接去找/sbin/init程序，即开始运行用户空间的第一个程序。</p>
+<p>用户空间启动流程<br><strong>7、/sbin/init程序</strong><br>  init程序主要依赖于配置文件：/etc/inittab，大体分为：设定默认启动级别 –&gt; 设定系统初始化脚本 –&gt; 启动对应级别的服务 –&gt; 打印各终端登录界面（如果级别为3处理提供文本登录界面，如果级别为5还提供图形登录界面）</p>
+<p><strong>8、设置默认运行级别</strong><br>  （1）运行级别：为了系统的运行或维护等目的而设定的机制；<br>    0-6：共7个级别；<br>     0：关机，shutdown<br>     1：单用户模式（single user），root用户，无须认证，维护模式；<br>     2：多用户模式（multi user），会启动网络功能，但不会启动NFS，维护模式；<br>     3：多用户模式（multi user），完全功能模式，文本界面；<br>     4：预留级别：目前无特别使用目的，但习惯以同3级别功能使用；<br>     5：多用户模式（multi user），完全功能模式，图形界面；<br>     6：重启，reboot<br>图示：</p>
+<div align="center"><br><img src="http://p1.bqimg.com/4851/b14bb0d285d16de7.png" alt=""><br></div>
+
+
+<p>（2）配置文件：/etc/inittab定义了很多功能，每一行定义一种操作（action）以及与之对应的process（仅适用于CentOS 5），一行就定义了init要执行的任务，甚至是一堆任务，每一行的语法格式为：                                                             id:runlevels:action:process<br>  id为一个任务的标识符；<br>  runlevels：在哪些运行级别下启动此任务；例：3，2345，也可为空表示所有级别；<br>  action：在什么条件下启动此任务；<br>    wait：等待切换至此任务所在的级别时执行一次（刚刚切换进来时）；<br>    respawn：一旦此任务终止时，就自动重启；（如：登录终端执行logout登出后会再次启动）<br>    initdefault：设定默认允许级别；此时process省略为空；<br>    sysinit：设定系统初始化方式，此处一般为指定/etc/rc.d/rc.sysinit脚本；（CentOS 5,6都用到此脚本，CentOS 7是靠systemd完成的），在CentOS 6中仅保留此配置文件中设定启动运行级别的功能。<br>    process：具体任务；通常为应用程序，或脚本，或二进制的程序，取决于自定义。</p>
+<p>演示：</p>
+<div align="center"><br><img src="http://p1.bqimg.com/4851/15c6ecc63decccbc.png" alt=""><br></div>
+
+<p><strong>9、系统初始化脚本</strong><br>系统初始化脚本：/etc/rc.d/rc.sysinit<br>（1）设置主机名；<br>（2）设置欢迎信息；<br>（3）激活udev和selinux；<br>（4）挂载/etc/fstab文件中定义的所有文件系统；<br>（5）检测根文件系统，并以读写方式重新挂载根文件系统；（重新挂载是指根文件检测完之后）<br>（6）设置系统时钟；<br>（7）根据/etc/sysctl.conf文件来设置内核参数；<br>（8）激活lvm即软raid设备；<br>（9）激活swap设备；<br>（10）加载额外设备的驱动程序；（内核加载驱动只加载根文件系统的）<br>（11）清理操作；<br>注意：在init配置文件：/etc/inittab中，有一行内容是定义/etc/rc.d/rc.sysinit，此脚本文件是负责完成系统初始化的脚本文件。</p>
+<p><strong>10、关闭/启动对应级别下的服务</strong><br>  脚本文件/etc/rc.d/rc作用为当级别切换时启动或停止服务；此脚本接受传递的参数给脚本中$runlevel变量，然后，读取/etc/rc$runlevel.d/K<em>和/etc/rc$runlevel.d/S</em>所有文件，这些文件就是为什么开机启动后，有些服务会自动启动，有些服务没有启动的原因。<br>K<em>：要停止的服务，K##</em>，优先级，数字越小，越优先关闭，依赖的服务先关闭，然后再关闭被依赖的。<br>S<em>：要启动的服务，S##</em>，优先级，数字越小，越是优先启动，被依赖的服务先启动，而依赖的服务后启动。<br>/etc/rc.d/init.d目录还有个链接目录为/etc/init.d目录，这两目录下文件相同。</p>
+<p>如上诉定义将会启动3级别下的以S打头的进程：</p>
+<p>图示：</p>
+<div align="center"><br><img src="http://p1.bqimg.com/4851/c875d900b63b98b5.png" alt=""><br></div>
+
+<p><strong>11、启动终端（图形终端）</strong><br> 操作系统启动完成</p>
+<h3 id="三、系统启动流程总结。"><a href="#三、系统启动流程总结。" class="headerlink" title="三、系统启动流程总结。"></a>三、系统启动流程总结。</h3><p><strong>内核级别：</strong><br>1.POST做开机启动时候的硬件检测功能<br>2.BootSequence(BIOS)启动加载主引导分区MBR中的引导加载器程序BootLoader<br>   在LInux现行的BootLoader是三段划分(打破446字节限制)的GRUB程序，<br>    第1段写在BootLoader中<br>    第1.5段在其后扇区用于文件系统的引导<br>    第2段在boot/grub中提供内部接口和调用系统内核kernel<br>3.Kernel识别硬件、加载驱动、只读挂载根文件系统、同时交付给用户空间第一个程序/sbin/init<br>此处特别要注意，系统发行商为了适应多种硬件接口驱动调用，会在第一次安装系统时候，自动识别硬件接口，并调用唯一驱动程序来生成ramdisk文件，以内存当磁盘做虚根，驱动接口后会切换到真实的根文件系统上<br>CentOS 5系列是initrd，当磁盘映像文件会造成二次缓存缓冲<br>CentOS 6/7系列改进为initramfs，以文件系统形式可以不二次占用缓存和缓冲</p>
+<p><strong>用户空间级别</strong><br>4./sbin/init接管后更具其配置文件来初始化<br>5.根据/sbin/init中的配置会设置默认运行级别，以及一些在/etc/init.d/设置的开机服务<br>6./etc/rc.d/rc.sysinit运行系统初始化脚本，完成系统初始化<br>7.关闭对应级别下需要停止的服务，启动对应级别下需要开启的服务<br>8.设置登录终端</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/CentOS/">CentOS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/11/11/CentOS启动流程学习笔记/" data-title="CentOS启动流程学习笔记 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/11/11/一张不错的Linux启动流程图/"  title="一张不错的Linux启动流程图">
+ <strong>下一篇：</strong><br/> 
+ <span>一张不错的Linux启动流程图
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/11/11/CentOS启动流程学习笔记/" data-title="CentOS启动流程学习笔记" data-url="http://yoursite.com/2016/11/11/CentOS启动流程学习笔记/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Kernel/" title="Kernel">Kernel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/TCP-IP/" title="TCP/IP">TCP/IP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/FileSystem/" title="FileSystem">FileSystem<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Centos/" title="Centos">Centos<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HTTP/" title="HTTP">HTTP<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Virtualization/" title="Virtualization">Virtualization<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/VMWARE/" title="VMWARE">VMWARE<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://godben.blog.51cto.com/" target="_blank" title="My Blog">My Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.csdn.net/" target="_blank" title="CSDN">CSDN</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://bbs.ithome.com/" target="_blank" title="IT之家">IT之家</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.itpub.net/" target="_blank" title="ITPUB">ITPUB</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://lemon100.top/" target="_blank" title="lemon100">lemon100</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=1783437385&verifier=9cb9c6df&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m CAO BEN. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/caoben88" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/godben" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/godben" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:godben@sina.cn" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="godben">godben</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"godben"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?f6dbd6c2451b74e4a750f748a54d11e9";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
