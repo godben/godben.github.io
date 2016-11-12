@@ -4,19 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>godben&#39;s blog</title>
+    <title>Use rsync to delete mass files quickly in Linux | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta property="og:type" content="website">
-<meta property="og:title" content="godben's blog">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+    <meta name="description" content="Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Use rsync to delete mass files quickly in Linux">
+<meta property="og:url" content="http://yoursite.com/2016/11/12/Use rsync to delete mass files quickly in Linux/index.html">
 <meta property="og:site_name" content="godben's blog">
+<meta property="og:description" content="Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them">
+<meta property="og:updated_time" content="2016-11-12T09:45:47.819Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="godben's blog">
+<meta name="twitter:title" content="Use rsync to delete mass files quickly in Linux">
+<meta name="twitter:description" content="Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -72,314 +76,110 @@
 </div>
     </header>
     <div id="container">
-      <div id="main">
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/11/03/DNS学习笔记/" title="DNS学习笔记" itemprop="url">DNS学习笔记</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-11-03T12:07:21.021Z" itemprop="datePublished"> 发表于 2016-11-03</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><strong>1. DNS</strong><br>DNS：Domain Name System 域名管理系统 域名是由圆点分开一串单词或缩写组成的，每一个域名都对应一个惟一的IP地址，这一命名的方法或这样管理域名的系统叫做域名管理系统。<br>DNS：Domain Name Server 域名服务器 域名虽然便于人们记忆，但网络中的计算机之间只能互相认识IP地址，它们之间的转换工作称为域名解析，域名解析需要由专门的域名解析服务器来完成，DNS 就是进行域名解析的服务器。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/11/03/DNS学习笔记/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+      <div id="main" class="post" itemscope itemprop="blogPost">
   
-  <span></span> <a href="/tags/DNS/">DNS</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/11/03/DNS学习笔记/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/03/DNS学习笔记/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/03/A possible way to recover deleted files on Linux/" title="A possible way to recover deleted files on Linux" itemprop="url">A possible way to recover deleted files on Linux</a>
+      <a href="/2016/11/12/Use rsync to delete mass files quickly in Linux/" title="Use rsync to delete mass files quickly in Linux" itemprop="url">Use rsync to delete mass files quickly in Linux</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-03T09:38:57.324Z" itemprop="datePublished"> 发表于 2016-11-03</time>
+    <time datetime="2016-11-12T08:52:16.829Z" itemprop="datePublished"> 发表于 2016-11-12</time>
     
   </p>
 </header>
-    <div class="article-content">
-        
-        <p>Last week I was generating a MD5 sum for an virtual machine image on one OpenNebula server:</p>
+	<div class="article-content">
+		
+		<p>Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them frequently. Usually we would use <strong>rm -rf *</strong> to delete these files, but we may need to wait for a relative long time if there are too many files. So we must adopt some unusual way. Fortunately, we can use <strong>rsync</strong> to delete mass files in one shot.</p>
+<a id="more"></a>
+<p><strong>1. Install rsync</strong></p>
 <blockquote>
-<p><code># ls -l test.img</code><br><code>-rw-r--r-- 1 root root 10486808576 Oct 12 02:21 test.img</code><br><code># md5sum test.img</code></p>
+<p>yum install rsync</p>
 </blockquote>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/11/03/A possible way to recover deleted files on Linux/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/11/03/A possible way to recover deleted files on Linux/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/03/A possible way to recover deleted files on Linux/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/11/02/Shortest command on Linux/" title="Shortest command on Linux" itemprop="url">Shortest command on Linux</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-11-02T14:17:20.109Z" itemprop="datePublished"> 发表于 2016-11-02</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Usually when we log in to a Linux system,. we may type some frequently used Linux commands such as pwd,ls, ps etc. All these commands are really simple but powerful with different options. But do you know what is the shortest command on Linux? The answer is <strong>w</strong>.<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/11/02/Shortest command on Linux/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/11/02/Shortest command on Linux/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/02/Shortest command on Linux/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/11/02/Markdown——入门指南/" title="Markdown——入门指南" itemprop="url">Markdown——入门指南</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-11-02T08:52:26.974Z" itemprop="datePublished"> 发表于 2016-11-02</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><strong>导语：</strong></p>
+<p><strong>2. Create a new empty folder</strong></p>
 <blockquote>
-<p>Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/11/02/Markdown——入门指南/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
+<p>mkdir /tmp/test</p>
+</blockquote>
+<p><strong>3. Use rsync to delete target folder</strong></p>
+<blockquote>
+<p>rsync --delete-before -a -H -v --progress --stats /tmp/test/ log/</p>
+</blockquote>
+<p>Now the log folder we be cleared if we run this command, the speed is very fast. Actually what rsync does  is to replace all files in the target folder.</p>
+<p>Option explanation for command in step 3:</p>
+<p><strong>–delete-before </strong>: do deletion before the transmission starts in target folder</p>
+<p><strong>–progress</strong> : Show the transmission progress</p>
+<p><strong>-a</strong> :Archive mode, use archive method to transmit files</p>
+<p><strong>-H</strong> ：keep the hard linked files</p>
+<p><strong>-v</strong> ：Verbose output</p>
+<p><strong>–stats</strong> : Show transmission status of some files</p>
+<h2 id="水平有限翻译仅供参考"><a href="#水平有限翻译仅供参考" class="headerlink" title="水平有限翻译仅供参考"></a>水平有限翻译仅供参考</h2><p>我昨天遇到一个从我Linux工作站删除大量日志文件的问题，那里有差不多100000个文件要删除。这些日志文件的增长速度很快，以至于我要频繁的删除它们。通常情况下我们使用<strong>rm -rf * </strong>命令删除这些文件，如果文件很多的话，我需要等待很长的时间。因此，我们必须采取一些不寻常的方法。幸运的是，我们可以使用<strong>rsync</strong>一次性删除大量的文件。</p>
+<p><strong>1.安装rsync</strong></p>
+<blockquote>
+<p>yum install rsync</p>
+</blockquote>
+<p><strong>2.创建一个新的文件夹</strong></p>
+<blockquote>
+<p>mkdir /tmp/test</p>
+</blockquote>
+<p>3.使用rsync删除目标文件夹</p>
+<blockquote>
+<p>rsync --delete-before -a -H -v --progress --stats /tmp/test/ log/</p>
+</blockquote>
+<p>这样我们要删除的log目录就会被清空了，删除的速度会非常快。rsync实际上用的是替换原理，处理数十万个文件也是秒删。</p>
+<p>选项说明：<br><strong>--delete-before</strong> 接收者在传输之前进行删除操作<br><strong>--progress</strong> 在传输时显示传输过程<br><strong>-a</strong> 归档模式，表示以递归方式传输文件，并保持所有文件属性<br><strong>-H</strong> 保持硬连接的文件<br><strong>-v</strong> 详细输出模式<br><strong>--stats</strong> 给出某些文件的传输状态</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Markdown/">Markdown</a>
+  <span></span> <a href="/tags/Linux/">Linux</a>
   </div>
 
 </div>
 
 
 
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/11/12/Use rsync to delete mass files quickly in Linux/" data-title="Use rsync to delete mass files quickly in Linux | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  </div>
+	
+	</div>
 
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/11/02/Markdown——入门指南/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/02/Markdown——入门指南/" data-count-type="comments">&nbsp;</a>
-	
-</div>
 
 </footer>
 
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/10/31/系统启动及内核管理/" title="系统启动及内核管理" itemprop="url">系统启动及内核管理</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-10-31T13:15:00.569Z" itemprop="datePublished"> 发表于 2016-10-31</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="一、知识整理"><a href="#一、知识整理" class="headerlink" title="一、知识整理"></a>一、知识整理</h3><p><strong> 1、nohup 命令：</strong><br>不挂断地运行命令，远程连接当断网或断开shell时还可以继续运行。无论是否将nohup命令的输出重定向到终端，输出都将附加到当前目录下的nohup.out文件中，如果当前不可写，则重定向到家目录nohup.out文件，除非定义了输出文件。<br>nohup COMMAND 输出重定向至文件<br>nohup COMMAND &amp; 使用jobs查看任务，按后台任务关闭方式关闭。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/10/31/系统启动及内核管理/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Kernel/">Kernel</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
+   	       
+	</article>
 	
-	  	<span></span>
-		<a href="/2016/10/31/系统启动及内核管理/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/10/31/系统启动及内核管理/" data-count-type="comments">&nbsp;</a>
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/11/11/dev_null dev_tty in Linux/"  title="/dev/null and /dev/tty in Linux">
+ <strong>下一篇：</strong><br/> 
+ <span>/dev/null and /dev/tty in Linux
+</span>
+</a>
+</div>
+
+</nav>
+
 	
-</div>
-
-</footer>
-
-
-    </article>
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/11/12/Use rsync to delete mass files quickly in Linux/" data-title="Use rsync to delete mass files quickly in Linux" data-url="http://yoursite.com/2016/11/12/Use rsync to delete mass files quickly in Linux/"></div>
+</section>
 
 
-
-
-
-
-
-  <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
-  </nav>
-
-</div>
+</div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
 <div id="asidepart">
@@ -609,8 +409,95 @@ $(document).ready(function(){
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
 
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"godben"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
 
 
 
@@ -679,4 +566,4 @@ var _hmt = _hmt || [];
 <!-- Tiny_search End -->
 
   </body>
- </html>
+</html>
