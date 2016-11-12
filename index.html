@@ -80,6 +80,65 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/11/11/dev_null dev_tty in Linux/" title="/dev/null and /dev/tty in Linux" itemprop="url">/dev/null and /dev/tty in Linux</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
+		
+  <p class="article-time">
+    <time datetime="2016-11-11T09:54:26.959Z" itemprop="datePublished"> 发表于 2016-11-11</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>In Linux, there are two special files /dev/null and /dev/tty. /dev/null will drop all the data written to it, i.e, when program writes data to this file, it means the program has completed the data write operation. But in  fact it does nothing, if you just want the status of a command but not the output of a command, this feature will be very useful. See below shell codes:<br>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2016/11/11/dev_null dev_tty in Linux/#more">阅读更多</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/FileSystem/">FileSystem</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/11/11/dev_null dev_tty in Linux/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/11/dev_null dev_tty in Linux/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/11/11/CentOS启动流程学习笔记/" title="CentOS启动流程学习笔记" itemprop="url">CentOS启动流程学习笔记</a>
   </h1>
   <p class="article-author">By
@@ -304,66 +363,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/11/06/非root用户正常使用wireshark方法/" title="非root用户正常使用wireshark方法" itemprop="url">非root用户正常使用wireshark方法</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-11-06T04:43:09.115Z" itemprop="datePublished"> 发表于 2016-11-06</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>今天在linux环境下运行wireshark抓包，安装好wireshark后，开始抓包总是报错，内容如下：<br><strong> The capture session could not be initiated (failed to set hardware filter to promiscuous mode) </strong><br><strong> Please check to make sure you have sufficient permissions, and that you have</strong></p>
-<p>查询解决方法，结果是将选项中的混杂模式关闭，关闭后仍然报错，继续查询，突然想起来可能是用户权限问题，然后用sudo wireshark打开wireshark就正常了，但是wireshark官方不推荐这么做：<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/11/06/非root用户正常使用wireshark方法/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Wireshark/">Wireshark</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/11/06/非root用户正常使用wireshark方法/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/06/非root用户正常使用wireshark方法/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -384,7 +383,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>11</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>12</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/FileSystem/" title="FileSystem">FileSystem<sup>3</sup></a></li>
 			
 		
 			
@@ -396,11 +399,7 @@
 			
 		
 			
-				<li><a href="/tags/FileSystem/" title="FileSystem">FileSystem<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>1</sup></a></li>
 			
 		
 			
@@ -408,19 +407,7 @@
 			
 		
 			
-				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
 			
 		
 			
@@ -428,7 +415,7 @@
 			
 		
 			
-				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
 			
 		
 			
@@ -445,6 +432,18 @@
 		
 			
 				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
 			
 		
 		</ul>
