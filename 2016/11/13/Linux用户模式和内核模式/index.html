@@ -4,37 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>TCP/IP、Http、Socket的区别 | godben&#39;s blog</title>
+    <title>Linux用户模式和内核模式 | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="网络由下往上分为：
-
-物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。
-
-如上图，IP协议对应于网络层；TCP协议对应于传输层；而HTTP协议对应于应用层；">
+    <meta name="description" content="MS-DOS等操作系统在单一的CPU模式下运行，但是一些类Unix的操作系统则使用了双模式，可以有效地实现时间共享。在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式。除了内核本身处于内核模式以外，所有的用户进程都运行在用户模式之中。内核模式的代码可以无限制地访问所有处理器指令集以及全部内存和I/O空间。如果用户模式的进程要享有此特权，它必须通过系统调用向设备驱动程序或其">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TCP/IP、Http、Socket的区别">
-<meta property="og:url" content="http://yoursite.com/2016/10/31/TCPIP、Http、Socket的区别/index.html">
+<meta property="og:title" content="Linux用户模式和内核模式">
+<meta property="og:url" content="http://yoursite.com/2016/11/13/Linux用户模式和内核模式/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="网络由下往上分为：
-
-物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。
-
-如上图，IP协议对应于网络层；TCP协议对应于传输层；而HTTP协议对应于应用层；">
-<meta property="og:image" content="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/45205997.jpg">
-<meta property="og:updated_time" content="2016-10-31T12:53:55.721Z">
+<meta property="og:description" content="MS-DOS等操作系统在单一的CPU模式下运行，但是一些类Unix的操作系统则使用了双模式，可以有效地实现时间共享。在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式。除了内核本身处于内核模式以外，所有的用户进程都运行在用户模式之中。内核模式的代码可以无限制地访问所有处理器指令集以及全部内存和I/O空间。如果用户模式的进程要享有此特权，它必须通过系统调用向设备驱动程序或其">
+<meta property="og:updated_time" content="2016-11-13T02:39:38.493Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TCP/IP、Http、Socket的区别">
-<meta name="twitter:description" content="网络由下往上分为：
-
-物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。
-
-如上图，IP协议对应于网络层；TCP协议对应于传输层；而HTTP协议对应于应用层；">
-<meta name="twitter:image" content="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/45205997.jpg">
+<meta name="twitter:title" content="Linux用户模式和内核模式">
+<meta name="twitter:description" content="MS-DOS等操作系统在单一的CPU模式下运行，但是一些类Unix的操作系统则使用了双模式，可以有效地实现时间共享。在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式。除了内核本身处于内核模式以外，所有的用户进程都运行在用户模式之中。内核模式的代码可以无限制地访问所有处理器指令集以及全部内存和I/O空间。如果用户模式的进程要享有此特权，它必须通过系统调用向设备驱动程序或其">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -96,69 +82,26 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/10/31/TCPIP、Http、Socket的区别/" title="TCP/IP、Http、Socket的区别" itemprop="url">TCP/IP、Http、Socket的区别</a>
+      <a href="/2016/11/13/Linux用户模式和内核模式/" title="Linux用户模式和内核模式" itemprop="url">Linux用户模式和内核模式</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-10-31T11:43:13.006Z" itemprop="datePublished"> 发表于 2016-10-31</time>
+    <time datetime="2016-11-13T02:37:49.171Z" itemprop="datePublished"> 发表于 2016-11-13</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>网络由下往上分为：</p>
-<blockquote>
-<p>物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。</p>
-</blockquote>
-<p><img src="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-31/45205997.jpg" alt=""><br>如上图，IP协议对应于网络层；TCP协议对应于传输层；而HTTP协议对应于应用层；<br><a id="more"></a><br>三者从本质上来说没有可比性，socket则是对TCP/IP协议的封装和应用(程序员层面上)。</p>
-<p>也可以说：</p>
-<blockquote>
-<ul>
-<li>TPC/IP协议是传输层协议，主要解决数据如何在网络中传输；</li>
-<li>而HTTP是应用层协议，主要解决如何包装数据。</li>
-</ul>
-</blockquote>
-<p>关于TCP/IP和HTTP协议的关系，网络有一段比较容易理解的介绍：</p>
-<blockquote>
-<p>我们在传输数据时，可以只使用(传输层)TCP/IP协议，但是那样的话，如果没有应用层，便无法识别数据内容。如果想要使传输的数据有意义，则必须使用到应用层协议。</p>
-<p>应用层协议有很多，比如HTTP、FTP、TELNET等，也可以自己定义应用层协议。</p>
-<p>WEB使用HTTP协议作应用层协议，以封装HTTP文本信息，然后使用TCP/IP做传输层协议将它发到网络上。</p>
-</blockquote>
-<p>而我们平时说的最多的socket是什么呢，实际上socket是对TCP/IP协议的封装，Socket本身并不是协议，而是一个调用接口(API)。 　　<br>通过Socket，我们才能使用TCP/IP协议。实际上，Socket跟TCP/IP协议没有必然的联系。Socket编程接口在设计的时候，就希望也能适应其他的网络协议。</p>
-<p>所以说，Socket的出现只是使得程序员更方便地使用TCP/IP协议栈而已，是对TCP/IP协议的抽象，从而形成了我们知道的一些最基本的函数接口，比如create、listen、connect、accept、send、read和write等等。</p>
-<p>网络有一段关于socket和TCP/IP协议关系的说法比较容易理解：</p>
-<blockquote>
-<p>TCP/IP只是一个协议栈，就像操作系统的运行机制一样，必须要具体实现，同时还要提供对外的操作接口。 这个就像操作系统会提供标准的编程接口，比如win32编程接口一样，TCP/IP也要提供可供程序员做网络&gt; 开发所用的接口，这就是Socket编程接口。</p>
-</blockquote>
-<p>关于TCP/IP协议的相关知识，用“博大精深”来讲我想也不为过，单单查一下网上关于此类只是的资料和书籍文献的数量就知道。这个我打算会买一些经典的书籍(比如《TCP/IP详解：卷一、卷二、卷三》)进行学习。</p>
-<p>今天就先总结一些基于基于TCP/IP协议的应用和编程接口的知识，也就是刚才说了很多的HTTP和Socket。 　　<br>CSDN上有个比较形象的描述：HTTP是轿车，提供了封装或者显示数据的具体形式;Socket是发动机，提供了网络通信的能力。</p>
-<p>实际上，传输层的TCP是基于网络层的IP协议的；而应用层的HTTP协议又是基于传输层的TCP协议的；而Socket本身不算是协议，就像上面所说，它只是提供了一个针对TCP或者UDP编程的接口。</p>
-<p>下面是一些经常在笔试或者面试中碰到的重要的概念，特在此做摘抄和总结。</p>
-<h3 id="一、什么是TCP连接的三次握手"><a href="#一、什么是TCP连接的三次握手" class="headerlink" title="一、什么是TCP连接的三次握手"></a>一、什么是TCP连接的三次握手</h3><p>第一次握手：客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认; 　<br>第二次握手：服务器收到syn包，必须确认客户的SYN(ack=j+1)，同时自己也发送一个SYN包(syn=k)，即SYN+ACK包，此时服务器进入SYN_RECV状态;<br>第三次握手：客户端收到服务器的SYN+ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。</p>
-<p>握手过程中传送的包里不包含数据，三次握手完毕后，客户端与服务器才正式开始传送数据。</p>
-<p>理想状态下，TCP连接一旦建立，在通信双方中的任何一方主动关闭连接之前，TCP 连接都将被一直保持下去。</p>
-<p>断开连接时服务器和客户端均可以主动发起断开TCP连接的请求，断开过程需要经过“四次握手”(过程就不细写了，就是服务器和客户端交互，最终确定断开)</p>
-<h3 id="二、利用Socket建立网络连接的步骤"><a href="#二、利用Socket建立网络连接的步骤" class="headerlink" title="二、利用Socket建立网络连接的步骤"></a>二、利用Socket建立网络连接的步骤</h3><p>建立Socket连接至少需要一对套接字，其中一个运行于客户端，称为ClientSocket ，另一个运行于服务器端，称为ServerSocket 。</p>
-<p>套接字之间的连接过程分为三个步骤：服务器监听，客户端请求，连接确认。</p>
-<p>1、<strong> 服务器监听 </strong> ：服务器端套接字并不定位具体的客户端套接字，而是处于等待连接的状态，实时监控网络状态，等待客户端的连接请求。</p>
-<p>2、<strong> 客户端请求 </strong>：指客户端的套接字提出连接请求，要连接的目标是服务器端的套接字。</p>
-<p>为此，客户端的套接字必须首先描述它要连接的服务器的套接字，指出服务器端套接字的地址和端口号，然后就向服务器端套接字提出连接请求。</p>
-<p>3、<strong> 连接确认 </strong>：当服务器端套接字监听到或者说接收到客户端套接字的连接请求时，就响应客户端套接字的请求，建立一个新的线程，把服务器端套接字的描述发给客户端，一旦客户端确认了此描述，双方就正式建立连接。</p>
-<p>而服务器端套接字继续处于监听状态，继续接收其他客户端套接字的连接请求。</p>
-<h3 id="三、HTTP链接的特点"><a href="#三、HTTP链接的特点" class="headerlink" title="三、HTTP链接的特点"></a>三、HTTP链接的特点</h3><p>HTTP协议即超文本传送协议(Hypertext Transfer Protocol )，是Web联网的基础，也是手机联网常用的协议之一，HTTP协议是建立在TCP协议之上的一种应用。</p>
-<p>HTTP连接最显著的特点是客户端发送的每次请求都需要服务器回送响应，在请求结束后，会主动释放连接。从建立连接到关闭连接的过程称为“一次连接”。</p>
-<h3 id="四、TCP和UDP的区别"><a href="#四、TCP和UDP的区别" class="headerlink" title="四、TCP和UDP的区别"></a>四、TCP和UDP的区别</h3><ul>
-<li><p>TCP是面向链接的，虽然说网络的不安全不稳定特性决定了多少次握手都不能保证连接的可靠性，但TCP的三次握手在最低限度上(实际上也很大程度上保证了)保证了连接的可靠性;</p>
-</li>
-<li><p>而UDP不是面向连接的，UDP传送数据前并不与对方建立连接，对接收到的数据也不发送确认信号，发送端不知道数据是否会正确接收，当然也不用重发，所以说UDP是无连接的、不可靠的一种数据传输协议。 　　</p>
-</li>
-<li><p>也正由于1所说的特点，使得UDP的开销更小数据传输速率更高，因为不必进行收发数据的确认，所以UDP的实时性更好。<br>知道了TCP和UDP的区别，就不难理解为何采用TCP传输协议的MSN比采用UDP的QQ传输文件慢了。但并不能说QQ的通信是不安全的，因为程序员可以手动对UDP的数据收发进行验证，比如发送方对每个数据包进行编号然后由接收方进行验证啊什么的。</p>
-</li>
-</ul>
-<p>即使是这样，UDP因为在底层协议的封装上没有采用类似TCP的“三次握手”而实现了TCP所无法达到的传输效率。</p>
+		<p>MS-DOS等操作系统在单一的CPU模式下运行，但是一些类Unix的操作系统则使用了双模式，可以有效地实现时间共享。在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式。除了内核本身处于内核模式以外，所有的用户进程都运行在用户模式之中。<br>内核模式的代码可以无限制地访问所有处理器指令集以及全部内存和I/O空间。如果用户模式的进程要享有此特权，它必须通过系统调用向设备驱动程序或其他内核模式的代码发出请求。另外，用户模式的代码允许发生缺页，而内核模式的代码则不允许。</p>
+<a id="more"></a>
+<p>在2.4和更早的内核中，仅仅用户模式的进程可以被上下文切换出局，由其他进程抢占。除非发生以下两种情况，否则内核模式代码可以一直独占CPU：<br>(1) 它自愿放弃CPU；<br>(2) 发生中断或异常。<br>2.6内核引入了内核抢占，大多数内核模式的代码也可以被抢占。</p>
+<p><strong>一、内核空间和用户空间</strong><br>   Linux简化了分段机制，使得虚拟地址与线性地址总是一致，因此，Linux的虚拟地址空间也为0～ 4G。Linux内核将这4G字节的空间分为两部分。将最高的1G字节（从虚拟地址0xC0000000到0xFFFFFFFF），供内核使用，称为“内核空间”。而将较低的3G字节（从虚拟地址0x00000000到0xBFFFFFFF），供各个进程使用，称为“用户空间“）。因为每个进程可以通过系统调用进入内核，因此，Linux内核由系统内的所有进程共享。于是，从具体进程的角度来看，每个进程可以拥有4G字节的虚拟空间。</p>
+<p><strong>二、内核态和用户态</strong><br>   当一个任务（进程）执行系统调用而陷入内核代码中执行时，我们就称进程处于内核运行态（或简称为内核态）。此时处理器处于特权级最高的（0级）内核代码中执行。当进程处于内核态时，执行的内核代码会使用当前进程的内核栈。每个进程都有自己的内核栈。当进程在执行用户自己的代码时，则称其处于用户运行态（用户态）。即此时处理器在特权级最低的（3级）用户代码中运行。当正在执行用户程序而突然被中断程序中断时，此时用户程序也可以象征性地称为处于进程的内核态。因为中断处理程序将使用当前进程的内核栈。这与处于内核态的进程的状态有些类似。</p>
+<p><strong>三、进程上下文和中断上下文</strong><br>   处理器总处于以下状态中的一种：<br>1、内核态，运行于进程上下文，内核代表进程运行于内核空间；<br>2、内核态，运行于中断上下文，内核代表硬件运行于内核空间；<br>3、用户态，运行于用户空间。</p>
+<p>用户空间的应用程序，通过系统调用，进入内核空间。这个时候用户空间的进程要传递很多变量、参数的值给内核，内核态运行的时候也要保存用户进程的一些寄存器值、变量等。所谓的“进程上下文”，可以看作是用户进程传递给内核的这些参数以及内核要保存的那一整套的变量和寄存器值和当时的环境等。<br>硬件通过触发信号，导致内核调用中断处理程序，进入内核空间。这个过程中，硬件的一些变量和参数也要传递给内核，内核通过这些参数进行中断处理。所谓的“中断上下文”，其实也可以看作就是硬件传递过来的这些参数和内核需要保存的一些其他环境（主要是当前被打断执行的进程环境）。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -167,7 +110,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/TCP-IP/">TCP/IP</a><a href="/tags/HTTP/">HTTP</a><a href="/tags/Socket/">Socket</a>
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Kernel/">Kernel</a>
   </div>
 
 </div>
@@ -176,7 +119,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/10/31/TCPIP、Http、Socket的区别/" data-title="TCP/IP、Http、Socket的区别 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/11/13/Linux用户模式和内核模式/" data-title="Linux用户模式和内核模式 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -189,19 +132,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/10/31/系统启动及内核管理/" title="系统启动及内核管理">
-  <strong>上一篇：</strong><br/>
-  <span>
-  系统启动及内核管理</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/10/27/Unix directory hierarchy history/"  title="Unix directory hierarchy history">
+<a href="/2016/11/12/Use rsync to delete mass files quickly in Linux/"  title="Use rsync to delete mass files quickly in Linux">
  <strong>下一篇：</strong><br/> 
- <span>Unix directory hierarchy history
+ <span>Use rsync to delete mass files quickly in Linux
 </span>
 </a>
 </div>
@@ -210,7 +145,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/10/31/TCPIP、Http、Socket的区别/" data-title="TCP/IP、Http、Socket的区别" data-url="http://yoursite.com/2016/10/31/TCPIP、Http、Socket的区别/"></div>
+	<div class="ds-thread" data-thread-key="2016/11/13/Linux用户模式和内核模式/" data-title="Linux用户模式和内核模式" data-url="http://yoursite.com/2016/11/13/Linux用户模式和内核模式/"></div>
 </section>
 
 
