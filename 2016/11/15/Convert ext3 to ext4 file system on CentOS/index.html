@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>/dev/null and /dev/tty in Linux | godben&#39;s blog</title>
+    <title>Convert ext3 to ext4 file system on CentOS | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="In Linux, there are two special files /dev/null and /dev/tty. /dev/null will drop all the data written to it, i.e, when program writes data to this file, it means the program has completed the data wr">
+    <meta name="description" content="Ext3 is a journaled file system that is commonly used by the Linux kernel. It is the default file system for many popular Linux distributions, including Debian. Stephen Tweedie. On June 28, 2006, Theo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="/dev/null and /dev/tty in Linux">
-<meta property="og:url" content="http://yoursite.com/2016/11/11/dev_null dev_tty in Linux/index.html">
+<meta property="og:title" content="Convert ext3 to ext4 file system on CentOS">
+<meta property="og:url" content="http://yoursite.com/2016/11/15/Convert ext3 to ext4 file system on CentOS/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="In Linux, there are two special files /dev/null and /dev/tty. /dev/null will drop all the data written to it, i.e, when program writes data to this file, it means the program has completed the data wr">
-<meta property="og:updated_time" content="2016-11-12T04:52:47.253Z">
+<meta property="og:description" content="Ext3 is a journaled file system that is commonly used by the Linux kernel. It is the default file system for many popular Linux distributions, including Debian. Stephen Tweedie. On June 28, 2006, Theo">
+<meta property="og:updated_time" content="2016-11-15T14:49:24.305Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="/dev/null and /dev/tty in Linux">
-<meta name="twitter:description" content="In Linux, there are two special files /dev/null and /dev/tty. /dev/null will drop all the data written to it, i.e, when program writes data to this file, it means the program has completed the data wr">
+<meta name="twitter:title" content="Convert ext3 to ext4 file system on CentOS">
+<meta name="twitter:description" content="Ext3 is a journaled file system that is commonly used by the Linux kernel. It is the default file system for many popular Linux distributions, including Debian. Stephen Tweedie. On June 28, 2006, Theo">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -82,130 +82,70 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/11/dev_null dev_tty in Linux/" title="/dev/null and /dev/tty in Linux" itemprop="url">/dev/null and /dev/tty in Linux</a>
+      <a href="/2016/11/15/Convert ext3 to ext4 file system on CentOS/" title="Convert ext3 to ext4 file system on CentOS" itemprop="url">Convert ext3 to ext4 file system on CentOS</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-11T09:54:26.959Z" itemprop="datePublished"> 发表于 2016-11-11</time>
+    <time datetime="2016-11-15T08:28:43.215Z" itemprop="datePublished"> 发表于 2016-11-15</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>In Linux, there are two special files /dev/null and /dev/tty. /dev/null will drop all the data written to it, i.e, when program writes data to this file, it means the program has completed the data write operation. But in  fact it does nothing, if you just want the status of a command but not the output of a command, this feature will be very useful. See below shell codes:<br><a id="more"></a></p>
-<pre><code>/&gt; vi test_dev_null.sh
-
-#!/bin/bash
-if grep hello TestFile &gt; /dev/null
-then
-    echo &quot;Found&quot;
-else
-    echo &quot;NOT Found&quot;
-fi
-</code></pre><p>After exiting vi, type below command:</p>
-<pre><code>/&gt; chmod +x test_dev_null.sh  
-/&gt; cat &gt; TestFile
-hello my friend
-CTRL + D                             #Save and exit
-/&gt; ./test_dev_null.sh
-Found                                 #Output
-</code></pre><p>Modify the above script:</p>
-<pre><code>/&gt; vi test_dev_null.sh
-
-#!/bin/bash
-if grep hello TestFile
-then
-    echo &quot;Found&quot;
-else
-    echo &quot;NOT Found&quot;
-fi
-
-/&gt; ./test_dev_null.sh
-hello my friend                      
-Found
-</code></pre><p>Let’s see /dev/tty command now, /dev/tty stands for the controlling terminal (if any) for the current process. To find out which tty’s are attached to which processes use the “ps -a” command at the shell prompt (command line). Look at the “tty” column. For the shell process you’re in, /dev/tty is the terminal you are now using. Type “tty” at the shell prompt to see what it is (see manual pg. tty(1)). /dev/tty is something like a link to the actually terminal device name with some additional features for C-programmers: see the manual page tty(4).</p>
-<pre><code>/&gt; vi test_dev_tty.sh
-
-#!/bin/bash
-printf &quot;Enter new password: &quot;    #Prompt input
-stty -echo                               
-read password &lt; /dev/tty         
-printf &quot;\nEnter again: &quot;           
-read password2 &lt; /dev/tty       
-printf &quot;\n&quot;                              
-stty echo                               
-echo &quot;Password = &quot; $password 
-echo &quot;Password2 = &quot; $password2
-echo &quot;All Done&quot;
-
-
-/&gt; chmod +x test_dev_tty.sh 
-/&gt; ./test_dev_tty
-Enter new password:             
-Enter again:                          
-Password = hello
-Password2 = hello
-All Done
-</code></pre><h2 id="水平有限翻译仅供参考"><a href="#水平有限翻译仅供参考" class="headerlink" title="水平有限翻译仅供参考"></a>水平有限翻译仅供参考</h2><p>在Linux里，有两个特殊的文件/dev/null和/dev/tty。/dev/null将删除所有写入它的数据，也就是说，当程序将数据写入这个文件，这意味着这个程序已经完成了写入数据操作。但事实上它什么事都没有做，如果你只想得到命令执行的返回状态而不是命令的输出结果，这个功能就非常有用了。看下面的这段shell代码：</p>
-<pre><code>/&gt; vi test_dev_null.sh
-
-#!/bin/bash
-if grep hello TestFile &gt; /dev/null
-then
-    echo &quot;Found&quot;
-else
-    echo &quot;NOT Found&quot;
-fi
-</code></pre><p>在vi中保存并退出后执行以下命令：</p>
-<pre><code>/&gt; chmod +x test_dev_null.sh      #使该文件成为可执行文件
-/&gt; cat &gt; TestFile
-
-hello my friend
-CTRL + D                          #退出命令行文件编辑状态
-
-/&gt; ./test_dev_null.sh
-Found                               #这里并没有输出grep命令的执行结果。
-</code></pre><p>修改这段脚本：</p>
-<pre><code>/&gt; vi test_dev_null.sh
-
-#!/bin/bash
-if grep hello TestFile             #去掉了&gt; /dev/null
-then
-    echo &quot;Found&quot;
-else
-    echo &quot;NOT Found&quot;
-fi
-
-/&gt; ./test_dev_null.sh
-hello my friend                      #输出了grep命令的执行结果
-Found
-</code></pre><p>现在看一下/dev/tty的用途，/dev/tty 代表当前进程的控制终端（如果有的话）。在shell命令行下使用”ps -a”命令就找出哪些tty连接到哪些进程。看一下tty的列。你所使用的shell程序就在里面，/dev/tty就是你正在使用的终端。在shell终端看一下”tty”类型是什么（请参阅手册pg. tty(1)）。<br>/dev/tty有些类似于到实际所使用终端设备的一个联接与c-programmers一些附加功能：请参阅手册页tty（4）。</p>
-<pre><code>/&gt; vi test_dev_tty.sh
-
-#!/bin/bash
-printf &quot;Enter new password: &quot;         #提示输入
-stty -echo                           #关闭自动打印输入字符的功能        
-read password &lt; /dev/tty              #读取密码
-printf &quot;\nEnter again: &quot;                #换行后提示再输入一次
-read password2 &lt; /dev/tty               #再读取一次以确认
-printf &quot;\n&quot;                          #换行
-stty echo                            #记着打开自动打印输入字符的功能    
-echo &quot;Password = &quot; $password          #输出读入变量
-echo &quot;Password2 = &quot; $password2
-echo &quot;All Done&quot;
-
-
-/&gt; chmod +x test_dev_tty.sh 
-/&gt; ./test_dev_tty
-Enter new password:                 #这里密码的输入被读入到脚本中的password变量
-Enter again:                        #这里密码的输入被读入到脚本中的password2变量  
-Password = hello
-Password2 = hello
-All Done
-</code></pre>  
+		<p>Ext3 is a journaled file system that is commonly used by the Linux kernel. It is the default file system for many popular Linux distributions, including Debian. Stephen Tweedie. On June 28, 2006, Theodore Ts’o, the principal developer of ext3, announced an enhanced version, called ext4. Today, we will show how to convert ext3 to ext4 format on CentOS.</p>
+<a id="more"></a>
+<p>System environment:</p>
+<p>Release version : <strong>CentOS release 5.4(Final)</strong></p>
+<p>Kernel:  Linux localhost.localdomain 2.6.18-164.el5 #1 SMP Thu Sep 3 03:28:30 EDT 2009 x86_64 x86_64 x86_64 GNU/Linux</p>
+<p>Assume the partition be to converted is <strong>/dev/sda7</strong> which is mounted on /data0 directory.</p>
+<p>First, install the ext4 support</p>
+<pre><code>yum install -y e4fsprogs
+</code></pre><p>Then unmount <strong>/dev/sda7</strong></p>
+<pre><code>umount /dev/sda7
+</code></pre><p>If the partition is in use and it cannot be unmounted, please use :</p>
+<pre><code>lsof | grep data0
+</code></pre><p>to check what processes are using /data0 directory and then kill those processes. After than, unmount /dev/sda7 again.</p>
+<p>Then activate ext4 on ext3 partition</p>
+<pre><code>tune4fs -O extents,uninit_bg,dir_index /dev/sda7
+</code></pre><p>Then refine the converted ext4 partition</p>
+<pre><code>e4fsck -yfDC0 /dev/sda7
+</code></pre><p>Lastly remount  /dev/sda7 to /data0</p>
+<p>mount /dev/sda7 /data0<br>We now can use mount to check format of /dev/sda7:</p>
+<pre><code>[root@localhost data0]# mount
+/dev/sda1 on / type ext3 (rw)
+proc on /proc type proc (rw)
+sysfs on /sys type sysfs (rw)
+.............................
+/dev/sda7 on /data0 type ext4 (rw)
+</code></pre><p>No, that’s not done. One more step, please remember to change format of respective records in <strong>/etc/fstab</strong> to ext4.</p>
+<h2 id="水平有限翻译仅供参考"><a href="#水平有限翻译仅供参考" class="headerlink" title="水平有限翻译仅供参考"></a>水平有限翻译仅供参考</h2><p>Ext3是Linux内核常用的日志文件系统。它默认支持大多数流行的Linux发行版本，包括Debian。在2006年6月28日,Theodore Ts’o,ext3的主要开发人员宣布了一个增强版,称为ext4。今天,我们将展示如何在CentOS上将ext3转换为ext4。</p>
+<p>系统环境：<br>发行版本： CentOS release 5.4(Final)<br>内核： Linux localhost.localdomain 2.6.18-164.el5 #1 SMP Thu Sep 3 03:28:30 EDT 2009 x86_64 x86_64 x86_64 GNU/Linux</p>
+<p>假设分区转换为/dev/sda7挂载于/data0目录</p>
+<p>首先，安装ext4支持</p>
+<pre><code>yum install -y e4fsprogs
+</code></pre><p>然后卸载/dev/sda7</p>
+<pre><code>umount /dev/sda7
+</code></pre><p>如果分区正在被使用并且不能被卸载，请使用：</p>
+<pre><code>lsof | grep data0
+</code></pre><p>检查哪个进程正在使用/data0目录并且杀死掉这些进程。之后执行再次unmount /dev/sda7。</p>
+<p>然后在ext3上激活ext4</p>
+<pre><code>tune4fs -O extents,uninit_bg,dir_index /dev/sda7
+</code></pre><p>接着完善转换的ext4分区</p>
+<pre><code>e4fsck -yfDC0 /dev/sda7
+</code></pre><p>最后重新在data0上挂载/dev/sda7</p>
+<pre><code>mount /dev/sda7 /data0
+</code></pre><p>我们现在可以使用mount命令检查/dev/sda7格式：</p>
+<pre><code>[root@localhost data0]# mount
+/dev/sda1 on / type ext3 (rw)
+proc on /proc type proc (rw)
+sysfs on /sys type sysfs (rw)
+.............................
+/dev/sda7 on /data0 type ext4 (rw)
+</code></pre><p>现在并没有结束。再来一步，请记得在/etc/fstab里更改EXT4各自的格式记录。</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -213,7 +153,7 @@ All Done
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/FileSystem/">FileSystem</a>
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/CentOS/">CentOS</a><a href="/tags/FileSystem/">FileSystem</a>
   </div>
 
 </div>
@@ -222,7 +162,7 @@ All Done
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/11/11/dev_null dev_tty in Linux/" data-title="/dev/null and /dev/tty in Linux | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/11/15/Convert ext3 to ext4 file system on CentOS/" data-title="Convert ext3 to ext4 file system on CentOS | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -235,19 +175,11 @@ All Done
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/11/12/Use rsync to delete mass files quickly in Linux/" title="Use rsync to delete mass files quickly in Linux">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Use rsync to delete mass files quickly in Linux</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/11/11/CentOS启动流程学习笔记/"  title="CentOS启动流程学习笔记">
+<a href="/2016/11/13/Linux用户模式和内核模式/"  title="Linux用户模式和内核模式">
  <strong>下一篇：</strong><br/> 
- <span>CentOS启动流程学习笔记
+ <span>Linux用户模式和内核模式
 </span>
 </a>
 </div>
@@ -256,7 +188,7 @@ All Done
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/11/11/dev_null dev_tty in Linux/" data-title="/dev/null and /dev/tty in Linux" data-url="http://yoursite.com/2016/11/11/dev_null dev_tty in Linux/"></div>
+	<div class="ds-thread" data-thread-key="2016/11/15/Convert ext3 to ext4 file system on CentOS/" data-title="Convert ext3 to ext4 file system on CentOS" data-url="http://yoursite.com/2016/11/15/Convert ext3 to ext4 file system on CentOS/"></div>
 </section>
 
 
