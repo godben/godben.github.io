@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>/dev/null and /dev/tty in Linux | godben&#39;s blog</title>
+    <title>正则表达式之Multiline和Dotall模式 | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="In Linux, there are two special files /dev/null and /dev/tty. /dev/null will drop all the data written to it, i.e, when program writes data to this file, it means the program has completed the data wr">
+    <meta name="description" content="Multiline模式如果regexp里出现了^或者$, 那么by default只会匹配第一行. 设置了Multiline,会匹配所有行.比如regexp: /^.AAA.$/src: “abcBBBdef/nsdfAAAfff/nsdf”without Multiline: 匹配失败with Multiline: 匹配成功">
 <meta property="og:type" content="article">
-<meta property="og:title" content="/dev/null and /dev/tty in Linux">
-<meta property="og:url" content="http://yoursite.com/2016/11/11/dev_null dev_tty in Linux/index.html">
+<meta property="og:title" content="正则表达式之Multiline和Dotall模式">
+<meta property="og:url" content="http://yoursite.com/2016/11/16/正则表达式之Multiline和Dotall模式/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="In Linux, there are two special files /dev/null and /dev/tty. /dev/null will drop all the data written to it, i.e, when program writes data to this file, it means the program has completed the data wr">
-<meta property="og:updated_time" content="2016-11-12T04:52:47.253Z">
+<meta property="og:description" content="Multiline模式如果regexp里出现了^或者$, 那么by default只会匹配第一行. 设置了Multiline,会匹配所有行.比如regexp: /^.AAA.$/src: “abcBBBdef/nsdfAAAfff/nsdf”without Multiline: 匹配失败with Multiline: 匹配成功">
+<meta property="og:updated_time" content="2016-11-16T11:02:40.687Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="/dev/null and /dev/tty in Linux">
-<meta name="twitter:description" content="In Linux, there are two special files /dev/null and /dev/tty. /dev/null will drop all the data written to it, i.e, when program writes data to this file, it means the program has completed the data wr">
+<meta name="twitter:title" content="正则表达式之Multiline和Dotall模式">
+<meta name="twitter:description" content="Multiline模式如果regexp里出现了^或者$, 那么by default只会匹配第一行. 设置了Multiline,会匹配所有行.比如regexp: /^.AAA.$/src: “abcBBBdef/nsdfAAAfff/nsdf”without Multiline: 匹配失败with Multiline: 匹配成功">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -82,130 +82,24 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/11/dev_null dev_tty in Linux/" title="/dev/null and /dev/tty in Linux" itemprop="url">/dev/null and /dev/tty in Linux</a>
+      <a href="/2016/11/16/正则表达式之Multiline和Dotall模式/" title="正则表达式之Multiline和Dotall模式" itemprop="url">正则表达式之Multiline和Dotall模式</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-11T09:54:26.959Z" itemprop="datePublished"> 发表于 2016-11-11</time>
+    <time datetime="2016-11-16T10:35:56.465Z" itemprop="datePublished"> 发表于 2016-11-16</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>In Linux, there are two special files /dev/null and /dev/tty. /dev/null will drop all the data written to it, i.e, when program writes data to this file, it means the program has completed the data write operation. But in  fact it does nothing, if you just want the status of a command but not the output of a command, this feature will be very useful. See below shell codes:<br><a id="more"></a></p>
-<pre><code>/&gt; vi test_dev_null.sh
-
-#!/bin/bash
-if grep hello TestFile &gt; /dev/null
-then
-    echo &quot;Found&quot;
-else
-    echo &quot;NOT Found&quot;
-fi
-</code></pre><p>After exiting vi, type below command:</p>
-<pre><code>/&gt; chmod +x test_dev_null.sh  
-/&gt; cat &gt; TestFile
-hello my friend
-CTRL + D                             #Save and exit
-/&gt; ./test_dev_null.sh
-Found                                 #Output
-</code></pre><p>Modify the above script:</p>
-<pre><code>/&gt; vi test_dev_null.sh
-
-#!/bin/bash
-if grep hello TestFile
-then
-    echo &quot;Found&quot;
-else
-    echo &quot;NOT Found&quot;
-fi
-
-/&gt; ./test_dev_null.sh
-hello my friend                      
-Found
-</code></pre><p>Let’s see /dev/tty command now, /dev/tty stands for the controlling terminal (if any) for the current process. To find out which tty’s are attached to which processes use the “ps -a” command at the shell prompt (command line). Look at the “tty” column. For the shell process you’re in, /dev/tty is the terminal you are now using. Type “tty” at the shell prompt to see what it is (see manual pg. tty(1)). /dev/tty is something like a link to the actually terminal device name with some additional features for C-programmers: see the manual page tty(4).</p>
-<pre><code>/&gt; vi test_dev_tty.sh
-
-#!/bin/bash
-printf &quot;Enter new password: &quot;    #Prompt input
-stty -echo                               
-read password &lt; /dev/tty         
-printf &quot;\nEnter again: &quot;           
-read password2 &lt; /dev/tty       
-printf &quot;\n&quot;                              
-stty echo                               
-echo &quot;Password = &quot; $password 
-echo &quot;Password2 = &quot; $password2
-echo &quot;All Done&quot;
-
-
-/&gt; chmod +x test_dev_tty.sh 
-/&gt; ./test_dev_tty
-Enter new password:             
-Enter again:                          
-Password = hello
-Password2 = hello
-All Done
-</code></pre><h2 id="水平有限翻译仅供参考"><a href="#水平有限翻译仅供参考" class="headerlink" title="水平有限翻译仅供参考"></a>水平有限翻译仅供参考</h2><p>在Linux里，有两个特殊的文件/dev/null和/dev/tty。/dev/null将删除所有写入它的数据，也就是说，当程序将数据写入这个文件，这意味着这个程序已经完成了写入数据操作。但事实上它什么事都没有做，如果你只想得到命令执行的返回状态而不是命令的输出结果，这个功能就非常有用了。看下面的这段shell代码：</p>
-<pre><code>/&gt; vi test_dev_null.sh
-
-#!/bin/bash
-if grep hello TestFile &gt; /dev/null
-then
-    echo &quot;Found&quot;
-else
-    echo &quot;NOT Found&quot;
-fi
-</code></pre><p>在vi中保存并退出后执行以下命令：</p>
-<pre><code>/&gt; chmod +x test_dev_null.sh      #使该文件成为可执行文件
-/&gt; cat &gt; TestFile
-
-hello my friend
-CTRL + D                          #退出命令行文件编辑状态
-
-/&gt; ./test_dev_null.sh
-Found                               #这里并没有输出grep命令的执行结果。
-</code></pre><p>修改这段脚本：</p>
-<pre><code>/&gt; vi test_dev_null.sh
-
-#!/bin/bash
-if grep hello TestFile             #去掉了&gt; /dev/null
-then
-    echo &quot;Found&quot;
-else
-    echo &quot;NOT Found&quot;
-fi
-
-/&gt; ./test_dev_null.sh
-hello my friend                      #输出了grep命令的执行结果
-Found
-</code></pre><p>现在看一下/dev/tty的用途，/dev/tty 代表当前进程的控制终端（如果有的话）。在shell命令行下使用”ps -a”命令就找出哪些tty连接到哪些进程。看一下tty的列。你所使用的shell程序就在里面，/dev/tty就是你正在使用的终端。在shell终端看一下”tty”类型是什么（请参阅手册pg. tty(1)）。<br>/dev/tty有些类似于到实际所使用终端设备的一个联接与c-programmers一些附加功能：请参阅手册页tty（4）。</p>
-<pre><code>/&gt; vi test_dev_tty.sh
-
-#!/bin/bash
-printf &quot;Enter new password: &quot;         #提示输入
-stty -echo                           #关闭自动打印输入字符的功能        
-read password &lt; /dev/tty              #读取密码
-printf &quot;\nEnter again: &quot;                #换行后提示再输入一次
-read password2 &lt; /dev/tty               #再读取一次以确认
-printf &quot;\n&quot;                          #换行
-stty echo                            #记着打开自动打印输入字符的功能    
-echo &quot;Password = &quot; $password          #输出读入变量
-echo &quot;Password2 = &quot; $password2
-echo &quot;All Done&quot;
-
-
-/&gt; chmod +x test_dev_tty.sh 
-/&gt; ./test_dev_tty
-Enter new password:                 #这里密码的输入被读入到脚本中的password变量
-Enter again:                        #这里密码的输入被读入到脚本中的password2变量  
-Password = hello
-Password2 = hello
-All Done
-</code></pre>  
+		<p><strong>Multiline模式</strong><br>如果regexp里出现了^或者$, 那么by default只会匹配第一行. 设置了Multiline,会匹配所有行.<br>比如<br>regexp: /^.<em>AAA.</em>$/<br>src: “abcBBBdef/nsdfAAAfff/nsdf”<br>without Multiline: 匹配失败<br>with Multiline: 匹配成功</p>
+<a id="more"></a>
+<p>所有, 在regexp里出现了^$, Multiline才有意思, 否则是没有意义的.</p>
+<p><strong>Dotall模式</strong><br>默认情况下, .不会匹配换行符, 设置了Dotall模式, .会匹配所有字符包括换行符<br>比如<br>regexp: /BBB.*AAA/<br>src: “abcBBBdef/nsdfAAAfff/nsdf”<br>without Dotall: 匹配失败<br>with Multiline: 匹配成功</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -213,7 +107,7 @@ All Done
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/FileSystem/">FileSystem</a>
+  <span></span> <a href="/tags/Regex/">Regex</a>
   </div>
 
 </div>
@@ -222,7 +116,7 @@ All Done
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/11/11/dev_null dev_tty in Linux/" data-title="/dev/null and /dev/tty in Linux | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/11/16/正则表达式之Multiline和Dotall模式/" data-title="正则表达式之Multiline和Dotall模式 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -235,19 +129,11 @@ All Done
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/11/12/Use rsync to delete mass files quickly in Linux/" title="Use rsync to delete mass files quickly in Linux">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Use rsync to delete mass files quickly in Linux</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/11/11/CentOS启动流程学习笔记/"  title="CentOS启动流程学习笔记">
+<a href="/2016/11/15/Convert ext3 to ext4 file system on CentOS/"  title="Convert ext3 to ext4 file system on CentOS">
  <strong>下一篇：</strong><br/> 
- <span>CentOS启动流程学习笔记
+ <span>Convert ext3 to ext4 file system on CentOS
 </span>
 </a>
 </div>
@@ -256,7 +142,7 @@ All Done
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/11/11/dev_null dev_tty in Linux/" data-title="/dev/null and /dev/tty in Linux" data-url="http://yoursite.com/2016/11/11/dev_null dev_tty in Linux/"></div>
+	<div class="ds-thread" data-thread-key="2016/11/16/正则表达式之Multiline和Dotall模式/" data-title="正则表达式之Multiline和Dotall模式" data-url="http://yoursite.com/2016/11/16/正则表达式之Multiline和Dotall模式/"></div>
 </section>
 
 
