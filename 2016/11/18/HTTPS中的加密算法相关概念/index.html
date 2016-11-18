@@ -4,23 +4,27 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Linux用户模式和内核模式 | godben&#39;s blog</title>
+    <title>HTTPS中的加密算法相关概念 | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="MS-DOS等操作系统在单一的CPU模式下运行，但是一些类Unix的操作系统则使用了双模式，可以有效地实现时间共享。在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式。除了内核本身处于内核模式以外，所有的用户进程都运行在用户模式之中。内核模式的代码可以无限制地访问所有处理器指令集以及全部内存和I/O空间。如果用户模式的进程要享有此特权，它必须通过系统调用向设备驱动程序或其">
+    <meta name="description" content="密码学在计算机科学中使用非常广泛，HTTPS就是建立在密码学基础之上的一种安全的通信协议。HTTPS早在1994年由网景公司首次提出，而如今在众多互联网厂商的推广之下HTTPS已经被广泛使用在各种大小网站中。在完全理解HTTPS之前，有必要弄清楚一些密码学相关的概念，比如：明文、密文、密码、密钥、对称加密、非对称加密、摘要、数字签名、数字证书。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux用户模式和内核模式">
-<meta property="og:url" content="http://yoursite.com/2016/11/13/Linux用户模式和内核模式/index.html">
+<meta property="og:title" content="HTTPS中的加密算法相关概念">
+<meta property="og:url" content="http://yoursite.com/2016/11/18/HTTPS中的加密算法相关概念/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="MS-DOS等操作系统在单一的CPU模式下运行，但是一些类Unix的操作系统则使用了双模式，可以有效地实现时间共享。在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式。除了内核本身处于内核模式以外，所有的用户进程都运行在用户模式之中。内核模式的代码可以无限制地访问所有处理器指令集以及全部内存和I/O空间。如果用户模式的进程要享有此特权，它必须通过系统调用向设备驱动程序或其">
-<meta property="og:updated_time" content="2016-11-13T02:39:38.493Z">
+<meta property="og:description" content="密码学在计算机科学中使用非常广泛，HTTPS就是建立在密码学基础之上的一种安全的通信协议。HTTPS早在1994年由网景公司首次提出，而如今在众多互联网厂商的推广之下HTTPS已经被广泛使用在各种大小网站中。在完全理解HTTPS之前，有必要弄清楚一些密码学相关的概念，比如：明文、密文、密码、密钥、对称加密、非对称加密、摘要、数字签名、数字证书。">
+<meta property="og:image" content="http://7d9py7.com1.z0.glb.clouddn.com/ciphe.jpg">
+<meta property="og:image" content="http://7lryy3.com1.z0.glb.clouddn.com/signature1.jpg">
+<meta property="og:image" content="http://7lryy3.com1.z0.glb.clouddn.com/signature2.jpg">
+<meta property="og:updated_time" content="2016-11-18T14:03:26.868Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux用户模式和内核模式">
-<meta name="twitter:description" content="MS-DOS等操作系统在单一的CPU模式下运行，但是一些类Unix的操作系统则使用了双模式，可以有效地实现时间共享。在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式。除了内核本身处于内核模式以外，所有的用户进程都运行在用户模式之中。内核模式的代码可以无限制地访问所有处理器指令集以及全部内存和I/O空间。如果用户模式的进程要享有此特权，它必须通过系统调用向设备驱动程序或其">
+<meta name="twitter:title" content="HTTPS中的加密算法相关概念">
+<meta name="twitter:description" content="密码学在计算机科学中使用非常广泛，HTTPS就是建立在密码学基础之上的一种安全的通信协议。HTTPS早在1994年由网景公司首次提出，而如今在众多互联网厂商的推广之下HTTPS已经被广泛使用在各种大小网站中。在完全理解HTTPS之前，有必要弄清楚一些密码学相关的概念，比如：明文、密文、密码、密钥、对称加密、非对称加密、摘要、数字签名、数字证书。">
+<meta name="twitter:image" content="http://7d9py7.com1.z0.glb.clouddn.com/ciphe.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -82,26 +86,84 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/13/Linux用户模式和内核模式/" title="Linux用户模式和内核模式" itemprop="url">Linux用户模式和内核模式</a>
+      <a href="/2016/11/18/HTTPS中的加密算法相关概念/" title="HTTPS中的加密算法相关概念" itemprop="url">HTTPS中的加密算法相关概念</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-13T02:37:49.171Z" itemprop="datePublished"> 发表于 2016-11-13</time>
+    <time datetime="2016-11-18T13:56:13.008Z" itemprop="datePublished"> 发表于 2016-11-18</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>MS-DOS等操作系统在单一的CPU模式下运行，但是一些类Unix的操作系统则使用了双模式，可以有效地实现时间共享。在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式。除了内核本身处于内核模式以外，所有的用户进程都运行在用户模式之中。<br>内核模式的代码可以无限制地访问所有处理器指令集以及全部内存和I/O空间。如果用户模式的进程要享有此特权，它必须通过系统调用向设备驱动程序或其他内核模式的代码发出请求。另外，用户模式的代码允许发生缺页，而内核模式的代码则不允许。</p>
+		<p>密码学在计算机科学中使用非常广泛，HTTPS就是建立在密码学基础之上的一种安全的通信协议。HTTPS早在1994年由网景公司首次提出，而如今在众多互联网厂商的推广之下HTTPS已经被广泛使用在各种大小网站中。在完全理解HTTPS之前，有必要弄清楚一些密码学相关的概念，比如：明文、密文、密码、密钥、对称加密、非对称加密、摘要、数字签名、数字证书。</p>
 <a id="more"></a>
-<p>在2.4和更早的内核中，仅仅用户模式的进程可以被上下文切换出局，由其他进程抢占。除非发生以下两种情况，否则内核模式代码可以一直独占CPU：<br>(1) 它自愿放弃CPU；<br>(2) 发生中断或异常。<br>2.6内核引入了内核抢占，大多数内核模式的代码也可以被抢占。</p>
-<p><strong>一、内核空间和用户空间</strong><br>   Linux简化了分段机制，使得虚拟地址与线性地址总是一致，因此，Linux的虚拟地址空间也为0～ 4G。Linux内核将这4G字节的空间分为两部分。将最高的1G字节（从虚拟地址0xC0000000到0xFFFFFFFF），供内核使用，称为“内核空间”。而将较低的3G字节（从虚拟地址0x00000000到0xBFFFFFFF），供各个进程使用，称为“用户空间“）。因为每个进程可以通过系统调用进入内核，因此，Linux内核由系统内的所有进程共享。于是，从具体进程的角度来看，每个进程可以拥有4G字节的虚拟空间。</p>
-<p><strong>二、内核态和用户态</strong><br>   当一个任务（进程）执行系统调用而陷入内核代码中执行时，我们就称进程处于内核运行态（或简称为内核态）。此时处理器处于特权级最高的（0级）内核代码中执行。当进程处于内核态时，执行的内核代码会使用当前进程的内核栈。每个进程都有自己的内核栈。当进程在执行用户自己的代码时，则称其处于用户运行态（用户态）。即此时处理器在特权级最低的（3级）用户代码中运行。当正在执行用户程序而突然被中断程序中断时，此时用户程序也可以象征性地称为处于进程的内核态。因为中断处理程序将使用当前进程的内核栈。这与处于内核态的进程的状态有些类似。</p>
-<p><strong>三、进程上下文和中断上下文</strong><br>   处理器总处于以下状态中的一种：<br>1、内核态，运行于进程上下文，内核代表进程运行于内核空间；<br>2、内核态，运行于中断上下文，内核代表硬件运行于内核空间；<br>3、用户态，运行于用户空间。</p>
-<p>用户空间的应用程序，通过系统调用，进入内核空间。这个时候用户空间的进程要传递很多变量、参数的值给内核，内核态运行的时候也要保存用户进程的一些寄存器值、变量等。所谓的“进程上下文”，可以看作是用户进程传递给内核的这些参数以及内核要保存的那一整套的变量和寄存器值和当时的环境等。<br>硬件通过触发信号，导致内核调用中断处理程序，进入内核空间。这个过程中，硬件的一些变量和参数也要传递给内核，内核通过这些参数进行中断处理。所谓的“中断上下文”，其实也可以看作就是硬件传递过来的这些参数和内核需要保存的一些其他环境（主要是当前被打断执行的进程环境）。</p>
+<blockquote>
+<p>密码(cipher)</p>
+</blockquote>
+<p>密码学中的<strong>密码（cipher）</strong>和我们日常生活中所说的密码不太一样，计算机术语『密码 cipher』是一种用于加密或者解密的<strong>算法</strong>，而我们日常所使用的『密码 password』是一种口令，它是用于认证用途的一组<strong>文本字符串</strong>，这里我们要讨论的是前者：cipher。</p>
+<blockquote>
+<p>密钥(key)</p>
+</blockquote>
+<p>密钥是一种参数，它是在使用密码（cipher）算法过程中输入的参数。同一个明文在相同的密码算法和不同的密钥计算下会产生不同的密文。很多知名的密码算法都是公开的，密钥才是决定密文是否安全的重要参数，通常密钥越长，破解的难度越大，比如一个8位的密钥最多有256种情况，使用穷举法，能非常轻易的破解，知名的DES算法使用56位的密钥，目前已经不是一种安全的加密算法了，主要还是因为56位的密钥太短，在数小时内就可以被破解。密钥分为对称密钥与非对称密钥。</p>
+<blockquote>
+<p>明文/密文</p>
+</blockquote>
+<p>明文（plaintext）是加密之前的原始数据，密文是通过密码（cipher）运算后得到的结果成为密文（ciphertext）</p>
+<p><img src="http://7d9py7.com1.z0.glb.clouddn.com/ciphe.jpg" alt=""></p>
+<blockquote>
+<p>对称密钥</p>
+</blockquote>
+<p>对称密钥（Symmetric-key algorithm）又称为共享密钥加密，对称密钥在加密和解密的过程中使用的密钥是相同的，常见的对称加密算法有DES、3DES、AES、RC5、RC6。对称密钥的优点是计算速度快，但是他也有缺点，密钥需要在通讯的两端共享，让彼此知道密钥是什么对方才能正确解密，如果所有客户端都共享同一个密钥，那么这个密钥就像万能钥匙一样，可以凭借一个密钥破解所有人的密文了，如果每个客户端与服务端单独维护一个密钥，那么服务端需要管理的密钥将是成千上万，这会给服务端带来噩梦。下面就是一个简单的对称加密，将明文加密成ASCII。</p>
+<pre><code># 加密的方式：在ASCII的基础上 + 密钥的值
+
+def encipher(plain_text, key):
+    # 加密
+    cipher_text = []
+    for c in plain_text:
+        cipher_text.append(str(ord(c) + key))
+
+    return &apos; &apos;.join(cipher_text)
+
+def decipher(cipher_text, key):
+    # 解密
+    plain_text = []
+    for c in cipher_text.split(&quot; &quot;):
+        plain_text.append(chr(int(c)+key))
+    return &quot;&quot;.join(plain_text)
+
+
+if __name__ == &apos;__main__&apos;:
+    print &quot;cipher_text:&quot;, encipher(&quot;abcdef&quot;, 0)
+    print &quot;plain_text:&quot;, decipher(&quot;97 98 99 100 101 102&quot;, 0)
+</code></pre><blockquote>
+<p>非对称密钥</p>
+</blockquote>
+<p>非对称密钥（public-key cryptography），又称为公开密钥加密，服务端会生成一对密钥，一个私钥保存在服务端，仅自己知道，另一个是公钥，公钥可以自由发布供任何人使用。客户端的明文通过公钥加密后的密文需要用私钥解密。非对称密钥在加密和解密的过程的使用的密钥是不同的密钥，加密和解密是不对称的，所以称之为非对称加密。与对称密钥加密相比，非对称加密无需在客户端和服务端之间共享密钥，只要私钥不发给任何用户，即使公钥在网上被截获，也无法被解密，仅有被窃取的公钥是没有任何用处的。常见的非对称加密有RSA，非对称加解密的过程：</p>
+<ol>
+<li>服务端生成配对的公钥和私钥</li>
+<li>私钥保存在服务端，公钥发送给客户端</li>
+<li>客户端使用公钥加密明文传输给服务端</li>
+<li>服务端使用私钥解密密文得到明文</li>
+</ol>
+<blockquote>
+<p>数字签名（Digital Signature）</p>
+</blockquote>
+<p>数据在浏览器和服务器之间传输时，有可能在传输过程中被冒充的盗贼把内容替换了，那么如何保证数据是真实服务器发送的而不被调包呢，同时如何保证传输的数据没有被人篡改呢，要解决这两个问题就必须用到数字签名，数字签名就如同日常生活的中的签名一样，一旦在合同书上落下了你的大名，从法律意义上就确定是你本人签的字儿，这是任何人都没法仿造的，因为这是你专有的手迹，任何人是造不出来的。那么在计算机中的数字签名怎么回事呢？数字签名就是用于验证传输的内容是不是真实服务器发送的数据，发送的数据有没有被篡改过，它就干这两件事，是非对称加密的一种应用场景。不过他是<strong>反过来用私钥来加密，通过与之配对的公钥来解密。</strong></p>
+<p><strong>第一步</strong>：服务端把报文经过Hash处理后生成摘要信息Digest，摘要信息使用私钥private-key加密之后就生成签名，服务器把签名连同报文一起发送给客户端。 </p>
+<p><img src="http://7lryy3.com1.z0.glb.clouddn.com/signature1.jpg" alt=""></p>
+<p><strong>第二步</strong>：客户端接收到数据后，把签名提取出来用public-key解密，如果能正常的解密出来Digest2，那么就能确认是对方发的。<br><strong>第三步</strong>：客户端把报文Text提取出来做同样的Hash处理，得到的摘要信息Digest1，再与之前解密出来的Digist2对比，如果两者相等，就表示内容没有被篡改，否则内容就是被人改过了。因为只要文本内容哪怕有任何一点点改动都会Hash出一个完全不一样的摘要信息出来。</p>
+<p><img src="http://7lryy3.com1.z0.glb.clouddn.com/signature2.jpg" alt=""></p>
+<blockquote>
+<p>数字证书（Certificate Authority）</p>
+</blockquote>
+<p>数字证书简称CA，它由权威机构给某网站颁发的一种认可凭证，这个凭证是被大家（浏览器）所认可的，为什么需要用数字证书呢，难道有了数字签名还不够安全吗？有这样一种情况，就是浏览器无法确定所有的真实服务器是不是真的是真实的，举一个简单的例子：A厂家给你们家安装锁，同时把钥匙也交给你，只要钥匙能打开锁，你就可以确定钥匙和锁是配对的，如果有人把钥匙换了或者把锁换了，你是打不开门的，你就知道肯定被窃取了，但是如果有人把锁和钥匙替换成另一套表面看起来差不多的，但质量差很多的，虽然钥匙和锁配套，但是你却不能确定这是否真的是A厂家给你的，那么这时候，你可以找质检部门来检验一下，这套锁是不是真的来自于A厂家，质检部门是权威机构，他说的话是可以被公众认可的（呵呵）。</p>
+<p>同样的， 因为如果有人（张三）用自己的公钥把真实服务器发送给浏览器的公钥替换了，于是张三用自己的私钥执行相同的步骤对文本Hash、数字签名，最后得到的结果都没什么问题，但事实上浏览器看到的东西却不是真实服务器给的，而是被张三从里到外（公钥到私钥）换了一通。那么如何保证你现在使用的公钥就是真实服务器发给你的呢？我们就用数字证书来解决这个问题。数字证书一般由数字证书认证机构（Certificate Authority）颁发，证书里面包含了真实服务器的公钥和网站的一些其他信息，数字证书机构用自己的私钥加密后发给浏览器，浏览器使用数字证书机构的公钥解密后得到真实服务器的公钥。这个过程是建立在被大家所认可的证书机构之上得到的公钥，所以这是一种安全的方式。</p>
+<p>参考：</p>
+<p><a href="http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html</a> <a href="https://zh.wikipedia.org/wiki/%E5%85%AC%E5%BC%80%E5%AF%86%E9%92%A5%E5%8A%A0%E5%AF%86" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E5%85%AC%E5%BC%80%E5%AF%86%E9%92%A5%E5%8A%A0%E5%AF%86</a> <a href="https://zh.wikipedia.org/wiki/%E9%AB%98%E7%BA%A7%E5%8A%A0%E5%AF%86%E6%A0%87%E5%87%86" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E9%AB%98%E7%BA%A7%E5%8A%A0%E5%AF%86%E6%A0%87%E5%87%86</a> <a href="https://zh.wikipedia.org/wiki/%E8%B3%87%E6%96%99%E5%8A%A0%E5%AF%86%E6%A8%99%E6%BA%96" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E8%B3%87%E6%96%99%E5%8A%A0%E5%AF%86%E6%A8%99%E6%BA%96</a> <a href="https://zh.wikipedia.org/wiki/%E6%95%B8%E4%BD%8D%E7%B0%BD%E7%AB%A0" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E6%95%B8%E4%BD%8D%E7%B0%BD%E7%AB%A0</a> <a href="http://www.guokr.com/post/114121/" target="_blank" rel="external">http://www.guokr.com/post/114121/</a> <a href="http://op.baidu.com/2015/04/https-s01a01/" target="_blank" rel="external">http://op.baidu.com/2015/04/https-s01a01/</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -110,7 +172,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Kernel/">Kernel</a>
+  <span></span> <a href="/tags/HTTP/">HTTP</a><a href="/tags/HTTPS/">HTTPS</a>
   </div>
 
 </div>
@@ -119,7 +181,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/11/13/Linux用户模式和内核模式/" data-title="Linux用户模式和内核模式 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/11/18/HTTPS中的加密算法相关概念/" data-title="HTTPS中的加密算法相关概念 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -132,19 +194,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/11/15/Convert ext3 to ext4 file system on CentOS/" title="Convert ext3 to ext4 file system on CentOS">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Convert ext3 to ext4 file system on CentOS</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/11/12/Use rsync to delete mass files quickly in Linux/"  title="Use rsync to delete mass files quickly in Linux">
+<a href="/2016/11/16/正则表达式之Multiline和Dotall模式/"  title="正则表达式之Multiline和Dotall模式">
  <strong>下一篇：</strong><br/> 
- <span>Use rsync to delete mass files quickly in Linux
+ <span>正则表达式之Multiline和Dotall模式
 </span>
 </a>
 </div>
@@ -153,7 +207,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/11/13/Linux用户模式和内核模式/" data-title="Linux用户模式和内核模式" data-url="http://yoursite.com/2016/11/13/Linux用户模式和内核模式/"></div>
+	<div class="ds-thread" data-thread-key="2016/11/18/HTTPS中的加密算法相关概念/" data-title="HTTPS中的加密算法相关概念" data-url="http://yoursite.com/2016/11/18/HTTPS中的加密算法相关概念/"></div>
 </section>
 
 
