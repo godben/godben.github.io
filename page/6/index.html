@@ -4,44 +4,19 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Centos7升级内核 | godben&#39;s blog</title>
+    <title>godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="更新前，内核版本为：
-
-[root@localhost ~]uname -r[root@localhost ~]3.10.0-327.10.1.el7.x86_64
-
-升级的方法：
-1、导入key
-
-[root@localhost ~]rpm –import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Centos7升级内核">
-<meta property="og:url" content="http://yoursite.com/2016/10/27/Centos7升级内核/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="godben's blog">
+<meta property="og:url" content="http://yoursite.com/page/6/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="更新前，内核版本为：
-
-[root@localhost ~]uname -r[root@localhost ~]3.10.0-327.10.1.el7.x86_64
-
-升级的方法：
-1、导入key
-
-[root@localhost ~]rpm –import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org">
-<meta property="og:updated_time" content="2016-10-31T13:10:09.520Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Centos7升级内核">
-<meta name="twitter:description" content="更新前，内核版本为：
-
-[root@localhost ~]uname -r[root@localhost ~]3.10.0-327.10.1.el7.x86_64
-
-升级的方法：
-1、导入key
-
-[root@localhost ~]rpm –import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org">
+<meta name="twitter:title" content="godben's blog">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -97,110 +72,73 @@
 </div>
     </header>
     <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-  
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/10/27/Centos7升级内核/" title="Centos7升级内核" itemprop="url">Centos7升级内核</a>
+      <a href="/2016/10/21/生命不息，折腾不止/" title="生命不息，折腾不止" itemprop="url">生命不息，折腾不止</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-10-27T10:12:27.515Z" itemprop="datePublished"> 发表于 2016-10-27</time>
+    <time datetime="2016-10-21T14:58:12.301Z" itemprop="datePublished"> 发表于 2016-10-21</time>
     
   </p>
 </header>
-	<div class="article-content">
-		
-		<p>更新前，内核版本为：</p>
-<blockquote>
-<p>[root@localhost ~]uname -r<br>[root@localhost ~]3.10.0-327.10.1.el7.x86_64</p>
-</blockquote>
-<p>升级的方法：</p>
-<p>1、导入key</p>
-<blockquote>
-<p>[root@localhost ~]rpm –import <a href="https://www.elrepo.org/RPM-GPG-KEY-elrepo.org" target="_blank" rel="external">https://www.elrepo.org/RPM-GPG-KEY-elrepo.org</a><br><a id="more"></a><br>2、安装elrepo的yum源<br>[root@localhost ~]rpm -Uvh <a href="http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm" target="_blank" rel="external">http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm</a>  </p>
-</blockquote>
-<p>3、安装内核</p>
-<blockquote>
-<p>[root@localhost ~]yum –enablerepo=elrepo-kernel install  kernel-ml-devel kernel-ml</p>
-</blockquote>
-<p>4、查看默认启动顺序</p>
-<blockquote>
-<p>[root@localhost ~]awk -F\’ ‘$1==”menuentry “ {print $2}’ /etc/grub2.cfg<br>CentOS Linux (4.4.4-1.el7.elrepo.x86_64) 7 (Core)<br>CentOS Linux (3.10.0-327.10.1.el7.x86_64) 7 (Core)<br>CentOS Linux (0-rescue-c52097a1078c403da03b8eddeac5080b) 7 (Core)</p>
-</blockquote>
-<p>默认启动的顺序是从0开始，新内核是从头插入（目前位置在0，而4.4.4的是在1），所以需要选择0。</p>
-<blockquote>
-<p>[root@localhost ~]grub2-set-default 0  </p>
-</blockquote>
-<p>然后reboot重启，使用新的内核，下面是重启后使用的内核版本:</p>
-<blockquote>
-<p>[root@localhost ~]uname -r<br>[root@localhost ~]4.4.4-1.el7.elrepo.x86_64  </p>
-</blockquote>
-<p>5、删除旧的内核</p>
-<blockquote>
-<p>[root@localhost ~]yum remove kernel</p>
-</blockquote>
-  
-	</div>
-		<footer class="article-footer clearfix">
+    <div class="article-content">
+        
+        <p>耗时半个月，踩了无数坑，查了不计其数的资料，最终将博客搭建成功，之前博客是51CTO的，总感觉用着别人的东西很不爽，而且51CTO博客的页面有些过时，不支持屏幕自适应，在移动端体验效果很差。因此怀着一颗生命不息，折腾不止的心开始搭建拥有自主产权的博客，最初打算用Bootstrap+Django+mysql搭建
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2016/10/21/生命不息，折腾不止/#more">阅读更多</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
 <div class="article-catetags">
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Centos/">Centos</a><a href="/tags/Kernel/">Kernel</a>
+  <span></span> <a href="/tags/Hexo/">Hexo</a><a href="/tags/github/">github</a>
   </div>
 
 </div>
 
 
 
-	<div class="article-share" id="share">
-	
-	  <div data-url="http://yoursite.com/2016/10/27/Centos7升级内核/" data-title="Centos7升级内核 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
-	  </div>
-	
-	</div>
 
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/10/21/生命不息，折腾不止/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/10/21/生命不息，折腾不止/" data-count-type="comments">&nbsp;</a>
+	
+</div>
 
 </footer>
 
-   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2016/10/27/Unix directory hierarchy history/" title="Unix directory hierarchy history">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Unix directory hierarchy history</span>
-</a>
+
+    </article>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <a class="extend prev" rel="prev" href="/page/5/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
+  </nav>
+
 </div>
-
-
-<div class="next">
-<a href="/2016/10/25/详解Linux运维工程师必备技能/"  title="详解Linux运维工程师必备技能">
- <strong>下一篇：</strong><br/> 
- <span>详解Linux运维工程师必备技能
-</span>
-</a>
-</div>
-
-</nav>
-
-	
-<section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/10/27/Centos7升级内核/" data-title="Centos7升级内核" data-url="http://yoursite.com/2016/10/27/Centos7升级内核/"></div>
-</section>
-
-
-</div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
 <div id="asidepart">
@@ -450,95 +388,8 @@ $(document).ready(function(){
 });
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
 
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-
-  $('.hoverqrcode').hide();
-
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      $('.hoverqrcode').hide();
-  });
-});   
-</script>
-
-
-
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"godben"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
 
 
 
@@ -607,4 +458,4 @@ var _hmt = _hmt || [];
 <!-- Tiny_search End -->
 
   </body>
-</html>
+ </html>
