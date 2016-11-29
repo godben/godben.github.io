@@ -4,26 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别 | godben&#39;s blog</title>
+    <title>MySQL常用命令集锦 | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="虚拟化技术：百度百科中的定义是这样的：虚拟化是一个广义的术语，在计算机方面通常是指计算元件在虚拟的基础上而不是真实的基础上运行。虚拟化技术可以扩大硬件的容量，简化软件的重新配置过程。CPU的虚拟化技术可以单CPU模拟多CPU并行，允许一个平台同时运行多个操作系统，并且应用程序都可以在相互独立的空间内运行而互不影响，从而显著提高计算机的工作效率。这个定义已经比较完整了。">
+    <meta name="description" content="一、连接MYSQL格式： mysql -h主机地址 -u用户名 －p用户密码
+1、连接到本机上的MYSQL。首先打开DOS窗口，然后进入目录mysql\bin，再键入命令mysql -u root -p，回车后提示你输密码.注意用户名前可以有空格也可以没有空格，但是密码前必须没有空格，否则让你重新输入密码。如果刚安装好MYSQL，超级用户root是没有密码的，故直接回车即可进入到MYSQL中了，M">
 <meta property="og:type" content="article">
-<meta property="og:title" content="虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别">
-<meta property="og:url" content="http://yoursite.com/2016/11/06/虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别/index.html">
+<meta property="og:title" content="MySQL常用命令集锦">
+<meta property="og:url" content="http://yoursite.com/2016/11/29/MySQL常用命令集锦/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="虚拟化技术：百度百科中的定义是这样的：虚拟化是一个广义的术语，在计算机方面通常是指计算元件在虚拟的基础上而不是真实的基础上运行。虚拟化技术可以扩大硬件的容量，简化软件的重新配置过程。CPU的虚拟化技术可以单CPU模拟多CPU并行，允许一个平台同时运行多个操作系统，并且应用程序都可以在相互独立的空间内运行而互不影响，从而显著提高计算机的工作效率。这个定义已经比较完整了。">
-<meta property="og:image" content="http://images.cnitblog.com/blog/382146/201411/171310170501018.gif">
-<meta property="og:image" content="http://images.cnitblog.com/blog/382146/201411/171339004723536.gif">
-<meta property="og:updated_time" content="2016-11-06T04:58:14.032Z">
+<meta property="og:description" content="一、连接MYSQL格式： mysql -h主机地址 -u用户名 －p用户密码
+1、连接到本机上的MYSQL。首先打开DOS窗口，然后进入目录mysql\bin，再键入命令mysql -u root -p，回车后提示你输密码.注意用户名前可以有空格也可以没有空格，但是密码前必须没有空格，否则让你重新输入密码。如果刚安装好MYSQL，超级用户root是没有密码的，故直接回车即可进入到MYSQL中了，M">
+<meta property="og:updated_time" content="2016-11-29T11:22:34.935Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别">
-<meta name="twitter:description" content="虚拟化技术：百度百科中的定义是这样的：虚拟化是一个广义的术语，在计算机方面通常是指计算元件在虚拟的基础上而不是真实的基础上运行。虚拟化技术可以扩大硬件的容量，简化软件的重新配置过程。CPU的虚拟化技术可以单CPU模拟多CPU并行，允许一个平台同时运行多个操作系统，并且应用程序都可以在相互独立的空间内运行而互不影响，从而显著提高计算机的工作效率。这个定义已经比较完整了。">
-<meta name="twitter:image" content="http://images.cnitblog.com/blog/382146/201411/171310170501018.gif">
+<meta name="twitter:title" content="MySQL常用命令集锦">
+<meta name="twitter:description" content="一、连接MYSQL格式： mysql -h主机地址 -u用户名 －p用户密码
+1、连接到本机上的MYSQL。首先打开DOS窗口，然后进入目录mysql\bin，再键入命令mysql -u root -p，回车后提示你输密码.注意用户名前可以有空格也可以没有空格，但是密码前必须没有空格，否则让你重新输入密码。如果刚安装好MYSQL，超级用户root是没有密码的，故直接回车即可进入到MYSQL中了，M">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -85,25 +85,46 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/06/虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别/" title="虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别" itemprop="url">虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别</a>
+      <a href="/2016/11/29/MySQL常用命令集锦/" title="MySQL常用命令集锦" itemprop="url">MySQL常用命令集锦</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-06T04:54:34.529Z" itemprop="datePublished"> 发表于 2016-11-06</time>
+    <time datetime="2016-11-29T11:07:44.916Z" itemprop="datePublished"> 发表于 2016-11-29</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p><strong>虚拟化技术</strong>：百度百科中的定义是这样的：虚拟化是一个广义的术语，在计算机方面通常是指计算元件在虚拟的基础上而不是真实的基础上运行。虚拟化技术可以扩大硬件的容量，简化软件的重新配置过程。CPU的虚拟化技术可以单CPU模拟多CPU并行，允许一个平台同时运行多个操作系统，并且应用程序都可以在相互独立的空间内运行而互不影响，从而显著提高计算机的工作效率。这个定义已经比较完整了。<br><a id="more"></a><br><strong>（完）全虚拟化技术</strong>：完全虚拟化技术又叫硬件辅助虚拟化技术，最初所使用的虚拟化技术就是全虚拟化（Full Virtualization)技术，它在虚拟机（VM）和硬件之间加了一个软件层–Hypervisor，或者叫做虚拟机管理程序（VMM）。hypervisor 可以划分为两大类。首先是类型 1，这种 hypervisor 是直接运行在物理硬件之上的。其次是类型 2，这种 hypervisor 运行在另一个操作系统（运行在物理硬件之上）中。类型 1 hypervisor 的一个例子是基于内核的虚拟机（KVM —— 它本身是一个基于操作系统的 hypervisor）。类型 2 hypervisor 包括 QEMU 和 WINE。</p>
-<p>因为运行在虚拟机上的操作系统通过Hypervisor来最终分享硬件，所以虚拟机发出的指令需经过Hypervisor捕获并处理。为此每个客户操作系统（Guest OS）所发出的指令都要被翻译成CPU能识别的指令格式，这里的客户操作系统即是运行的虚拟机，所以Hypervisor的工作负荷会很大，因此会占用一定的资源，所以在性能方面不如裸机。但是运行速度要快于硬件模拟。全虚拟化最大的优点就是运行在虚拟机上的操作系统没有经过任何修改，唯一的限制就是操作系统必须能够支持底层的硬件，不过目前的操作系统一般都能支持底层硬件，所以这个限制就变得微不足道了。全虚拟化技术如图1所示。</p>
-<p><img src="http://images.cnitblog.com/blog/382146/201411/171310170501018.gif" alt="图1：全虚拟化技术"></p>
-<p><strong>半/准虚拟化技术</strong>：半虚拟化技术是后来才出现的技术，半虚拟化技术英文是paravirtualization，也叫做准虚拟化技术，现在比较热门，它就是在全虚拟化的基础上，把客户操作系统进行了修改，增加了一个专门的API，这个API可以将客户操作系统发出的指令进行最优化，即不需要Hypervisor耗费一定的资源进行翻译操作，因此Hypervisor的工作负担变得非常的小，因此整体的性能也有很大的提高。不过缺点就是，要修改包含该API的操作系统，但是对于某些不含该API的操作系统（主要是windows）来说，就不行能用这种方法。半/准虚拟化技术如图2所示。</p>
-<p><img src="http://images.cnitblog.com/blog/382146/201411/171339004723536.gif" alt="图2：半/准虚拟化技术"></p>
-<p>随着硬件虚拟化技术的逐渐演化，运行于Intel平台的全虚拟化的性能已经超过了准虚拟化产品，这一点在64位的操作系统上表现的更为明显。加之，全虚拟化不需要对客户机操作系统做任何修改的固有优势。可以预言，基于硬件的全虚拟化产品将是未来虚拟化技术的核心。</p>
+		<h3 id="一、连接MYSQL"><a href="#一、连接MYSQL" class="headerlink" title="一、连接MYSQL"></a>一、连接MYSQL</h3><pre><code>格式： mysql -h主机地址 -u用户名 －p用户密码
+</code></pre><p><strong>1、连接到本机上的MYSQL。</strong><br>首先打开DOS窗口，然后进入目录mysql\bin，再键入命令mysql -u root -p，回车后提示你输密码.注意用户名前可以有空格也可以没有空格，但是密码前必须没有空格，否则让你重新输入密码。<br>如果刚安装好MYSQL，超级用户root是没有密码的，故直接回车即可进入到MYSQL中了，MYSQL的提示符是： mysql&gt;</p>
+<a id="more"></a>
+<p>2、连接到远程主机上的MYSQL。假设远程主机的IP为：110.110.110.110，用户名为root,密码为abcd123。则键入以下命令：<br><code>mysql -h110.110.110.110 -u root -p 123;</code>（注:u与root之间可以不用加空格，其它也一样）</p>
+<p>3、退出MYSQL命令： exit （回车）</p>
+<h3 id="二、修改密码"><a href="#二、修改密码" class="headerlink" title="二、修改密码"></a>二、修改密码</h3><pre><code>格式：mysqladmin -u用户名 -p旧密码 password 新密码
+</code></pre><p>1、给root加个密码ab12。首先在DOS下进入目录mysql\bin，然后键入以下命令</p>
+<p><code>mysqladmin -u root -password ab12</code></p>
+<p><em>注：因为开始时root没有密码，所以-p旧密码一项就可以省略了。</em></p>
+<p>2、再将root的密码改为djg345。<br><code>mysqladmin -u root -p ab12 password djg345</code></p>
+<h3 id="三、增加新用户"><a href="#三、增加新用户" class="headerlink" title="三、增加新用户"></a>三、增加新用户</h3><p>（注意：和上面不同，下面的因为是MYSQL环境中的命令，所以后面都带一个分号作为命令结束符）</p>
+<pre><code>格式：grant select on 数据库.* to 用户名@登录主机 identified by “密码”
+</code></pre><p>1、增加一个用户test1密码为abc，让他可以在任何主机上登录，并对所有数据库有查询、插入、修改、删除的权限。首先用root用户连入MYSQL，然后键入以下命令：</p>
+<p><code>grant select,insert,update,delete on *.* to test1@”%” Identified by “abc”;</code></p>
+<p>但增加的用户是十分危险的，你想如某个人知道test1的密码，那么他就可以在internet上的任何一台电脑上登录你的mysql数据库并对你的数据可以为所欲为了，解决办法见2。<br>2、增加一个用户test2密码为abc,让他只可以在localhost上登录，并可以对数据库mydb进行查询、插入、修改、删除的操作（localhost指本地主机，即MYSQL数据库所在的那台主机），<br>这样用户即使用知道test2的密码，他也无法从internet上直接访问数据库，只能通过MYSQL主机上的web页来访问了。</p>
+<p><code>grant select,insert,update,delete on mydb.* to test2@localhost identified by “abc”;</code></p>
+<p>如果你不想test2有密码，可以再打一个命令将密码消掉。<br><code>grant select,insert,update,delete on mydb.* to test2@localhost identified by “”;</code></p>
+<p>下篇我是MYSQL中有关数据库方面的操作。注意：你必须首先登录到MYSQL中，以下操作都是在MYSQL的提示符下进行的，而且每个命令以分号结束。<br><strong>一、操作技巧</strong><br>1、如果你打命令时，回车后发现忘记加分号，你无须重打一遍命令，只要打个分号回车就可以了。<br>也就是说你可以把一个完整的命令分成几行来打，完后用分号作结束标志就OK。<br>2、你可以使用光标上下键调出以前的命令。</p>
+<p><strong>二、显示命令</strong><br>1、显示当前数据库服务器中的数据库列表：<br><code>mysql&gt; SHOW DATABASES;</code><br>注意：mysql库里面有MYSQL的系统信息，我们改密码和新增用户，实际上就是用这个库进行操作。<br>2、显示数据库中的数据表：<br><code>mysql&gt; USE 库名；</code><br><code>mysql&gt; SHOW TABLES;</code><br>3、显示数据表的结构：<br><code>mysql&gt; DESCRIBE 表名;</code><br>4、建立数据库：<br><code>mysql&gt; CREATE DATABASE 库名;</code><br>5、建立数据表：<br><code>mysql&gt; USE 库名;</code><br><code>mysql&gt; CREATE TABLE 表名 (字段名 VARCHAR(20), 字段名 CHAR(1));</code><br>6、删除数据库：<br><code>mysql&gt; DROP DATABASE 库名;</code><br>7、删除数据表：<br><code>mysql&gt; DROP TABLE 表名；</code><br>8、将表中记录清空：<br><code>mysql&gt; DELETE FROM 表名;</code><br>9、显示表中的记录：<br><code>mysql&gt; SELECT * FROM 表名;</code><br>10、往表中插入记录：<br><code>mysql&gt; INSERT INTO 表名 VALUES (”hyq”,”M”);</code><br>11、更新表中数据：<br><code>mysql-&gt; UPDATE 表名 SET 字段名1=&#39;a&#39;,字段名2=&#39;b&#39; WHERE 字段名3=&#39;c&#39;;</code><br>12、用文本方式将数据装入数据表中：<br><code>mysql&gt; LOAD DATA LOCAL INFILE “D:/mysql.txt” INTO TABLE 表名;</code><br>13、导入.sql文件命令：<br><code>mysql&gt; USE 数据库名;</code><br><code>mysql&gt; SOURCE d:/mysql.sql;</code><br>14、命令行修改root密码：<br><code>mysql&gt; UPDATE mysql.user SET password=PASSWORD(&#39;新密码&#39;) WHERE User=&#39;root&#39;;</code><br><code>mysql&gt; FLUSH PRIVILEGES;</code><br>15、显示use的数据库名：<br><code>mysql&gt; SELECT DATABASE();</code><br>16、显示当前的user：<br><code>mysql&gt; SELECT USER();</code></p>
+<h3 id="三、一个建库和建表以及插入数据的实例"><a href="#三、一个建库和建表以及插入数据的实例" class="headerlink" title="三、一个建库和建表以及插入数据的实例"></a>三、一个建库和建表以及插入数据的实例</h3><p><code>drop database if exists school;</code> //如果存在SCHOOL则删除</p>
+<p><code>create database school;</code> //建立库SCHOOL</p>
+<p><code>use school;</code> //打开库SCHOOL</p>
+<p><code>create table teacher</code> //建立表TEACHER<br><code>(</code><br><code>id int(3) auto_increment not null primary key,</code><br><code>name char(10) not null,</code><br><code>address varchar(50) default ‘深圳&#39;,</code><br><code>year date</code><br><code>);</code> //建表结束</p>
+<p>//以下为插入字段<br><code>insert into teacher values(”,&#39;allen&#39;,&#39;大连一中&#39;,&#39;1976-10-10′);</code><br><code>insert into teacher values(”,&#39;jack&#39;,&#39;大连二中&#39;,&#39;1975-12-23′);</code><br>如果你在mysql提示符键入上面的命令也可以，但不方便调试。<br>（1）你可以将以上命令原样写入一个文本文件中，假设为school.sql，然后复制到c:\下，并在DOS状态进入目录\mysql\bin，然后键入以下命令：<br><code>mysql -uroot -p密码 &lt; c:\\school.sql</code><br>如果成功，空出一行无任何显示；如有错误，会有提示。（以上命令已经调试，你只要将//的注释去掉即可使用）。<br>（2）或者进入命令行后使用 <code>mysql&gt; source c:\\school.sql;</code> 也可以将school.sql文件导入数据库中。</p>
+<h3 id="四、将文本数据转到数据库中"><a href="#四、将文本数据转到数据库中" class="headerlink" title="四、将文本数据转到数据库中"></a>四、将文本数据转到数据库中</h3><p>1、文本数据应符合的格式：字段数据之间用tab键隔开，null值用\n来代替.例：<br>3 rose 大连二中 1976-10-10<br>4 mike 大连一中 1975-12-23<br>假设你把这两组数据存为school.txt文件，放在c盘根目录下。<br>2、数据传入命令 load data local infile “c:\school.txt” into table 表名;<br>注意：你最好将文件复制到\mysql\bin目录下，并且要先用use命令打表所在的库。</p>
+<h3 id="五、备份数据库：（命令在DOS的-mysql-bin目录下执行）"><a href="#五、备份数据库：（命令在DOS的-mysql-bin目录下执行）" class="headerlink" title="五、备份数据库：（命令在DOS的\mysql\bin目录下执行）"></a>五、备份数据库：（命令在DOS的\mysql\bin目录下执行）</h3><p><strong>1.导出整个数据库</strong><br>导出文件默认是存在mysql\bin目录下<br>mysqldump -u 用户名 -p 数据库名 &gt; 导出的文件名<br>mysqldump -u user_name -p123456 database_name &gt; outfile_name.sql<br><strong>2.导出一个表</strong><br>mysqldump -u 用户名 -p 数据库名 表名&gt; 导出的文件名<br>mysqldump -u user_name -p database_name table_name &gt; outfile_name.sql<br><strong>3.导出一个数据库结构</strong><br>mysqldump -u user_name -p -d –add-drop-table database_name &gt; outfile_name.sql<br>-d 没有数据 –add-drop-table 在每个create语句之前增加一个drop table<br><strong>4.带语言参数导出</strong><br>mysqldump -uroot -p –default-character-set=latin1 –set-charset=gbk –skip-opt database_name &gt; outfile_name.sql</p>
+<p><strong>1. 备份数据库 </strong><br><code>mysqldump -uroot -p test_db &gt; test_db.sql</code><br><strong>2. 恢复数据库 </strong><br><code>mysql -uroot -p test_db &lt; test_db.sql</code><br><strong>3. 创建权限 </strong><br><code>grant all privileges on test_db.* to test_db@&#39;localhost&#39; identified by &#39;123456&#39;;</code><br>兼容mysql4.1之前模式：<br><code>update mysql.user set password=old_password(&#39;123456&#39;) where user=&#39;test_db&#39;;</code><br><strong>4. 忘记密码 </strong><br>在“my.cnf”或“my.ini”文件的“mysqld”配置段添加“<strong>skip-grant-tables</strong>”，然后重新启动mysql即可登录修改root密码。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -112,7 +133,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Virtualization/">Virtualization</a><a href="/tags/VMWARE/">VMWARE</a>
+  <span></span> <a href="/tags/MySQL/">MySQL</a>
   </div>
 
 </div>
@@ -121,7 +142,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/11/06/虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别/" data-title="虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/11/29/MySQL常用命令集锦/" data-title="MySQL常用命令集锦 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -134,19 +155,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/11/10/css2016/" title="CSS2016">
-  <strong>上一篇：</strong><br/>
-  <span>
-  CSS2016</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/11/06/非root用户正常使用wireshark方法/"  title="非root用户正常使用wireshark方法">
+<a href="/2016/11/28/ssh双机互信搭建/"  title="ssh双机互信搭建">
  <strong>下一篇：</strong><br/> 
- <span>非root用户正常使用wireshark方法
+ <span>ssh双机互信搭建
 </span>
 </a>
 </div>
@@ -155,7 +168,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/11/06/虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别/" data-title="虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别" data-url="http://yoursite.com/2016/11/06/虚拟化、完全虚拟化、半虚拟化和准虚拟化技术区别/"></div>
+	<div class="ds-thread" data-thread-key="2016/11/29/MySQL常用命令集锦/" data-title="MySQL常用命令集锦" data-url="http://yoursite.com/2016/11/29/MySQL常用命令集锦/"></div>
 </section>
 
 
