@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Use rsync to delete mass files quickly in Linux | godben&#39;s blog</title>
+    <title>【译】Use rsync to delete mass files quickly in Linux | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
@@ -13,13 +13,13 @@
     
     <meta name="description" content="Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Use rsync to delete mass files quickly in Linux">
+<meta property="og:title" content="【译】Use rsync to delete mass files quickly in Linux">
 <meta property="og:url" content="http://yoursite.com/2016/11/12/Use rsync to delete mass files quickly in Linux/index.html">
 <meta property="og:site_name" content="godben's blog">
 <meta property="og:description" content="Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them">
-<meta property="og:updated_time" content="2016-11-12T09:45:47.819Z">
+<meta property="og:updated_time" content="2016-11-30T15:09:21.456Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Use rsync to delete mass files quickly in Linux">
+<meta name="twitter:title" content="【译】Use rsync to delete mass files quickly in Linux">
 <meta name="twitter:description" content="Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them">
 
     
@@ -81,7 +81,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/12/Use rsync to delete mass files quickly in Linux/" title="Use rsync to delete mass files quickly in Linux" itemprop="url">Use rsync to delete mass files quickly in Linux</a>
+      <a href="/2016/11/12/Use rsync to delete mass files quickly in Linux/" title="【译】Use rsync to delete mass files quickly in Linux" itemprop="url">【译】Use rsync to delete mass files quickly in Linux</a>
   </h1>
   <p class="article-author">By
        
@@ -116,7 +116,8 @@
 <p><strong>-H</strong> ：keep the hard linked files</p>
 <p><strong>-v</strong> ：Verbose output</p>
 <p><strong>–stats</strong> : Show transmission status of some files</p>
-<h2 id="水平有限翻译仅供参考"><a href="#水平有限翻译仅供参考" class="headerlink" title="水平有限翻译仅供参考"></a>水平有限翻译仅供参考</h2><p>我昨天遇到一个从我Linux工作站删除大量日志文件的问题，那里有差不多100000个文件要删除。这些日志文件的增长速度很快，以至于我要频繁的删除它们。通常情况下我们使用<strong>rm -rf * </strong>命令删除这些文件，如果文件很多的话，我需要等待很长的时间。因此，我们必须采取一些不寻常的方法。幸运的是，我们可以使用<strong>rsync</strong>一次性删除大量的文件。</p>
+<p><strong>水平有限翻译仅供参考</strong></p>
+<h2 id="在Linux中使用rsync命令迅速删除大量文件"><a href="#在Linux中使用rsync命令迅速删除大量文件" class="headerlink" title="在Linux中使用rsync命令迅速删除大量文件"></a>在Linux中使用rsync命令迅速删除大量文件</h2><p>我昨天遇到一个从我Linux工作站删除大量日志文件的问题，那里有差不多100000个文件要删除。这些日志文件的增长速度很快，以至于我要频繁的删除它们。通常情况下我们使用<strong>rm -rf * </strong>命令删除这些文件，如果文件很多的话，我需要等待很长的时间。因此，我们必须采取一些不寻常的方法。幸运的是，我们可以使用<strong>rsync</strong>一次性删除大量的文件。</p>
 <p><strong>1.安装rsync</strong></p>
 <blockquote>
 <p>yum install rsync</p>
@@ -148,7 +149,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/11/12/Use rsync to delete mass files quickly in Linux/" data-title="Use rsync to delete mass files quickly in Linux | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/11/12/Use rsync to delete mass files quickly in Linux/" data-title="【译】Use rsync to delete mass files quickly in Linux | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -171,9 +172,9 @@
 
 
 <div class="next">
-<a href="/2016/11/11/dev_null dev_tty in Linux/"  title="/dev/null and /dev/tty in Linux">
+<a href="/2016/11/11/dev_null dev_tty in Linux/"  title="【译】/dev/null and /dev/tty in Linux">
  <strong>下一篇：</strong><br/> 
- <span>/dev/null and /dev/tty in Linux
+ <span>【译】/dev/null and /dev/tty in Linux
 </span>
 </a>
 </div>
@@ -182,7 +183,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/11/12/Use rsync to delete mass files quickly in Linux/" data-title="Use rsync to delete mass files quickly in Linux" data-url="http://yoursite.com/2016/11/12/Use rsync to delete mass files quickly in Linux/"></div>
+	<div class="ds-thread" data-thread-key="2016/11/12/Use rsync to delete mass files quickly in Linux/" data-title="【译】Use rsync to delete mass files quickly in Linux" data-url="http://yoursite.com/2016/11/12/Use rsync to delete mass files quickly in Linux/"></div>
 </section>
 
 
@@ -229,11 +230,19 @@
 			
 		
 			
-				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
 			
 		
 			
@@ -241,27 +250,11 @@
 			
 		
 			
-				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/ssh/" title="ssh">ssh<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
 			
 		
 			
@@ -273,11 +266,19 @@
 			
 		
 			
-				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
 			
 		
 		</ul>

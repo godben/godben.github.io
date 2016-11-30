@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Convert ext3 to ext4 file system on CentOS | godben&#39;s blog</title>
+    <title>【译】Convert ext3 to ext4 file system on CentOS | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
@@ -13,13 +13,13 @@
     
     <meta name="description" content="Ext3 is a journaled file system that is commonly used by the Linux kernel. It is the default file system for many popular Linux distributions, including Debian. Stephen Tweedie. On June 28, 2006, Theo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Convert ext3 to ext4 file system on CentOS">
+<meta property="og:title" content="【译】Convert ext3 to ext4 file system on CentOS">
 <meta property="og:url" content="http://yoursite.com/2016/11/15/Convert ext3 to ext4 file system on CentOS/index.html">
 <meta property="og:site_name" content="godben's blog">
 <meta property="og:description" content="Ext3 is a journaled file system that is commonly used by the Linux kernel. It is the default file system for many popular Linux distributions, including Debian. Stephen Tweedie. On June 28, 2006, Theo">
-<meta property="og:updated_time" content="2016-11-15T14:49:24.305Z">
+<meta property="og:updated_time" content="2016-11-30T15:04:24.316Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Convert ext3 to ext4 file system on CentOS">
+<meta name="twitter:title" content="【译】Convert ext3 to ext4 file system on CentOS">
 <meta name="twitter:description" content="Ext3 is a journaled file system that is commonly used by the Linux kernel. It is the default file system for many popular Linux distributions, including Debian. Stephen Tweedie. On June 28, 2006, Theo">
 
     
@@ -81,7 +81,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/15/Convert ext3 to ext4 file system on CentOS/" title="Convert ext3 to ext4 file system on CentOS" itemprop="url">Convert ext3 to ext4 file system on CentOS</a>
+      <a href="/2016/11/15/Convert ext3 to ext4 file system on CentOS/" title="【译】Convert ext3 to ext4 file system on CentOS" itemprop="url">【译】Convert ext3 to ext4 file system on CentOS</a>
   </h1>
   <p class="article-author">By
        
@@ -120,7 +120,8 @@ sysfs on /sys type sysfs (rw)
 .............................
 /dev/sda7 on /data0 type ext4 (rw)
 </code></pre><p>No, that’s not done. One more step, please remember to change format of respective records in <strong>/etc/fstab</strong> to ext4.</p>
-<h2 id="水平有限翻译仅供参考"><a href="#水平有限翻译仅供参考" class="headerlink" title="水平有限翻译仅供参考"></a>水平有限翻译仅供参考</h2><p>Ext3是Linux内核常用的日志文件系统。它默认支持大多数流行的Linux发行版本，包括Debian。在2006年6月28日,Theodore Ts’o,ext3的主要开发人员宣布了一个增强版,称为ext4。今天,我们将展示如何在CentOS上将ext3转换为ext4。</p>
+<p><strong>水平有限翻译仅供参考</strong></p>
+<h2 id="在CentOS中将ext3转换为ext4文件系统"><a href="#在CentOS中将ext3转换为ext4文件系统" class="headerlink" title="在CentOS中将ext3转换为ext4文件系统"></a>在CentOS中将ext3转换为ext4文件系统</h2><p>Ext3是Linux内核常用的日志文件系统。它默认支持大多数流行的Linux发行版本，包括Debian。在2006年6月28日,Theodore Ts’o,ext3的主要开发人员宣布了一个增强版,称为ext4。今天,我们将展示如何在CentOS上将ext3转换为ext4。</p>
 <p>系统环境：<br>发行版本： CentOS release 5.4(Final)<br>内核： Linux localhost.localdomain 2.6.18-164.el5 #1 SMP Thu Sep 3 03:28:30 EDT 2009 x86_64 x86_64 x86_64 GNU/Linux</p>
 <p>假设分区转换为/dev/sda7挂载于/data0目录</p>
 <p>首先，安装ext4支持</p>
@@ -161,7 +162,7 @@ sysfs on /sys type sysfs (rw)
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/11/15/Convert ext3 to ext4 file system on CentOS/" data-title="Convert ext3 to ext4 file system on CentOS | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/11/15/Convert ext3 to ext4 file system on CentOS/" data-title="【译】Convert ext3 to ext4 file system on CentOS | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -195,7 +196,7 @@ sysfs on /sys type sysfs (rw)
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/11/15/Convert ext3 to ext4 file system on CentOS/" data-title="Convert ext3 to ext4 file system on CentOS" data-url="http://yoursite.com/2016/11/15/Convert ext3 to ext4 file system on CentOS/"></div>
+	<div class="ds-thread" data-thread-key="2016/11/15/Convert ext3 to ext4 file system on CentOS/" data-title="【译】Convert ext3 to ext4 file system on CentOS" data-url="http://yoursite.com/2016/11/15/Convert ext3 to ext4 file system on CentOS/"></div>
 </section>
 
 
@@ -242,11 +243,19 @@ sysfs on /sys type sysfs (rw)
 			
 		
 			
-				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
 			
 		
 			
@@ -254,27 +263,11 @@ sysfs on /sys type sysfs (rw)
 			
 		
 			
-				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/ssh/" title="ssh">ssh<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
 			
 		
 			
@@ -286,11 +279,19 @@ sysfs on /sys type sysfs (rw)
 			
 		
 			
-				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
 			
 		
 		</ul>

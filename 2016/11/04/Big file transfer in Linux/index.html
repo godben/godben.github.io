@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Big file transfer in Linux | godben&#39;s blog</title>
+    <title>【译】Big file transfer in Linux | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
@@ -13,15 +13,15 @@
     
     <meta name="description" content="It’s very common that we need to transfer files between two different hosts such as backups. It is also an very simple task, we can use scp or rsync to complete the task well. But what if the file is">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Big file transfer in Linux">
+<meta property="og:title" content="【译】Big file transfer in Linux">
 <meta property="og:url" content="http://yoursite.com/2016/11/04/Big file transfer in Linux/index.html">
 <meta property="og:site_name" content="godben's blog">
 <meta property="og:description" content="It’s very common that we need to transfer files between two different hosts such as backups. It is also an very simple task, we can use scp or rsync to complete the task well. But what if the file is">
 <meta property="og:image" content="http://p1.bpimg.com/567571/c11af617ab99211b.jpg">
 <meta property="og:image" content="http://p1.bpimg.com/567571/c11af617ab99211b.jpg">
-<meta property="og:updated_time" content="2016-11-04T15:25:47.011Z">
+<meta property="og:updated_time" content="2016-11-30T15:02:10.172Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Big file transfer in Linux">
+<meta name="twitter:title" content="【译】Big file transfer in Linux">
 <meta name="twitter:description" content="It’s very common that we need to transfer files between two different hosts such as backups. It is also an very simple task, we can use scp or rsync to complete the task well. But what if the file is">
 <meta name="twitter:image" content="http://p1.bpimg.com/567571/c11af617ab99211b.jpg">
 
@@ -84,7 +84,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/04/Big file transfer in Linux/" title="Big file transfer in Linux" itemprop="url">Big file transfer in Linux</a>
+      <a href="/2016/11/04/Big file transfer in Linux/" title="【译】Big file transfer in Linux" itemprop="url">【译】Big file transfer in Linux</a>
   </h1>
   <p class="article-author">By
        
@@ -139,7 +139,8 @@
 </blockquote>
 <p>The first line above is to install the qpress on the remote machine, the second line is to listen to a port with NC, the third line is to compress and transfer the data.</p>
 <p>It takes 2.8s to execute above commands, the average throughput is 402MB/s which will be 16 times faster than ZIP+SCP.</p>
-<h2 id="水平有限翻译仅供参考"><a href="#水平有限翻译仅供参考" class="headerlink" title="水平有限翻译仅供参考"></a>水平有限翻译仅供参考</h2><p>我们经常需要在两台主机间传输文件，比如备份。这也是非常简单的工作，我们可以使用scp或者rsync就能很好的完成任务。但是如果文件很大，会占用很长的时间。我们如何更快的传输大文件呢？在这里,我们提出一个解决方案。</p>
+<p><strong>水平有限翻译仅供参考</strong></p>
+<h2 id="Linux下大文件传输"><a href="#Linux下大文件传输" class="headerlink" title="Linux下大文件传输"></a>Linux下大文件传输</h2><p>我们经常需要在两台主机间传输文件，比如备份。这也是非常简单的工作，我们可以使用scp或者rsync就能很好的完成任务。但是如果文件很大，会占用很长的时间。我们如何更快的传输大文件呢？在这里,我们提出一个解决方案。</p>
 <h3 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h3><p>如果我们复制一个未压缩的文件，应该按如下步骤做：<br>1.压缩数据<br>2.发送到另一台主机上<br>3.解压数据<br>4.校验数据完整性</p>
 <p>这样做会很有效率，数据压缩后可以更有效的利用带宽。</p>
 <h3 id="使用ZIP-SCP"><a href="#使用ZIP-SCP" class="headerlink" title="使用ZIP+SCP"></a>使用ZIP+SCP</h3><p>我们可以通过ZIP+SCP的组合实现这个功能。</p>
@@ -189,7 +190,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/11/04/Big file transfer in Linux/" data-title="Big file transfer in Linux | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/11/04/Big file transfer in Linux/" data-title="【译】Big file transfer in Linux | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -223,7 +224,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/11/04/Big file transfer in Linux/" data-title="Big file transfer in Linux" data-url="http://yoursite.com/2016/11/04/Big file transfer in Linux/"></div>
+	<div class="ds-thread" data-thread-key="2016/11/04/Big file transfer in Linux/" data-title="【译】Big file transfer in Linux" data-url="http://yoursite.com/2016/11/04/Big file transfer in Linux/"></div>
 </section>
 
 
@@ -270,11 +271,19 @@
 			
 		
 			
-				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
 			
 		
 			
@@ -282,27 +291,11 @@
 			
 		
 			
-				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/ssh/" title="ssh">ssh<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
 			
 		
 			
@@ -314,11 +307,19 @@
 			
 		
 			
-				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
 			
 		
 		</ul>

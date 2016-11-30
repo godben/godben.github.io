@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Unix directory hierarchy history | godben&#39;s blog</title>
+    <title>【译】Unix directory hierarchy history | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
@@ -13,15 +13,15 @@
     
     <meta name="description" content="原文As a beginner user of Unix or Linux, people would frequently get confused about the use of different directories of the system.For example, there is a /bin directory under root(/), it is used to sto">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Unix directory hierarchy history">
+<meta property="og:title" content="【译】Unix directory hierarchy history">
 <meta property="og:url" content="http://yoursite.com/2016/10/27/Unix directory hierarchy history/index.html">
 <meta property="og:site_name" content="godben's blog">
 <meta property="og:description" content="原文As a beginner user of Unix or Linux, people would frequently get confused about the use of different directories of the system.For example, there is a /bin directory under root(/), it is used to sto">
 <meta property="og:image" content="http://p1.bqimg.com/4851/a9c57e33d074271a.jpg">
 <meta property="og:image" content="http://p1.bqimg.com/4851/76120698989491ad.jpg">
-<meta property="og:updated_time" content="2016-10-27T14:43:55.320Z">
+<meta property="og:updated_time" content="2016-11-30T15:07:51.877Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Unix directory hierarchy history">
+<meta name="twitter:title" content="【译】Unix directory hierarchy history">
 <meta name="twitter:description" content="原文As a beginner user of Unix or Linux, people would frequently get confused about the use of different directories of the system.For example, there is a /bin directory under root(/), it is used to sto">
 <meta name="twitter:image" content="http://p1.bqimg.com/4851/a9c57e33d074271a.jpg">
 
@@ -84,7 +84,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/10/27/Unix directory hierarchy history/" title="Unix directory hierarchy history" itemprop="url">Unix directory hierarchy history</a>
+      <a href="/2016/10/27/Unix directory hierarchy history/" title="【译】Unix directory hierarchy history" itemprop="url">【译】Unix directory hierarchy history</a>
   </h1>
   <p class="article-author">By
        
@@ -100,7 +100,8 @@
 		<h3 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h3><p>As a beginner user of Unix or Linux, people would frequently get confused about the use of different directories of the system.<br><img src="http://p1.bqimg.com/4851/a9c57e33d074271a.jpg" alt=""><br>For example, there is a /bin directory under root(/), it is used to store binary files. However, there are /usr/bin and /usr/local/bin under /usr which are used for storing binary files as well. Some systems even have /opt/bin. What are the differences among them?<br><a id="more"></a><br>Though there are articles explaining different directories in Unix such as Filesystem Hierarchy Standard, it’s not clear why these directories are present and their history. Rob Landley filled part of this gap in an online thread Understanding the bin, sbin, usr/bin , usr/sbin split.<br>Ken Thompson and Dennis Ritchie created Unix on a PDP-7 in 1969?  Well around 1971 they upgraded to a PDP-11 with a pair of RK05 disk packs (1.5 megabytes each) for storage.<br><img src="http://p1.bqimg.com/4851/76120698989491ad.jpg" alt=""><br>When the operating system grew too big to fit on the first RK05 disk pack (their root filesystem) they let it leak into the second one, which is where all the user home directories lived (which is why the mount was called /usr). They replicated all the OS directories under there (/bin, /sbin, /lib, /tmp…) and wrote files to those new directories because their original disk was out of space.  When they got a third disk, they mounted it on /home and relocated all the user directories to there so the OS could consume all the space on both disks and grow to THREE WHOLE MEGABYTES. And thereafter /usr is used to store user programs while /home is used to store user data.</p>
 <p>With the evolution of Unix system, the definitions for different directories become clearer. </p>
 <p>/ : Store system programs(developed by AT&amp;T)<br>/usr : Store vendor programs(IBM and HP etc)<br>/usr/local : User installed programs<br>/opt : Store third party programs<br>/tmp : Store temporary files.<br>/var : Store files to which the system writes data during the course of its operation. For example, log files.<br>/bin : Store essential binary files for booting. It usually contains the shells like bash and commonly used commands like cp, mv, rm, cat, ls.<br>/sbin : Store system binary files like reboot, grub.</p>
-<h2 id="水平有限翻译仅供参考"><a href="#水平有限翻译仅供参考" class="headerlink" title="水平有限翻译仅供参考"></a>水平有限翻译仅供参考</h2><p>作为一个Unix或者Linux的入门用户，总是对目录结构的含义感到困惑。<br>举例来说，这个在根目录root(/)下的/bin子目录，用来存储二进制文件。然而，在/usr目录下还有/usr/bin和/usr/local/bin，他们也用于存储二进制文件，有些系统甚至会有/opt/bin。它们之间有什么不同呢？<br>虽然有文章解释UNIX不同的目录，例如《文件系统层次标准》，不过没有写清为什么会出现这些目录和这些目录的历史。Rob Landley填补了这些空缺在一篇“Understanding the bin, sbin, usr/bin , usr/sbin split”的在线文档。<br>1969年，Ken Thompson和Dennis Ritchie在小型机PDP-7(DEC PDP-7，由迪吉多公司所研发的一款迷你电脑)上发明了Unix。1971年左右，他们将主机升级到一个带有一对RK05磁盘组（每个1.5兆字节）的PDP-11小型机用于存储。<br>当操作系统变得太大以至于不能存储在第一块RK05磁盘组（他们的根文件系统）时，他们加上了第二块RK05，这是所有用户家目录所在的地方（因此挂载的目录点取名为/usr）。他们复制了所有的操作系统目录（/ bin，/ sbin，/ lib，/ tmp …），并将文件写入这些新目录，因为它们的原始磁盘空间不足。 当他们添加第三个磁盘时，他们将它挂载在/home下，并将所有的用户目录重定位到那里，所以操作系统可以消耗两个磁盘上的所有空间，并增长到三个兆字节。并且规定/usr用于存放用户的程序，/home用于存放用户的数据。并且迁移了所有用户目录</p>
+<p><strong>水平有限翻译仅供参考</strong></p>
+<h2 id="Unix目录层次结构的历史"><a href="#Unix目录层次结构的历史" class="headerlink" title="Unix目录层次结构的历史"></a>Unix目录层次结构的历史</h2><p>作为一个Unix或者Linux的入门用户，总是对目录结构的含义感到困惑。<br>举例来说，这个在根目录root(/)下的/bin子目录，用来存储二进制文件。然而，在/usr目录下还有/usr/bin和/usr/local/bin，他们也用于存储二进制文件，有些系统甚至会有/opt/bin。它们之间有什么不同呢？<br>虽然有文章解释UNIX不同的目录，例如《文件系统层次标准》，不过没有写清为什么会出现这些目录和这些目录的历史。Rob Landley填补了这些空缺在一篇“Understanding the bin, sbin, usr/bin , usr/sbin split”的在线文档。<br>1969年，Ken Thompson和Dennis Ritchie在小型机PDP-7(DEC PDP-7，由迪吉多公司所研发的一款迷你电脑)上发明了Unix。1971年左右，他们将主机升级到一个带有一对RK05磁盘组（每个1.5兆字节）的PDP-11小型机用于存储。<br>当操作系统变得太大以至于不能存储在第一块RK05磁盘组（他们的根文件系统）时，他们加上了第二块RK05，这是所有用户家目录所在的地方（因此挂载的目录点取名为/usr）。他们复制了所有的操作系统目录（/ bin，/ sbin，/ lib，/ tmp …），并将文件写入这些新目录，因为它们的原始磁盘空间不足。 当他们添加第三个磁盘时，他们将它挂载在/home下，并将所有的用户目录重定位到那里，所以操作系统可以消耗两个磁盘上的所有空间，并增长到三个兆字节。并且规定/usr用于存放用户的程序，/home用于存放用户的数据。并且迁移了所有用户目录</p>
 <p>从此，这种目录结构就延续了下来。随着硬盘容量越来越大，各个目录的含义进一步得到明确。</p>
 <p>/：存放系统程序，也就是At&amp;t开发的Unix程序。<br>/usr：存放Unix系统商（比如IBM和HP）开发的程序。<br>/usr/local：存放用户自己安装的程序。<br>/opt：在某些系统，用于存放第三方厂商开发的程序，所以取名为option，意为”选装”。<br>/tmp:存储临时文件。<br>/var:存储系统在操作过程中写入数据的文件。 例如，日志文件。<br>/bin：存储用于引导的基本二进制文件。 它通常包含shell类似bash和常用的命令，如cp，mv，rm，cat，ls。<br>/sbin：存储系统二进制文件，如reboot，grub。</p>
   
@@ -120,7 +121,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/10/27/Unix directory hierarchy history/" data-title="Unix directory hierarchy history | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/10/27/Unix directory hierarchy history/" data-title="【译】Unix directory hierarchy history | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -154,7 +155,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/10/27/Unix directory hierarchy history/" data-title="Unix directory hierarchy history" data-url="http://yoursite.com/2016/10/27/Unix directory hierarchy history/"></div>
+	<div class="ds-thread" data-thread-key="2016/10/27/Unix directory hierarchy history/" data-title="【译】Unix directory hierarchy history" data-url="http://yoursite.com/2016/10/27/Unix directory hierarchy history/"></div>
 </section>
 
 
@@ -201,11 +202,19 @@
 			
 		
 			
-				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
 			
 		
 			
@@ -213,27 +222,11 @@
 			
 		
 			
-				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/ssh/" title="ssh">ssh<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
 			
 		
 			
@@ -245,11 +238,19 @@
 			
 		
 			
-				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
 			
 		
 		</ul>
