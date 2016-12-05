@@ -4,23 +4,35 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>【译】Use rsync to delete mass files quickly in Linux | godben&#39;s blog</title>
+    <title>MySQL日志管理学习笔记 | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them">
+    <meta name="description" content="SHOW GLOBAL VARIABLES LIKE ‘%log%’
+
+错误日志：服务器启动或关闭过程中的信息服务器运行过程中的错误信息事件调度器运行一个事件时产生的信息在从服务器上启动从服务器进程时产生的信息
+log_error
+log_warnings">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【译】Use rsync to delete mass files quickly in Linux">
-<meta property="og:url" content="http://yoursite.com/2016/11/12/Use rsync to delete mass files quickly in Linux/index.html">
+<meta property="og:title" content="MySQL日志管理学习笔记">
+<meta property="og:url" content="http://yoursite.com/2016/12/05/mysql日志管理学习笔记/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them">
-<meta property="og:updated_time" content="2016-11-30T15:09:21.456Z">
+<meta property="og:description" content="SHOW GLOBAL VARIABLES LIKE ‘%log%’
+
+错误日志：服务器启动或关闭过程中的信息服务器运行过程中的错误信息事件调度器运行一个事件时产生的信息在从服务器上启动从服务器进程时产生的信息
+log_error
+log_warnings">
+<meta property="og:updated_time" content="2016-12-05T12:23:58.402Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【译】Use rsync to delete mass files quickly in Linux">
-<meta name="twitter:description" content="Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them">
+<meta name="twitter:title" content="MySQL日志管理学习笔记">
+<meta name="twitter:description" content="SHOW GLOBAL VARIABLES LIKE ‘%log%’
+
+错误日志：服务器启动或关闭过程中的信息服务器运行过程中的错误信息事件调度器运行一个事件时产生的信息在从服务器上启动从服务器进程时产生的信息
+log_error
+log_warnings">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -81,57 +93,71 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/12/Use rsync to delete mass files quickly in Linux/" title="【译】Use rsync to delete mass files quickly in Linux" itemprop="url">【译】Use rsync to delete mass files quickly in Linux</a>
+      <a href="/2016/12/05/mysql日志管理学习笔记/" title="MySQL日志管理学习笔记" itemprop="url">MySQL日志管理学习笔记</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-12T08:52:16.829Z" itemprop="datePublished"> 发表于 2016-11-12</time>
+    <time datetime="2016-12-05T12:18:26.687Z" itemprop="datePublished"> 发表于 2016-12-05</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them frequently. Usually we would use <strong>rm -rf *</strong> to delete these files, but we may need to wait for a relative long time if there are too many files. So we must adopt some unusual way. Fortunately, we can use <strong>rsync</strong> to delete mass files in one shot.</p>
-<a id="more"></a>
-<p><strong>1. Install rsync</strong></p>
-<blockquote>
-<p>yum install rsync</p>
+		<blockquote>
+<p>SHOW GLOBAL VARIABLES LIKE ‘%log%’</p>
 </blockquote>
-<p><strong>2. Create a new empty folder</strong></p>
-<blockquote>
-<p>mkdir /tmp/test</p>
-</blockquote>
-<p><strong>3. Use rsync to delete target folder</strong></p>
-<blockquote>
-<p>rsync --delete-before -a -H -v --progress --stats /tmp/test/ log/</p>
-</blockquote>
-<p>Now the log folder we be cleared if we run this command, the speed is very fast. Actually what rsync does  is to replace all files in the target folder.</p>
-<p>Option explanation for command in step 3:</p>
-<p><strong>–delete-before </strong>: do deletion before the transmission starts in target folder</p>
-<p><strong>–progress</strong> : Show the transmission progress</p>
-<p><strong>-a</strong> :Archive mode, use archive method to transmit files</p>
-<p><strong>-H</strong> ：keep the hard linked files</p>
-<p><strong>-v</strong> ：Verbose output</p>
-<p><strong>–stats</strong> : Show transmission status of some files</p>
-<p><strong>水平有限翻译仅供参考</strong></p>
-<h2 id="在Linux中使用rsync命令迅速删除大量文件"><a href="#在Linux中使用rsync命令迅速删除大量文件" class="headerlink" title="在Linux中使用rsync命令迅速删除大量文件"></a>在Linux中使用rsync命令迅速删除大量文件</h2><p>我昨天遇到一个从我Linux工作站删除大量日志文件的问题，那里有差不多100000个文件要删除。这些日志文件的增长速度很快，以至于我要频繁的删除它们。通常情况下我们使用<strong>rm -rf * </strong>命令删除这些文件，如果文件很多的话，我需要等待很长的时间。因此，我们必须采取一些不寻常的方法。幸运的是，我们可以使用<strong>rsync</strong>一次性删除大量的文件。</p>
-<p><strong>1.安装rsync</strong></p>
-<blockquote>
-<p>yum install rsync</p>
-</blockquote>
-<p><strong>2.创建一个新的文件夹</strong></p>
-<blockquote>
-<p>mkdir /tmp/test</p>
-</blockquote>
-<p>3.使用rsync删除目标文件夹</p>
-<blockquote>
-<p>rsync --delete-before -a -H -v --progress --stats /tmp/test/ log/</p>
-</blockquote>
-<p>这样我们要删除的log目录就会被清空了，删除的速度会非常快。rsync实际上用的是替换原理，处理数十万个文件也是秒删。</p>
-<p>选项说明：<br><strong>--delete-before</strong> 接收者在传输之前进行删除操作<br><strong>--progress</strong> 在传输时显示传输过程<br><strong>-a</strong> 归档模式，表示以递归方式传输文件，并保持所有文件属性<br><strong>-H</strong> 保持硬连接的文件<br><strong>-v</strong> 详细输出模式<br><strong>--stats</strong> 给出某些文件的传输状态</p>
+<p><strong>错误日志</strong>：服务器启动或关闭过程中的信息<br>服务器运行过程中的错误信息<br>事件调度器运行一个事件时产生的信息<br>在从服务器上启动从服务器进程时产生的信息</p>
+<pre><code>log_error
+log_warnings
+</code></pre><a id="more"></a>
+<p><strong>一般查询日志</strong>：<br>    general_log<br>    general_log_file<br>        log_output={TABLE|FILE|NOEN}</p>
+<p><strong>慢查询日志</strong>:查询时间超出指定时间的日志</p>
+<pre><code>long_query_time       指定的超时时间
+log_slow_query={ON|OFF}  
+slow_query_log
+slow_query_log_file
+</code></pre><p>启动慢查询日志：SET GLOBAL slow_query_log=1;<br>更改日志文件必须编辑配置文件并重启服务器，单纯打开关闭可直接操作</p>
+<p><strong>二进制日志</strong>：任何引起或可能引起数据库变化的操作（DDL,DML)；</p>
+<pre><code>复制、即时点恢复
+
+二进制日志的格式：
+    基于语句：statement
+    基于行：row
+    混合方式：mixed
+二进制日志事件：
+    产生的时间
+    相对位置
+二进制日志文件：
+    索引文件
+    二进制日志文件
+查看当前正在使用的二进制日志文件
+    mysql&gt;SHOW MASTER STATUS;
+查看支持的二进制日志文件
+    mysql&gt;SHOW BINARY LOGS;
+查看二进制日志文件
+    mysql&gt;SHOW BINLOG EVENT IN &apos;二进制日志
+</code></pre><p>文件名’ [FROM pos];</p>
+<pre><code>把此之前的日志文件清除
+    mysql&gt;PURGE BINARY LOGS TO &apos;日志文件&apos;
+二进制日志文件手动滚动
+    mysql&gt;FLUSH LOGS;
+mysqlbinlog:从二进制日志读取语句的工具:
+    --start-datetime
+    --stop-datetime
+
+    --start-position
+    --stop-position
+</code></pre><p><strong>中继日志</strong>：从服务器上，从主服务器的二进制日志文件中复制而来的事件，并保存为的日志文件</p>
+<p><strong>事务日志</strong>：事务性存储引擎用于保证原子性、一致性、隔离性、持久性。</p>
+<pre><code>innodb_flush_log_at_trx_commit:
+    0:每秒同步，并执行磁盘flush操作
+    1：每事物同步，并执行磁盘flush操作
+    2：每事物同步，不执行磁盘flush操作
+</code></pre><p><strong>存储引擎</strong>：<br>    MyISAM: .frm  .MYD   .MYI<br>        不支持事物，仅支持表锁,不支持外键，支持B树索引、FULLTEXT索引、空间索引，支持表压缩<br>    InnoDB:    .frm  .ibd<br>        支持事物，行级锁，支持B树索引、聚簇索引、</p>
+<p>自适应hash索引，表空间，raw磁盘设备（裸设备)</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -140,7 +166,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Linux/">Linux</a>
+  <span></span> <a href="/tags/MySQL/">MySQL</a>
   </div>
 
 </div>
@@ -149,7 +175,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/11/12/Use rsync to delete mass files quickly in Linux/" data-title="【译】Use rsync to delete mass files quickly in Linux | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/12/05/mysql日志管理学习笔记/" data-title="MySQL日志管理学习笔记 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -162,19 +188,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/11/13/Linux用户模式和内核模式/" title="Linux用户模式和内核模式">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Linux用户模式和内核模式</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/11/11/dev_null dev_tty in Linux/"  title="【译】/dev/null and /dev/tty in Linux">
+<a href="/2016/11/30/理解inode/"  title="理解inode">
  <strong>下一篇：</strong><br/> 
- <span>【译】/dev/null and /dev/tty in Linux
+ <span>理解inode
 </span>
 </a>
 </div>
@@ -183,7 +201,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/11/12/Use rsync to delete mass files quickly in Linux/" data-title="【译】Use rsync to delete mass files quickly in Linux" data-url="http://yoursite.com/2016/11/12/Use rsync to delete mass files quickly in Linux/"></div>
+	<div class="ds-thread" data-thread-key="2016/12/05/mysql日志管理学习笔记/" data-title="MySQL日志管理学习笔记" data-url="http://yoursite.com/2016/12/05/mysql日志管理学习笔记/"></div>
 </section>
 
 
