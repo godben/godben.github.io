@@ -4,19 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>godben&#39;s blog</title>
+    <title>你好，2017 | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta property="og:type" content="website">
-<meta property="og:title" content="godben's blog">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+    <meta name="description" content="已经一个多月没有更新博客了，一直在准备期末，总算闲下来了，有时间干自己的事了，回顾2016，人生没有什么变化，一切都有条不紊的进行，2017继续努力，希望明年这个时候能找份好工作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你好，2017">
+<meta property="og:url" content="http://yoursite.com/2017/01/12/你好2017/index.html">
 <meta property="og:site_name" content="godben's blog">
+<meta property="og:description" content="已经一个多月没有更新博客了，一直在准备期末，总算闲下来了，有时间干自己的事了，回顾2016，人生没有什么变化，一切都有条不紊的进行，2017继续努力，希望明年这个时候能找份好工作。">
+<meta property="og:updated_time" content="2017-01-12T13:16:33.420Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="godben's blog">
+<meta name="twitter:title" content="你好，2017">
+<meta name="twitter:description" content="已经一个多月没有更新博客了，一直在准备期末，总算闲下来了，有时间干自己的事了，回顾2016，人生没有什么变化，一切都有条不紊的进行，2017继续努力，希望明年这个时候能找份好工作。">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -72,308 +76,69 @@
 </div>
     </header>
     <div id="container">
-      <div id="main">
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/13/Linux用户模式和内核模式/" title="Linux用户模式和内核模式" itemprop="url">Linux用户模式和内核模式</a>
+      <a href="/2017/01/12/你好2017/" title="你好，2017" itemprop="url">你好，2017</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-13T02:37:49.171Z" itemprop="datePublished"> 发表于 2016-11-13</time>
+    <time datetime="2017-01-12T13:14:12.902Z" itemprop="datePublished"> 发表于 2017-01-12</time>
     
   </p>
 </header>
-    <div class="article-content">
-        
-        <p>MS-DOS等操作系统在单一的CPU模式下运行，但是一些类Unix的操作系统则使用了双模式，可以有效地实现时间共享。在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式。除了内核本身处于内核模式以外，所有的用户进程都运行在用户模式之中。<br>内核模式的代码可以无限制地访问所有处理器指令集以及全部内存和I/O空间。如果用户模式的进程要享有此特权，它必须通过系统调用向设备驱动程序或其他内核模式的代码发出请求。另外，用户模式的代码允许发生缺页，而内核模式的代码则不允许。</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/11/13/Linux用户模式和内核模式/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Kernel/">Kernel</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/11/13/Linux用户模式和内核模式/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/13/Linux用户模式和内核模式/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/11/12/Use rsync to delete mass files quickly in Linux/" title="【译】Use rsync to delete mass files quickly in Linux" itemprop="url">【译】Use rsync to delete mass files quickly in Linux</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
+	<div class="article-content">
 		
-  <p class="article-time">
-    <time datetime="2016-11-12T08:52:16.829Z" itemprop="datePublished"> 发表于 2016-11-12</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them frequently. Usually we would use <strong>rm -rf *</strong> to delete these files, but we may need to wait for a relative long time if there are too many files. So we must adopt some unusual way. Fortunately, we can use <strong>rsync</strong> to delete mass files in one shot.</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/11/12/Use rsync to delete mass files quickly in Linux/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
+		<p>已经一个多月没有更新博客了，一直在准备期末，总算闲下来了，有时间干自己的事了，回顾2016，人生没有什么变化，一切都有条不紊的进行，2017继续努力，希望明年这个时候能找份好工作。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a>
-  </div>
-
 </div>
 
 
 
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2017/01/12/你好2017/" data-title="你好，2017 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  </div>
+	
+	</div>
 
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/11/12/Use rsync to delete mass files quickly in Linux/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/12/Use rsync to delete mass files quickly in Linux/" data-count-type="comments">&nbsp;</a>
-	
-</div>
 
 </footer>
 
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/11/11/dev_null dev_tty in Linux/" title="【译】/dev/null and /dev/tty in Linux" itemprop="url">【译】/dev/null and /dev/tty in Linux</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-11-11T09:54:26.959Z" itemprop="datePublished"> 发表于 2016-11-11</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>In Linux, there are two special files /dev/null and /dev/tty. /dev/null will drop all the data written to it, i.e, when program writes data to this file, it means the program has completed the data write operation. But in  fact it does nothing, if you just want the status of a command but not the output of a command, this feature will be very useful. See below shell codes:<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/11/11/dev_null dev_tty in Linux/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/FileSystem/">FileSystem</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
+   	       
+	</article>
 	
-	  	<span></span>
-		<a href="/2016/11/11/dev_null dev_tty in Linux/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/11/dev_null dev_tty in Linux/" data-count-type="comments">&nbsp;</a>
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/12/05/mysql日志管理学习笔记/"  title="MySQL日志管理学习笔记">
+ <strong>下一篇：</strong><br/> 
+ <span>MySQL日志管理学习笔记
+</span>
+</a>
+</div>
+
+</nav>
+
 	
-</div>
-
-</footer>
-
-
-    </article>
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2017/01/12/你好2017/" data-title="你好，2017" data-url="http://yoursite.com/2017/01/12/你好2017/"></div>
+</section>
 
 
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/11/11/CentOS启动流程学习笔记/" title="CentOS启动流程学习笔记" itemprop="url">CentOS启动流程学习笔记</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-11-11T08:02:14.723Z" itemprop="datePublished"> 发表于 2016-11-11</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="一、Linux内核的组成"><a href="#一、Linux内核的组成" class="headerlink" title="一、Linux内核的组成"></a>一、Linux内核的组成</h3><p><strong>相关概念：</strong><br>   Linux系统的组成部分：内核+根文件系统<br>   内核：进程管理、内存管理、网络协议栈、文件系统、驱动程序。<br>   IPC(Inter-Process Communication进程间通信):就是指多个进程之间相互通信，交换信息的方法。Linux IPC基本上都是从Unix平台上继承而来的。主要包括最初的Unix IPC，System V IPC以及基于Socket的IPC。另外，Linux也支持POSIX IPC。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/11/11/CentOS启动流程学习笔记/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/CentOS/">CentOS</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/11/11/CentOS启动流程学习笔记/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/11/CentOS启动流程学习笔记/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/11/11/一张不错的Linux启动流程图/" title="一张不错的Linux启动流程图" itemprop="url">一张不错的Linux启动流程图</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-11-11T07:51:06.806Z" itemprop="datePublished"> 发表于 2016-11-11</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><img src="http://p1.bpimg.com/4851/56619ae877525880.jpg" alt=""></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/11/11/一张不错的Linux启动流程图/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/11/一张不错的Linux启动流程图/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-
-  <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
-  </nav>
-
-</div>
+</div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
 <div id="asidepart">
@@ -631,8 +396,95 @@ $(document).ready(function(){
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
 
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"godben"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
 
 
 
@@ -701,4 +553,4 @@ var _hmt = _hmt || [];
 <!-- Tiny_search End -->
 
   </body>
- </html>
+</html>
