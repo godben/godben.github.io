@@ -93,8 +93,15 @@
 </header>
     <div class="article-content">
         
-        <p>import requests<br>from bs4 import BeautifulSoup<br>import bs4</p>
-<p>def getHTMLText(inputIP, url):<br>    try:<br>        r = requests.get(url + inputIP)<br>        r.raise_for_status()<br>
+        <pre><code>import requests
+from bs4 import BeautifulSoup
+import bs4
+
+def getHTMLText(inputIP, url):
+    try:
+        r = requests.get(url + inputIP)
+        r.raise_for_status()
+</code></pre>
         
         
         <p class="article-more-link">
@@ -121,63 +128,6 @@
 	
 	  	<span></span>
 		<a href="/2017/04/23/python爬虫IP地址查询/#comments" class="ds-thread-count comments-count-link" data-thread-key="2017/04/23/python爬虫IP地址查询/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/01/17/shell中重定向详解？/" title="详解shell中的&gt;/dev/null 2&gt;&amp;1" itemprop="url">详解shell中的&gt;/dev/null 2&gt;&amp;1</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2017-01-17T00:24:15.255Z" itemprop="datePublished"> 发表于 2017-01-17</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/CentOS/">CentOS</a><a href="/tags/Shell/">Shell</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2017/01/17/shell中重定向详解？/#comments" class="ds-thread-count comments-count-link" data-thread-key="2017/01/17/shell中重定向详解？/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -368,6 +318,66 @@ log_warnings
 
 
 
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/11/29/MySQL常用命令集锦/" title="MySQL常用命令集锦" itemprop="url">MySQL常用命令集锦</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
+		
+  <p class="article-time">
+    <time datetime="2016-11-29T11:07:44.916Z" itemprop="datePublished"> 发表于 2016-11-29</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="一、连接MYSQL"><a href="#一、连接MYSQL" class="headerlink" title="一、连接MYSQL"></a>一、连接MYSQL</h3><pre><code>格式： mysql -h主机地址 -u用户名 －p用户密码
+</code></pre><p><strong>1、连接到本机上的MYSQL。</strong><br>首先打开DOS窗口，然后进入目录mysql\bin，再键入命令mysql -u root -p，回车后提示你输密码.注意用户名前可以有空格也可以没有空格，但是密码前必须没有空格，否则让你重新输入密码。<br>如果刚安装好MYSQL，超级用户root是没有密码的，故直接回车即可进入到MYSQL中了，MYSQL的提示符是： mysql&gt;</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2016/11/29/MySQL常用命令集锦/#more">阅读更多</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/MySQL/">MySQL</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/11/29/MySQL常用命令集锦/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/29/MySQL常用命令集锦/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -388,11 +398,7 @@ log_warnings
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>20</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>6</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>19</sup></a></li>
 			
 		
 			
@@ -400,11 +406,11 @@ log_warnings
 			
 		
 			
-				<li><a href="/tags/Kernel/" title="Kernel">Kernel<sup>3</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/TCP-IP/" title="TCP/IP">TCP/IP<sup>2</sup></a></li>
+				<li><a href="/tags/Kernel/" title="Kernel">Kernel<sup>3</sup></a></li>
 			
 		
 			
@@ -412,15 +418,11 @@ log_warnings
 			
 		
 			
+				<li><a href="/tags/TCP-IP/" title="TCP/IP">TCP/IP<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
 			
 		
 			
@@ -428,7 +430,15 @@ log_warnings
 			
 		
 			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
 			
 		
 			
@@ -440,7 +450,7 @@ log_warnings
 			
 		
 			
-				<li><a href="/tags/Shell/" title="Shell">Shell<sup>1</sup></a></li>
+				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
 			
 		
 			
@@ -449,10 +459,6 @@ log_warnings
 		
 			
 				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
 			
 		
 			
@@ -465,6 +471,10 @@ log_warnings
 		
 			
 				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
 			
 		
 		</ul>

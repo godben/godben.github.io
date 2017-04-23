@@ -11,19 +11,37 @@
     
 
     
-    <meta name="description" content="import requestsfrom bs4 import BeautifulSoupimport bs4
-def getHTMLText(inputIP, url):    try:        r = requests.get(url + inputIP)        r.raise_for_status()">
+    <meta name="description" content="import requests
+from bs4 import BeautifulSoup
+import bs4
+
+def getHTMLText(inputIP, url):
+    try:
+        r = requests.get(url + inputIP)
+        r.raise_for_status()">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python爬虫IP地址查询">
 <meta property="og:url" content="http://yoursite.com/2017/04/23/python爬虫IP地址查询/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="import requestsfrom bs4 import BeautifulSoupimport bs4
-def getHTMLText(inputIP, url):    try:        r = requests.get(url + inputIP)        r.raise_for_status()">
-<meta property="og:updated_time" content="2017-04-23T10:40:00.199Z">
+<meta property="og:description" content="import requests
+from bs4 import BeautifulSoup
+import bs4
+
+def getHTMLText(inputIP, url):
+    try:
+        r = requests.get(url + inputIP)
+        r.raise_for_status()">
+<meta property="og:updated_time" content="2017-04-23T11:00:04.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python爬虫IP地址查询">
-<meta name="twitter:description" content="import requestsfrom bs4 import BeautifulSoupimport bs4
-def getHTMLText(inputIP, url):    try:        r = requests.get(url + inputIP)        r.raise_for_status()">
+<meta name="twitter:description" content="import requests
+from bs4 import BeautifulSoup
+import bs4
+
+def getHTMLText(inputIP, url):
+    try:
+        r = requests.get(url + inputIP)
+        r.raise_for_status()">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -98,11 +116,38 @@ def getHTMLText(inputIP, url):    try:        r = requests.get(url + inputIP)   
 </header>
 	<div class="article-content">
 		
-		<p>import requests<br>from bs4 import BeautifulSoup<br>import bs4</p>
-<p>def getHTMLText(inputIP, url):<br>    try:<br>        r = requests.get(url + inputIP)<br>        r.raise_for_status()<br><a id="more"></a><br>        r.encoding = r.apparent_encoding<br>        return r.text<br>    except:<br>        print(“Failed”)</p>
-<p>def fillUnivList(html):<br>    ulist = []<br>    soup = BeautifulSoup(html, “html.parser”)<br>    for tr in soup.find_all(‘tr’):<br>        if isinstance(tr, bs4.element.Tag):<br>            lis = tr(‘li’)<br>            for u in lis:<br>                ulist.append(u.string)<br>    return ulist</p>
-<p>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>    url = ‘<a href="http://www.ip138.com/ips138.asp?ip=" target="_blank" rel="external">http://www.ip138.com/ips138.asp?ip=</a>‘<br>    inputIP = input(“请输入要查询的IP地址:”)<br>    html = getHTMLText(inputIP, url)<br>    data = fillUnivList(html)<br>    for i in data:<br>        print(i)</p>
-  
+		<pre><code>import requests
+from bs4 import BeautifulSoup
+import bs4
+
+def getHTMLText(inputIP, url):
+    try:
+        r = requests.get(url + inputIP)
+        r.raise_for_status()
+</code></pre><a id="more"></a>
+<pre><code>        r.encoding = r.apparent_encoding
+        return r.text
+    except:
+        print(&quot;Failed&quot;)
+
+def fillUnivList(html):
+    ulist = []
+    soup = BeautifulSoup(html, &quot;html.parser&quot;)
+    for tr in soup.find_all(&apos;tr&apos;):
+        if isinstance(tr, bs4.element.Tag):
+            lis = tr(&apos;li&apos;)
+            for u in lis:
+                ulist.append(u.string)
+    return ulist
+
+if __name__ == &apos;__main__&apos;:
+    url = &apos;http://www.ip138.com/ips138.asp?ip=&apos;
+    inputIP = input(&quot;请输入要查询的IP地址:&quot;)
+    html = getHTMLText(inputIP, url)
+    data = fillUnivList(html)
+    for i in data:
+        print(i)
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -134,9 +179,9 @@ def getHTMLText(inputIP, url):    try:        r = requests.get(url + inputIP)   
  
 
 <div class="next">
-<a href="/2017/01/17/shell中重定向详解？/"  title="详解shell中的&gt;/dev/null 2&gt;&amp;1">
+<a href="/2017/01/12/你好2017/"  title="你好，2017">
  <strong>下一篇：</strong><br/> 
- <span>详解shell中的&gt;/dev/null 2&gt;&amp;1
+ <span>你好，2017
 </span>
 </a>
 </div>
@@ -164,11 +209,7 @@ def getHTMLText(inputIP, url):    try:        r = requests.get(url + inputIP)   
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>20</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>6</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>19</sup></a></li>
 			
 		
 			
@@ -176,11 +217,11 @@ def getHTMLText(inputIP, url):    try:        r = requests.get(url + inputIP)   
 			
 		
 			
-				<li><a href="/tags/Kernel/" title="Kernel">Kernel<sup>3</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/TCP-IP/" title="TCP/IP">TCP/IP<sup>2</sup></a></li>
+				<li><a href="/tags/Kernel/" title="Kernel">Kernel<sup>3</sup></a></li>
 			
 		
 			
@@ -188,15 +229,11 @@ def getHTMLText(inputIP, url):    try:        r = requests.get(url + inputIP)   
 			
 		
 			
+				<li><a href="/tags/TCP-IP/" title="TCP/IP">TCP/IP<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
 			
 		
 			
@@ -204,7 +241,15 @@ def getHTMLText(inputIP, url):    try:        r = requests.get(url + inputIP)   
 			
 		
 			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
 			
 		
 			
@@ -216,7 +261,7 @@ def getHTMLText(inputIP, url):    try:        r = requests.get(url + inputIP)   
 			
 		
 			
-				<li><a href="/tags/Shell/" title="Shell">Shell<sup>1</sup></a></li>
+				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
 			
 		
 			
@@ -225,10 +270,6 @@ def getHTMLText(inputIP, url):    try:        r = requests.get(url + inputIP)   
 		
 			
 				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
 			
 		
 			
@@ -241,6 +282,10 @@ def getHTMLText(inputIP, url):    try:        r = requests.get(url + inputIP)   
 		
 			
 				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
 			
 		
 		</ul>
