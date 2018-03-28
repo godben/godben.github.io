@@ -80,6 +80,89 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/03/28/Linux笔记day01/" title="20180327Linux笔记" itemprop="url">20180327Linux笔记</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
+		
+  <p class="article-time">
+    <time datetime="2018-03-28T00:47:20.911Z" itemprop="datePublished"> 发表于 2018-03-28</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="资料地址"><a href="#资料地址" class="headerlink" title="资料地址:"></a>资料地址:</h3><pre><code>\\172.20.0.1\30
+账号：magedu30
+密码：Magedu30
+ftp:172.20.0.1        
+</code></pre><h3 id="摩尔定律"><a href="#摩尔定律" class="headerlink" title="摩尔定律"></a>摩尔定律</h3><blockquote>
+<p>摩尔定律是由英特尔（Intel）创始人之一戈登·摩尔（Gordon Moore）提出来的。其内容为：当价格不变时，集成电路上可容纳的元器件的数目，约每隔18-24个月便会增加一倍，性能也将提升一倍。换言之，每一美元所能买到的电脑性能，将每隔18-24个月翻一倍以上。这一定律揭示了信息技术进步的速度。</p>
+</blockquote>
+<h3 id="反摩尔定律"><a href="#反摩尔定律" class="headerlink" title="反摩尔定律"></a>反摩尔定律</h3><blockquote>
+<p>由Google的前CEO埃里克·施密特提出的：如果你反过来看摩尔定律，一个IT公司如果今天和18个月前卖掉同样多的、同样的产品，它的营业额就要降一半。IT界把它称为反摩尔定律。</p>
+</blockquote>
+<h3 id="存储网络："><a href="#存储网络：" class="headerlink" title="存储网络："></a>存储网络：</h3><blockquote>
+<pre><code>DAS----直接连接存储
+NAS----网络连接存储
+SAN----存储区域网络
+</code></pre></blockquote>
+<hr>
+<h3 id="Linux命令："><a href="#Linux命令：" class="headerlink" title="Linux命令："></a>Linux命令：</h3><p><strong>strace命令</strong>是一个集诊断、调试、统计与一体的工具，我们可以使用strace对应用的系统调用和信号传递的跟踪结果来对应用进行分析，以达到解决问题或者是了解应用工作过程的目的</p>
+<p><strong>ltrace命令</strong>用来跟踪进程调用库函数的情况</p>
+<p><strong>free命令</strong>可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区</p>
+<p><strong>cat /etc/centos-release</strong> 查看发行版本</p>
+<p><strong>cat /proc/meminfo</strong> 查看内存大小</p>
+<p><strong>fdisk -l</strong> 查看磁盘分区</p>
+<p><strong>halt</strong>   关机</p>
+<p><strong>lsblk</strong>    块设备的情况</p>
+<p><strong>ifconfig</strong> 查看IP</p>
+<p><strong>uname -r</strong>查看内核 </p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2018/03/28/Linux笔记day01/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/03/28/Linux笔记day01/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2017/04/23/python爬虫IP地址查询/" title="python爬虫IP地址查询" itemprop="url">python爬虫IP地址查询</a>
   </h1>
   <p class="article-author">By
@@ -318,66 +401,6 @@ log_warnings
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/11/29/MySQL常用命令集锦/" title="MySQL常用命令集锦" itemprop="url">MySQL常用命令集锦</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-11-29T11:07:44.916Z" itemprop="datePublished"> 发表于 2016-11-29</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="一、连接MYSQL"><a href="#一、连接MYSQL" class="headerlink" title="一、连接MYSQL"></a>一、连接MYSQL</h3><pre><code>格式： mysql -h主机地址 -u用户名 －p用户密码
-</code></pre><p><strong>1、连接到本机上的MYSQL。</strong><br>首先打开DOS窗口，然后进入目录mysql\bin，再键入命令mysql -u root -p，回车后提示你输密码.注意用户名前可以有空格也可以没有空格，但是密码前必须没有空格，否则让你重新输入密码。<br>如果刚安装好MYSQL，超级用户root是没有密码的，故直接回车即可进入到MYSQL中了，MYSQL的提示符是： mysql&gt;</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/11/29/MySQL常用命令集锦/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/MySQL/">MySQL</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/11/29/MySQL常用命令集锦/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/29/MySQL常用命令集锦/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -398,7 +421,7 @@ log_warnings
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>19</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>20</sup></a></li>
 			
 		
 			
@@ -426,7 +449,7 @@ log_warnings
 			
 		
 			
-				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
 			
 		
 			
@@ -434,11 +457,11 @@ log_warnings
 			
 		
 			
-				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
 			
 		
 			
