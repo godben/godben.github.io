@@ -4,29 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Linux文件系统ext3与ext4主要区别 | godben&#39;s blog</title>
+    <title>20180328Linux笔记 | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="很长一段时间以来，ext3是很多linux发行版默认的文件系统，现在ext4已经发布，并且已经有发行版开始使用ext4作为默认的文件系统了（其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目）。
-ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接">
+    <meta name="description" content="dd命令用于复制文件并对原文件的内容进行转换和格式化处理。
+1234567[root@localhost text]# dd if=/dev/zero of=sun.txt bs=1M count=11+0 records in1+0 records out1048576 bytes (1.0 MB) copied, 0.006107 seconds, 172 MB/s[root@localhos">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux文件系统ext3与ext4主要区别">
-<meta property="og:url" content="http://yoursite.com/2016/11/04/Linux文件系统ext3与ext4主要区别/index.html">
+<meta property="og:title" content="20180328Linux笔记">
+<meta property="og:url" content="http://yoursite.com/2018/03/28/day02/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="很长一段时间以来，ext3是很多linux发行版默认的文件系统，现在ext4已经发布，并且已经有发行版开始使用ext4作为默认的文件系统了（其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目）。
-ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接">
-<meta property="og:image" content="http://images.51cto.com/files/uploadimg/20120508/1058140.png">
-<meta property="og:image" content="http://images.51cto.com/files/uploadimg/20120508/1058141.jpg">
-<meta property="og:updated_time" content="2016-11-04T14:28:26.862Z">
+<meta property="og:description" content="dd命令用于复制文件并对原文件的内容进行转换和格式化处理。
+1234567[root@localhost text]# dd if=/dev/zero of=sun.txt bs=1M count=11+0 records in1+0 records out1048576 bytes (1.0 MB) copied, 0.006107 seconds, 172 MB/s[root@localhos">
+<meta property="og:updated_time" content="2018-03-28T13:05:23.107Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux文件系统ext3与ext4主要区别">
-<meta name="twitter:description" content="很长一段时间以来，ext3是很多linux发行版默认的文件系统，现在ext4已经发布，并且已经有发行版开始使用ext4作为默认的文件系统了（其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目）。
-ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接">
-<meta name="twitter:image" content="http://images.51cto.com/files/uploadimg/20120508/1058140.png">
+<meta name="twitter:title" content="20180328Linux笔记">
+<meta name="twitter:description" content="dd命令用于复制文件并对原文件的内容进行转换和格式化处理。
+1234567[root@localhost text]# dd if=/dev/zero of=sun.txt bs=1M count=11+0 records in1+0 records out1048576 bytes (1.0 MB) copied, 0.006107 seconds, 172 MB/s[root@localhos">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -88,43 +85,54 @@ ext3还是使用15个inode来查找数据块，前12个为直接数据块，直�
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/04/Linux文件系统ext3与ext4主要区别/" title="Linux文件系统ext3与ext4主要区别" itemprop="url">Linux文件系统ext3与ext4主要区别</a>
+      <a href="/2018/03/28/day02/" title="20180328Linux笔记" itemprop="url">20180328Linux笔记</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-04T14:19:22.892Z" itemprop="datePublished"> 发表于 2016-11-04</time>
+    <time datetime="2018-03-28T13:05:43.679Z" itemprop="datePublished"> 发表于 2018-03-28</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>很长一段时间以来，ext3是很多linux发行版默认的文件系统，现在ext4已经发布，并且已经有发行版开始使用ext4作为默认的文件系统了（其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目）。</p>
-<p>ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接块，二级间接块，三级间接块，如下图：</p>
-<a id="more"></a>
-<p><img src="http://images.51cto.com/files/uploadimg/20120508/1058140.png" alt=""></p>
-<p>其中point本来也是数据块，现在拿来做数据块的索引用，其中ext3的头文件定义为：__u32 i_block[EXT3_N_BLOCKS];/* Pointers to blocks */，所以可以计算ext3文件系统的极限：</p>
-<p><strong>最大分区：</strong><br>因为定义的是无符号32位数，所以可能定位的block范围为2^32，也就是4G，如果一个block大小为4KB，所以为4G * 4KB = 16TB</p>
-<p><strong>最大文件：</strong><br>前面直接指向12个数据块，一级间接块最大为block size / 4，block size就是数据块的大小，因为一个索引是4个字节，所以除以4，这样计算下来，最大的文件可以使用的总块数为:12 + (block size/4) + (block size/4)^2 + (block size/4)^3，如果block size大小为4K，则为(12 + 2^10 + 2^20 + 2^30) * 2^12 约等于4T。</p>
-<p>为了突破ext3这个大小限制，ext4使用了48位的数据块索引空间，同时使用了如下结构代替inode索引的方式：<br>struct ext3_extent {<br>__u32 ee_block; /* first logical block extent covers */<br>__u16 ee_len;   /* number of blocks covered by extent */<br>__u16 ee_start_hi; /* high 16 bits of physical block */<br>__u32 ee_start; /* low 32 bigs of physical block */<br>};</p>
-<p>用这样查找数据块的时候就不是每个块建立一个索引，而且使用连续的数据块，也就是分别指示起始位置，以及连续的块数，这样在大文件的时候，磁盘io效率以及 查找数据块效率上都有很大的提高，所以ext4的文件系统也比ext3出色。因为使了48位的索引空间，所以在4KB块大小的情况下，文件系统的极限是 2^48 * 4KB = 1EB，不过，目前由于工具的限制，只能使用16TB的分区。</p>
-<h2 id="EXT3与EXT4的主要区别"><a href="#EXT3与EXT4的主要区别" class="headerlink" title="EXT3与EXT4的主要区别"></a>EXT3与EXT4的主要区别</h2><p>Linux kernel自2.6.28开始正式支持新的文件系统 Ext4。 Ext4是Ext3的改进版，修改了Ext3中部分重要的数据结构，而不仅仅像Ext3对Ext2那样，只是增加了一个日志功能而已。Ext4 可以提供更佳的性能和可靠性，还有更为丰富的功能：</p>
-<p><strong>1.与Ext3兼容。</strong><br>执行若干条命令，就能从Ext3在线迁移到Ext4，而无须重新格式化磁盘或重新安装系统。原有Ext3数据结构照样保留，Ext4作用于新数据，当然，整个文件系统因此也就获得了Ext4所支持的更大容量。</p>
-<p><strong>2.更大的文件系统和更大的文件。</strong><br>较之Ext3目前所支持的最大16TB文件系统和最大2TB文件，Ext4分别支持1EB（1,048,576TB，1EB=1024PB，1PB=1024TB）的文件系统，以及16TB 的文件。</p>
-<p><strong>3.无限数量的子目录。</strong><br>Ext3目前只支持32,000个子目录，而Ext4支持无限数量的子目录。</p>
-<p><strong>4.Extents。</strong><br>Ext3 采用间接块映射，当操作大文件时，效率极其低下。比如一个 100MB 大小的文件，在Ext3中要建立25,600个数据块（每个数据块大小为 4KB）的映射表。而Ext4引入了现代文件系统中流行的extents概念，每个 extent 为一组连续的数据块，上述文件则表示为“该文件数据保存在接下来的25,600个数据块中”，提高了不少效率。</p>
-<p><strong>5.多块分配。</strong><br>当写入数据到 Ext3 文件系统中时，Ext3 的数据块分配器每次只能分配一个 4KB 的块，写一个 100MB 文件就要调用 25,600 次数据块分配器，而 Ext4 的多块分配器“multiblock allocator”（mballoc） 支持一次调用分配多个数据块。</p>
-<p><strong>6.延迟分配。</strong><br>Ext3的数据块分配策略是尽快分配，而 Ext4 和其它现代文件操作系统的策略是尽可能地延迟分配，直到文件在 cache 中写完才开始分配数据块并写入磁盘，这样就能优化整个文件的数据块分配，与前两种特性搭配起来可以显著提升性能。</p>
-<p><strong>7.快速fsck。</strong><br>以前执行 fsck 第一步就会很慢，因为它要检查所有的 inode，现在 Ext4 给每个组的 inode 表中都添加了一份未使用 inode 的列表，今后 fsck Ext4 文件系统就可以跳过它们而只去检查那些在用的 inode 了。</p>
-<p><strong>8.日志校验。</strong><br>日志是最常用的部分，也极易导致磁盘硬件故障，而从损坏的日志中恢复数据会导致更多的数据损坏。Ext4的日志校验功能可以很方便地判断日志数据是否损坏，而且它将 Ext3 的两阶段日志机制合并成一个阶段，在增加安全性的同时提高了性能。</p>
-<p><strong>9.“无日志”（No Journaling）模式。</strong><br>日志总归有一些开销，Ext4允许关闭日志，以便某些有特殊需求的用户可以借此提升性能。</p>
-<p><strong>10.在线碎片整理。</strong><br>尽管延迟分配、多块分配和extents能有效减少文件系统碎片，但碎片还是不可避免会产生。Ext4支持在线碎片整理，并将提供e4defrag工具进行个别文件或整个文件系统的碎片整理。</p>
-<p><strong>11.inode 相关特性。</strong><br>Ext4 支持更大的inode，较之Ext3默认的inode大小128字节，Ext4为了在 inode 中容纳更多的扩展属性（如纳秒时间戳或inode版本），默认inode大小为256字节。Ext4 还支持快速扩展属性（fast extended attributes）和inode保留（inodes reservation）。</p>
-<p><strong>12.持久预分配（Persistent preallocation）。</strong><br>P2P 软件为了保证下载文件有足够的空间存放，常常会预先创建一个与所下载文件大小相同的空文件，以免未来的数小时或数天之内磁盘空间不足导致下载失败。 Ext4在文件系统层面实现了持久预分配并提供相应的API（libc 中的 posix_fallocate()），比应用软件自己实现更有效率。</p>
-<p><strong>13.默认启用 barrier。</strong><br>磁盘上配有内部缓存，以便重新调整批量数据的写操作顺序，优化写入性能，因此文件系统必须在日志数据写入磁盘之后才能写commit记录，若commit 记录写入在先，而日志有可能损坏，那么就会影响数据完整性。Ext4默认启用barrier，只有当barrier之前的数据全部写入磁盘，才能写 barrier之后的数据。（可通过“mount -o barrier=0″命令禁用该特性。）</p>
-<p><img src="http://images.51cto.com/files/uploadimg/20120508/1058141.jpg" alt=""></p>
+		<p><strong>dd命令</strong>用于复制文件并对原文件的内容进行转换和格式化处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@localhost text]# dd if=/dev/zero of=sun.txt bs=1M count=1</div><div class="line">1+0 records in</div><div class="line">1+0 records out</div><div class="line">1048576 bytes (1.0 MB) copied, 0.006107 seconds, 172 MB/s</div><div class="line"></div><div class="line">[root@localhost text]# du -sh sun.txt </div><div class="line">1.1M    sun.txt</div></pre></td></tr></table></figure>
+<p>该命令创建了一个1M大小的文件sun.txt，其中参数解释：</p>
+<p>if 代表输入文件。如果不指定if，默认就会从stdin中读取输入。<br>of 代表输出文件。如果不指定of，默认就会将stdout作为默认输出。<br>bs 代表字节为单位的块大小。<br>count 代表被复制的块数。<br>/dev/zero 是一个字符设备，会不断返回0值字节（\0）。</p>
+<hr>
+<p><strong>df命令</strong>用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。<br>查看系统磁盘设备，默认是KB为单位：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@LinServ-1 ~]# df  </div><div class="line">文件系统               1K-块        已用     可用 已用% 挂载点  </div><div class="line">/dev/sda2            146294492  28244432 110498708  21% /  </div><div class="line">/dev/sda1              1019208     62360    904240   7% /boot  </div><div class="line">tmpfs                  1032204         0   1032204   0% /dev/shm  </div><div class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</div></pre></td></tr></table></figure>
+<p><strong>使用-h选项以KB以上的单位来显示，可读性高：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@LinServ-1 ~]# df -h</div><div class="line">文件系统              容量  已用 可用 已用% 挂载点</div><div class="line">/dev/sda2             140G   27G  106G  21% /</div><div class="line">/dev/sda1             996M   61M  884M   7% /boot</div><div class="line">tmpfs                1009M     0 1009M   0% /dev/shm</div><div class="line">/dev/sdb1             2.7T  209G  2.4T   8% /data1</div></pre></td></tr></table></figure>
+<p><strong>查看全部文件系统：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[root@LinServ-1 ~]# df -a</div><div class="line">文件系统               1K-块        已用     可用 已用% 挂载点</div><div class="line">/dev/sda2            146294492  28244432 110498708  21% /</div><div class="line">proc                         0         0         0   -  /proc</div><div class="line">sysfs                        0         0         0   -  /sys</div><div class="line">devpts                       0         0         0   -  /dev/pts</div><div class="line">/dev/sda1              1019208     62360    904240   7% /boot</div><div class="line">tmpfs                  1032204         0   1032204   0% /dev/shm</div><div class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</div><div class="line">none                         0         0         0   -  /proc/sys/fs/binfmt_misc</div></pre></td></tr></table></figure>
+<hr>
+<p><strong>dirname命令</strong>去除文件名中的非目录部分，仅显示与目录有关的内容。dirname命令读取指定路径名保留最后一个/及其后面的字符，删除其他部分，并写结果到标准输出。如果最后一个/后无字符，dirname 命令使用倒数第二个/，并忽略其后的所有字符。dirname 和 basename 通常在 shell 内部命令替换使用，以指定一个与指定输入文件名略有差异的输出文件名。</p>
+<hr>
+<p><strong>显示目录或者文件所占空间：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[root@localhost test]# du</div><div class="line">608 ./test6</div><div class="line">308 ./test4</div><div class="line">4 ./scf/lib</div><div class="line">4 ./scf/service/deploy/product</div><div class="line">4 ./scf/service/deploy/info</div><div class="line">12 ./scf/service/deploy</div><div class="line">16 ./scf/service</div><div class="line">4 ./scf/doc</div><div class="line">4 ./scf/bin</div><div class="line">32 ./scf</div><div class="line">8 ./test3</div><div class="line">1288 .</div></pre></td></tr></table></figure>
+<p><strong>只显示当前目录下面的子目录的目录大小和当前目录的总的大小，最下面的1288为当前目录的总大小</strong></p>
+<hr>
+<p><strong>enable命令</strong>用于临时关闭或者激活指定的shell内部命令。若要执行的文件名称与shell内建命令相同，可用enable -n来关闭shell内建命令。若不加-n选项，enable可重新启动关闭的命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-n：关闭指定的内部命令；</div><div class="line">-a：显示所有激活的内部命令；</div><div class="line">-f：从指定文件中读取内部命令。</div></pre></td></tr></table></figure></p>
+<hr>
+<p><strong>fdisk命令</strong>用于观察硬盘实体使用情况，也可对硬盘分区。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-b&lt;分区大小&gt;：指定每个分区的大小；</div><div class="line">-l：列出指定的外围设备的分区表状况；</div><div class="line">-s&lt;分区编号&gt;：将指定的分区大小输出到标准输出上，单位为区块；</div><div class="line">-u：搭配&quot;-l&quot;参数列表，会用分区数目取代柱面数目，来表示每个分区的起始地址；</div><div class="line">-v：显示版本信息。</div></pre></td></tr></table></figure>
+<hr>
+<p><strong>hexdump命令</strong>一般用来查看“二进制”文件的十六进制编码，但实际上它能查看任何文件，而不只限于二进制文件。</p>
+<hr>
+<p><strong>init命令</strong>是Linux下的进程初始化工具，init进程是所有Linux进程的父进程，它的进程号为1。init命令是Linux操作系统中不可缺少的程序之一，init进程是Linux内核引导运行的，是系统中的第一个进程。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#0  停机（千万不能把initdefault 设置为0）</div><div class="line">#1  单用户模式</div><div class="line">#2  多用户，没有 NFS(和级别3相似，会停止部分服务)</div><div class="line">#3  完全多用户模式</div><div class="line">#4  没有用到</div><div class="line">#5  x11(Xwindow)</div><div class="line">#6  重新启动（千万不要把initdefault 设置为6）</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">查看系统进程命令：ps -ef | head</div><div class="line">查看init的配置文件：more /etc/inittab</div><div class="line">查看系统当前运行的级别：runlevel</div></pre></td></tr></table></figure>
+<hr>
+<p><strong>runlevel命令</strong>用于打印当前Linux系统的运行等级。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">0 停机</div><div class="line">1 单用户模式</div><div class="line">2 多用户，没有 NFS</div><div class="line">3 完全多用户模式</div><div class="line">4 没有用到</div><div class="line">5 图形界面</div><div class="line">6 重新启动</div><div class="line">S s Single user mode</div></pre></td></tr></table></figure>
+<hr>
+<p><strong>w命令</strong>用于显示已经登陆系统的用户列表，并显示用户正在执行的指令。执行这个命令可得知目前登入系统的用户有那些人，以及他们正在执行的程序。单独执行w命令会显示所有的用户，您也可指定用户名称，仅显示某位用户的相关信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@localhost test]# w</div><div class="line"> 20:39:37 up 136 days,  3:58,  1 user,  load average: 0.00, 0.00, 0.00</div><div class="line">USER     TTY      FROM              login@   IDLE   JCPU   PCPU WHAT</div><div class="line">root     pts/0    222.94.97.122    20:39    1.00s  0.00s  0.00s w</div></pre></td></tr></table></figure>
+<hr>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -133,7 +141,7 @@ ext3还是使用15个inode来查找数据块，前12个为直接数据块，直�
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/FileSystem/">FileSystem</a>
+  <span></span> <a href="/tags/Linux/">Linux</a>
   </div>
 
 </div>
@@ -142,7 +150,7 @@ ext3还是使用15个inode来查找数据块，前12个为直接数据块，直�
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/11/04/Linux文件系统ext3与ext4主要区别/" data-title="Linux文件系统ext3与ext4主要区别 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2018/03/28/day02/" data-title="20180328Linux笔记 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -155,19 +163,11 @@ ext3还是使用15个inode来查找数据块，前12个为直接数据块，直�
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/11/04/Big file transfer in Linux/" title="【译】Big file transfer in Linux">
-  <strong>上一篇：</strong><br/>
-  <span>
-  【译】Big file transfer in Linux</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/11/03/DNS学习笔记/"  title="DNS学习笔记">
+<a href="/2018/03/28/Linux笔记day01/"  title="20180327Linux笔记">
  <strong>下一篇：</strong><br/> 
- <span>DNS学习笔记
+ <span>20180327Linux笔记
 </span>
 </a>
 </div>
@@ -176,7 +176,7 @@ ext3还是使用15个inode来查找数据块，前12个为直接数据块，直�
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/11/04/Linux文件系统ext3与ext4主要区别/" data-title="Linux文件系统ext3与ext4主要区别" data-url="http://yoursite.com/2016/11/04/Linux文件系统ext3与ext4主要区别/"></div>
+	<div class="ds-thread" data-thread-key="2018/03/28/day02/" data-title="20180328Linux笔记" data-url="http://yoursite.com/2018/03/28/day02/"></div>
 </section>
 
 

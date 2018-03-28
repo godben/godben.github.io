@@ -80,6 +80,66 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/11/06/非root用户正常使用wireshark方法/" title="非root用户正常使用wireshark方法" itemprop="url">非root用户正常使用wireshark方法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
+		
+  <p class="article-time">
+    <time datetime="2016-11-06T04:43:09.115Z" itemprop="datePublished"> 发表于 2016-11-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>今天在linux环境下运行wireshark抓包，安装好wireshark后，开始抓包总是报错，内容如下：<br><strong> The capture session could not be initiated (failed to set hardware filter to promiscuous mode) </strong><br><strong> Please check to make sure you have sufficient permissions, and that you have</strong></p>
+<p>查询解决方法，结果是将选项中的混杂模式关闭，关闭后仍然报错，继续查询，突然想起来可能是用户权限问题，然后用sudo wireshark打开wireshark就正常了，但是wireshark官方不推荐这么做：<br>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2016/11/06/非root用户正常使用wireshark方法/#more">阅读更多</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Wireshark/">Wireshark</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/11/06/非root用户正常使用wireshark方法/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/06/非root用户正常使用wireshark方法/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/11/06/IP协议不可靠无连接为什么不把它设计为可靠的/" title="IP协议不可靠无连接 为什么不把它设计为可靠的?" itemprop="url">IP协议不可靠无连接 为什么不把它设计为可靠的?</a>
   </h1>
   <p class="article-author">By
@@ -312,68 +372,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/11/03/A possible way to recover deleted files on Linux/" title="【译】A possible way to recover deleted files on Linux" itemprop="url">【译】A possible way to recover deleted files on Linux</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-11-03T09:38:57.324Z" itemprop="datePublished"> 发表于 2016-11-03</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Last week I was generating a MD5 sum for an virtual machine image on one OpenNebula server:</p>
-<blockquote>
-<p><code># ls -l test.img</code><br><code>-rw-r--r-- 1 root root 10486808576 Oct 12 02:21 test.img</code><br><code># md5sum test.img</code></p>
-</blockquote>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/11/03/A possible way to recover deleted files on Linux/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/11/03/A possible way to recover deleted files on Linux/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/03/A possible way to recover deleted files on Linux/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
@@ -394,7 +392,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>20</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>21</sup></a></li>
 			
 		
 			
@@ -422,7 +420,7 @@
 			
 		
 			
-				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
 			
 		
 			
@@ -430,11 +428,11 @@
 			
 		
 			
-				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
 			
 		
 			
