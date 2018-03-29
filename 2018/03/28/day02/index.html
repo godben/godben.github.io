@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="godben's blog">
 <meta property="og:description" content="dd命令用于复制文件并对原文件的内容进行转换和格式化处理。
 1234567[root@localhost text]# dd if=/dev/zero of=sun.txt bs=1M count=11+0 records in1+0 records out1048576 bytes (1.0 MB) copied, 0.006107 seconds, 172 MB/s[root@localhos">
-<meta property="og:updated_time" content="2018-03-28T13:05:23.107Z">
+<meta property="og:updated_time" content="2018-03-29T01:13:30.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="20180328Linux笔记">
 <meta name="twitter:description" content="dd命令用于复制文件并对原文件的内容进行转换和格式化处理。
@@ -100,8 +100,7 @@
 		
 		<p><strong>dd命令</strong>用于复制文件并对原文件的内容进行转换和格式化处理。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@localhost text]# dd if=/dev/zero of=sun.txt bs=1M count=1</div><div class="line">1+0 records in</div><div class="line">1+0 records out</div><div class="line">1048576 bytes (1.0 MB) copied, 0.006107 seconds, 172 MB/s</div><div class="line"></div><div class="line">[root@localhost text]# du -sh sun.txt </div><div class="line">1.1M    sun.txt</div></pre></td></tr></table></figure>
-<p>该命令创建了一个1M大小的文件sun.txt，其中参数解释：</p>
-<p>if 代表输入文件。如果不指定if，默认就会从stdin中读取输入。<br>of 代表输出文件。如果不指定of，默认就会将stdout作为默认输出。<br>bs 代表字节为单位的块大小。<br>count 代表被复制的块数。<br>/dev/zero 是一个字符设备，会不断返回0值字节（\0）。</p>
+<p>该命令创建了一个1M大小的文件sun.txt，其中参数解释：<br><a id="more"></a><br>if 代表输入文件。如果不指定if，默认就会从stdin中读取输入。<br>of 代表输出文件。如果不指定of，默认就会将stdout作为默认输出。<br>bs 代表字节为单位的块大小。<br>count 代表被复制的块数。<br>/dev/zero 是一个字符设备，会不断返回0值字节（\0）。</p>
 <hr>
 <p><strong>df命令</strong>用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。<br>查看系统磁盘设备，默认是KB为单位：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@LinServ-1 ~]# df  </div><div class="line">文件系统               1K-块        已用     可用 已用% 挂载点  </div><div class="line">/dev/sda2            146294492  28244432 110498708  21% /  </div><div class="line">/dev/sda1              1019208     62360    904240   7% /boot  </div><div class="line">tmpfs                  1032204         0   1032204   0% /dev/shm  </div><div class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</div></pre></td></tr></table></figure>
@@ -239,7 +238,7 @@
 			
 		
 			
-				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
 			
 		
 			
@@ -247,11 +246,15 @@
 			
 		
 			
+				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/ssh/" title="ssh">ssh<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
 			
 		
 			
@@ -263,10 +266,6 @@
 			
 		
 			
-				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Virtualization/" title="Virtualization">Virtualization<sup>1</sup></a></li>
 			
 		
@@ -275,7 +274,7 @@
 			
 		
 			
-				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
 			
 		
 			

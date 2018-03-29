@@ -13,20 +13,23 @@
     
     <meta name="description" content="英文：2daygeek，翻译：Linux中国/amwps290linux.cn/article-9425-1.html
 
-人类犯错误是因为我们不是一个可编程设备，所以，在使用 rm 命令时要额外注意，不要在任何时候使用 rm -rf *。当你使用 rm 命令时，它会永久删除文件，不会像文件管理器那样将这些文件移动到 “垃圾箱”。">
+人类犯错误是因为我们不是一个可编程设备，所以，在使用 rm 命令时要额外注意，不要在任何时候使用 rm -rf *。当你使用 rm 命令时，它会永久删除文件，不会像文件管理器那样将这些文件移动到 “垃圾箱”。  
+有时我们会将不应该删除的文件删除掉，所以当错误地删除了文件时该">
 <meta property="og:type" content="article">
 <meta property="og:title" content="给 “rm” 命令添加个“垃圾桶”">
 <meta property="og:url" content="http://yoursite.com/2018/03/29/给rm命令添加个垃圾桶/index.html">
 <meta property="og:site_name" content="godben's blog">
 <meta property="og:description" content="英文：2daygeek，翻译：Linux中国/amwps290linux.cn/article-9425-1.html
 
-人类犯错误是因为我们不是一个可编程设备，所以，在使用 rm 命令时要额外注意，不要在任何时候使用 rm -rf *。当你使用 rm 命令时，它会永久删除文件，不会像文件管理器那样将这些文件移动到 “垃圾箱”。">
-<meta property="og:updated_time" content="2018-03-29T01:07:29.856Z">
+人类犯错误是因为我们不是一个可编程设备，所以，在使用 rm 命令时要额外注意，不要在任何时候使用 rm -rf *。当你使用 rm 命令时，它会永久删除文件，不会像文件管理器那样将这些文件移动到 “垃圾箱”。  
+有时我们会将不应该删除的文件删除掉，所以当错误地删除了文件时该">
+<meta property="og:updated_time" content="2018-03-29T01:12:43.983Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="给 “rm” 命令添加个“垃圾桶”">
 <meta name="twitter:description" content="英文：2daygeek，翻译：Linux中国/amwps290linux.cn/article-9425-1.html
 
-人类犯错误是因为我们不是一个可编程设备，所以，在使用 rm 命令时要额外注意，不要在任何时候使用 rm -rf *。当你使用 rm 命令时，它会永久删除文件，不会像文件管理器那样将这些文件移动到 “垃圾箱”。">
+人类犯错误是因为我们不是一个可编程设备，所以，在使用 rm 命令时要额外注意，不要在任何时候使用 rm -rf *。当你使用 rm 命令时，它会永久删除文件，不会像文件管理器那样将这些文件移动到 “垃圾箱”。  
+有时我们会将不应该删除的文件删除掉，所以当错误地删除了文件时该">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -105,10 +108,8 @@
 <p>英文：2daygeek，翻译：Linux中国/amwps290<br>linux.cn/article-9425-1.html</p>
 </blockquote>
 <p>人类犯错误是因为我们不是一个可编程设备，所以，在使用 rm 命令时要额外注意，不要在任何时候使用 rm -rf *。当你使用 rm 命令时，它会永久删除文件，不会像文件管理器那样将这些文件移动到 “垃圾箱”。  </p>
-<a id="more"></a>
 <p>有时我们会将不应该删除的文件删除掉，所以当错误地删除了文件时该怎么办？ 你必须看看恢复工具（Linux 中有很多数据恢复工具），但我们不知道是否能将它百分之百恢复，所以要如何解决这个问题？</p>
-<p>我们最近发表了一篇关于 Trash-Cli 的文章，在评论部分，我们从用户 Eemil Lgz 那里获得了一个关于 saferm.sh 脚本的更新，它可以帮助我们将文件移动到“垃圾箱”而不是永久删除它们。</p>
-<p>将文件移动到“垃圾桶”是一个好主意，当你无意中运行 rm 命令时，可以拯救你；但是很少有人会说这是一个坏习惯，如果你不注意“垃圾桶”，它可能会在一定的时间内被文件和文件夹堆积起来。在这种情况下，我建议你按照你的意愿去做一个定时任务。</p>
+<p>我们最近发表了一篇关于 Trash-Cli 的文章，在评论部分，我们从用户 Eemil Lgz 那里获得了一个关于 saferm.sh 脚本的更新，它可以帮助我们将文件移动到“垃圾箱”而不是永久删除它们。<br><a id="more"></a><br>将文件移动到“垃圾桶”是一个好主意，当你无意中运行 rm 命令时，可以拯救你；但是很少有人会说这是一个坏习惯，如果你不注意“垃圾桶”，它可能会在一定的时间内被文件和文件夹堆积起来。在这种情况下，我建议你按照你的意愿去做一个定时任务。</p>
 <p>这适用于服务器和桌面两种环境。 如果脚本检测到 GNOME 、KDE、Unity 或 LXDE 桌面环境（DE），则它将文件或文件夹安全地移动到默认垃圾箱 $HOME/.local/share/Trash/files，否则会在您的主目录中创建垃圾箱文件夹 $HOME/Trash。</p>
 <p>saferm.sh 脚本托管在 Github 中，可以从仓库中克隆，也可以创建一个名为 saferm.sh 的文件并复制其上的代码。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git clone https://github.com/lagerspetz/linux-stuff</div><div class="line">$ sudo mv linux-stuff/scripts/saferm.sh /bin</div><div class="line">$ rm -Rf linux-stuff</div></pre></td></tr></table></figure>
@@ -221,7 +222,7 @@
 			
 		
 			
-				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
 			
 		
 			
@@ -229,11 +230,15 @@
 			
 		
 			
+				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/ssh/" title="ssh">ssh<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
 			
 		
 			
@@ -245,10 +250,6 @@
 			
 		
 			
-				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Virtualization/" title="Virtualization">Virtualization<sup>1</sup></a></li>
 			
 		
@@ -257,7 +258,7 @@
 			
 		
 			
-				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
 			
 		
 			

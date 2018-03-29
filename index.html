@@ -97,6 +97,8 @@
 <p>英文：2daygeek，翻译：Linux中国/amwps290<br>linux.cn/article-9425-1.html</p>
 </blockquote>
 <p>人类犯错误是因为我们不是一个可编程设备，所以，在使用 rm 命令时要额外注意，不要在任何时候使用 rm -rf *。当你使用 rm 命令时，它会永久删除文件，不会像文件管理器那样将这些文件移动到 “垃圾箱”。  </p>
+<p>有时我们会将不应该删除的文件删除掉，所以当错误地删除了文件时该怎么办？ 你必须看看恢复工具（Linux 中有很多数据恢复工具），但我们不知道是否能将它百分之百恢复，所以要如何解决这个问题？</p>
+<p>我们最近发表了一篇关于 Trash-Cli 的文章，在评论部分，我们从用户 Eemil Lgz 那里获得了一个关于 saferm.sh 脚本的更新，它可以帮助我们将文件移动到“垃圾箱”而不是永久删除它们。<br>
         
         
         <p class="article-more-link">
@@ -157,43 +159,12 @@
         
         <p><strong>dd命令</strong>用于复制文件并对原文件的内容进行转换和格式化处理。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@localhost text]# dd if=/dev/zero of=sun.txt bs=1M count=1</div><div class="line">1+0 records in</div><div class="line">1+0 records out</div><div class="line">1048576 bytes (1.0 MB) copied, 0.006107 seconds, 172 MB/s</div><div class="line"></div><div class="line">[root@localhost text]# du -sh sun.txt </div><div class="line">1.1M    sun.txt</div></pre></td></tr></table></figure>
-<p>该命令创建了一个1M大小的文件sun.txt，其中参数解释：</p>
-<p>if 代表输入文件。如果不指定if，默认就会从stdin中读取输入。<br>of 代表输出文件。如果不指定of，默认就会将stdout作为默认输出。<br>bs 代表字节为单位的块大小。<br>count 代表被复制的块数。<br>/dev/zero 是一个字符设备，会不断返回0值字节（\0）。</p>
-<hr>
-<p><strong>df命令</strong>用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。<br>查看系统磁盘设备，默认是KB为单位：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@LinServ-1 ~]# df  </div><div class="line">文件系统               1K-块        已用     可用 已用% 挂载点  </div><div class="line">/dev/sda2            146294492  28244432 110498708  21% /  </div><div class="line">/dev/sda1              1019208     62360    904240   7% /boot  </div><div class="line">tmpfs                  1032204         0   1032204   0% /dev/shm  </div><div class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</div></pre></td></tr></table></figure>
-<p><strong>使用-h选项以KB以上的单位来显示，可读性高：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@LinServ-1 ~]# df -h</div><div class="line">文件系统              容量  已用 可用 已用% 挂载点</div><div class="line">/dev/sda2             140G   27G  106G  21% /</div><div class="line">/dev/sda1             996M   61M  884M   7% /boot</div><div class="line">tmpfs                1009M     0 1009M   0% /dev/shm</div><div class="line">/dev/sdb1             2.7T  209G  2.4T   8% /data1</div></pre></td></tr></table></figure>
-<p><strong>查看全部文件系统：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[root@LinServ-1 ~]# df -a</div><div class="line">文件系统               1K-块        已用     可用 已用% 挂载点</div><div class="line">/dev/sda2            146294492  28244432 110498708  21% /</div><div class="line">proc                         0         0         0   -  /proc</div><div class="line">sysfs                        0         0         0   -  /sys</div><div class="line">devpts                       0         0         0   -  /dev/pts</div><div class="line">/dev/sda1              1019208     62360    904240   7% /boot</div><div class="line">tmpfs                  1032204         0   1032204   0% /dev/shm</div><div class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</div><div class="line">none                         0         0         0   -  /proc/sys/fs/binfmt_misc</div></pre></td></tr></table></figure>
-<hr>
-<p><strong>dirname命令</strong>去除文件名中的非目录部分，仅显示与目录有关的内容。dirname命令读取指定路径名保留最后一个/及其后面的字符，删除其他部分，并写结果到标准输出。如果最后一个/后无字符，dirname 命令使用倒数第二个/，并忽略其后的所有字符。dirname 和 basename 通常在 shell 内部命令替换使用，以指定一个与指定输入文件名略有差异的输出文件名。</p>
-<hr>
-<p><strong>显示目录或者文件所占空间：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[root@localhost test]# du</div><div class="line">608 ./test6</div><div class="line">308 ./test4</div><div class="line">4 ./scf/lib</div><div class="line">4 ./scf/service/deploy/product</div><div class="line">4 ./scf/service/deploy/info</div><div class="line">12 ./scf/service/deploy</div><div class="line">16 ./scf/service</div><div class="line">4 ./scf/doc</div><div class="line">4 ./scf/bin</div><div class="line">32 ./scf</div><div class="line">8 ./test3</div><div class="line">1288 .</div></pre></td></tr></table></figure>
-<p><strong>只显示当前目录下面的子目录的目录大小和当前目录的总的大小，最下面的1288为当前目录的总大小</strong></p>
-<hr>
-<p><strong>enable命令</strong>用于临时关闭或者激活指定的shell内部命令。若要执行的文件名称与shell内建命令相同，可用enable -n来关闭shell内建命令。若不加-n选项，enable可重新启动关闭的命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-n：关闭指定的内部命令；</div><div class="line">-a：显示所有激活的内部命令；</div><div class="line">-f：从指定文件中读取内部命令。</div></pre></td></tr></table></figure></p>
-<hr>
-<p><strong>fdisk命令</strong>用于观察硬盘实体使用情况，也可对硬盘分区。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-b&lt;分区大小&gt;：指定每个分区的大小；</div><div class="line">-l：列出指定的外围设备的分区表状况；</div><div class="line">-s&lt;分区编号&gt;：将指定的分区大小输出到标准输出上，单位为区块；</div><div class="line">-u：搭配&quot;-l&quot;参数列表，会用分区数目取代柱面数目，来表示每个分区的起始地址；</div><div class="line">-v：显示版本信息。</div></pre></td></tr></table></figure>
-<hr>
-<p><strong>hexdump命令</strong>一般用来查看“二进制”文件的十六进制编码，但实际上它能查看任何文件，而不只限于二进制文件。</p>
-<hr>
-<p><strong>init命令</strong>是Linux下的进程初始化工具，init进程是所有Linux进程的父进程，它的进程号为1。init命令是Linux操作系统中不可缺少的程序之一，init进程是Linux内核引导运行的，是系统中的第一个进程。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#0  停机（千万不能把initdefault 设置为0）</div><div class="line">#1  单用户模式</div><div class="line">#2  多用户，没有 NFS(和级别3相似，会停止部分服务)</div><div class="line">#3  完全多用户模式</div><div class="line">#4  没有用到</div><div class="line">#5  x11(Xwindow)</div><div class="line">#6  重新启动（千万不要把initdefault 设置为6）</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">查看系统进程命令：ps -ef | head</div><div class="line">查看init的配置文件：more /etc/inittab</div><div class="line">查看系统当前运行的级别：runlevel</div></pre></td></tr></table></figure>
-<hr>
-<p><strong>runlevel命令</strong>用于打印当前Linux系统的运行等级。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">0 停机</div><div class="line">1 单用户模式</div><div class="line">2 多用户，没有 NFS</div><div class="line">3 完全多用户模式</div><div class="line">4 没有用到</div><div class="line">5 图形界面</div><div class="line">6 重新启动</div><div class="line">S s Single user mode</div></pre></td></tr></table></figure>
-<hr>
-<p><strong>w命令</strong>用于显示已经登陆系统的用户列表，并显示用户正在执行的指令。执行这个命令可得知目前登入系统的用户有那些人，以及他们正在执行的程序。单独执行w命令会显示所有的用户，您也可指定用户名称，仅显示某位用户的相关信息。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@localhost test]# w</div><div class="line"> 20:39:37 up 136 days,  3:58,  1 user,  load average: 0.00, 0.00, 0.00</div><div class="line">USER     TTY      FROM              login@   IDLE   JCPU   PCPU WHAT</div><div class="line">root     pts/0    222.94.97.122    20:39    1.00s  0.00s  0.00s w</div></pre></td></tr></table></figure>
-<hr>
-
+<p>该命令创建了一个1M大小的文件sun.txt，其中参数解释：<br>
         
         
         <p class="article-more-link">
+          
+            <a href="/2018/03/28/day02/#more">阅读更多</a>
           
        </p>
     </div>
@@ -252,31 +223,12 @@
 密码：Magedu30
 ftp:172.20.0.1        
 </code></pre><h3 id="摩尔定律"><a href="#摩尔定律" class="headerlink" title="摩尔定律"></a>摩尔定律</h3><blockquote>
-<p>摩尔定律是由英特尔（Intel）创始人之一戈登·摩尔（Gordon Moore）提出来的。其内容为：当价格不变时，集成电路上可容纳的元器件的数目，约每隔18-24个月便会增加一倍，性能也将提升一倍。换言之，每一美元所能买到的电脑性能，将每隔18-24个月翻一倍以上。这一定律揭示了信息技术进步的速度。</p>
-</blockquote>
-<h3 id="反摩尔定律"><a href="#反摩尔定律" class="headerlink" title="反摩尔定律"></a>反摩尔定律</h3><blockquote>
-<p>由Google的前CEO埃里克·施密特提出的：如果你反过来看摩尔定律，一个IT公司如果今天和18个月前卖掉同样多的、同样的产品，它的营业额就要降一半。IT界把它称为反摩尔定律。</p>
-</blockquote>
-<h3 id="存储网络："><a href="#存储网络：" class="headerlink" title="存储网络："></a>存储网络：</h3><blockquote>
-<pre><code>DAS----直接连接存储
-NAS----网络连接存储
-SAN----存储区域网络
-</code></pre></blockquote>
-<hr>
-<h3 id="Linux命令："><a href="#Linux命令：" class="headerlink" title="Linux命令："></a>Linux命令：</h3><p><strong>strace命令</strong>是一个集诊断、调试、统计与一体的工具，我们可以使用strace对应用的系统调用和信号传递的跟踪结果来对应用进行分析，以达到解决问题或者是了解应用工作过程的目的</p>
-<p><strong>ltrace命令</strong>用来跟踪进程调用库函数的情况</p>
-<p><strong>free命令</strong>可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区</p>
-<p><strong>cat /etc/centos-release</strong> 查看发行版本</p>
-<p><strong>cat /proc/meminfo</strong> 查看内存大小</p>
-<p><strong>fdisk -l</strong> 查看磁盘分区</p>
-<p><strong>halt</strong>   关机</p>
-<p><strong>lsblk</strong>    块设备的情况</p>
-<p><strong>ifconfig</strong> 查看IP</p>
-<p><strong>uname -r</strong>查看内核 </p>
-
+<p>摩尔定律是由英特尔（Intel）创始人之一戈登·摩尔（Gordon Moore）提出来的。其内容为：当价格不变时，集成电路上可容纳的元器件的数目，约每隔18-24个月便会增加一倍，性能也将提升一倍。换言之，每一美元所能买到的电脑性能，将每隔18-24个月翻一倍以上。这一定律揭示了信息技术进步的速度。<br>
         
         
         <p class="article-more-link">
+          
+            <a href="/2018/03/28/Linux笔记day01/#more">阅读更多</a>
           
        </p>
     </div>
@@ -487,7 +439,7 @@ def getHTMLText(inputIP, url):
 			
 		
 			
-				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
 			
 		
 			
@@ -495,11 +447,15 @@ def getHTMLText(inputIP, url):
 			
 		
 			
+				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/ssh/" title="ssh">ssh<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
 			
 		
 			
@@ -511,10 +467,6 @@ def getHTMLText(inputIP, url):
 			
 		
 			
-				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Virtualization/" title="Virtualization">Virtualization<sup>1</sup></a></li>
 			
 		
@@ -523,7 +475,7 @@ def getHTMLText(inputIP, url):
 			
 		
 			
-				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
 			
 		
 			
