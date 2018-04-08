@@ -80,7 +80,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/04/08/浅谈Linux中正则表达式的基本用法(1)/" title="浅谈Linux中正则表达式的基本用法" itemprop="url">浅谈Linux中正则表达式的基本用法</a>
+      <a href="/2018/04/08/浅谈Linux中正则表达式的基本用法/" title="浅谈Linux中正则表达式的基本用法" itemprop="url">浅谈Linux中正则表达式的基本用法</a>
   </h1>
   <p class="article-author">By
        
@@ -103,126 +103,7 @@
         
         <p class="article-more-link">
           
-            <a href="/2018/04/08/浅谈Linux中正则表达式的基本用法(1)/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux-regex/">Linux,regex</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2018/04/08/浅谈Linux中正则表达式的基本用法(1)/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/08/浅谈Linux中正则表达式的基本用法(1)/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/04/08/浅谈Linux中正则表达式的基本用法/" title="浅谈Linux中正则表达式的基本用法" itemprop="url">浅谈Linux中正则表达式的基本用法</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2018-04-08T03:52:25.261Z" itemprop="datePublished"> 发表于 2018-04-08</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="1-什么是正则表达式："><a href="#1-什么是正则表达式：" class="headerlink" title="1.什么是正则表达式："></a>1.什么是正则表达式：</h1><blockquote>
-<p><strong>正则表达式</strong>就是为了处理大量的文本或字符串而定义的一套规则和方法，通过定义的这些特殊符号的辅助，系统管理员就可以快速过滤，替换或输出需要的字符串。Linux正则表达式一般以行为单位处理。</p>
-</blockquote>
-<h3 id="2-为什么用正则表达式："><a href="#2-为什么用正则表达式：" class="headerlink" title="2.为什么用正则表达式："></a>2.为什么用正则表达式：</h3><blockquote>
-<p>Linux运维在工作中使用正则表达式能简化工作，使工作变得简单高效<br>Linux中支持正则表达式的程序：grep, sed, awk,vim,less,nginx等</p>
-</blockquote>
-<h3 id="3-通配符与正则表达式区别："><a href="#3-通配符与正则表达式区别：" class="headerlink" title="3.通配符与正则表达式区别："></a>3.通配符与正则表达式区别：</h3><ul>
-<li><p>通配符用于Linux的shell命令（如文件名相关操作）中，通配符是Linux系统本身就支持的。</p>
-</li>
-<li><p>正则表达式用于文本内容中的字符串搜索和替换等。ls，find，cp是不支持正则表达式的，但是grep awk sed支持正则表达式。</p>
-</li>
-</ul>
-<h3 id="4-正则表达式分类："><a href="#4-正则表达式分类：" class="headerlink" title="4.正则表达式分类："></a>4.正则表达式分类：</h3><ul>
-<li>基本正则表达式：BRE<blockquote>
-<pre><code>grep ,egrep -G
-</code></pre></blockquote>
-</li>
-<li>扩展正则表达式：ERE<blockquote>
-<pre><code>grep -E, egrep  
-</code></pre></blockquote>
-</li>
-</ul>
-<h3 id="5-基本正则表达式用法"><a href="#5-基本正则表达式用法" class="headerlink" title="5.基本正则表达式用法"></a>5.基本正则表达式用法</h3><h5 id="匹配字符："><a href="#匹配字符：" class="headerlink" title="匹配字符："></a>匹配字符：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">. 匹配任意单个字符(不匹配空行)</div><div class="line">[] 匹配括号中的任意单个字符  </div><div class="line">[^] 匹配括号范围外的任意单个字符  </div><div class="line">[:digit:] [:lower:] [:upper:] [:alpha:] [:alnum:] [:punct:] [:space:]</div></pre></td></tr></table></figure>
-<h4 id="练习"><a href="#练习" class="headerlink" title="练习:"></a>练习:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# echo abcd | grep -o &quot;.d&quot;</div><div class="line">cd</div><div class="line">[root@localhost ~]# echo abcd123ab | grep -o &quot;[a-z]&quot;</div><div class="line">a</div><div class="line">b</div><div class="line">c</div><div class="line">d</div><div class="line">a</div><div class="line">b</div><div class="line">[root@localhost ~]# echo abcd123ab | grep -o &quot;[^a-z]&quot;</div><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td></tr></table></figure>
-<h5 id="匹配次数："><a href="#匹配次数：" class="headerlink" title="匹配次数："></a>匹配次数：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">*  ：匹配前面的字符任意次，包括0次</div><div class="line">.* ：任意长度的任意字符</div><div class="line">\? ：匹配其前面的字符0或1次</div><div class="line">\+ ：匹配其前面的字符至少1次,但不需要紧随在第一次后面</div><div class="line">\&#123;m\&#125; ：匹配前面的字符m次</div><div class="line">\&#123;m,n\&#125; ：匹配前面的字符至少m次，至多n次</div><div class="line">\&#123;,n\&#125; ：匹配前面的字符至多n次</div><div class="line">&lt;=n次</div><div class="line">\&#123;m,\&#125; ：匹配前面的字符至少m次</div><div class="line">&gt;=m次</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# echo qqqaaaqa | grep -o &quot;q*&quot;</div><div class="line">qqq  </div><div class="line">q</div><div class="line"></div><div class="line">[root@localhost ~]# echo qqqaaaqa | grep -o &quot;.*&quot;</div><div class="line">qqqaaaqa</div></pre></td></tr></table></figure>
-<h5 id="位置锚定"><a href="#位置锚定" class="headerlink" title="位置锚定"></a>位置锚定</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">^ ：行首锚定，用于模式的最左侧</div><div class="line">$ ：行尾锚定，用于模式的最右侧</div><div class="line">^PATTERN$: 用于模式匹配整行</div><div class="line">^$: 空行</div><div class="line">^[[:space:]]*$ ：空白行或包含tab字符的行</div><div class="line">\&lt; 或 \b ：词首锚定，用于单词模式的左侧</div><div class="line">\&gt; 或 \b ：词尾锚定；用于单词模式的右侧</div><div class="line">注意：在grep中，字母和数字的组合也被视为单词</div><div class="line">\&lt;PATTERN\&gt;：锚定以PATTERN表达式做为单词的行</div></pre></td></tr></table></figure>
-<h5 id="分组及引用"><a href="#分组及引用" class="headerlink" title="分组及引用　　"></a>分组及引用　　</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">\(\)：将1个或多个字符捆绑在一起作为一个整体进行处理</div><div class="line">\(xy\)*ab：xy作为一个整体出现0此或多次</div><div class="line">　　　      注意：分组括号中的模式匹配到的内容会被正则表达式引擎记录与内部变量中，这些变量为：</div><div class="line">　　\1：模式从左侧起，第一个左括号以及与其匹配的右括号之间的内容</div><div class="line">　　\2：模式从左侧起，第二个左括号以及与其匹配的右括号之间的内容</div><div class="line">　　\3：</div><div class="line">　　后向引用：引用前面的分组括号中的模式所匹配的字符，且引用中的数据和分组模式匹配到的数据是一样</div></pre></td></tr></table></figure>
-<h3 id="6-扩展的正则表达式"><a href="#6-扩展的正则表达式" class="headerlink" title="6.扩展的正则表达式"></a>6.扩展的正则表达式</h3><h5 id="匹配次数：用在要指定次数的字符后面，用于指定前面的字符要出现的次数，默认工作在贪婪模式，尽可能长的匹配"><a href="#匹配次数：用在要指定次数的字符后面，用于指定前面的字符要出现的次数，默认工作在贪婪模式，尽可能长的匹配" class="headerlink" title="匹配次数：用在要指定次数的字符后面，用于指定前面的字符要出现的次数，默认工作在贪婪模式，尽可能长的匹配"></a>匹配次数：用在要指定次数的字符后面，用于指定前面的字符要出现的次数，默认工作在贪婪模式，尽可能长的匹配</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">* ：匹配前面的字符任意次，包括0次</div><div class="line">.* ：任意长度的任意字符</div><div class="line">? ：匹配其前面的字符0或1次</div><div class="line">+ ：匹配其前面的字符至少1次</div><div class="line">&#123;m&#125; ：匹配前面的字符m次</div><div class="line">&#123;m,n&#125; ：匹配前面的字符至少m次，至多n次</div><div class="line">&#123;,n&#125; ：匹配前面的字符至多n次 &lt;=n次</div><div class="line">&#123;m,&#125; ：匹配前面的字符至少m次 &gt;=m次</div></pre></td></tr></table></figure>
-<h5 id="位置锚定：定位出现的位置"><a href="#位置锚定：定位出现的位置" class="headerlink" title="位置锚定：定位出现的位置"></a>位置锚定：定位出现的位置</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">^ ：行首锚定</div><div class="line">$ ：行尾锚定</div><div class="line">^PATTERN$: 用于模式匹配整行</div><div class="line">^$: 空行</div><div class="line">^[[:space:]]*$ ：空白行或包含tab字符的行</div><div class="line">\&lt; 或 \b ：词首锚定</div><div class="line">\&gt; 或 \b ：词尾锚定</div><div class="line">    注意：在grep中，字母和数字的组合也被视为单词</div><div class="line">\&lt;PATTERN\&gt;：锚定以PATTERN表达式做为单词的行</div></pre></td></tr></table></figure>
-<h5 id="分组及引用-1"><a href="#分组及引用-1" class="headerlink" title="分组及引用"></a>分组及引用</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">()：括号内模式会被记录于正则表达式引擎中：</div><div class="line">后向引用：\1，\2，\3......</div><div class="line">或者</div><div class="line">a|b：a或者b</div><div class="line">　　eg：C|cat ：表示C或者cat</div><div class="line">　　　　(C|c)at ：表示Cat或者cat</div></pre></td></tr></table></figure>
-<p>　</p>
-<h3 id="7-基本正则表达式与扩展正则表达式区别"><a href="#7-基本正则表达式与扩展正则表达式区别" class="headerlink" title="7.基本正则表达式与扩展正则表达式区别"></a>7.基本正则表达式与扩展正则表达式区别</h3><table>
-<thead>
-<tr>
-<th>基础正则</th>
-<th>扩展正则</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>\?</td>
-<td>?</td>
-</tr>
-<tr>
-<td>\+</td>
-<td>+</td>
-</tr>
-<tr>
-<td>\{\}</td>
-<td>{}</td>
-</tr>
-<tr>
-<td>\( \)</td>
-<td>()</td>
-</tr>
-<tr>
-<td>\</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
-        
-        
-        <p class="article-more-link">
+            <a href="/2018/04/08/浅谈Linux中正则表达式的基本用法/#more">阅读更多</a>
           
        </p>
     </div>
@@ -447,9 +328,76 @@ ftp:172.20.0.1
 
 
 
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/04/23/python爬虫IP地址查询/" title="python爬虫IP地址查询" itemprop="url">python爬虫IP地址查询</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
+		
+  <p class="article-time">
+    <time datetime="2017-04-23T10:35:46.825Z" itemprop="datePublished"> 发表于 2017-04-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>import requests
+from bs4 import BeautifulSoup
+import bs4
+
+def getHTMLText(inputIP, url):
+    try:
+        r = requests.get(url + inputIP)
+        r.raise_for_status()
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2017/04/23/python爬虫IP地址查询/#more">阅读更多</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/python/">python</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2017/04/23/python爬虫IP地址查询/#comments" class="ds-thread-count comments-count-link" data-thread-key="2017/04/23/python爬虫IP地址查询/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
 
   <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
@@ -471,11 +419,11 @@ ftp:172.20.0.1
 			
 		
 			
-				<li><a href="/tags/FileSystem/" title="FileSystem">FileSystem<sup>5</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>5</sup></a></li>
+				<li><a href="/tags/FileSystem/" title="FileSystem">FileSystem<sup>5</sup></a></li>
 			
 		
 			
@@ -495,7 +443,7 @@ ftp:172.20.0.1
 			
 		
 			
-				<li><a href="/tags/Linux-regex/" title="Linux,regex">Linux,regex<sup>2</sup></a></li>
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
 			
 		
 			
@@ -503,11 +451,11 @@ ftp:172.20.0.1
 			
 		
 			
-				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
 			
 		
 			
@@ -523,7 +471,7 @@ ftp:172.20.0.1
 			
 		
 			
-				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+				<li><a href="/tags/Linux-regex/" title="Linux,regex">Linux,regex<sup>1</sup></a></li>
 			
 		
 			
@@ -543,7 +491,7 @@ ftp:172.20.0.1
 			
 		
 			
-				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>1</sup></a></li>
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
 			
 		
 		</ul>
