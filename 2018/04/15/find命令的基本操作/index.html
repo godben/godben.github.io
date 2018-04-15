@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>【译】Use rsync to delete mass files quickly in Linux | godben&#39;s blog</title>
+    <title>find命令的基本操作 | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them">
+    <meta name="description" content="首先在/home下创建如下目录和文件12345678910touch MybashProgram.shtouch mycprogram.ctouch MyCProgram.ctouch Program.cmkdir backupcd backuptouch MybashProgram.shtouch mycprogram.ctouch MyCProgram.ctouch Program.c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【译】Use rsync to delete mass files quickly in Linux">
-<meta property="og:url" content="http://yoursite.com/2016/11/12/Use rsync to delete mass files quickly in Linux/index.html">
+<meta property="og:title" content="find命令的基本操作">
+<meta property="og:url" content="http://yoursite.com/2018/04/15/find命令的基本操作/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them">
-<meta property="og:updated_time" content="2016-11-30T15:09:21.456Z">
+<meta property="og:description" content="首先在/home下创建如下目录和文件12345678910touch MybashProgram.shtouch mycprogram.ctouch MyCProgram.ctouch Program.cmkdir backupcd backuptouch MybashProgram.shtouch mycprogram.ctouch MyCProgram.ctouch Program.c">
+<meta property="og:updated_time" content="2018-04-15T13:36:13.880Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【译】Use rsync to delete mass files quickly in Linux">
-<meta name="twitter:description" content="Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them">
+<meta name="twitter:title" content="find命令的基本操作">
+<meta name="twitter:description" content="首先在/home下创建如下目录和文件12345678910touch MybashProgram.shtouch mycprogram.ctouch MyCProgram.ctouch Program.cmkdir backupcd backuptouch MybashProgram.shtouch mycprogram.ctouch MyCProgram.ctouch Program.c">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -82,57 +82,72 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/12/Use rsync to delete mass files quickly in Linux/" title="【译】Use rsync to delete mass files quickly in Linux" itemprop="url">【译】Use rsync to delete mass files quickly in Linux</a>
+      <a href="/2018/04/15/find命令的基本操作/" title="find命令的基本操作" itemprop="url">find命令的基本操作</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-12T08:52:16.829Z" itemprop="datePublished"> 发表于 2016-11-12</time>
+    <time datetime="2018-04-15T13:36:29.601Z" itemprop="datePublished"> 发表于 2018-04-15</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them frequently. Usually we would use <strong>rm -rf *</strong> to delete these files, but we may need to wait for a relative long time if there are too many files. So we must adopt some unusual way. Fortunately, we can use <strong>rsync</strong> to delete mass files in one shot.</p>
+		<p><strong>首先在/home下创建如下目录和文件</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">touch MybashProgram.sh</div><div class="line">touch mycprogram.c</div><div class="line">touch MyCProgram.c</div><div class="line">touch Program.c</div><div class="line">mkdir backup</div><div class="line">cd backup</div><div class="line">touch MybashProgram.sh</div><div class="line">touch mycprogram.c</div><div class="line">touch MyCProgram.c</div><div class="line">touch Program.c</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<p><strong>1. Install rsync</strong></p>
-<blockquote>
-<p>yum install rsync</p>
+<p><strong>目录结构如下：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── backup  </div><div class="line">│   ├── MybashProgram.sh  </div><div class="line">│   ├── mycprogram.c   </div><div class="line">│   ├── MyCProgram.c  </div><div class="line">│   └── Program.c  </div><div class="line">├── MybashProgram.sh  </div><div class="line">├── mycprogram.c     </div><div class="line">├── MyCProgram.c  </div><div class="line">└── Program.c</div></pre></td></tr></table></figure>
+<h3 id="1-通过文件名查找文件"><a href="#1-通过文件名查找文件" class="headerlink" title="1.通过文件名查找文件"></a>1.通过文件名查找文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@localhost home]# find -name &quot;MyCProgram.c&quot;</div><div class="line">./MyCProgram.c</div><div class="line">./backup/MyCProgram.c</div></pre></td></tr></table></figure>
+<h3 id="2-通过文件名查找文件-忽略大小写"><a href="#2-通过文件名查找文件-忽略大小写" class="headerlink" title="2.通过文件名查找文件(忽略大小写)"></a>2.通过文件名查找文件(忽略大小写)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@localhost home]# find -iname &quot;MyCProgram.c&quot;</div><div class="line">./mycprogram.c</div><div class="line">./MyCProgram.c</div><div class="line">./backup/mycprogram.c</div><div class="line">./backup/MyCProgram.c</div></pre></td></tr></table></figure>
+<h3 id="3-使用mindepth和maxdepth限定搜索指定目录的深度"><a href="#3-使用mindepth和maxdepth限定搜索指定目录的深度" class="headerlink" title="3.使用mindepth和maxdepth限定搜索指定目录的深度"></a>3.使用mindepth和maxdepth限定搜索指定目录的深度</h3><blockquote>
+<p>在root目录及其子目录下查找passwd文件。</p>
 </blockquote>
-<p><strong>2. Create a new empty folder</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# find / -name passwd</div><div class="line">/sys/fs/selinux/class/passwd</div><div class="line">/sys/fs/selinux/class/passwd/perms/passwd</div><div class="line">/etc/pam.d/passwd</div><div class="line">/etc/passwd</div><div class="line">/tmp/passwd</div><div class="line">/usr/bin/passwd</div><div class="line">/usr/share/bash-completion/completions/passwd</div></pre></td></tr></table></figure>
 <blockquote>
-<p>mkdir /tmp/test</p>
+<p>在root目录及其1层深的子目录中查找passwd. </p>
 </blockquote>
-<p><strong>3. Use rsync to delete target folder</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# find / -maxdepth 2 -name passwd</div><div class="line">/etc/passwd</div><div class="line">/tmp/passwd</div></pre></td></tr></table></figure>
 <blockquote>
-<p>rsync --delete-before -a -H -v --progress --stats /tmp/test/ log/</p>
+<p>在root目录下及其最大两层深度的子目录中查找passwd文件.</p>
 </blockquote>
-<p>Now the log folder we be cleared if we run this command, the speed is very fast. Actually what rsync does  is to replace all files in the target folder.</p>
-<p>Option explanation for command in step 3:</p>
-<p><strong>–delete-before </strong>: do deletion before the transmission starts in target folder</p>
-<p><strong>–progress</strong> : Show the transmission progress</p>
-<p><strong>-a</strong> :Archive mode, use archive method to transmit files</p>
-<p><strong>-H</strong> ：keep the hard linked files</p>
-<p><strong>-v</strong> ：Verbose output</p>
-<p><strong>–stats</strong> : Show transmission status of some files</p>
-<p><strong>水平有限翻译仅供参考</strong></p>
-<h2 id="在Linux中使用rsync命令迅速删除大量文件"><a href="#在Linux中使用rsync命令迅速删除大量文件" class="headerlink" title="在Linux中使用rsync命令迅速删除大量文件"></a>在Linux中使用rsync命令迅速删除大量文件</h2><p>我昨天遇到一个从我Linux工作站删除大量日志文件的问题，那里有差不多100000个文件要删除。这些日志文件的增长速度很快，以至于我要频繁的删除它们。通常情况下我们使用<strong>rm -rf * </strong>命令删除这些文件，如果文件很多的话，我需要等待很长的时间。因此，我们必须采取一些不寻常的方法。幸运的是，我们可以使用<strong>rsync</strong>一次性删除大量的文件。</p>
-<p><strong>1.安装rsync</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# find / -maxdepth 3 -name passwd</div><div class="line">/etc/pam.d/passwd</div><div class="line">/etc/passwd</div><div class="line">/tmp/passwd</div><div class="line">/usr/bin/passwd</div></pre></td></tr></table></figure>
 <blockquote>
-<p>yum install rsync</p>
+<p>在第二层子目录和第四层子目录之间查找passwd文件.</p>
 </blockquote>
-<p><strong>2.创建一个新的文件夹</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# find / -mindepth 3 -maxdepth 5 -name passwd  /sys/fs/selinux/class/passwd</div><div class="line">/etc/pam.d/passwd</div><div class="line">/usr/bin/passwd</div><div class="line">/usr/share/bash-completion/completions/passwd</div></pre></td></tr></table></figure>
+<h3 id="4-在find命令查找到的文件上执行命令"><a href="#4-在find命令查找到的文件上执行命令" class="headerlink" title="4. 在find命令查找到的文件上执行命令"></a>4. 在find命令查找到的文件上执行命令</h3><blockquote>
+<p>忽略大小写查找文件名为MyCProgram.c的文件并将文件复制到/tmp/test/目录下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@localhost home]# find -iname &quot;MyCProgram.c&quot; -exec cp &#123;&#125; /tmp/test/ \;</div><div class="line">[root@localhost home]# ll /tmp/test</div><div class="line">total 0</div><div class="line">-rw-r--r--. 1 root root 0 Apr 13 17:31 mycprogram.c</div><div class="line">-rw-r--r--. 1 root root 0 Apr 13 17:31 MyCProgram.c</div></pre></td></tr></table></figure>
+<h3 id="5-相反匹配"><a href="#5-相反匹配" class="headerlink" title="5. 相反匹配"></a>5. 相反匹配</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@localhost home]# find -not -iname &quot;MyCProgram.c&quot;</div><div class="line">./MybashProgram.sh</div><div class="line">./Program.c</div><div class="line">./backup</div><div class="line">./backup/MybashProgram.sh</div><div class="line">./backup/Program.c</div></pre></td></tr></table></figure>
+<h3 id="6-通过文件大小查找文件"><a href="#6-通过文件大小查找文件" class="headerlink" title="6. 通过文件大小查找文件"></a>6. 通过文件大小查找文件</h3><blockquote>
+<p>查找比指定文件大的文件</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@localhost home]# find -size +1M -exec ls -lh &#123;&#125; \;</div><div class="line">-rw-r--r--. 1 benny benny 1.6M Apr  9 19:19 ./benny/.cache/tracker/meta.db</div><div class="line">-rw-r--r--. 1 benny benny 1.3M Apr  9 19:19 ./benny/.cache/tracker/meta.db-wal</div></pre></td></tr></table></figure>
 <blockquote>
-<p>mkdir /tmp/test</p>
+<p>查找比指定文件小的文件</p>
 </blockquote>
-<p>3.使用rsync删除目标文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@localhost home]# find -size -1M -exec ls -lh &#123;&#125; \;</div><div class="line">-rw-------. 1 benny benny 0 Apr  7 09:12 ./benny/.cache/gdm/session.log</div><div class="line">-rw-rw-r--. 1 benny benny 0 Apr  3 10:14 ./benny/.cache/abrt/applet_dirlist</div><div class="line">-rw-rw-r--. 1 benny benny 0 Apr  3 10:14 ./benny/.cache/gnome-shell/update-check-3.22</div><div class="line">-rw-rw-r--. 1 benny benny 0 Apr  7 09:13 ./benny/.cache/gnome-software/3.22/flatpak/installation-tmp/.changed</div></pre></td></tr></table></figure>
+<h3 id="7-找到home目录及子目录下所有的空文件-0字节文件"><a href="#7-找到home目录及子目录下所有的空文件-0字节文件" class="headerlink" title="7. 找到home目录及子目录下所有的空文件(0字节文件)"></a>7. 找到home目录及子目录下所有的空文件(0字节文件)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost home]# find ~ -empty</div></pre></td></tr></table></figure>
+<h3 id="8-查找文件大小前5的文件"><a href="#8-查找文件大小前5的文件" class="headerlink" title="8. 查找文件大小前5的文件"></a>8. 查找文件大小前5的文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@localhost home]# find . -type f -exec ls -s &#123;&#125; \; | sort -nr | head -5</div><div class="line">1556 ./benny/.cache/tracker/meta.db</div><div class="line">1308 ./benny/.cache/tracker/meta.db-wal</div><div class="line">1012 ./benny/.local/share/app-info/xmls/extensions-web.xml</div><div class="line">624 ./benny/.cache/gnome-software/3.22/extensions/gnome.json</div><div class="line">488 ./benny/.cache/gstreamer-1.0/registry.x86_64.bin</div></pre></td></tr></table></figure>
+<h3 id="9-使用-type查找指定文件类型的文件"><a href="#9-使用-type查找指定文件类型的文件" class="headerlink" title="9. 使用-type查找指定文件类型的文件"></a>9. 使用-type查找指定文件类型的文件</h3><blockquote>
+<p>查找所有的目录</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost home]# find . -type d</div></pre></td></tr></table></figure>
 <blockquote>
-<p>rsync --delete-before -a -H -v --progress --stats /tmp/test/ log/</p>
+<p>查找所有的普通文件</p>
 </blockquote>
-<p>这样我们要删除的log目录就会被清空了，删除的速度会非常快。rsync实际上用的是替换原理，处理数十万个文件也是秒删。</p>
-<p>选项说明：<br><strong>--delete-before</strong> 接收者在传输之前进行删除操作<br><strong>--progress</strong> 在传输时显示传输过程<br><strong>-a</strong> 归档模式，表示以递归方式传输文件，并保持所有文件属性<br><strong>-H</strong> 保持硬连接的文件<br><strong>-v</strong> 详细输出模式<br><strong>--stats</strong> 给出某些文件的传输状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost home]# find . -type f</div></pre></td></tr></table></figure>
+<blockquote>
+<p>查找所有的隐藏文件</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost home]# find . -type f -name &quot;.*&quot;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>查找所有的隐藏目录</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost home]# find . -type d -name &quot;.*&quot;</div></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -150,7 +165,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/11/12/Use rsync to delete mass files quickly in Linux/" data-title="【译】Use rsync to delete mass files quickly in Linux | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2018/04/15/find命令的基本操作/" data-title="find命令的基本操作 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -163,19 +178,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/11/13/Linux用户模式和内核模式/" title="Linux用户模式和内核模式">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Linux用户模式和内核模式</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/11/11/dev_null dev_tty in Linux/"  title="【译】/dev/null and /dev/tty in Linux">
+<a href="/2018/04/08/浅谈Linux中正则表达式的基本用法/"  title="浅谈Linux中正则表达式的基本用法">
  <strong>下一篇：</strong><br/> 
- <span>【译】/dev/null and /dev/tty in Linux
+ <span>浅谈Linux中正则表达式的基本用法
 </span>
 </a>
 </div>
@@ -184,7 +191,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/11/12/Use rsync to delete mass files quickly in Linux/" data-title="【译】Use rsync to delete mass files quickly in Linux" data-url="http://yoursite.com/2016/11/12/Use rsync to delete mass files quickly in Linux/"></div>
+	<div class="ds-thread" data-thread-key="2018/04/15/find命令的基本操作/" data-title="find命令的基本操作" data-url="http://yoursite.com/2018/04/15/find命令的基本操作/"></div>
 </section>
 
 
