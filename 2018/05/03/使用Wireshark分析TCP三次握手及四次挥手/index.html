@@ -4,23 +4,46 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>【译】Convert ext3 to ext4 file system on CentOS | godben&#39;s blog</title>
+    <title>CentOS7迁移HOME目录到独立分区 | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="Ext3 is a journaled file system that is commonly used by the Linux kernel. It is the default file system for many popular Linux distributions, including Debian. Stephen Tweedie. On June 28, 2006, Theo">
+    <meta name="description" content="1.为什么使用wireshark
+Wireshark 是最著名的网络通讯抓包分析工具。功能十分强大，可以截取各种网络封包，显示网络封包的详细信息。
+
+2.通过抓包查看TCP包结构TCP报文首部如下图所示：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【译】Convert ext3 to ext4 file system on CentOS">
-<meta property="og:url" content="http://yoursite.com/2016/11/15/Convert ext3 to ext4 file system on CentOS/index.html">
+<meta property="og:title" content="CentOS7迁移HOME目录到独立分区">
+<meta property="og:url" content="http://yoursite.com/2018/05/03/使用Wireshark分析TCP三次握手及四次挥手/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="Ext3 is a journaled file system that is commonly used by the Linux kernel. It is the default file system for many popular Linux distributions, including Debian. Stephen Tweedie. On June 28, 2006, Theo">
-<meta property="og:updated_time" content="2016-11-30T15:04:24.316Z">
+<meta property="og:description" content="1.为什么使用wireshark
+Wireshark 是最著名的网络通讯抓包分析工具。功能十分强大，可以截取各种网络封包，显示网络封包的详细信息。
+
+2.通过抓包查看TCP包结构TCP报文首部如下图所示：">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWBTI.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWg1S.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWwmd.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWfmj.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWJfK.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWtSO.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWNlD.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWrkt.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYW00A.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWstP.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYW26g.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWcp8.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWyff.png">
+<meta property="og:updated_time" content="2018-05-03T02:59:07.901Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【译】Convert ext3 to ext4 file system on CentOS">
-<meta name="twitter:description" content="Ext3 is a journaled file system that is commonly used by the Linux kernel. It is the default file system for many popular Linux distributions, including Debian. Stephen Tweedie. On June 28, 2006, Theo">
+<meta name="twitter:title" content="CentOS7迁移HOME目录到独立分区">
+<meta name="twitter:description" content="1.为什么使用wireshark
+Wireshark 是最著名的网络通讯抓包分析工具。功能十分强大，可以截取各种网络封包，显示网络封包的详细信息。
+
+2.通过抓包查看TCP包结构TCP报文首部如下图所示：">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/05/03/CYWBTI.png">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -82,70 +105,68 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/15/Convert ext3 to ext4 file system on CentOS/" title="【译】Convert ext3 to ext4 file system on CentOS" itemprop="url">【译】Convert ext3 to ext4 file system on CentOS</a>
+      <a href="/2018/05/03/使用Wireshark分析TCP三次握手及四次挥手/" title="CentOS7迁移HOME目录到独立分区" itemprop="url">CentOS7迁移HOME目录到独立分区</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-15T08:28:43.215Z" itemprop="datePublished"> 发表于 2016-11-15</time>
+    <time datetime="2018-05-03T02:59:34.785Z" itemprop="datePublished"> 发表于 2018-05-03</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>Ext3 is a journaled file system that is commonly used by the Linux kernel. It is the default file system for many popular Linux distributions, including Debian. Stephen Tweedie. On June 28, 2006, Theodore Ts’o, the principal developer of ext3, announced an enhanced version, called ext4. Today, we will show how to convert ext3 to ext4 format on CentOS.</p>
+		<h3 id="1-为什么使用wireshark"><a href="#1-为什么使用wireshark" class="headerlink" title="1.为什么使用wireshark"></a>1.为什么使用wireshark</h3><blockquote>
+<p>Wireshark 是最著名的网络通讯抓包分析工具。功能十分强大，可以截取各种网络封包，显示网络封包的详细信息。</p>
+</blockquote>
+<h3 id="2-通过抓包查看TCP包结构"><a href="#2-通过抓包查看TCP包结构" class="headerlink" title="2.通过抓包查看TCP包结构"></a>2.通过抓包查看TCP包结构</h3><p><strong>TCP报文首部如下图所示：</strong></p>
 <a id="more"></a>
-<p>System environment:</p>
-<p>Release version : <strong>CentOS release 5.4(Final)</strong></p>
-<p>Kernel:  Linux localhost.localdomain 2.6.18-164.el5 #1 SMP Thu Sep 3 03:28:30 EDT 2009 x86_64 x86_64 x86_64 GNU/Linux</p>
-<p>Assume the partition be to converted is <strong>/dev/sda7</strong> which is mounted on /data0 directory.</p>
-<p>First, install the ext4 support</p>
-<pre><code>yum install -y e4fsprogs
-</code></pre><p>Then unmount <strong>/dev/sda7</strong></p>
-<pre><code>umount /dev/sda7
-</code></pre><p>If the partition is in use and it cannot be unmounted, please use :</p>
-<pre><code>lsof | grep data0
-</code></pre><p>to check what processes are using /data0 directory and then kill those processes. After than, unmount /dev/sda7 again.</p>
-<p>Then activate ext4 on ext3 partition</p>
-<pre><code>tune4fs -O extents,uninit_bg,dir_index /dev/sda7
-</code></pre><p>Then refine the converted ext4 partition</p>
-<pre><code>e4fsck -yfDC0 /dev/sda7
-</code></pre><p>Lastly remount  /dev/sda7 to /data0</p>
-<p>mount /dev/sda7 /data0<br>We now can use mount to check format of /dev/sda7:</p>
-<pre><code>[root@localhost data0]# mount
-/dev/sda1 on / type ext3 (rw)
-proc on /proc type proc (rw)
-sysfs on /sys type sysfs (rw)
-.............................
-/dev/sda7 on /data0 type ext4 (rw)
-</code></pre><p>No, that’s not done. One more step, please remember to change format of respective records in <strong>/etc/fstab</strong> to ext4.</p>
-<p><strong>水平有限翻译仅供参考</strong></p>
-<h2 id="在CentOS中将ext3转换为ext4文件系统"><a href="#在CentOS中将ext3转换为ext4文件系统" class="headerlink" title="在CentOS中将ext3转换为ext4文件系统"></a>在CentOS中将ext3转换为ext4文件系统</h2><p>Ext3是Linux内核常用的日志文件系统。它默认支持大多数流行的Linux发行版本，包括Debian。在2006年6月28日,Theodore Ts’o,ext3的主要开发人员宣布了一个增强版,称为ext4。今天,我们将展示如何在CentOS上将ext3转换为ext4。</p>
-<p>系统环境：<br>发行版本： CentOS release 5.4(Final)<br>内核： Linux localhost.localdomain 2.6.18-164.el5 #1 SMP Thu Sep 3 03:28:30 EDT 2009 x86_64 x86_64 x86_64 GNU/Linux</p>
-<p>假设分区转换为/dev/sda7挂载于/data0目录</p>
-<p>首先，安装ext4支持</p>
-<pre><code>yum install -y e4fsprogs
-</code></pre><p>然后卸载/dev/sda7</p>
-<pre><code>umount /dev/sda7
-</code></pre><p>如果分区正在被使用并且不能被卸载，请使用：</p>
-<pre><code>lsof | grep data0
-</code></pre><p>检查哪个进程正在使用/data0目录并且杀死掉这些进程。之后执行再次unmount /dev/sda7。</p>
-<p>然后在ext3上激活ext4</p>
-<pre><code>tune4fs -O extents,uninit_bg,dir_index /dev/sda7
-</code></pre><p>接着完善转换的ext4分区</p>
-<pre><code>e4fsck -yfDC0 /dev/sda7
-</code></pre><p>最后重新在data0上挂载/dev/sda7</p>
-<pre><code>mount /dev/sda7 /data0
-</code></pre><p>我们现在可以使用mount命令检查/dev/sda7格式：</p>
-<pre><code>[root@localhost data0]# mount
-/dev/sda1 on / type ext3 (rw)
-proc on /proc type proc (rw)
-sysfs on /sys type sysfs (rw)
-.............................
-/dev/sda7 on /data0 type ext4 (rw)
-</code></pre><p>现在并没有结束。再来一步，请记得在/etc/fstab里更改EXT4各自的格式记录。</p>
+<p><img src="https://s1.ax1x.com/2018/05/03/CYWBTI.png" alt="CYWBTI.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">1. 源端口号：数据发起者的端口号，16bit</div><div class="line">2. 目的端口号：数据接收者的端口号，16bit</div><div class="line">3. 序号：32bit的序列号，由发送方使用</div><div class="line">4. 确认序号：32bit的确认号，是接收数据方期望收到发送方的下一个报文段的序号，因此确认序号应当是上次已成功收到数据字节序号加1。</div><div class="line">5. 首部长度：首部中32bit字的数目，可表示15*32bit=60字节的首部。一般首部长度为20字节。</div><div class="line">6. 保留：6bit, 均为0</div><div class="line">7. 紧急URG：当URG=1时，表示报文段中有紧急数据，应尽快传送。</div><div class="line">8. 确认比特ACK：ACK = 1时代表这是一个确认的TCP包，取值0则不是确认包。</div><div class="line">9. 推送比特PSH：当发送端PSH=1时，接收端尽快的交付给应用进程。</div><div class="line">10. 复位比特（RST）：当RST=1时，表明TCP连接中出现严重差错，必须释放连接，再重新建立连接。</div><div class="line">11. 同步比特SYN：在建立连接是用来同步序号。SYN=1， ACK=0表示一个连接请求报文段。SYN=1，ACK=1表示同意建立连接。</div><div class="line">12. 终止比特FIN：FIN=1时，表明此报文段的发送端的数据已经发送完毕，并要求释放传输连接。</div><div class="line">13. 窗口：用来控制对方发送的数据量，通知发放已确定的发送窗口上限。</div><div class="line">14. 检验和：该字段检验的范围包括首部和数据这两部分。由发端计算和存储，并由收端进行验证。</div><div class="line">15. 紧急指针：紧急指针在URG=1时才有效，它指出本报文段中的紧急数据的字节数。</div><div class="line">16. 选项：长度可变，最长可达40字节。</div></pre></td></tr></table></figure>
+<p><strong>通过Wireshark抓取的TCP数据包各部分如下图所示：</strong></p>
+<p><img src="https://s1.ax1x.com/2018/05/03/CYWg1S.png" alt="CYWg1S.png"></p>
+<h3 id="3-通过Wireshark抓包理解三次握手"><a href="#3-通过Wireshark抓包理解三次握手" class="headerlink" title="3.通过Wireshark抓包理解三次握手"></a>3.通过Wireshark抓包理解三次握手</h3><blockquote>
+<p>启动Wireshark捕获功能，在浏览器输入www.godben.com，返回到Wireshark中查看数据包获取情况，如下图红框中的数据包即为三次握手的过程，三次握手结束后捕获的数据包为HTTP数据包，表示客户端与服务器成功建立联系并开始传输网页数据。</p>
+</blockquote>
+<p><img src="https://s1.ax1x.com/2018/05/03/CYWwmd.png" alt="CYWwmd.png"></p>
+<p><strong>三次握手示意图：</strong></p>
+<p><img src="https://s1.ax1x.com/2018/05/03/CYWfmj.png" alt="CYWfmj.png"></p>
+<blockquote>
+<p>第一次握手，客户端向服务器发送连接请求包，标志位SYN置为1，序号为seq x=0</p>
+</blockquote>
+<p><img src="https://s1.ax1x.com/2018/05/03/CYWJfK.png" alt="CYWJfK.png"></p>
+<blockquote>
+<p>第二次握手，服务器收到客户端发过来报文，由SYN=1知道客户端要求建立联机。向客户端发送一个SYN和ACK都置为1的TCP报文，设置初始序号seq y=0，将确认序号(Acknowledgement Number)设置为客户的序列号加1，即x+1=0+1=1</p>
+</blockquote>
+<p><img src="https://s1.ax1x.com/2018/05/03/CYWtSO.png" alt="CYWtSO.png"></p>
+<blockquote>
+<p>第三次握手，客户端收到服务器发来的包后检查确认序号(Acknowledgement Number)是否正确，即第一次发送的序号加1（x+1=1）。以及标志位ACK是否为1。若正确，服务器再次发送确认包，ACK标志位为1，SYN标志位为0。确认序号(Acknowledgement Number)=y+1=0+1=1，发送序号为x+1=1。客户端收到后确认序号值与ACK=1则连接建立成功，可以传送数据了。</p>
+</blockquote>
+<p><img src="https://s1.ax1x.com/2018/05/03/CYWNlD.png" alt="CYWNlD.png"></p>
+<h3 id="4-通过Wireshark抓包理解四次挥手"><a href="#4-通过Wireshark抓包理解四次挥手" class="headerlink" title="4.通过Wireshark抓包理解四次挥手"></a>4.通过Wireshark抓包理解四次挥手</h3><blockquote>
+<p>TCP断开连接时，会有四次挥手过程，如下图所示，wireshark截获到了四次挥手的四个数据包。</p>
+</blockquote>
+<p><img src="https://s1.ax1x.com/2018/05/03/CYWrkt.png" alt="CYWrkt.png"></p>
+<p><strong>TCP四次挥手过程如下图所示：</strong></p>
+<p><img src="https://s1.ax1x.com/2018/05/03/CYW00A.png" alt="CYW00A.png"></p>
+<blockquote>
+<p>第一次挥手：客户端给服务器发送TCP包，用来关闭客户端到服务器的数据传送。将标志位FIN和ACK置为1，序号为X=2221，确认序号为Z=3806</p>
+</blockquote>
+<p><img src="https://s1.ax1x.com/2018/05/03/CYWstP.png" alt="CYWstP.png"></p>
+<blockquote>
+<p>第二次挥手：服务器收到FIN后，发回一个ACK(标志位ACK=1),确认序号为收到的序号加1，即X=X+1=2222。序号为收到的确认序号=Z。</p>
+</blockquote>
+<p><img src="https://s1.ax1x.com/2018/05/03/CYW26g.png" alt="CYW26g.png"></p>
+<blockquote>
+<p>第三次挥手：服务器关闭与客户端的连接，发送一个FIN。标志位FIN和ACK置为1，序号为Y=3806，确认序号为X=2222。</p>
+</blockquote>
+<p><img src="https://s1.ax1x.com/2018/05/03/CYWcp8.png" alt="CYWcp8.png"></p>
+<blockquote>
+<p>第四次挥手：客户端收到服务器发送的FIN之后，发回ACK确认(标志位ACK=1),确认序号为收到的序号加1，即Y+1=2222。序号为收到的确认序号X=3087。</p>
+</blockquote>
+<p><img src="https://s1.ax1x.com/2018/05/03/CYWyff.png" alt="CYWyff.png"></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -154,7 +175,7 @@ sysfs on /sys type sysfs (rw)
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/FileSystem/">FileSystem</a><a href="/tags/CentOS/">CentOS</a>
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/TCP-IP/">TCP/IP</a><a href="/tags/Wireshark/">Wireshark</a>
   </div>
 
 </div>
@@ -163,7 +184,7 @@ sysfs on /sys type sysfs (rw)
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/11/15/Convert ext3 to ext4 file system on CentOS/" data-title="【译】Convert ext3 to ext4 file system on CentOS | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2018/05/03/使用Wireshark分析TCP三次握手及四次挥手/" data-title="CentOS7迁移HOME目录到独立分区 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -176,19 +197,11 @@ sysfs on /sys type sysfs (rw)
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/11/16/正则表达式之Multiline和Dotall模式/" title="正则表达式之Multiline和Dotall模式">
-  <strong>上一篇：</strong><br/>
-  <span>
-  正则表达式之Multiline和Dotall模式</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/11/13/Linux用户模式和内核模式/"  title="Linux用户模式和内核模式">
+<a href="/2018/04/26/CentOS7迁移HOME目录到独立分区/"  title="CentOS7迁移HOME目录到独立分区">
  <strong>下一篇：</strong><br/> 
- <span>Linux用户模式和内核模式
+ <span>CentOS7迁移HOME目录到独立分区
 </span>
 </a>
 </div>
@@ -197,7 +210,7 @@ sysfs on /sys type sysfs (rw)
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/11/15/Convert ext3 to ext4 file system on CentOS/" data-title="【译】Convert ext3 to ext4 file system on CentOS" data-url="http://yoursite.com/2016/11/15/Convert ext3 to ext4 file system on CentOS/"></div>
+	<div class="ds-thread" data-thread-key="2018/05/03/使用Wireshark分析TCP三次握手及四次挥手/" data-title="CentOS7迁移HOME目录到独立分区" data-url="http://yoursite.com/2018/05/03/使用Wireshark分析TCP三次握手及四次挥手/"></div>
 </section>
 
 
