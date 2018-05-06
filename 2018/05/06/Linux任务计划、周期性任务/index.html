@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/05/06/Linux任务计划、周期性任务/index.html">
 <meta property="og:site_name" content="godben's blog">
 <meta property="og:description" content="在未来的某时间点执行一次任务: at, batch周期性运行某任务: cron">
-<meta property="og:updated_time" content="2018-05-06T12:48:31.214Z">
+<meta property="og:updated_time" content="2018-05-06T12:58:17.651Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux任务计划、周期性任务">
 <meta name="twitter:description" content="在未来的某时间点执行一次任务: at, batch周期性运行某任务: cron">
@@ -118,7 +118,9 @@
     注意:作业执行结果以邮件通知给相关用户
 </code></pre><h4 id="batch命令："><a href="#batch命令：" class="headerlink" title="batch命令："></a>batch命令：</h4><pre><code>让系统自行选择空闲时间去执行此处指定的任务
 </code></pre><h4 id="周期性任务计划：cron"><a href="#周期性任务计划：cron" class="headerlink" title="周期性任务计划：cron"></a>周期性任务计划：cron</h4><p><strong>相关的程序包：</strong></p>
-<p><strong>cronie:</strong> 主程序包，提供了crond守护进程及相关辅助工具;<br><strong>cronie-anacron:</strong> cronie的补充程序,用于监控cronie任务执行情况;   如cronie中的任务在过去该运行的时间点未能正常运行,则anacron会随后启动一次此任务<br><strong>crontabs:</strong> 包含CentOS提供系统维护任务</p>
+<blockquote>
+<p>cronie: 主程序包，提供了crond守护进程及相关辅助工具;<br>cronie-anacron: cronie的补充程序,用于监控cronie任务执行情况;   如cronie中的任务在过去该运行的时间点未能正常运行,则anacron会随后启动一次此任务<br>crontabs: 包含CentOS提供系统维护任务</p>
+</blockquote>
 <p><strong>确保crond守护处于运行状态:</strong></p>
 <pre><code>CentOS7:  
     systemctl status crond
@@ -239,7 +241,7 @@ tar Jcf /logs/messages-`date +%Y%m%d`.tar.xz /var/log/message/
 21.每天早晨三点二十分执行用户目录下如下所示的两个指令（每个指令以;分隔）：
     20 3 * * * （/bin/rm -f expire.ls logins.bad;bin/expire$#@62;expire.1st）　　
 
-22.每年的一月和四月，4号到9号的3点12分和3点55分执行/bin/rm -f expire.1st这个指令，并把结果添加在mm.txt这个文件之后（mm.txt文件位于用户自己的目录位置）。
+22.每年的一月和四月，4号到9号的3点12分和3点55分执行/bin/rm -f expire.1st这个指令，并把结果添加在mm.txt这个文件之后
     12,55 3 4-9 1,4 * /bin/rm -f expire.1st &gt;&gt; mm.txt
 </code></pre>  
 	</div>
@@ -339,11 +341,11 @@ tar Jcf /logs/messages-`date +%Y%m%d`.tar.xz /var/log/message/
 			
 		
 			
-				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
 			
 		
 			
@@ -355,7 +357,7 @@ tar Jcf /logs/messages-`date +%Y%m%d`.tar.xz /var/log/message/
 			
 		
 			
-				<li><a href="/tags/Linux-regex/" title="Linux,regex">Linux,regex<sup>1</sup></a></li>
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
 			
 		
 			
@@ -363,7 +365,7 @@ tar Jcf /logs/messages-`date +%Y%m%d`.tar.xz /var/log/message/
 			
 		
 			
-				<li><a href="/tags/VMWARE/" title="VMWARE">VMWARE<sup>1</sup></a></li>
+				<li><a href="/tags/Linux-regex/" title="Linux,regex">Linux,regex<sup>1</sup></a></li>
 			
 		
 			
@@ -375,11 +377,11 @@ tar Jcf /logs/messages-`date +%Y%m%d`.tar.xz /var/log/message/
 			
 		
 			
-				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+				<li><a href="/tags/Virtualization/" title="Virtualization">Virtualization<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Virtualization/" title="Virtualization">Virtualization<sup>1</sup></a></li>
+				<li><a href="/tags/VMWARE/" title="VMWARE">VMWARE<sup>1</sup></a></li>
 			
 		
 		</ul>
