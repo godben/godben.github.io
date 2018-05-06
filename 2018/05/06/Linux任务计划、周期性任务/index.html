@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/05/06/Linux任务计划、周期性任务/index.html">
 <meta property="og:site_name" content="godben's blog">
 <meta property="og:description" content="在未来的某时间点执行一次任务: at, batch周期性运行某任务: cron">
-<meta property="og:updated_time" content="2018-05-06T12:58:17.651Z">
+<meta property="og:updated_time" content="2018-05-06T13:04:02.759Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux任务计划、周期性任务">
 <meta name="twitter:description" content="在未来的某时间点执行一次任务: at, batch周期性运行某任务: cron">
@@ -209,7 +209,9 @@ tar Jcf /logs/messages-`date +%Y%m%d`.tar.xz /var/log/message/
     0 4 1 1 * command line 
 
 8.每天早上6点
-    0 6 * * * echo &quot;Good morning.&quot; &gt;&gt; /tmp/test.txt       //注意单纯echo，从屏幕上看不到任何输出，因为cron把任何输出都email到root的信箱了。
+    0 6 * * * echo &quot;Good morning.&quot; &gt;&gt; /tmp/test.txt  
+
+    //注意单纯echo，从屏幕上看不到任何输出，因为cron把任何输出都email到root的信箱了。   
 
 9.每两个小时(第一个为15，指明每两个小时的第15min中执行一次)
     15 */2 * * * echo &quot;Have a break now.&quot; &gt;&gt; /tmp/test.txt 
