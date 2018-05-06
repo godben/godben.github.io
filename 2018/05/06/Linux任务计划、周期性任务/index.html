@@ -4,38 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>20180327Linux笔记 | godben&#39;s blog</title>
+    <title>Linux任务计划、周期性任务 | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="资料地址:\\172.20.0.1\30
-账号：magedu30
-密码：Magedu30
-ftp:172.20.0.1        
-摩尔定律
-摩尔定律是由英特尔（Intel）创始人之一戈登·摩尔（Gordon Moore）提出来的。其内容为：当价格不变时，集成电路上可容纳的元器件的数目，约每隔18-24个月便会增加一倍，性能也将提升一倍。换言之，每一美元所能买到的电脑性能，将每隔18-24个月">
+    <meta name="description" content="在未来的某时间点执行一次任务: at, batch周期性运行某任务: cron">
 <meta property="og:type" content="article">
-<meta property="og:title" content="20180327Linux笔记">
-<meta property="og:url" content="http://yoursite.com/2018/03/28/Linux笔记day01/index.html">
+<meta property="og:title" content="Linux任务计划、周期性任务">
+<meta property="og:url" content="http://yoursite.com/2018/05/06/Linux任务计划、周期性任务/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="资料地址:\\172.20.0.1\30
-账号：magedu30
-密码：Magedu30
-ftp:172.20.0.1        
-摩尔定律
-摩尔定律是由英特尔（Intel）创始人之一戈登·摩尔（Gordon Moore）提出来的。其内容为：当价格不变时，集成电路上可容纳的元器件的数目，约每隔18-24个月便会增加一倍，性能也将提升一倍。换言之，每一美元所能买到的电脑性能，将每隔18-24个月">
-<meta property="og:updated_time" content="2018-03-29T01:23:18.795Z">
+<meta property="og:description" content="在未来的某时间点执行一次任务: at, batch周期性运行某任务: cron">
+<meta property="og:updated_time" content="2018-05-06T12:48:31.214Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="20180327Linux笔记">
-<meta name="twitter:description" content="资料地址:\\172.20.0.1\30
-账号：magedu30
-密码：Magedu30
-ftp:172.20.0.1        
-摩尔定律
-摩尔定律是由英特尔（Intel）创始人之一戈登·摩尔（Gordon Moore）提出来的。其内容为：当价格不变时，集成电路上可容纳的元器件的数目，约每隔18-24个月便会增加一倍，性能也将提升一倍。换言之，每一美元所能买到的电脑性能，将每隔18-24个月">
+<meta name="twitter:title" content="Linux任务计划、周期性任务">
+<meta name="twitter:description" content="在未来的某时间点执行一次任务: at, batch周期性运行某任务: cron">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -97,47 +82,166 @@ ftp:172.20.0.1
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/03/28/Linux笔记day01/" title="20180327Linux笔记" itemprop="url">20180327Linux笔记</a>
+      <a href="/2018/05/06/Linux任务计划、周期性任务/" title="Linux任务计划、周期性任务" itemprop="url">Linux任务计划、周期性任务</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2018-03-28T00:47:20.911Z" itemprop="datePublished"> 发表于 2018-03-28</time>
+    <time datetime="2018-05-06T12:48:45.243Z" itemprop="datePublished"> 发表于 2018-05-06</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<h3 id="资料地址"><a href="#资料地址" class="headerlink" title="资料地址:"></a>资料地址:</h3><pre><code>\\172.20.0.1\30
-账号：magedu30
-密码：Magedu30
-ftp:172.20.0.1        
-</code></pre><h3 id="摩尔定律"><a href="#摩尔定律" class="headerlink" title="摩尔定律"></a>摩尔定律</h3><blockquote>
-<p>摩尔定律是由英特尔（Intel）创始人之一戈登·摩尔（Gordon Moore）提出来的。其内容为：当价格不变时，集成电路上可容纳的元器件的数目，约每隔18-24个月便会增加一倍，性能也将提升一倍。换言之，每一美元所能买到的电脑性能，将每隔18-24个月翻一倍以上。这一定律揭示了信息技术进步的速度。  </p>
+		<blockquote>
+<p>在未来的某时间点执行一次任务: at, batch<br>周期性运行某任务: cron</p>
 </blockquote>
 <a id="more"></a>
-<h3 id="反摩尔定律"><a href="#反摩尔定律" class="headerlink" title="反摩尔定律"></a>反摩尔定律</h3><blockquote>
-<p>由Google的前CEO埃里克·施密特提出的：如果你反过来看摩尔定律，一个IT公司如果今天和18个月前卖掉同样多的、同样的产品，它的营业额就要降一半。IT界把它称为反摩尔定律。</p>
-</blockquote>
-<h3 id="存储网络："><a href="#存储网络：" class="headerlink" title="存储网络："></a>存储网络：</h3><blockquote>
-<pre><code>DAS----直接连接存储
-NAS----网络连接存储
-SAN----存储区域网络
+<h4 id="at命令："><a href="#at命令：" class="headerlink" title="at命令："></a>at命令：</h4><blockquote>
+<pre><code>at [option] TIME
 </code></pre></blockquote>
-<hr>
-<h3 id="Linux命令："><a href="#Linux命令：" class="headerlink" title="Linux命令："></a>Linux命令：</h3><p><strong>strace命令</strong>是一个集诊断、调试、统计与一体的工具，我们可以使用strace对应用的系统调用和信号传递的跟踪结果来对应用进行分析，以达到解决问题或者是了解应用工作过程的目的</p>
-<p><strong>ltrace命令</strong>用来跟踪进程调用库函数的情况</p>
-<p><strong>free命令</strong>可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区</p>
-<p><strong>cat /etc/centos-release</strong> 查看发行版本</p>
-<p><strong>cat /proc/meminfo</strong> 查看内存大小</p>
-<p><strong>fdisk -l</strong> 查看磁盘分区</p>
-<p><strong>halt</strong>   关机</p>
-<p><strong>lsblk</strong>    块设备的情况</p>
-<p><strong>ifconfig</strong> 查看IP</p>
-<p><strong>uname -r</strong>查看内核 </p>
-  
+<pre><code>TIME:
+    HH:MM [YYYY-mm-dd]
+    noon, midnighe, teatime
+    tommrrow
+    now+#{minutes, hours, days, OR weeks}
+
+常用选项：
+    -q QUEUE
+    -l: 列出指定队列中等待运行的作业,相当于atq
+    -d: 删除指定的作业,相当于atrm
+    -c: 查看具体作业任务
+    -f /path/from/somefile: 从指定的文件中读取任务  
+
+    注意:作业执行结果以邮件通知给相关用户
+</code></pre><h4 id="batch命令："><a href="#batch命令：" class="headerlink" title="batch命令："></a>batch命令：</h4><pre><code>让系统自行选择空闲时间去执行此处指定的任务
+</code></pre><h4 id="周期性任务计划：cron"><a href="#周期性任务计划：cron" class="headerlink" title="周期性任务计划：cron"></a>周期性任务计划：cron</h4><p><strong>相关的程序包：</strong></p>
+<p><strong>cronie:</strong> 主程序包，提供了crond守护进程及相关辅助工具;<br><strong>cronie-anacron:</strong> cronie的补充程序,用于监控cronie任务执行情况;   如cronie中的任务在过去该运行的时间点未能正常运行,则anacron会随后启动一次此任务<br><strong>crontabs:</strong> 包含CentOS提供系统维护任务</p>
+<p><strong>确保crond守护处于运行状态:</strong></p>
+<pre><code>CentOS7:  
+    systemctl status crond
+CentOS6:  
+    service crond status
+</code></pre><blockquote>
+<p>计划要周期性执行的任务提交给crond,由其来实现到点运行<br>    系统cron任务: 系统维护作业<br>        /etc/crontab  </p>
+</blockquote>
+<pre><code>SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+HOME=/
+
+# run-parts
+01 * * * * root run-parts /etc/cron.hourly
+02 4 * * * root run-parts /etc/cron.daily
+22 4 * * 0 root run-parts /etc/cron.weekly
+42 4 1 * * root run-parts /etc/cron.monthly
+</code></pre><p>前四行是用来配置 cron 任务运行环境的变量。<br>SHELL变量的值告诉系统要使用哪个shell 环境（在这个例子里是 bash shell）；PATH变量定义用来执行命令的路径。cron 任务的输出被邮寄给 MAILTO 变量定义的用户名。如果 MAILTO变量被定义为空白字符串（MAILTO=””），电子邮件就不会被寄出。HOME 变量可以用来设置在执行命令或脚本时使用的主目录。</p>
+<p>如你在 /etc/crontab 文件中所见，它使用 run-parts 脚本来执行 /etc/cron.hourly、/etc/cron.daily、/etc/cron.weekly 和 /etc/cron.monthly 目录中的脚本，这些脚本被相应地每小时、每日、每周、或每月执行。这些目录中的文件应该是shell脚本。crontab -e 中使用run-parts命令不会生效。 “run-parts”这个参数了，如果去掉这个参数的话，后面就可以写要运行的某个脚本名，而不是文件夹名。</p>
+<h4 id="用户cron任务"><a href="#用户cron任务" class="headerlink" title="用户cron任务:"></a>用户cron任务:</h4><p><strong>crontab命令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># Example of job definition:</div><div class="line"># .---------------- minute (0 - 59)</div><div class="line"># |  .------------- hour (0 - 23)</div><div class="line"># |  |  .---------- day of month (1 - 31)</div><div class="line"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</div><div class="line"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</div><div class="line"># |  |  |  |  |</div><div class="line"># *  *  *  *  * user-name  command to be executed</div></pre></td></tr></table></figure>
+<pre><code>时间表示法:    
+(1) 特定值:  
+    给定时间点有效取值范围内的值  
+(2) *  
+    给定时间点上有效取值范围内的所有值  
+    表示&quot;每....&quot;  
+(3) 离散取值:  
+    #,#,#  
+(4) 连续取值：-  
+    #-#  
+(5) 在指定时间按范围上,定义步长  
+    /#: #即为步长  
+</code></pre><p><strong>用户cron:</strong>  </p>
+<blockquote>
+<p>crontab命令定义, 每个用户都有专用的cron任务文件: /var/spool/cron/USERNAME  (普通用户没有权限管理此文件)</p>
+</blockquote>
+<pre><code>crontab命令:
+   crontab [-u user] [-l | -r | -e] [-i] [-s]
+        -l: 列出所有任务
+        -e: 编辑任务
+        -r: 移除所有任务
+        -i：同-r 一同使用，以交互式模式让用户有选择地移除指定任务
+        -u user: 仅root可运行，代为为指定用户管理cron任务
+</code></pre><p><strong>crontab权限问题</strong><br>CentOS7中，/etc目录中存在cron.allow和cron.deny两个文件<br>用法如下：<br>1.如果两个文件都不存在，则只有root用户才能使用crontab命令。<br>2.如果cron.allow存在但cron.deny不存在，则只有列在cron.allow文件里的用户才能使用crontab命令，如果root用户也不在里面，则root用户也不能使用crontab。<br>3.如果cron.allow不存在, cron.deny存在，则只有列在cron.deny文件里面的用户不能使用crontab命令，其它用户都能使用。<br>4.如果两个文件都存在，则列在cron.allow文件中而且没有列在cron.deny中的用户可以使用crontab，如果两个文件中都有同一个用户，以cron.allow文件里面是否有该用户为准，如果cron.allow中有该用户，则可以使用crontab命令。 </p>
+<p><strong>crontab日志</strong></p>
+<blockquote>
+<p>看 /var/log/cron这个文件就可以，可以用tail -f /var/log/cron观察</p>
+</blockquote>
+<pre><code>注意： 作业执行结果以邮件通知给相关用户
+    (1) COMMAND &gt; /dev/null
+    (2) COMMAND &amp;&gt; /dev/null
+
+    对于cron任务来讲，%有特殊用途，如果在命令中要使用%,则需要转义；不过，如果把%放置于单引号中，也可不用转义
+
+    如何在秒级别运行任务?
+    * * * * * for min in 0 1 2; do echo &quot;hi&quot;; sleep 20; done
+</code></pre><h4 id="练习："><a href="#练习：" class="headerlink" title="练习："></a>练习：</h4><pre><code>1、每四小时备份一次/etc目录至/backup目录中,保存的文件名称格式为“etc-yyyy-mm-dd-HH.tar.xz&quot;
+
+    [root@godben script_file]# cat bak_etc.sh
+    tar Jcf /backup/etc-`date +%F-%H`.tar.xz /etc/
+    [root@godben script_file]# cat /etc/crontab
+    0 4 * * * root bash /root/script_file/bak_etc.sh
+
+2、每周2，4，7备份/var/log/message文件至/logs目录中，文件名&quot;messages-yyyymmd&quot;
+
+[root@godben script_file]# cat bak_message.sh
+tar Jcf /logs/messages-`date +%Y%m%d`.tar.xz /var/log/message/
+[root@godben script_file]# cat /etc/crontab
+* * * * 2,4,7 root bash /root/script_file/bak_message.sh
+
+3、每两小时取出当前系统/proc/meminfo文件中以S开头或M开头的信息追加至/tmp/meminfo.txt文件中
+    0 */2 * * *  grep &quot;^[SM]&quot; /proc/meminfo &gt;&gt; /tmp/meminfo.txt
+
+4、工作日时间内，每小时执行一次&quot;ip addr show&quot;命令
+    0 9-18 1-5 * * ip addr show
+
+5、晚上11点到早上8点之间每两个小时和早上八点 
+    0 23-7/2,8 * * * echo &quot;Have a good dream&quot; &gt;&gt; /tmp/test.txt
+
+6、每个月的4号和每个礼拜的礼拜一到礼拜三的早上11点 
+    0 11 4 * 1-3 command line
+
+7、1月1日早上4点 
+    0 4 1 1 * command line 
+
+8.每天早上6点
+    0 6 * * * echo &quot;Good morning.&quot; &gt;&gt; /tmp/test.txt       //注意单纯echo，从屏幕上看不到任何输出，因为cron把任何输出都email到root的信箱了。
+
+9.每两个小时(第一个为15，指明每两个小时的第15min中执行一次)
+    15 */2 * * * echo &quot;Have a break now.&quot; &gt;&gt; /tmp/test.txt 
+
+13.每小时（第一分钟）执行/etc/cron.hourly内的脚本
+    01 * * * * root run-parts /etc/cron.hourly
+
+14.每天（凌晨4：02）执行/etc/cron.daily内的脚本
+    02 4 * * * root run-parts /etc/cron.daily
+
+15.每星期（周日凌晨4：22）执行/etc/cron.weekly内的脚本
+    22 4 * * 0 root run-parts /etc/cron.weekly
+
+16.每月（1号凌晨4：42）去执行/etc/cron.monthly内的脚本
+    42 4 1 * * root run-parts /etc/cron.monthly
+
+17.每天的下午4点、5点、6点的5 min、15 min、25 min、35 min、45 min、55 min时执行命令。
+    5，15，25，35，45，55 16，17，18 * * * command
+
+18.每周一，三，五的下午3：00系统进入维护状态，重新启动系统。
+    00 15 * *1，3，5 shutdown -r +5
+
+19.每小时的10分，40分执行用户目录下的innd/bbslin这个指令：
+    10，40 * * * * innd/bbslink
+
+20.每小时的1分执行用户目录下的bin/account这个指令：
+    1 * * * * bin/account
+
+21.每天早晨三点二十分执行用户目录下如下所示的两个指令（每个指令以;分隔）：
+    20 3 * * * （/bin/rm -f expire.ls logins.bad;bin/expire$#@62;expire.1st）　　
+
+22.每年的一月和四月，4号到9号的3点12分和3点55分执行/bin/rm -f expire.1st这个指令，并把结果添加在mm.txt这个文件之后（mm.txt文件位于用户自己的目录位置）。
+    12,55 3 4-9 1,4 * /bin/rm -f expire.1st &gt;&gt; mm.txt
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -154,7 +258,7 @@ SAN----存储区域网络
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2018/03/28/Linux笔记day01/" data-title="20180327Linux笔记 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2018/05/06/Linux任务计划、周期性任务/" data-title="Linux任务计划、周期性任务 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -167,19 +271,11 @@ SAN----存储区域网络
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/03/28/day02/" title="20180328Linux笔记">
-  <strong>上一篇：</strong><br/>
-  <span>
-  20180328Linux笔记</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/04/23/python爬虫IP地址查询/"  title="python爬虫IP地址查询">
+<a href="/2018/05/03/使用Wireshark分析TCP三次握手及四次挥手/"  title="使用Wireshark分析TCP三次握手及四次挥手">
  <strong>下一篇：</strong><br/> 
- <span>python爬虫IP地址查询
+ <span>使用Wireshark分析TCP三次握手及四次挥手
 </span>
 </a>
 </div>
@@ -188,7 +284,7 @@ SAN----存储区域网络
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2018/03/28/Linux笔记day01/" data-title="20180327Linux笔记" data-url="http://yoursite.com/2018/03/28/Linux笔记day01/"></div>
+	<div class="ds-thread" data-thread-key="2018/05/06/Linux任务计划、周期性任务/" data-title="Linux任务计划、周期性任务" data-url="http://yoursite.com/2018/05/06/Linux任务计划、周期性任务/"></div>
 </section>
 
 
