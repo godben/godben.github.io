@@ -4,26 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>【译】Big file transfer in Linux | godben&#39;s blog</title>
+    <title>如何保证程序在后台稳定运行 | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="It’s very common that we need to transfer files between two different hosts such as backups. It is also an very simple task, we can use scp or rsync to complete the task well. But what if the file is">
+    <meta name="description" content="通常情况下，我们都是通过ssh登陆到远程服务器，当我们关闭终端时，正在运行的程序就会中断，或者运行一些耗时较长的任务时，我们不可能一直盯着直至结束。下面的方法就能帮我们解决这种窘况。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【译】Big file transfer in Linux">
-<meta property="og:url" content="http://yoursite.com/2016/11/04/Big file transfer in Linux/index.html">
+<meta property="og:title" content="如何保证程序在后台稳定运行">
+<meta property="og:url" content="http://yoursite.com/2018/05/07/ 如何保证程序在后台稳定运行/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="It’s very common that we need to transfer files between two different hosts such as backups. It is also an very simple task, we can use scp or rsync to complete the task well. But what if the file is">
-<meta property="og:image" content="http://p1.bpimg.com/567571/c11af617ab99211b.jpg">
-<meta property="og:image" content="http://p1.bpimg.com/567571/c11af617ab99211b.jpg">
-<meta property="og:updated_time" content="2016-11-30T15:02:10.172Z">
+<meta property="og:description" content="通常情况下，我们都是通过ssh登陆到远程服务器，当我们关闭终端时，正在运行的程序就会中断，或者运行一些耗时较长的任务时，我们不可能一直盯着直至结束。下面的方法就能帮我们解决这种窘况。">
+<meta property="og:updated_time" content="2018-05-07T12:35:12.919Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【译】Big file transfer in Linux">
-<meta name="twitter:description" content="It’s very common that we need to transfer files between two different hosts such as backups. It is also an very simple task, we can use scp or rsync to complete the task well. But what if the file is">
-<meta name="twitter:image" content="http://p1.bpimg.com/567571/c11af617ab99211b.jpg">
+<meta name="twitter:title" content="如何保证程序在后台稳定运行">
+<meta name="twitter:description" content="通常情况下，我们都是通过ssh登陆到远程服务器，当我们关闭终端时，正在运行的程序就会中断，或者运行一些耗时较长的任务时，我们不可能一直盯着直至结束。下面的方法就能帮我们解决这种窘况。">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -85,95 +82,46 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/04/Big file transfer in Linux/" title="【译】Big file transfer in Linux" itemprop="url">【译】Big file transfer in Linux</a>
+      <a href="/2018/05/07/ 如何保证程序在后台稳定运行/" title="如何保证程序在后台稳定运行" itemprop="url">如何保证程序在后台稳定运行</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-04T14:32:37.575Z" itemprop="datePublished"> 发表于 2016-11-04</time>
+    <time datetime="2018-05-07T12:35:20.510Z" itemprop="datePublished"> 发表于 2018-05-07</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>It’s very common that we need to transfer files between two different hosts such as backups. It is also an very simple task, we can use scp or rsync to complete the task well. But what if the file is very big, it may take some time to transfer it. How can we transfer a big file with high speed? Here we propose one solution.<br><a id="more"></a><br><strong>Copy file</strong></p>
-<p>If we copy one uncompressed file, then we should follow below steps:</p>
-<ul>
-<li>1.Compress data</li>
-<li>2.Send it to another host</li>
-<li>3.Uncompress the data</li>
-<li>4.Verify the data integrity</li>
-<li>5.This will be very efficient and it also saves bandwidth.</li>
-</ul>
-<p><strong>With ZIP+SCP</strong></p>
-<p>We can combine ZIP and SCP to achieve this.</p>
+		<p><strong>通常情况下，我们都是通过ssh登陆到远程服务器，当我们关闭终端时，正在运行的程序就会中断，或者运行一些耗时较长的任务时，我们不可能一直盯着直至结束。下面的方法就能帮我们解决这种窘况。</strong></p>
+<a id="more"></a>
+<h4 id="1-nohup命令"><a href="#1-nohup命令" class="headerlink" title="1.nohup命令"></a>1.nohup命令</h4><p>nohup命令可以将程序以忽略挂起信号的方式运行起来，被运行的程序的输出信息将不会显示到终端。</p>
+<p>nohup运行机制：当内核检测到终端关闭时，会给相对应的bash进程发送sigup信号(sigup信号的默认行为时终止进程),当bash收到sigup信号后，会给当前终端上运行的任务发送sigup信号，而nohup就是要屏蔽sigup信号，使任务继续运行</p>
 <blockquote>
-<p>gzip -c /home/yankay/data | ssh yankay01 “gunzip -c - &gt; /home/yankay/data”</p>
+<p>  nohup (选项) (参数)</p>
 </blockquote>
-<p>This command will use GZIP to compress /home/yankay/data and then send it to host yankay01 through ssh.</p>
-<p>The file size of data is 1.1 GB, it becomes 183MB after compressed with Zip compression, the above command takes 45.6s, the average throughput is 24.7MB/s. Actually scp has compression capability as well, we can write the above command as :</p>
+<p><strong>实验：</strong><br>在终端上执行ping www.godben.com &amp;，执行jobs命令可以看出ping命令正在后台运行，使用ps命令也能看出，当重新登录终端时，使用ps命令查看，发现ping命令已经消失了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# ping www.godben.com &amp;</div><div class="line">[1] 7675</div><div class="line">[root@localhost ~]# PING pages.coding.me (103.72.145.7) 56(84) bytes of data.</div><div class="line">From 172.20.108.10 (172.20.108.10) icmp_seq=2 Redirect Network(New nexthop: gateway (172.20.0.1))</div><div class="line">From 172.20.108.10 (172.20.108.10): icmp_seq=2 Redirect Network(New nexthop: gateway (172.20.0.1))</div><div class="line">64 bytes from 103.72.145.7 (103.72.145.7): icmp_seq=1 ttl=49 time=1139 ms</div><div class="line">64 bytes from 103.72.145.7 (103.72.145.7): icmp_seq=2 ttl=49 time=1279 ms</div><div class="line"></div><div class="line">[root@localhost ~]# jobs</div><div class="line">[1]+  Running                 ping www.godben.com &amp;</div><div class="line"></div><div class="line">[root@localhost ~]# ps aux | grep ping</div><div class="line">root       7675  0.0  0.1 147824  2068 pts/1    S    19:48   0:00 ping www.godben.com</div><div class="line"></div><div class="line">[root@localhost ~]# ps aux | grep ping</div><div class="line">root       7770  0.0  0.0 112660   972 pts/1    S+   19:51   0:00 grep --color=auto ping</div></pre></td></tr></table></figure>
+<p>接下来在命令前加上nohup命令，重复上面步骤，重新登录终端后发现ping任务并没有被关闭，并且在使用nohup命令时，输出内容不会输出到屏幕上，而是写入到当前目录下的nohup.out文件中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# jobs</div><div class="line">[1]+  Running                 nohup ping www.godben.com &amp;</div><div class="line"></div><div class="line">[root@localhost ~]# ps aux | grep ping</div><div class="line">root       7884  0.0  0.1 147824  2072 pts/2    S    19:59   0:00 ping www.godben.com</div><div class="line"></div><div class="line">[root@localhost ~]# ps aux | grep ping</div><div class="line">root       7884  0.0  0.1 147824  2076 ?        S    19:59   0:00 ping www.godben.com</div></pre></td></tr></table></figure>
+<h4 id="2-screen命令"><a href="#2-screen命令" class="headerlink" title="2.screen命令"></a>2.screen命令</h4><p>通过使用nohup命令屏蔽sigup信号，进而在我们退出终端时不会影响到正在运行的任务，那么如果有大量任务需要在后台稳定运行时，使用screen命令会更加方便。</p>
+<p>Screen是一款由GNU计划开发的用于命令行终端切换的自由软件。用户可以通过该软件同时连接多个本地或远程的命令行会话，并在其间自由切换。GNU Screen可以看作是窗口管理器的命令行界面版本。它提供了统一的管理多个会话的界面和相应的功能。<br>只要Screen本身没有终止，在其内部运行的会话都可以恢复。这一点对于远程登录的用户特别有用，即使网络连接中断，用户也不会失去对已经打开的命令行会话的控制。只要再次登录到主机上执行screen -r就可以恢复会话的运行。同样在暂时离开的时候，也可以执行分离命令detach，在保证里面的程序正常运行的情况下让Screen挂起（切换到后台）。</p>
 <blockquote>
-<p>scp -C -c blowfish /home/yankay/data yankay01:/home/yankay/data</p>
+<p>screen [-AmRvx -ls -wipe][-d &lt;作业名称&gt;][-h &lt;行数&gt;][-r &lt;作业名称&gt;][-s ][-S &lt;作业名称&gt;]</p>
 </blockquote>
-<p>The end result of both commands above is the same, the difference is that we use blowfish algorithm as the compression algorithm, it will be faster using the blowfish algorithm than the default algorithm.</p>
-<p>The above command takes 45s again, the average throughput is 24MB/s which has no much improvement. It seems the bottleneck is not at the network side.</p>
-<p>Then what is the bottleneck?</p>
-<p><strong>Performance analysis</strong></p>
-<p>We need to define some variables</p>
-<ul>
-<li>The compression ratio of the compression toll is CompressRatio</li>
-<li>The compression throughput is CompressSpeed MB/s</li>
-<li>The throughput of the network is NetSpeed MB/s<br>Because we use pipe, the performance of pipe depends on the performance of the slowest component, so the overall performance is:</li>
-</ul>
-<p><img src="http://p1.bpimg.com/567571/c11af617ab99211b.jpg" alt=""></p>
-<p>When the compression throughput is less than the network throughput, then the bottleneck is the compression, otherwise, it is the network.</p>
-<p>We have our test data below:</p>
-<p>speed=min(NetSpeed/CompressRadio,CompressSpeed)</p>
-<p>We can find , when the network speed is 100M/s, QuickLZ has the best performance. If we use SSH as the data transfer protocol, it will not achieve the best performance. In 10M/s, all algorithms have almost the same performance, but QuickLZ has a relatively better performance.</p>
-<p>For different data and hosts, the best algorithm is also different, but one thing can be sure, the bottleneck should be on network side.</p>
-<p><strong>Conclusion</strong></p>
-<p>According to above analysis, we should not use SSH as the network transfer protocol, we can use NC to improve the performance. And we can use qpress as the compression algorithm.</p>
-<blockquote>
-<p>scp /usr/bin/qpress yankay01:/usr/bin/qpress<br>ssh yankay01 “nc -l 12345 |  qpress -dio &gt; /home/yankay/data” &amp;<br>qpress -o /home/yankay/data |nc yankay01 12345</p>
-</blockquote>
-<p>The first line above is to install the qpress on the remote machine, the second line is to listen to a port with NC, the third line is to compress and transfer the data.</p>
-<p>It takes 2.8s to execute above commands, the average throughput is 402MB/s which will be 16 times faster than ZIP+SCP.</p>
-<p><strong>水平有限翻译仅供参考</strong></p>
-<h2 id="Linux下大文件传输"><a href="#Linux下大文件传输" class="headerlink" title="Linux下大文件传输"></a>Linux下大文件传输</h2><p>我们经常需要在两台主机间传输文件，比如备份。这也是非常简单的工作，我们可以使用scp或者rsync就能很好的完成任务。但是如果文件很大，会占用很长的时间。我们如何更快的传输大文件呢？在这里,我们提出一个解决方案。</p>
-<h3 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h3><p>如果我们复制一个未压缩的文件，应该按如下步骤做：<br>1.压缩数据<br>2.发送到另一台主机上<br>3.解压数据<br>4.校验数据完整性</p>
-<p>这样做会很有效率，数据压缩后可以更有效的利用带宽。</p>
-<h3 id="使用ZIP-SCP"><a href="#使用ZIP-SCP" class="headerlink" title="使用ZIP+SCP"></a>使用ZIP+SCP</h3><p>我们可以通过ZIP+SCP的组合实现这个功能。</p>
-<blockquote>
-<p>gzip -c /home/yankay/data | ssh yankay01 “gunzip -c - &gt; /home/yankay/data”</p>
-</blockquote>
-<p>这条命令是将/home/yankay/data经过GZIP压缩，通过ssh传输到yankay01的机器上。</p>
-<p>data文件大小是1.1GB，经过Zip压缩后为183MB，执行完这个命令花了45.6s，平均吞吐量为24.7MB/s.</p>
-<p>实际上scp也有压缩功能，所以我们可以将上面的命令写成：</p>
-<blockquote>
-<p>scp -C -c blowfish /home/yankay/data yankay01:/home/yankay/data</p>
-</blockquote>
-<p>这样运行效果是相同的，不同之处在于我使用了blowfish算法作为Scp的密匙算法，使用这个算法可以比默认的情况快很多。单单对与scp,使用了blowfish 吞吐量是62MB/s,不使用只有46MB/s。<br>可是我执行上面一条命令的时候，发现还是需要45s。平均吞吐量还为24MB/s。没有丝毫的提升，可见瓶颈不在网络上。</p>
-<p>那瓶颈在哪里呢？</p>
-<h3 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h3><p>我们需要定义一些变量</p>
-<ul>
-<li>压缩工具的压缩比是 CompressRadio</li>
-<li>压缩工具的压缩吞吐是CompressSpeed MB/s</li>
-<li>网络传输的吞吐是 NetSpeed MB/s</li>
-</ul>
-<p>由于使用了管道，管道的性能取决于管道中最慢的部分的性能，所以整体的性能是：</p>
-<p><em>speed=min(NetSpeed/CompressRadio,CompressSpeed)speed=min(NetSpeed/CompressRadio,CompressSpeed)</em> </p>
-<p>当压缩吞吐较网络传输慢的时候，压缩是瓶颈；但网络较慢的时候，网络传输/吞吐 是瓶颈。</p>
-<p>根据现有的测试数据(纯文本)，可以得到表格：<br><img src="http://p1.bpimg.com/567571/c11af617ab99211b.jpg" alt=""><br>可以看出来。在千兆网卡下，使用QuickLZ作为压缩算法，可以达到最高的性能。如果使用SSH作为数据传输通道，则远远没有达到网卡可以达到的最佳性能。在百兆网卡的情况下，各个算法相近。对比下来QuickLZ是有优势的。</p>
-<p>对于不同的数据和不同的机器，可以得出不同的最佳压缩算法。但有一点是肯定的，尽量把瓶颈压在网络上。对于较慢的网络环境，高压缩比的算法会比较有优势；相反对于较快的网络环境，低压缩比的算法会更好。</p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>根据上面的分析结果，我们不能是用SSH作为网络传输通道，可以使用NC这个基本网络工具，提高性能。同时使用qpress作为压缩算法。</p>
-<blockquote>
-<p>scp /usr/bin/qpress yankay01:/usr/bin/qpress<br>ssh yankay01 “nc -l 12345 |  qpress -dio &gt; /home/yankay/data” &amp;<br>qpress -o /home/yankay/data |nc yankay01 12345</p>
-</blockquote>
-<p>第一行是将gpress安装到远程机器上，第二行在远程机器上使用nc监听一个端口，第三行压缩并传送数据。</p>
-<p>执行上面的命令需要2.8s。平均吞吐量为402MB/s,比使用Gzip+Scp快了16倍！！</p>
-<p>根据上文的公式，和自己的数据，可以绘出上面的表格，就可以选择出最适合的压缩算法和传输方式。达到满意的效果。如果是一个长期运行的脚本的话，这么做是值得的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">-A 　将所有的视窗都调整为目前终端机的大小。</div><div class="line">-d &lt;作业名称&gt; 　将指定的screen作业离线。</div><div class="line">-h &lt;行数&gt; 　指定视窗的缓冲区行数。</div><div class="line">-m 　即使目前已在作业中的screen作业，仍强制建立新的screen作业。</div><div class="line">-r &lt;作业名称&gt; 　恢复离线的screen作业。</div><div class="line">-R 　先试图恢复离线的作业。若找不到离线的作业，即建立新的screen作业。</div><div class="line">-s 　指定建立新视窗时，所要执行的shell。</div><div class="line">-S &lt;作业名称&gt; 　指定screen作业的名称。</div><div class="line">-v 　显示版本信息。</div><div class="line">-x 　恢复之前离线的screen作业。</div><div class="line">-ls或--list 　显示目前所有的screen作业。</div><div class="line">-wipe 　检查目前所有的screen作业，并删除已经无法使用的screen作业。</div></pre></td></tr></table></figure>
+<pre><code>使用方法：  
+1.安装screen  
+[root@localhost ~]# yum install screen  
+2.创建一个新窗口，新窗口名称随意  
+[root@localhost ~]# screen -S godben  
+3.此时screen已经启动，使用pstree查看，结果如下：  
+sshd───sshd───bash───screen───screen───bash  
+4.在screen中执行ping www.godben.com命令，然后重启终端，使用screen -r命令恢复之前的screen窗口，发现ping命令还在运行。  
+</code></pre><h4 id="3-command-amp"><a href="#3-command-amp" class="headerlink" title="3. (command &amp;)"></a>3. (command &amp;)</h4><p>在后台命令外加括号，这种方法同样能够屏蔽sigup信号，效果和nohup命令类似，只不过通过jobs命令无法查看该后台程序，因为此时该任务不是当前shell的子进程了，而是init的子进程，因此不会受到sigup命令的影响。</p>
+<p>[root@localhost ~]# ps aux | grep ping<br>root       8314  0.0  0.1 147824  2072 ?        S    20:26   0:00 ping www.baidu.com</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -191,7 +139,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/11/04/Big file transfer in Linux/" data-title="【译】Big file transfer in Linux | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2018/05/07/ 如何保证程序在后台稳定运行/" data-title="如何保证程序在后台稳定运行 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -204,19 +152,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/11/06/IP协议不可靠无连接为什么不把它设计为可靠的/" title="IP协议不可靠无连接 为什么不把它设计为可靠的?">
-  <strong>上一篇：</strong><br/>
-  <span>
-  IP协议不可靠无连接 为什么不把它设计为可靠的?</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/11/04/Linux文件系统ext3与ext4主要区别/"  title="Linux文件系统ext3与ext4主要区别">
+<a href="/2018/05/06/Linux任务计划、周期性任务/"  title="Linux任务计划、周期性任务">
  <strong>下一篇：</strong><br/> 
- <span>Linux文件系统ext3与ext4主要区别
+ <span>Linux任务计划、周期性任务
 </span>
 </a>
 </div>
@@ -225,7 +165,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/11/04/Big file transfer in Linux/" data-title="【译】Big file transfer in Linux" data-url="http://yoursite.com/2016/11/04/Big file transfer in Linux/"></div>
+	<div class="ds-thread" data-thread-key="2018/05/07/ 如何保证程序在后台稳定运行/" data-title="如何保证程序在后台稳定运行" data-url="http://yoursite.com/2018/05/07/ 如何保证程序在后台稳定运行/"></div>
 </section>
 
 
