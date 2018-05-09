@@ -80,25 +80,25 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/28/ssh双机互信搭建/" title="ssh双机互信搭建" itemprop="url">ssh双机互信搭建</a>
+      <a href="/2016/11/15/Convert ext3 to ext4 file system on CentOS/" title="【译】Convert ext3 to ext4 file system on CentOS" itemprop="url">【译】Convert ext3 to ext4 file system on CentOS</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-28T14:49:02.413Z" itemprop="datePublished"> 发表于 2016-11-28</time>
+    <time datetime="2016-11-15T08:28:43.215Z" itemprop="datePublished"> 发表于 2016-11-15</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <p>在 linux 系统管理中，设置免密码登录，进行机器的批量管理是最常用的一个方法。比如针对几十甚至上百台线上机器，通常我们会设置一台“发布机”作为中央控制机对其它线上机器免密码登录，然后进行软件、配置文件的分发、更新、部署。当然了，针对上面的问题，解决方案并非最优且唯一，比如你也可以用 expect 模拟自动输入来完成自动登录验证这一过程，或者用现在一些开源的软件自动化配置和部署工具，比如 Puppet，但这都不在本文的讨论范畴，今天咱们要说的就是这种最原始、最有效、最直接的方式：免密码登录。</p>
+        <p>Ext3 is a journaled file system that is commonly used by the Linux kernel. It is the default file system for many popular Linux distributions, including Debian. Stephen Tweedie. On June 28, 2006, Theodore Ts’o, the principal developer of ext3, announced an enhanced version, called ext4. Today, we will show how to convert ext3 to ext4 format on CentOS.</p>
         
         
         <p class="article-more-link">
           
-            <a href="/2016/11/28/ssh双机互信搭建/#more">阅读更多</a>
+            <a href="/2016/11/15/Convert ext3 to ext4 file system on CentOS/#more">阅读更多</a>
           
        </p>
     </div>
@@ -108,7 +108,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/CentOS/">CentOS</a><a href="/tags/ssh/">ssh</a>
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/FileSystem/">FileSystem</a><a href="/tags/CentOS/">CentOS</a>
   </div>
 
 </div>
@@ -119,7 +119,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2016/11/28/ssh双机互信搭建/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/28/ssh双机互信搭建/" data-count-type="comments">&nbsp;</a>
+		<a href="/2016/11/15/Convert ext3 to ext4 file system on CentOS/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/15/Convert ext3 to ext4 file system on CentOS/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -139,25 +139,25 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/24/Linux 吃掉我的内存/" title="Linux 吃掉我的内存" itemprop="url">Linux 吃掉我的内存</a>
+      <a href="/2016/11/13/Linux用户模式和内核模式/" title="Linux用户模式和内核模式" itemprop="url">Linux用户模式和内核模式</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-24T10:25:31.596Z" itemprop="datePublished"> 发表于 2016-11-24</time>
+    <time datetime="2016-11-13T02:37:49.171Z" itemprop="datePublished"> 发表于 2016-11-13</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <p>在Windows下资源管理器查看内存使用的情况，如果使用率达到80%以上，再运行大程序就能感觉到系统不流畅了，因为在内存紧缺的情况下使用交换分区，频繁地从磁盘上换入换出页会极大地影响系统的性能。而当我们使用free命令查看Linux系统内存使用情况时，会发现内存使用一直处于较高的水平，即使此时系统并没有运行多少软件。这正是Windows和Linux在内存管理上的区别，乍一看，Linux系统吃掉我们的内存（Linux ate my ram），但其实这也正是其内存管理的特点。</p>
+        <p>MS-DOS等操作系统在单一的CPU模式下运行，但是一些类Unix的操作系统则使用了双模式，可以有效地实现时间共享。在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式。除了内核本身处于内核模式以外，所有的用户进程都运行在用户模式之中。<br>内核模式的代码可以无限制地访问所有处理器指令集以及全部内存和I/O空间。如果用户模式的进程要享有此特权，它必须通过系统调用向设备驱动程序或其他内核模式的代码发出请求。另外，用户模式的代码允许发生缺页，而内核模式的代码则不允许。</p>
         
         
         <p class="article-more-link">
           
-            <a href="/2016/11/24/Linux 吃掉我的内存/#more">阅读更多</a>
+            <a href="/2016/11/13/Linux用户模式和内核模式/#more">阅读更多</a>
           
        </p>
     </div>
@@ -167,7 +167,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/CentOS/">CentOS</a>
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Kernel/">Kernel</a>
   </div>
 
 </div>
@@ -178,7 +178,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2016/11/24/Linux 吃掉我的内存/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/24/Linux 吃掉我的内存/" data-count-type="comments">&nbsp;</a>
+		<a href="/2016/11/13/Linux用户模式和内核模式/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/13/Linux用户模式和内核模式/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -198,25 +198,84 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/22/Beginners guide to Linux directory structure/" title="【译】Beginners guide to Linux directory structure" itemprop="url">【译】Beginners guide to Linux directory structure</a>
+      <a href="/2016/11/12/Use rsync to delete mass files quickly in Linux/" title="【译】Use rsync to delete mass files quickly in Linux" itemprop="url">【译】Use rsync to delete mass files quickly in Linux</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-22T05:58:12.781Z" itemprop="datePublished"> 发表于 2016-11-22</time>
+    <time datetime="2016-11-12T08:52:16.829Z" itemprop="datePublished"> 发表于 2016-11-12</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <p>Have you ever looked in your / directory, you’ll see a lot of directories. Here we are presenting beginners guide to linux directory structure explaining what they mean and what are the contents of these directories.</p>
+        <p>Ysterday I encountered an issue to delete many log files in my Linux workstation, there were around 100,000 files to be deleted. These are log files and they grow very fast, and we need to delete them frequently. Usually we would use <strong>rm -rf *</strong> to delete these files, but we may need to wait for a relative long time if there are too many files. So we must adopt some unusual way. Fortunately, we can use <strong>rsync</strong> to delete mass files in one shot.</p>
         
         
         <p class="article-more-link">
           
-            <a href="/2016/11/22/Beginners guide to Linux directory structure/#more">阅读更多</a>
+            <a href="/2016/11/12/Use rsync to delete mass files quickly in Linux/#more">阅读更多</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/11/12/Use rsync to delete mass files quickly in Linux/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/12/Use rsync to delete mass files quickly in Linux/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/11/11/dev_null dev_tty in Linux/" title="【译】/dev/null and /dev/tty in Linux" itemprop="url">【译】/dev/null and /dev/tty in Linux</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
+		
+  <p class="article-time">
+    <time datetime="2016-11-11T09:54:26.959Z" itemprop="datePublished"> 发表于 2016-11-11</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>In Linux, there are two special files /dev/null and /dev/tty. /dev/null will drop all the data written to it, i.e, when program writes data to this file, it means the program has completed the data write operation. But in  fact it does nothing, if you just want the status of a command but not the output of a command, this feature will be very useful. See below shell codes:<br>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2016/11/11/dev_null dev_tty in Linux/#more">阅读更多</a>
           
        </p>
     </div>
@@ -237,7 +296,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2016/11/22/Beginners guide to Linux directory structure/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/22/Beginners guide to Linux directory structure/" data-count-type="comments">&nbsp;</a>
+		<a href="/2016/11/11/dev_null dev_tty in Linux/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/11/dev_null dev_tty in Linux/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -257,25 +316,25 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/18/HTTPS中的加密算法相关概念/" title="HTTPS中的加密算法相关概念" itemprop="url">HTTPS中的加密算法相关概念</a>
+      <a href="/2016/11/11/CentOS启动流程学习笔记/" title="CentOS启动流程学习笔记" itemprop="url">CentOS启动流程学习笔记</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-18T13:56:13.008Z" itemprop="datePublished"> 发表于 2016-11-18</time>
+    <time datetime="2016-11-11T08:02:14.723Z" itemprop="datePublished"> 发表于 2016-11-11</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <p>密码学在计算机科学中使用非常广泛，HTTPS就是建立在密码学基础之上的一种安全的通信协议。HTTPS早在1994年由网景公司首次提出，而如今在众多互联网厂商的推广之下HTTPS已经被广泛使用在各种大小网站中。在完全理解HTTPS之前，有必要弄清楚一些密码学相关的概念，比如：明文、密文、密码、密钥、对称加密、非对称加密、摘要、数字签名、数字证书。</p>
+        <h3 id="一、Linux内核的组成"><a href="#一、Linux内核的组成" class="headerlink" title="一、Linux内核的组成"></a>一、Linux内核的组成</h3><p><strong>相关概念：</strong><br>   Linux系统的组成部分：内核+根文件系统<br>   内核：进程管理、内存管理、网络协议栈、文件系统、驱动程序。<br>   IPC(Inter-Process Communication进程间通信):就是指多个进程之间相互通信，交换信息的方法。Linux IPC基本上都是从Unix平台上继承而来的。主要包括最初的Unix IPC，System V IPC以及基于Socket的IPC。另外，Linux也支持POSIX IPC。<br>
         
         
         <p class="article-more-link">
           
-            <a href="/2016/11/18/HTTPS中的加密算法相关概念/#more">阅读更多</a>
+            <a href="/2016/11/11/CentOS启动流程学习笔记/#more">阅读更多</a>
           
        </p>
     </div>
@@ -285,7 +344,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/HTTP/">HTTP</a><a href="/tags/HTTPS/">HTTPS</a>
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/CentOS/">CentOS</a>
   </div>
 
 </div>
@@ -296,66 +355,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2016/11/18/HTTPS中的加密算法相关概念/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/18/HTTPS中的加密算法相关概念/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/11/16/正则表达式之Multiline和Dotall模式/" title="正则表达式之Multiline和Dotall模式" itemprop="url">正则表达式之Multiline和Dotall模式</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-11-16T10:35:56.465Z" itemprop="datePublished"> 发表于 2016-11-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><strong>Multiline模式</strong><br>如果regexp里出现了^或者$, 那么by default只会匹配第一行。设置了Multiline,会匹配所有行。<br>比如：<br>regexp: /^.*AAA.*$/<br>src: “abcBBBdef/nsdfAAAfff/nsdf”<br>without Multiline: 匹配失败<br>with Multiline: 匹配成功</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/11/16/正则表达式之Multiline和Dotall模式/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Regex/">Regex</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/11/16/正则表达式之Multiline和Dotall模式/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/16/正则表达式之Multiline和Dotall模式/" data-count-type="comments">&nbsp;</a>
+		<a href="/2016/11/11/CentOS启动流程学习笔记/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/11/CentOS启动流程学习笔记/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -371,7 +371,7 @@
 
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
   </nav>
 
 </div>
@@ -389,7 +389,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>28</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>25</sup></a></li>
 			
 		
 			
@@ -397,23 +397,15 @@
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>5</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Kernel/" title="Kernel">Kernel<sup>3</sup></a></li>
+				<li><a href="/tags/Kernel/" title="Kernel">Kernel<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/TCP-IP/" title="TCP/IP">TCP/IP<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/HTTP/" title="HTTP">HTTP<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>2</sup></a></li>
+				<li><a href="/tags/TCP-IP/" title="TCP/IP">TCP/IP<sup>2</sup></a></li>
 			
 		
 			
@@ -425,15 +417,7 @@
 			
 		
 			
-				<li><a href="/tags/HTTPS/" title="HTTPS">HTTPS<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
 			
 		
 			
@@ -441,7 +425,7 @@
 			
 		
 			
-				<li><a href="/tags/Linux-regex/" title="Linux,regex">Linux,regex<sup>1</sup></a></li>
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
 			
 		
 			
@@ -449,7 +433,7 @@
 			
 		
 			
-				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+				<li><a href="/tags/Linux-regex/" title="Linux,regex">Linux,regex<sup>1</sup></a></li>
 			
 		
 			
@@ -461,11 +445,7 @@
 			
 		
 			
-				<li><a href="/tags/Virtualization/" title="Virtualization">Virtualization<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/VMWARE/" title="VMWARE">VMWARE<sup>1</sup></a></li>
+				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
 			
 		
 		</ul>
