@@ -12,30 +12,36 @@
 
     
     <meta name="description" content="sudo
-  sudo命令能让一个用户以某个用户的身份去执行命令，例如可以让普通用户以root身份查看/etc/shadow文件    sudo与直接用root身份执行的区别：
+  sudo命令能让一个用户以某个用户的身份去执行命令，例如可以让普通用户以root身份查看/etc/shadow文件
+
+sudo与直接用root身份执行的区别：
 1. 使用sudo可以不需要知道root密码，可以给某用户在一段时间内拥有某些命令的root操作权限。
 2. sudo可以保持当前用户的环境变量
 3. sudo便于审计，系统审计日志会记录具体对应用户执行的命令
-4. su">
+4. sudo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sudo">
 <meta property="og:url" content="http://yoursite.com/2018/05/28/sudo/index.html">
 <meta property="og:site_name" content="godben's blog">
 <meta property="og:description" content="sudo
-  sudo命令能让一个用户以某个用户的身份去执行命令，例如可以让普通用户以root身份查看/etc/shadow文件    sudo与直接用root身份执行的区别：
+  sudo命令能让一个用户以某个用户的身份去执行命令，例如可以让普通用户以root身份查看/etc/shadow文件
+
+sudo与直接用root身份执行的区别：
 1. 使用sudo可以不需要知道root密码，可以给某用户在一段时间内拥有某些命令的root操作权限。
 2. sudo可以保持当前用户的环境变量
 3. sudo便于审计，系统审计日志会记录具体对应用户执行的命令
-4. su">
-<meta property="og:updated_time" content="2018-05-28T13:56:51.170Z">
+4. sudo">
+<meta property="og:updated_time" content="2018-05-28T14:18:29.943Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sudo">
 <meta name="twitter:description" content="sudo
-  sudo命令能让一个用户以某个用户的身份去执行命令，例如可以让普通用户以root身份查看/etc/shadow文件    sudo与直接用root身份执行的区别：
+  sudo命令能让一个用户以某个用户的身份去执行命令，例如可以让普通用户以root身份查看/etc/shadow文件
+
+sudo与直接用root身份执行的区别：
 1. 使用sudo可以不需要知道root密码，可以给某用户在一段时间内拥有某些命令的root操作权限。
 2. sudo可以保持当前用户的环境变量
 3. sudo便于审计，系统审计日志会记录具体对应用户执行的命令
-4. su">
+4. sudo">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -111,13 +117,14 @@
 	<div class="article-content">
 		
 		<h4 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h4><blockquote>
-<p>  sudo命令能让一个用户以某个用户的身份去执行命令，例如可以让普通用户以root身份查看/etc/shadow文件<br>    sudo与直接用root身份执行的区别：</p>
-<pre><code>1. 使用sudo可以不需要知道root密码，可以给某用户在一段时间内拥有某些命令的root操作权限。
+<p>  sudo命令能让一个用户以某个用户的身份去执行命令，例如可以让普通用户以root身份查看/etc/shadow文件</p>
+</blockquote>
+<pre><code>sudo与直接用root身份执行的区别：
+1. 使用sudo可以不需要知道root密码，可以给某用户在一段时间内拥有某些命令的root操作权限。
 2. sudo可以保持当前用户的环境变量
 3. sudo便于审计，系统审计日志会记录具体对应用户执行的命令
 4. sudo使用时间戳文件来完成类似“检票”的系统，默认存活期为5分钟的“入场券” 
-</code></pre></blockquote>
-<a id="more"></a>    
+</code></pre><a id="more"></a>    
 <h5 id="sudo相关参数"><a href="#sudo相关参数" class="headerlink" title="sudo相关参数"></a>sudo相关参数</h5><p>1./etc/sudoers，sudo的授权文件，只有root能够编辑<br>visudo：专用的sudoers文本编辑工具</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">shell&gt; visudo     </div><div class="line">## hostname or IP addresses instead.   # 主机别名Host_Alias</div><div class="line"># Host_Alias     FILESERVERS = fs1, fs2</div><div class="line"># Host_Alias     MAILSERVERS = smtp, smtp2</div><div class="line"></div><div class="line">## User Aliases           # 用户别名User_Alias</div><div class="line"># User_Alias ADMINS = jsmith, mikem</div><div class="line"></div><div class="line">## Command Aliases        # 命令别名</div><div class="line"># Cmnd_Alias SERVICES = /sbin/service, /sbin/chkconfig</div><div class="line"># Cmnd_Alias LOCATE = /usr/bin/updatedb</div><div class="line"> </div><div class="line">root    ALL=(ALL)       ALL   # sudo权限的配置</div><div class="line"># %sys ALL = NETWORKING, SOFTWARE, SERVICES, STORAGE, DELEGATING, PROCESSES, LOCATE, DRIVERS</div><div class="line">## Allows people in group wheel to run all commands</div><div class="line"># %wheel        ALL=(ALL)       ALL</div><div class="line">## Same thing without a password</div><div class="line"># %wheel        ALL=(ALL)       NOPASSWD: ALL</div></pre></td></tr></table></figure>
 <p>授权规则格式：  用户 登入主机=(代表用户) 命令<br>示例：          root ALL=(ALL)           ALL<br>格式说明：<br>user: 运行命令者的身份<br>host: 表示该用户可以在哪些主机上运行sudo，可以用hostname也可以用ip指定<br>(runas)：以哪个用户的身份<br>command: 允许执行和不允许执行的命令(多个命令间用逗号分隔)和特殊权限，命令可以带其选项及参数。命令要写绝对路径。不允许执行的命令需要在命令前加上”!”来表示。可以使用标签，如NOPASSWD标签表示切换或以指定用户执行该标签后的命令时不需要输入密码。一行写不下时可使用”\”续行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">别名定义：</div><div class="line">User_Alias   NAME = item1,item2,item3,….</div><div class="line"></div><div class="line">item:可以是用户名，%组名，#UID,$#GID,User_Alias</div><div class="line"></div><div class="line">HOST别名定义：</div><div class="line"></div><div class="line">Host_Alias  NAME = item1,item2,item3,….</div><div class="line"></div><div class="line">item:可以是hostname，ip，network，Host_Alias</div><div class="line"></div><div class="line">WHOM别名定义：</div><div class="line"></div><div class="line">Runas_Alias  NAME = item1,item2,item3,….</div><div class="line"></div><div class="line">item:可以是用户名，%组名，#UID,$#GID,User_Alias</div><div class="line"></div><div class="line">COMMANDb别名定义：</div><div class="line"></div><div class="line">Cmnd_Alias  NAME = item1,item2,item3,…..</div><div class="line"></div><div class="line">item:可以是命令，目录(目录下的所有命令)，”sudoedit”,Cmnd_Alias</div></pre></td></tr></table></figure></p>
