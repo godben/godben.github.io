@@ -80,25 +80,84 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/11/dev_null dev_tty in Linux/" title="【译】/dev/null and /dev/tty in Linux" itemprop="url">【译】/dev/null and /dev/tty in Linux</a>
+      <a href="/2016/11/28/ssh双机互信搭建/" title="ssh双机互信搭建" itemprop="url">ssh双机互信搭建</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-11T09:54:26.959Z" itemprop="datePublished"> 发表于 2016-11-11</time>
+    <time datetime="2016-11-28T14:49:02.413Z" itemprop="datePublished"> 发表于 2016-11-28</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <p>In Linux, there are two special files /dev/null and /dev/tty. /dev/null will drop all the data written to it, i.e, when program writes data to this file, it means the program has completed the data write operation. But in  fact it does nothing, if you just want the status of a command but not the output of a command, this feature will be very useful. See below shell codes:<br>
+        <p>在 linux 系统管理中，设置免密码登录，进行机器的批量管理是最常用的一个方法。比如针对几十甚至上百台线上机器，通常我们会设置一台“发布机”作为中央控制机对其它线上机器免密码登录，然后进行软件、配置文件的分发、更新、部署。当然了，针对上面的问题，解决方案并非最优且唯一，比如你也可以用 expect 模拟自动输入来完成自动登录验证这一过程，或者用现在一些开源的软件自动化配置和部署工具，比如 Puppet，但这都不在本文的讨论范畴，今天咱们要说的就是这种最原始、最有效、最直接的方式：免密码登录。</p>
         
         
         <p class="article-more-link">
           
-            <a href="/2016/11/11/dev_null dev_tty in Linux/#more">阅读更多</a>
+            <a href="/2016/11/28/ssh双机互信搭建/#more">阅读更多</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/CentOS/">CentOS</a><a href="/tags/ssh/">ssh</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/11/28/ssh双机互信搭建/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/28/ssh双机互信搭建/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/11/22/Beginners guide to Linux directory structure/" title="【译】Beginners guide to Linux directory structure" itemprop="url">【译】Beginners guide to Linux directory structure</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
+		
+  <p class="article-time">
+    <time datetime="2016-11-22T05:58:12.781Z" itemprop="datePublished"> 发表于 2016-11-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>Have you ever looked in your / directory, you’ll see a lot of directories. Here we are presenting beginners guide to linux directory structure explaining what they mean and what are the contents of these directories.</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2016/11/22/Beginners guide to Linux directory structure/#more">阅读更多</a>
           
        </p>
     </div>
@@ -119,7 +178,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2016/11/11/dev_null dev_tty in Linux/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/11/dev_null dev_tty in Linux/" data-count-type="comments">&nbsp;</a>
+		<a href="/2016/11/22/Beginners guide to Linux directory structure/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/22/Beginners guide to Linux directory structure/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -139,25 +198,25 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/11/CentOS启动流程学习笔记/" title="CentOS启动流程学习笔记" itemprop="url">CentOS启动流程学习笔记</a>
+      <a href="/2016/11/16/正则表达式之Multiline和Dotall模式/" title="正则表达式之Multiline和Dotall模式" itemprop="url">正则表达式之Multiline和Dotall模式</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-11T08:02:14.723Z" itemprop="datePublished"> 发表于 2016-11-11</time>
+    <time datetime="2016-11-16T10:35:56.465Z" itemprop="datePublished"> 发表于 2016-11-16</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <h3 id="一、Linux内核的组成"><a href="#一、Linux内核的组成" class="headerlink" title="一、Linux内核的组成"></a>一、Linux内核的组成</h3><p><strong>相关概念：</strong><br>   Linux系统的组成部分：内核+根文件系统<br>   内核：进程管理、内存管理、网络协议栈、文件系统、驱动程序。<br>   IPC(Inter-Process Communication进程间通信):就是指多个进程之间相互通信，交换信息的方法。Linux IPC基本上都是从Unix平台上继承而来的。主要包括最初的Unix IPC，System V IPC以及基于Socket的IPC。另外，Linux也支持POSIX IPC。<br>
+        <p><strong>Multiline模式</strong><br>如果regexp里出现了^或者$, 那么by default只会匹配第一行。设置了Multiline,会匹配所有行。<br>比如：<br>regexp: /^.*AAA.*$/<br>src: “abcBBBdef/nsdfAAAfff/nsdf”<br>without Multiline: 匹配失败<br>with Multiline: 匹配成功</p>
         
         
         <p class="article-more-link">
           
-            <a href="/2016/11/11/CentOS启动流程学习笔记/#more">阅读更多</a>
+            <a href="/2016/11/16/正则表达式之Multiline和Dotall模式/#more">阅读更多</a>
           
        </p>
     </div>
@@ -167,7 +226,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/CentOS/">CentOS</a>
+  <span></span> <a href="/tags/Regex/">Regex</a>
   </div>
 
 </div>
@@ -178,7 +237,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2016/11/11/CentOS启动流程学习笔记/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/11/CentOS启动流程学习笔记/" data-count-type="comments">&nbsp;</a>
+		<a href="/2016/11/16/正则表达式之Multiline和Dotall模式/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/16/正则表达式之Multiline和Dotall模式/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -198,26 +257,25 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/06/非root用户正常使用wireshark方法/" title="非root用户正常使用wireshark方法" itemprop="url">非root用户正常使用wireshark方法</a>
+      <a href="/2016/11/15/Convert ext3 to ext4 file system on CentOS/" title="【译】Convert ext3 to ext4 file system on CentOS" itemprop="url">【译】Convert ext3 to ext4 file system on CentOS</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-06T04:43:09.115Z" itemprop="datePublished"> 发表于 2016-11-06</time>
+    <time datetime="2016-11-15T08:28:43.215Z" itemprop="datePublished"> 发表于 2016-11-15</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <p>今天在linux环境下运行wireshark抓包，安装好wireshark后，开始抓包总是报错，内容如下：<br><strong> The capture session could not be initiated (failed to set hardware filter to promiscuous mode) </strong><br><strong> Please check to make sure you have sufficient permissions, and that you have</strong></p>
-<p>查询解决方法，结果是将选项中的混杂模式关闭，关闭后仍然报错，继续查询，突然想起来可能是用户权限问题，然后用sudo wireshark打开wireshark就正常了，但是wireshark官方不推荐这么做：<br>
+        <p>Ext3 is a journaled file system that is commonly used by the Linux kernel. It is the default file system for many popular Linux distributions, including Debian. Stephen Tweedie. On June 28, 2006, Theodore Ts’o, the principal developer of ext3, announced an enhanced version, called ext4. Today, we will show how to convert ext3 to ext4 format on CentOS.</p>
         
         
         <p class="article-more-link">
           
-            <a href="/2016/11/06/非root用户正常使用wireshark方法/#more">阅读更多</a>
+            <a href="/2016/11/15/Convert ext3 to ext4 file system on CentOS/#more">阅读更多</a>
           
        </p>
     </div>
@@ -227,7 +285,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Wireshark/">Wireshark</a>
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/FileSystem/">FileSystem</a><a href="/tags/CentOS/">CentOS</a>
   </div>
 
 </div>
@@ -238,7 +296,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2016/11/06/非root用户正常使用wireshark方法/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/06/非root用户正常使用wireshark方法/" data-count-type="comments">&nbsp;</a>
+		<a href="/2016/11/15/Convert ext3 to ext4 file system on CentOS/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/15/Convert ext3 to ext4 file system on CentOS/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -258,26 +316,25 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/11/06/IP协议不可靠无连接为什么不把它设计为可靠的/" title="IP协议不可靠无连接 为什么不把它设计为可靠的?" itemprop="url">IP协议不可靠无连接 为什么不把它设计为可靠的?</a>
+      <a href="/2016/11/13/Linux用户模式和内核模式/" title="Linux用户模式和内核模式" itemprop="url">Linux用户模式和内核模式</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-06T04:36:09.242Z" itemprop="datePublished"> 发表于 2016-11-06</time>
+    <time datetime="2016-11-13T02:37:49.171Z" itemprop="datePublished"> 发表于 2016-11-13</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <p>因特网使用的IP协议是无连接的，因此其传输是不可靠的。这样容易使人们感到因特网很不可靠，那为什么当初不直接把它设计为可靠的?</p>
-<p>先打一个比方。邮局寄送的平信很像无连接的IP数据报。每封平信可能走不同的传送路径，同时平信也不保证不丢失。当我们发现收信人没有收到寄出的平信时，去找邮局索赔是没有用的。邮局会说：“平信不保证不丢失。怕丢失就请你寄挂号信”。但是大家并不会将所有的信件都用挂号方式邮寄，这是因为邮局从来不会随意地将平信丢弃，而丢失平信的概率并不大，况且寄挂号信要多花些钱，还要去邮局排队，太麻烦。总之，尽管寄平信有可能会丢失，但绝大多数的信件还是平信，因为寄平信方便、便宜。<br>
+        <p>MS-DOS等操作系统在单一的CPU模式下运行，但是一些类Unix的操作系统则使用了双模式，可以有效地实现时间共享。在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式。除了内核本身处于内核模式以外，所有的用户进程都运行在用户模式之中。<br>内核模式的代码可以无限制地访问所有处理器指令集以及全部内存和I/O空间。如果用户模式的进程要享有此特权，它必须通过系统调用向设备驱动程序或其他内核模式的代码发出请求。另外，用户模式的代码允许发生缺页，而内核模式的代码则不允许。</p>
         
         
         <p class="article-more-link">
           
-            <a href="/2016/11/06/IP协议不可靠无连接为什么不把它设计为可靠的/#more">阅读更多</a>
+            <a href="/2016/11/13/Linux用户模式和内核模式/#more">阅读更多</a>
           
        </p>
     </div>
@@ -287,7 +344,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/TCP-IP/">TCP/IP</a>
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Kernel/">Kernel</a>
   </div>
 
 </div>
@@ -298,66 +355,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2016/11/06/IP协议不可靠无连接为什么不把它设计为可靠的/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/06/IP协议不可靠无连接为什么不把它设计为可靠的/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/11/04/Big file transfer in Linux/" title="【译】Big file transfer in Linux" itemprop="url">【译】Big file transfer in Linux</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2016-11-04T14:32:37.575Z" itemprop="datePublished"> 发表于 2016-11-04</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>It’s very common that we need to transfer files between two different hosts such as backups. It is also an very simple task, we can use scp or rsync to complete the task well. But what if the file is very big, it may take some time to transfer it. How can we transfer a big file with high speed? Here we propose one solution.<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/11/04/Big file transfer in Linux/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/11/04/Big file transfer in Linux/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/04/Big file transfer in Linux/" data-count-type="comments">&nbsp;</a>
+		<a href="/2016/11/13/Linux用户模式和内核模式/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/11/13/Linux用户模式和内核模式/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -373,7 +371,7 @@
 
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
   </nav>
 
 </div>
@@ -391,7 +389,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>27</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>33</sup></a></li>
 			
 		
 			

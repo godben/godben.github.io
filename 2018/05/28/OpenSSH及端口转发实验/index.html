@@ -1,0 +1,622 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>OpenSSH及端口转发实验 | godben&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="godben">
+    
+
+    
+    <meta name="description" content="ssh: secure shell, protocol, 22/tcp, 安全的远程登陆,ssh协议有v1和v2两个版本，现在使用的都是v2版，v1已经不安全了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenSSH及端口转发实验">
+<meta property="og:url" content="http://yoursite.com/2018/05/28/OpenSSH及端口转发实验/index.html">
+<meta property="og:site_name" content="godben's blog">
+<meta property="og:description" content="ssh: secure shell, protocol, 22/tcp, 安全的远程登陆,ssh协议有v1和v2两个版本，现在使用的都是v2版，v1已经不安全了">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/27/ChOpQO.md.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/27/ChOqc8.png">
+<meta property="og:updated_time" content="2018-05-28T13:53:56.121Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenSSH及端口转发实验">
+<meta name="twitter:description" content="ssh: secure shell, protocol, 22/tcp, 安全的远程登陆,ssh协议有v1和v2两个版本，现在使用的都是v2版，v1已经不安全了">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/05/27/ChOpQO.md.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="godben&#39;s blog" title="godben&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="godben&#39;s blog">godben&#39;s blog</a></h1>
+				<h2 class="blog-motto">博观而约取 厚积而薄发</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/photo/index.html">摄影</a></li>
+					
+						<li><a href="/about">留言板</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/05/28/OpenSSH及端口转发实验/" title="OpenSSH及端口转发实验" itemprop="url">OpenSSH及端口转发实验</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
+		
+  <p class="article-time">
+    <time datetime="2018-05-28T13:54:04.344Z" itemprop="datePublished"> 发表于 2018-05-28</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<blockquote>
+<p>ssh: secure shell, protocol, 22/tcp, 安全的远程登陆,ssh协议有v1和v2两个版本，现在使用的都是v2版，v1已经不安全了</p>
+</blockquote>
+<a id="more"></a>
+<p>OpenSSH： ssh协议的开源实现</p>
+<blockquote>
+<p>ssh两种方式的用户登录认证：<br>    基于password<br>    基于key</p>
+</blockquote>
+<h3 id="OpenSSH"><a href="#OpenSSH" class="headerlink" title="OpenSSH:"></a>OpenSSH:</h3><h5 id="常见客户端工具："><a href="#常见客户端工具：" class="headerlink" title="常见客户端工具："></a>常见客户端工具：</h5><pre><code>Windows客户端：xshell, putty, secureCRT
+Linux客户端：ssh、sftp、scp、slogin
+</code></pre><p><strong>客户端组件：</strong></p>
+<blockquote>
+<p>ssh配置文件：/etc/ssh/ssh_config</p>
+</blockquote>
+<p><strong>ssh命令格式：</strong></p>
+<pre><code>ssh [user@]host [COMMAND]
+ssh [-l user] host [COMMAND]
+
+选项：
+-p port：远程服务器监听的端口
+-l username：指定用户名
+-b IP：指定连接的源IP（自己主机的IP）
+-v：调试模式
+-C：压缩方式
+-X：支持x11转发
+-Y：支持信任x11转发
+-t：强制伪tty分配，例：ssh -t remoteserver1 ssh remoteserver2
+-f 后台启用
+-N 不打开远程shell，处于等待状态
+-g 启用网关功能
+</code></pre><h5 id="基于密钥的认证"><a href="#基于密钥的认证" class="headerlink" title="基于密钥的认证:"></a>基于密钥的认证:</h5><p>1.在客户端生成密钥对儿</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@CA ~]# ssh-keygen -t rsa -P &apos;&apos; -f &apos;/root/.ssh/id_rsa&apos;</div></pre></td></tr></table></figure>
+<p>2.把公钥传输至远程服务器对应用户的家目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@CA ~]# ssh-copy-id -i .ssh/id_rsa.pub root@172.20.103.50</div></pre></td></tr></table></figure>
+<p>3.测试</p>
+<h3 id="scp命令："><a href="#scp命令：" class="headerlink" title="scp命令："></a>scp命令：</h3><blockquote>
+<p>scp命令格式： scp [options] SRC… DEST/</p>
+</blockquote>
+<p>存在两种情形：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">PULL: scp [options] [user@]host:/PATH/FROM/SOMEFILE /PATH/TO/SOMEWHERE</div><div class="line">PUSH: scp [options] /PATH/FROM/SOMEFILE [user@]host:/PATH/TO/SOMEWHERE</div><div class="line"></div><div class="line">常用选项：</div><div class="line">-r:递归复制</div><div class="line">-p:保持文件原属性信息</div><div class="line">-q:静默模式</div><div class="line">-P PORT:指明remote host的监听的端口</div></pre></td></tr></table></figure>
+<h3 id="sftp命令："><a href="#sftp命令：" class="headerlink" title="sftp命令："></a>sftp命令：</h3><blockquote>
+<p>sftp命令格式： [user@] host</p>
+</blockquote>
+<h3 id="服务器端sshd："><a href="#服务器端sshd：" class="headerlink" title="服务器端sshd："></a>服务器端sshd：</h3><blockquote>
+<p>配置文件：/etc/ssh/sshd_config  </p>
+<p>#加空格的是注释  </p>
+<p>#不带空格的是可启用的指令或选项<br>常用参数：<br>Port 22<br>ListenAddress ip<br>PermitRootLogin yes  </p>
+</blockquote>
+<hr>
+<h3 id="端口转发"><a href="#端口转发" class="headerlink" title="端口转发"></a>端口转发</h3><p>SSH会自动加密和解密所有SSH客户端与服务端之间的网络数据。但是，SSH 还能够将其他 TCP 端口的网络数据通过 SSH 链接来转发，并且自动提供了相应的加密及解密服务。这一过程也被叫做“隧道”（tunneling），这是因为 SSH 为其他 TCP 链接提供了一个安全的通道来进行传输而得名。<br>例如，Telnet，SMTP，LDAP 这些 TCP 应用均能够从中得益，避免了用户名，密码以及隐私信息的明文传输。而与此同时，如果工作环境中的防火墙限制了一些网络端口的使用，但是允许 SSH 的连接，也能够通过将 TCP 端口转发来使用 SSH 进行通讯。</p>
+<h6 id="SSH-端口转发能够提供两大功能："><a href="#SSH-端口转发能够提供两大功能：" class="headerlink" title="SSH 端口转发能够提供两大功能："></a>SSH 端口转发能够提供两大功能：</h6><blockquote>
+<p>1.加密 SSH Client 端至 SSH Server 端之间的通讯数据<br>2.突破防火墙的限制完成一些之前无法建立的 TCP 连接</p>
+</blockquote>
+<h6 id="SSH端口转发提供的类型有："><a href="#SSH端口转发提供的类型有：" class="headerlink" title="SSH端口转发提供的类型有："></a>SSH端口转发提供的类型有：</h6><ul>
+<li><p>本地转发<br>   <strong>Data &lt;–&gt; localhost:9527 &lt;–&gt;localhost:xxxxx &lt;–&gt; sshsrv:22 &lt;–&gt;sshsrv:yyyyy &lt;–&gt; telnetsrv:23</strong></p>
+</li>
+<li><p>远程转发<br> <strong>Data &lt;–&gt; sshsrv:9527 &lt;–&gt; sshsrv:22 &lt;–&gt; localhost:xxxxx &lt;–&gt; localhost:yyyyy &lt;–&gt; telnetsrv:23</strong></p>
+</li>
+<li>动态转发   </li>
+<li>X协议转发  </li>
+</ul>
+<h4 id="实验一：模拟SSH本地端口转发"><a href="#实验一：模拟SSH本地端口转发" class="headerlink" title="实验一：模拟SSH本地端口转发"></a>实验一：模拟SSH本地端口转发</h4><p><a href="https://imgchr.com/i/ChOpQO" target="_blank" rel="external"><img src="https://s1.ax1x.com/2018/05/27/ChOpQO.md.png" alt=""></a><br>应用场景：当外部客户端想要访问公司内网的Telnet服务器时，由于防火墙限制无法直接访问，可使用SSH本地端口转发实现：</p>
+<p>实验环境：<br>客户端：192.168.3.56<br>SSH服务器：192.168.3.33<br>telnet服务器：192.168.3.34  </p>
+<h6 id="1-为模拟防火墙，在telnet服务器加上iptebles策略："><a href="#1-为模拟防火墙，在telnet服务器加上iptebles策略：" class="headerlink" title="1.为模拟防火墙，在telnet服务器加上iptebles策略："></a>1.为模拟防火墙，在telnet服务器加上iptebles策略：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@telnet-server ~]# iptables -F</div><div class="line">[root@telnet-server ~]# iptables -A INPUT -s 192.168.3.56 -j REJECT</div></pre></td></tr></table></figure>
+<p>此时客户端无法ping通telnet服务器</p>
+<h6 id="2-telnet服务器安装telnet-server"><a href="#2-telnet服务器安装telnet-server" class="headerlink" title="2.telnet服务器安装telnet-server"></a>2.telnet服务器安装telnet-server</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@telnet-server ~]# yum install telnet-server</div><div class="line">[root@telnet-server ~]# service xinted start                       </div><div class="line">[root@telnet-server ~]# chkconfig telnet on                       </div><div class="line">[root@telnet-server ~]# service xinted restart</div></pre></td></tr></table></figure>
+<h6 id="3-客户端操作"><a href="#3-客户端操作" class="headerlink" title="3. 客户端操作"></a>3. 客户端操作</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[root@client ~]# ssh -L 9527:192.168.3.34:23 -Nf 192.168.3.33</div><div class="line">root@192.168.3.33&apos;s password: </div><div class="line">[root@client ~]# telnet 127.0.0.1 9527</div><div class="line">Trying 127.0.0.1...</div><div class="line">Connected to 127.0.0.1.</div><div class="line">Escape character is &apos;^]&apos;.</div><div class="line">CentOS release 6.9 (Final)</div><div class="line">Kernel 2.6.32-696.el6.x86_64 on an x86_64</div><div class="line">telnet-server login: </div><div class="line">Password: </div><div class="line">选项：  </div><div class="line">    -f 后台启用     </div><div class="line">    -N 不打开远程shell，处于等待状态    </div><div class="line">    -g 启用网关功能</div></pre></td></tr></table></figure>
+<h4 id="实验二：模拟SSH远程端口转发"><a href="#实验二：模拟SSH远程端口转发" class="headerlink" title="实验二：模拟SSH远程端口转发"></a>实验二：模拟SSH远程端口转发</h4><p><img src="https://s1.ax1x.com/2018/05/27/ChOqc8.png" alt=""><br>应用场景：当外部有工程师想要临时访问内部telnet服务器时，作为系统管理员，我们可以将对方主机作为SSH服务器进行端口转发，让其临时可访问公司的telnet服务器。</p>
+<p>实验环境：<br>SSH服务器：192.168.3.56<br>客户端：192.168.3.33<br>telnet服务器：192.168.3.34  </p>
+<h6 id="1-在客户端操作，此时客户端为局域网内主机"><a href="#1-在客户端操作，此时客户端为局域网内主机" class="headerlink" title="1.在客户端操作，此时客户端为局域网内主机"></a>1.在客户端操作，此时客户端为局域网内主机</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@lanserver ~]# ssh -R 9527:192.168.3.34:23 -Nf 192.168.3.56</div></pre></td></tr></table></figure>
+<h6 id="2-在SSH服务器操作，此时SSH服务器为外网主机"><a href="#2-在SSH服务器操作，此时SSH服务器为外网主机" class="headerlink" title="2.在SSH服务器操作，此时SSH服务器为外网主机"></a>2.在SSH服务器操作，此时SSH服务器为外网主机</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@internet ~]# telnet 127.0.0.1 9527</div><div class="line">Trying 127.0.0.1...</div><div class="line">Connected to 127.0.0.1.</div><div class="line">Escape character is &apos;^]&apos;.</div><div class="line">CentOS release 6.9 (Final)</div><div class="line">Kernel 2.6.32-696.el6.x86_64 on an x86_64</div><div class="line">telnet-server login: </div><div class="line">Password:</div></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2018/05/28/OpenSSH及端口转发实验/" data-title="OpenSSH及端口转发实验 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2018/05/28/cobbler无人值守批量安装Linux系统/" title="cobbler无人值守批量安装Linux系统">
+  <strong>上一篇：</strong><br/>
+  <span>
+  cobbler无人值守批量安装Linux系统</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/05/28/搭建DHCP服务器/"  title="搭建DHCP服务器">
+ <strong>下一篇：</strong><br/> 
+ <span>搭建DHCP服务器
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2018/05/28/OpenSSH及端口转发实验/" data-title="OpenSSH及端口转发实验" data-url="http://yoursite.com/2018/05/28/OpenSSH及端口转发实验/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>33</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/FileSystem/" title="FileSystem">FileSystem<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Kernel/" title="Kernel">Kernel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/TCP-IP/" title="TCP/IP">TCP/IP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ssh/" title="ssh">ssh<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux-regex/" title="Linux,regex">Linux,regex<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://godben.blog.51cto.com/" target="_blank" title="我的51CTO博客">我的51CTO博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://linux.cn/" target="_blank" title="Linux中国">Linux中国</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.liaoxuefeng.com/" target="_blank" title="廖雪峰官网">廖雪峰官网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.ruanyifeng.com/home.html" target="_blank" title="阮一峰博客">阮一峰博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.csdn.net/" target="_blank" title="CSDN">CSDN</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://bbs.ithome.com/" target="_blank" title="IT之家">IT之家</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.itpub.net/" target="_blank" title="ITPUB">ITPUB</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=1783437385&verifier=9cb9c6df&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m CAO BEN. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/caoben88" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/godben" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/godben" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:godben@sina.cn" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="godben">godben</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"godben"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?f6dbd6c2451b74e4a750f748a54d11e9";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

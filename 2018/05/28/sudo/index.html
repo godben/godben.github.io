@@ -1,0 +1,566 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>sudo | godben&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="godben">
+    
+
+    
+    <meta name="description" content="sudo
+  sudo命令能让一个用户以某个用户的身份去执行命令，例如可以让普通用户以root身份查看/etc/shadow文件    sudo与直接用root身份执行的区别：
+1. 使用sudo可以不需要知道root密码，可以给某用户在一段时间内拥有某些命令的root操作权限。
+2. sudo可以保持当前用户的环境变量
+3. sudo便于审计，系统审计日志会记录具体对应用户执行的命令
+4. su">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sudo">
+<meta property="og:url" content="http://yoursite.com/2018/05/28/sudo/index.html">
+<meta property="og:site_name" content="godben's blog">
+<meta property="og:description" content="sudo
+  sudo命令能让一个用户以某个用户的身份去执行命令，例如可以让普通用户以root身份查看/etc/shadow文件    sudo与直接用root身份执行的区别：
+1. 使用sudo可以不需要知道root密码，可以给某用户在一段时间内拥有某些命令的root操作权限。
+2. sudo可以保持当前用户的环境变量
+3. sudo便于审计，系统审计日志会记录具体对应用户执行的命令
+4. su">
+<meta property="og:updated_time" content="2018-05-28T13:56:51.170Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sudo">
+<meta name="twitter:description" content="sudo
+  sudo命令能让一个用户以某个用户的身份去执行命令，例如可以让普通用户以root身份查看/etc/shadow文件    sudo与直接用root身份执行的区别：
+1. 使用sudo可以不需要知道root密码，可以给某用户在一段时间内拥有某些命令的root操作权限。
+2. sudo可以保持当前用户的环境变量
+3. sudo便于审计，系统审计日志会记录具体对应用户执行的命令
+4. su">
+
+    
+    <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="godben&#39;s blog" title="godben&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="godben&#39;s blog">godben&#39;s blog</a></h1>
+				<h2 class="blog-motto">博观而约取 厚积而薄发</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/photo/index.html">摄影</a></li>
+					
+						<li><a href="/about">留言板</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/05/28/sudo/" title="sudo" itemprop="url">sudo</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
+		
+  <p class="article-time">
+    <time datetime="2018-05-28T13:57:00.328Z" itemprop="datePublished"> 发表于 2018-05-28</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<h4 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h4><blockquote>
+<p>  sudo命令能让一个用户以某个用户的身份去执行命令，例如可以让普通用户以root身份查看/etc/shadow文件<br>    sudo与直接用root身份执行的区别：</p>
+<pre><code>1. 使用sudo可以不需要知道root密码，可以给某用户在一段时间内拥有某些命令的root操作权限。
+2. sudo可以保持当前用户的环境变量
+3. sudo便于审计，系统审计日志会记录具体对应用户执行的命令
+4. sudo使用时间戳文件来完成类似“检票”的系统，默认存活期为5分钟的“入场券” 
+</code></pre></blockquote>
+<a id="more"></a>    
+<h5 id="sudo相关参数"><a href="#sudo相关参数" class="headerlink" title="sudo相关参数"></a>sudo相关参数</h5><p>1./etc/sudoers，sudo的授权文件，只有root能够编辑<br>visudo：专用的sudoers文本编辑工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">shell&gt; visudo     </div><div class="line">## hostname or IP addresses instead.   # 主机别名Host_Alias</div><div class="line"># Host_Alias     FILESERVERS = fs1, fs2</div><div class="line"># Host_Alias     MAILSERVERS = smtp, smtp2</div><div class="line"></div><div class="line">## User Aliases           # 用户别名User_Alias</div><div class="line"># User_Alias ADMINS = jsmith, mikem</div><div class="line"></div><div class="line">## Command Aliases        # 命令别名</div><div class="line"># Cmnd_Alias SERVICES = /sbin/service, /sbin/chkconfig</div><div class="line"># Cmnd_Alias LOCATE = /usr/bin/updatedb</div><div class="line"> </div><div class="line">root    ALL=(ALL)       ALL   # sudo权限的配置</div><div class="line"># %sys ALL = NETWORKING, SOFTWARE, SERVICES, STORAGE, DELEGATING, PROCESSES, LOCATE, DRIVERS</div><div class="line">## Allows people in group wheel to run all commands</div><div class="line"># %wheel        ALL=(ALL)       ALL</div><div class="line">## Same thing without a password</div><div class="line"># %wheel        ALL=(ALL)       NOPASSWD: ALL</div></pre></td></tr></table></figure>
+<p>授权规则格式：  用户 登入主机=(代表用户) 命令<br>示例：          root ALL=(ALL)           ALL<br>格式说明：<br>user: 运行命令者的身份<br>host: 表示该用户可以在哪些主机上运行sudo，可以用hostname也可以用ip指定<br>(runas)：以哪个用户的身份<br>command: 允许执行和不允许执行的命令(多个命令间用逗号分隔)和特殊权限，命令可以带其选项及参数。命令要写绝对路径。不允许执行的命令需要在命令前加上”!”来表示。可以使用标签，如NOPASSWD标签表示切换或以指定用户执行该标签后的命令时不需要输入密码。一行写不下时可使用”\”续行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">别名定义：</div><div class="line">User_Alias   NAME = item1,item2,item3,….</div><div class="line"></div><div class="line">item:可以是用户名，%组名，#UID,$#GID,User_Alias</div><div class="line"></div><div class="line">HOST别名定义：</div><div class="line"></div><div class="line">Host_Alias  NAME = item1,item2,item3,….</div><div class="line"></div><div class="line">item:可以是hostname，ip，network，Host_Alias</div><div class="line"></div><div class="line">WHOM别名定义：</div><div class="line"></div><div class="line">Runas_Alias  NAME = item1,item2,item3,….</div><div class="line"></div><div class="line">item:可以是用户名，%组名，#UID,$#GID,User_Alias</div><div class="line"></div><div class="line">COMMANDb别名定义：</div><div class="line"></div><div class="line">Cmnd_Alias  NAME = item1,item2,item3,…..</div><div class="line"></div><div class="line">item:可以是命令，目录(目录下的所有命令)，”sudoedit”,Cmnd_Alias</div></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2018/05/28/sudo/" data-title="sudo | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/05/28/PXE+kickstart安装CentOS6，7/"  title="PXE+kickstart安装CentOS6，7">
+ <strong>下一篇：</strong><br/> 
+ <span>PXE+kickstart安装CentOS6，7
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2018/05/28/sudo/" data-title="sudo" data-url="http://yoursite.com/2018/05/28/sudo/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>33</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/FileSystem/" title="FileSystem">FileSystem<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Kernel/" title="Kernel">Kernel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/TCP-IP/" title="TCP/IP">TCP/IP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ssh/" title="ssh">ssh<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux-regex/" title="Linux,regex">Linux,regex<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://godben.blog.51cto.com/" target="_blank" title="我的51CTO博客">我的51CTO博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://linux.cn/" target="_blank" title="Linux中国">Linux中国</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.liaoxuefeng.com/" target="_blank" title="廖雪峰官网">廖雪峰官网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.ruanyifeng.com/home.html" target="_blank" title="阮一峰博客">阮一峰博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.csdn.net/" target="_blank" title="CSDN">CSDN</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://bbs.ithome.com/" target="_blank" title="IT之家">IT之家</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.itpub.net/" target="_blank" title="ITPUB">ITPUB</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=1783437385&verifier=9cb9c6df&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m CAO BEN. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/caoben88" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/godben" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/godben" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:godben@sina.cn" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="godben">godben</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"godben"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?f6dbd6c2451b74e4a750f748a54d11e9";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

@@ -1,0 +1,591 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>PXE+kickstart安装CentOS6，7 | godben&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="godben">
+    
+
+    
+    <meta name="description" content="一、PEX简介：PXE(Preboot Execution Environment)：预启动执行环境
+PXE是由Intel设计的协议，它可以使计算机通过网络而不是从本地硬盘、光驱等设备启动。
+基于Client/Server的网络模式，支持远程主机通过网络从远端服务器下载映像，并由此支持通过网络启动操作系统
+PXE可以引导和安装Windows,linux等多种操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PXE+kickstart安装CentOS6，7">
+<meta property="og:url" content="http://yoursite.com/2018/05/28/PXE+kickstart安装CentOS6，7/index.html">
+<meta property="og:site_name" content="godben's blog">
+<meta property="og:description" content="一、PEX简介：PXE(Preboot Execution Environment)：预启动执行环境
+PXE是由Intel设计的协议，它可以使计算机通过网络而不是从本地硬盘、光驱等设备启动。
+基于Client/Server的网络模式，支持远程主机通过网络从远端服务器下载映像，并由此支持通过网络启动操作系统
+PXE可以引导和安装Windows,linux等多种操作系统">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/27/ChWuVS.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/27/ChW8vq.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/27/ChWP4H.png">
+<meta property="og:updated_time" content="2018-05-28T13:55:25.698Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PXE+kickstart安装CentOS6，7">
+<meta name="twitter:description" content="一、PEX简介：PXE(Preboot Execution Environment)：预启动执行环境
+PXE是由Intel设计的协议，它可以使计算机通过网络而不是从本地硬盘、光驱等设备启动。
+基于Client/Server的网络模式，支持远程主机通过网络从远端服务器下载映像，并由此支持通过网络启动操作系统
+PXE可以引导和安装Windows,linux等多种操作系统">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/05/27/ChWuVS.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="godben&#39;s blog" title="godben&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="godben&#39;s blog">godben&#39;s blog</a></h1>
+				<h2 class="blog-motto">博观而约取 厚积而薄发</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/photo/index.html">摄影</a></li>
+					
+						<li><a href="/about">留言板</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/05/28/PXE+kickstart安装CentOS6，7/" title="PXE+kickstart安装CentOS6，7" itemprop="url">PXE+kickstart安装CentOS6，7</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
+		
+  <p class="article-time">
+    <time datetime="2018-05-28T13:55:37.265Z" itemprop="datePublished"> 发表于 2018-05-28</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<h4 id="一、PEX简介："><a href="#一、PEX简介：" class="headerlink" title="一、PEX简介："></a>一、PEX简介：</h4><p>PXE(Preboot Execution Environment)：预启动执行环境</p>
+<p>PXE是由Intel设计的协议，它可以使计算机通过网络而不是从本地硬盘、光驱等设备启动。</p>
+<p>基于Client/Server的网络模式，支持远程主机通过网络从远端服务器下载映像，并由此支持通过网络启动操作系统</p>
+<p>PXE可以引导和安装Windows,linux等多种操作系统</p>
+<a id="more"></a>
+<p><strong>要达成PXE必须要有两个环节：</strong> </p>
+<p>(1)一个是客户端的网卡必须要支持PXE用户端功能，并且开机时选择从网卡启动，这样系统才会以网卡进入PXE客户端的程序；<br>(2)一个是PXE服务器必须要提供至少含有DHCP以及TFTP的服务！<br>且其中：<br>    · DHCP服务必须要能够提供客户端的网络参数，还要告知客户端TFTP所在的位置；<br>    · TFTP则提供客户端的boot loader及kernel file下载路径。<br>还要加上NFS/FTP/HTTP(选择一样即可)等提供安装文件(安装镜像的解压文件)，才算是比较完整的PXE服务器。一般TFTP和DHCP服务都由同一台服务器提供，且大多数时候还提供NFS/FTP/HTTP服务，所以PXE服务器一般是提供3合一的服务。  </p>
+<h5 id="PXE的工作原理："><a href="#PXE的工作原理：" class="headerlink" title="PXE的工作原理："></a>PXE的工作原理：</h5><p><img src="https://s1.ax1x.com/2018/05/27/ChWuVS.png" alt=""><br>1.Client向PXE Server上的DHCP发送IP地址请求消息，DHCP检测Client是否合法（主要是检测Client的网卡MAC地址），如果合法则返回Client的IP地址，同时将pxe环境下的Boot loader文件pxelinux.0的位置信息传送给Client。<br>2.Client向PXE Server上的TFTP请求pxelinux.0，TFTP接收到消息之后再向Client发送pxelinux.0大小信息，试探Client是否满意，当TFTP收到Client发回的同意大小信息之后，正式向Client发送pxelinux.0。<br>3.Client执行接收到的pxelinux.0文件。<br>4.Client向TFTP请求pxelinux.cfg文件(其实它是目录，里面放置的是是启动菜单，即grub的配置文件)，TFTP将配置文件发回Client，继而Client根据配置文件执行后续操作。<br>5.Client向TFTP发送Linux内核请求信息，TFTP接收到消息之后将内核文件发送给Client。<br>6.Client向TFTP发送根文件请求信息，TFTP接收到消息之后返回Linux根文件系统。<br>7.Client加载Linux内核（启动参数已经在4中的配置文件中设置好了）。<br>8.Client通过nfs/ftp/http下载系统安装文件进行安装。如果在4中的配置文件指定了kickstart路径，则会根据此文件自动应答安装系统。  </p>
+<hr>
+<h4 id="实验：PXE-kickstart安装CentOS-7"><a href="#实验：PXE-kickstart安装CentOS-7" class="headerlink" title="实验：PXE+kickstart安装CentOS 7"></a>实验：PXE+kickstart安装CentOS 7</h4><p><img src="https://s1.ax1x.com/2018/05/27/ChW8vq.jpg" alt="">  </p>
+<p>环境：Centos7.4<br>IP:192.168.3.33<br>准备工作：关闭SELinux</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# vim /etc/selinux/config </div><div class="line">SELINUX=disabled</div></pre></td></tr></table></figure>
+<p>关闭firewall防火墙</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# systemctl start firewalld.service</div><div class="line">[root@localhost ~]# systemctl disable firewalld.service</div></pre></td></tr></table></figure>
+<h5 id="1-搭建DHCP服务器"><a href="#1-搭建DHCP服务器" class="headerlink" title="1.搭建DHCP服务器"></a>1.搭建DHCP服务器</h5><p>之前文章已经详细介绍DHCP服务器搭建，此处不再赘述。  </p>
+<h5 id="2-搭建TFTP服务器"><a href="#2-搭建TFTP服务器" class="headerlink" title="2.搭建TFTP服务器"></a>2.搭建TFTP服务器</h5><h6 id="安装tftp服务"><a href="#安装tftp服务" class="headerlink" title="安装tftp服务"></a>安装tftp服务</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# yum install tftp tftp-server</div></pre></td></tr></table></figure>
+<h6 id="启动tftp服务"><a href="#启动tftp服务" class="headerlink" title="启动tftp服务"></a>启动tftp服务</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# systemctl start tftp.socket</div><div class="line">[root@localhost ~]# systemctl enable tftp.socket</div></pre></td></tr></table></figure>
+<h5 id="3-准备YUM源"><a href="#3-准备YUM源" class="headerlink" title="3.准备YUM源"></a>3.准备YUM源</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# mkdir /var/www/html/centos/&#123;6,7&#125;/ -pv</div></pre></td></tr></table></figure>
+<h6 id="添加开机自动挂载光盘"><a href="#添加开机自动挂载光盘" class="headerlink" title="添加开机自动挂载光盘"></a>添加开机自动挂载光盘</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# vim /etc/fstab</div><div class="line">/dev/sr0         /var/www/html/centos/7    iso9660 defaults        0 0</div><div class="line">/dev/sr1         /var/www/html/centos/6    iso9660 defaults        0 0</div></pre></td></tr></table></figure>
+<h6 id="挂载磁盘"><a href="#挂载磁盘" class="headerlink" title="挂载磁盘"></a>挂载磁盘</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# mount dev/sr0   /var/www/html/centos/7</div><div class="line">[root@localhost ~]# mount dev/sr1   /var/www/html/centos/6</div></pre></td></tr></table></figure>
+<h6 id="重新读取磁盘挂载"><a href="#重新读取磁盘挂载" class="headerlink" title="重新读取磁盘挂载"></a>重新读取磁盘挂载</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# mount -a</div><div class="line"></div><div class="line">[root@localhost ~]# lsblk </div><div class="line">NAME                 MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT</div><div class="line">sda                    8:0    0   50G  0 disk </div><div class="line">├─sda1                 8:1    0    1G  0 part /boot</div><div class="line">├─sda2                 8:2    0   20G  0 part /</div><div class="line">├─sda3                 8:3    0    2G  0 part [SWAP]</div><div class="line">├─sda4                 8:4    0    1K  0 part </div><div class="line">└─sda5                 8:5    0   27G  0 part /data</div><div class="line">sr0                   11:0    1  8.1G  0 rom  /var/www/html/centos/7</div><div class="line">sr1                   11:1    1  6G  0 rom  /var/www/html/centos/6</div></pre></td></tr></table></figure>
+<h5 id="4-准备ks文件"><a href="#4-准备ks文件" class="headerlink" title="4.准备ks文件"></a>4.准备ks文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# mkdir /var/www/html/ksdir/&#123;6,7&#125; -pv</div><div class="line">[root@localhost ~]# cp /root/anaconda-ks.cfg /var/www/html/ksdir/7/ks7_desktop.cfg</div><div class="line">[root@localhost ~]# cp /root/ks6_mini.cfg  /var/www/html/ksdir/7/ks6_mini.cfg</div><div class="line">[root@localhost ~]# chmod +r /var/www/html/ksdir/7/ks7_desktop.cfg</div><div class="line">[root@localhost ~]# chmod +r /var/www/html/ksdir/6/ks6_mini.cfg</div></pre></td></tr></table></figure>
+<h6 id="使用浏览器确认ks文件是否能正常访问"><a href="#使用浏览器确认ks文件是否能正常访问" class="headerlink" title="使用浏览器确认ks文件是否能正常访问"></a>使用浏览器确认ks文件是否能正常访问</h6><p><a href="http://192.168.3.33/ksdir/7/ks7_desktop.cfg" target="_blank" rel="external">http://192.168.3.33/ksdir/7/ks7_desktop.cfg</a><br><a href="http://192.168.3.33/ksdir/6/ks6_mini.cfg" target="_blank" rel="external">http://192.168.3.33/ksdir/6/ks6_mini.cfg</a></p>
+<h5 id="5-修改ks文件"><a href="#5-修改ks文件" class="headerlink" title="5.修改ks文件"></a>5.修改ks文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# vim /var/www/html/ksdir/7/ks7_desktop.cfg</div><div class="line">#version=DEVEL</div><div class="line"># System authorization information</div><div class="line">auth --enableshadow --passalgo=sha512</div><div class="line"># Use CDROM installation media</div><div class="line">url --url=http://192.168.3.33/centos/7</div><div class="line"># Use graphical install</div><div class="line">text</div><div class="line">reboot</div><div class="line"># Run the Setup Agent on first boot</div><div class="line">firstboot --enable</div><div class="line">ignoredisk --only-use=sda</div><div class="line"># Keyboard layouts</div><div class="line">keyboard --vckeymap=us --xlayouts=&apos;us&apos;</div><div class="line"># System language</div><div class="line">lang en_US.UTF-8</div><div class="line"></div><div class="line"># Network information</div><div class="line">network  --bootproto=dhcp --device=ens33 --onboot=on --ipv6=auto --activate</div><div class="line">network  --hostname=localhost.localdomain</div><div class="line"></div><div class="line"># Root password</div><div class="line">rootpw --iscrypted $6$xjCpOepqcpfQvm1P$l1BHDfcty4ysf/FYM1DCKt7Ai6j0v1yQiMmMvcqkBOHlLp67XBNTppU61lXmOmfCCQCOwIYz2CHpHJbfq5fPL0</div><div class="line"># System services</div><div class="line">services --disabled=&quot;chronyd&quot;</div><div class="line"># System timezone</div><div class="line">timezone Asia/Shanghai --isUtc --nontp</div><div class="line">user --name=benny --password=$6$UF8AgdmOcZAkgQZn$70vAjgk.dZwjZ4mgU/3lThksXlj33F5grtMEYYPVYq.xlZmbhHDCSFd4pug.xwr0Cudt/NYPhIeWIzErWTDFt1 --iscrypted --gecos=&quot;benny&quot;</div><div class="line"># X Window System configuration information</div><div class="line">xconfig  --startxonboot</div><div class="line"># System bootloader configuration</div><div class="line">bootloader --append=&quot; crashkernel=auto&quot; --location=mbr --boot-drive=sda</div><div class="line"># Partition clearing information</div><div class="line">zerombr</div><div class="line">clearpart --none --initlabel</div><div class="line"># Disk partitioning information</div><div class="line">part /boot --fstype=&quot;xfs&quot; --ondisk=sda --size=1024</div><div class="line">part swap --fstype=&quot;swap&quot; --ondisk=sda --size=2048</div><div class="line">part / --fstype=&quot;xfs&quot; --ondisk=sda --size=51200</div><div class="line">part /data --fstype=&quot;xfs&quot; --ondisk=sda --size=27645</div><div class="line"></div><div class="line">%packages</div><div class="line">@base</div><div class="line">@core</div><div class="line">@fonts</div><div class="line">@gnome-desktop</div><div class="line">@guest-agents</div><div class="line">@guest-desktop-agents</div><div class="line">@print-client</div><div class="line">@x11</div><div class="line">autofs</div><div class="line">%end</div><div class="line"></div><div class="line">%addon com_redhat_kdump --enable --reserve-mb=&apos;auto&apos;</div><div class="line"></div><div class="line">%end</div><div class="line"></div><div class="line">%anaconda</div><div class="line">pwpolicy root --minlen=6 --minquality=1 --notstrict --nochanges --notempty</div><div class="line">pwpolicy user --minlen=6 --minquality=1 --notstrict --nochanges --emptyok</div><div class="line">pwpolicy luks --minlen=6 --minquality=1 --notstrict --nochanges --notempty</div><div class="line">%end</div><div class="line"></div><div class="line">%post</div><div class="line">systemctl enable autofs</div><div class="line">systemctl disable initial-setup.service</div><div class="line">systemctl set-default multi-user.target</div><div class="line"></div><div class="line">mkdir /root/.ssh</div><div class="line">cat &gt; /root/.ssh/authorized_keys &lt;&lt;EOF</div><div class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWpNkKvxbxin5tdSYRNg/dFbh7sqnGSqaQEfHtuh66vlbi8+BQx+AzkOB39cLZUj+gbGIHwuotZBiwF53rdpCdnT6zsi6jJOFGgfbiWbhl/Yuhcl7ajznDjoTtiDhO2F6Z/qWBX9OrGiYPUzZxY2eAXYfcaEfKR+pudeo3mamx6cfjlhyL7Nr3dc3mCTogc2ZgwC9OTapGErEnkl2FvDvslIykgGcohkPYJ/a1MdJRfvRelK2qpZGyhWopEFWJVPfFQWmDde1SeUVM6ml0DjM9R9XDrHe2O6bYQ6ReML1OcGfFjMMXPitfSNx0kaUhllIsh9j18BDzQenE70FQGZxX root@localhost.localdomain</div><div class="line">EOF</div><div class="line">rm -fr /etc/yum.repos.d/*</div><div class="line">cat &gt; /etc/yum.repos.d/base.repo &lt;&lt; EOF</div><div class="line">[base]</div><div class="line">name=base</div><div class="line">baseurl=file:///misc/cd</div><div class="line">gpgcheck=0</div><div class="line">EOF</div><div class="line"></div><div class="line">%end</div></pre></td></tr></table></figure>
+<h5 id="6-配置dhcp服务"><a href="#6-配置dhcp服务" class="headerlink" title="6.配置dhcp服务"></a>6.配置dhcp服务</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">subnet 192.168.3.0 netmask 255.255.255.0 &#123;</div><div class="line">  range 192.168.3.50 192.168.3.60;</div><div class="line">  option domain-name-servers 8.8.8.8;</div><div class="line">  option domain-name &quot;godben.com&quot;;</div><div class="line">  option routers 192.168.3.1;</div><div class="line">  option broadcast-address 192.168.3.254;</div><div class="line">  default-lease-time 600;</div><div class="line">  max-lease-time 7200;</div><div class="line">  next-server 192.168.3.33;</div><div class="line">  filename &quot;pxelinux.0&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h6 id="重启dhcp"><a href="#重启dhcp" class="headerlink" title="重启dhcp"></a>重启dhcp</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# syetemctl dhcpd start</div></pre></td></tr></table></figure>
+<h5 id="7-准备PXE文件"><a href="#7-准备PXE文件" class="headerlink" title="7.准备PXE文件"></a>7.准备PXE文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# yum install syslinux -y</div><div class="line">[root@localhost ~]# mkdir /var/lib/tftpboot/pxelinux.cfg/</div><div class="line">[root@localhost ~]# cp /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/</div><div class="line">[root@localhost ~]# cp /usr/share/syslinux/menu.c32 /var/lib/tftpboot/</div><div class="line">[root@localhost ~]# mkdir /var/lib/tftpboot/centos&#123;6,7&#125;</div><div class="line"></div><div class="line">[root@localhost ~]# cp  /var/www/html/centos/7/isolinux/&#123;vmlinuz,initrd.img&#125; /var/lib/tftpboot/centos7/</div><div class="line">[root@localhost ~]# cp  /var/www/html/centos/6/isolinux/&#123;vmlinuz,initrd.img&#125; /var/lib/tftpboot/centos6/</div><div class="line"></div><div class="line"></div><div class="line">[root@localhost ~]# cp /var/www/html/centos/7/isolinux/isolinux.cfg  /var/lib/tftpboot/pxelinux.cfg/default</div></pre></td></tr></table></figure>
+<h5 id="8-修改启动菜单"><a href="#8-修改启动菜单" class="headerlink" title="8.修改启动菜单"></a>8.修改启动菜单</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# cat /var/lib/tftpboot/pxelinux.cfg/default</div><div class="line">default menu.c32</div><div class="line">timeout 600</div><div class="line"></div><div class="line">menu title GODBEN Auto Install Centos</div><div class="line"></div><div class="line">label desktop</div><div class="line">  menu label Install ^Desktop CentOS 7</div><div class="line">  kernel vmlinuz</div><div class="line">  append initrd=initrd.img ks=http://192.168.3.33/ksdir/7/ks7_desktop.cfg</div><div class="line"></div><div class="line">label centos6</div><div class="line">  menu label install ^Mini CentOS 6</div><div class="line">  menu default</div><div class="line">  kernel centos6/vmlinuz</div><div class="line">  append initrd=centos6/initrd.img ks=http://192.168.30.17/ksdir/ks6_mini.cfg</div><div class="line"></div><div class="line">label local</div><div class="line">  menu label Boot from ^local drive</div><div class="line">  localboot 0xffff</div><div class="line"></div><div class="line">menu end</div></pre></td></tr></table></figure>
+<h6 id="最终目录结构："><a href="#最终目录结构：" class="headerlink" title="最终目录结构："></a>最终目录结构：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">tree /var/lib/tftpboot/</div><div class="line">/var/lib/tftpboot/</div><div class="line">├── centos6</div><div class="line">│   ├── initrd.img</div><div class="line">│   └── vmlinuz</div><div class="line">├── centos7</div><div class="line">│   ├── initrd.img</div><div class="line">│   └── vmlinuz</div><div class="line">├── menu.c32</div><div class="line">├── pxelinux.0</div><div class="line">└── pxelinux.cfg</div><div class="line">    └── default</div></pre></td></tr></table></figure>
+<h5 id="9-客户端测试安装"><a href="#9-客户端测试安装" class="headerlink" title="9.客户端测试安装"></a>9.客户端测试安装</h5><p><img src="https://s1.ax1x.com/2018/05/27/ChWP4H.png" alt=""></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2018/05/28/PXE+kickstart安装CentOS6，7/" data-title="PXE+kickstart安装CentOS6，7 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2018/05/28/sudo/" title="sudo">
+  <strong>上一篇：</strong><br/>
+  <span>
+  sudo</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/05/28/cobbler无人值守批量安装Linux系统/"  title="cobbler无人值守批量安装Linux系统">
+ <strong>下一篇：</strong><br/> 
+ <span>cobbler无人值守批量安装Linux系统
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2018/05/28/PXE+kickstart安装CentOS6，7/" data-title="PXE+kickstart安装CentOS6，7" data-url="http://yoursite.com/2018/05/28/PXE+kickstart安装CentOS6，7/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>33</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/FileSystem/" title="FileSystem">FileSystem<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Kernel/" title="Kernel">Kernel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/TCP-IP/" title="TCP/IP">TCP/IP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ssh/" title="ssh">ssh<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux-regex/" title="Linux,regex">Linux,regex<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://godben.blog.51cto.com/" target="_blank" title="我的51CTO博客">我的51CTO博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://linux.cn/" target="_blank" title="Linux中国">Linux中国</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.liaoxuefeng.com/" target="_blank" title="廖雪峰官网">廖雪峰官网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.ruanyifeng.com/home.html" target="_blank" title="阮一峰博客">阮一峰博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.csdn.net/" target="_blank" title="CSDN">CSDN</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://bbs.ithome.com/" target="_blank" title="IT之家">IT之家</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.itpub.net/" target="_blank" title="ITPUB">ITPUB</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=1783437385&verifier=9cb9c6df&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m CAO BEN. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/caoben88" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/godben" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/godben" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:godben@sina.cn" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="godben">godben</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"godben"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?f6dbd6c2451b74e4a750f748a54d11e9";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

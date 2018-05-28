@@ -1,0 +1,594 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>搭建DHCP服务器 | godben&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="godben">
+    
+
+    
+    <meta name="description" content="1.DHCP介绍DHCP(Dynamic Host Configuration Protocol),动态主机配置协议，DHCP 协议主要是用来自动为局域网中的客户机分配 TCP/IP 信息的网络协议，并完成每台客户机的 TCP/IP协议配置。当我们将局域网中客户机IP地址设置为动态获取方式时，DHCP服务器就会根据DHCP协议给客户机自动分配IP地址，使得客户机能够使用这个IP地址。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建DHCP服务器">
+<meta property="og:url" content="http://yoursite.com/2018/05/28/搭建DHCP服务器/index.html">
+<meta property="og:site_name" content="godben's blog">
+<meta property="og:description" content="1.DHCP介绍DHCP(Dynamic Host Configuration Protocol),动态主机配置协议，DHCP 协议主要是用来自动为局域网中的客户机分配 TCP/IP 信息的网络协议，并完成每台客户机的 TCP/IP协议配置。当我们将局域网中客户机IP地址设置为动态获取方式时，DHCP服务器就会根据DHCP协议给客户机自动分配IP地址，使得客户机能够使用这个IP地址。">
+<meta property="og:updated_time" content="2018-05-28T13:52:15.337Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搭建DHCP服务器">
+<meta name="twitter:description" content="1.DHCP介绍DHCP(Dynamic Host Configuration Protocol),动态主机配置协议，DHCP 协议主要是用来自动为局域网中的客户机分配 TCP/IP 信息的网络协议，并完成每台客户机的 TCP/IP协议配置。当我们将局域网中客户机IP地址设置为动态获取方式时，DHCP服务器就会根据DHCP协议给客户机自动分配IP地址，使得客户机能够使用这个IP地址。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="godben&#39;s blog" title="godben&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="godben&#39;s blog">godben&#39;s blog</a></h1>
+				<h2 class="blog-motto">博观而约取 厚积而薄发</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/photo/index.html">摄影</a></li>
+					
+						<li><a href="/about">留言板</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/05/28/搭建DHCP服务器/" title="搭建DHCP服务器" itemprop="url">搭建DHCP服务器</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
+		
+  <p class="article-time">
+    <time datetime="2018-05-28T13:52:25.655Z" itemprop="datePublished"> 发表于 2018-05-28</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<h4 id="1-DHCP介绍"><a href="#1-DHCP介绍" class="headerlink" title="1.DHCP介绍"></a>1.DHCP介绍</h4><p>DHCP(Dynamic Host Configuration Protocol),动态主机配置协议，DHCP 协议主要是用来自动为局域网中的客户机分配 TCP/IP 信息的网络协议，并完成每台客户机的 TCP/IP协议配置。当我们将局域网中客户机IP地址设置为动态获取方式时，DHCP服务器就会根据DHCP协议给客户机自动分配IP地址，使得客户机能够使用这个IP地址。</p>
+<a id="more"></a>
+<h4 id="2-使用DHCP的优点"><a href="#2-使用DHCP的优点" class="headerlink" title="2.使用DHCP的优点"></a>2.使用DHCP的优点</h4><ul>
+<li>减少管理员的工作量；</li>
+<li>避免IP冲突；</li>
+<li>减少收入错误的可能；</li>
+<li>能方便地更改网络的IP网段；</li>
+<li>移动计算机后不用重新配置网络信息；</li>
+<li>提高IP地址的利用率。</li>
+</ul>
+<h4 id="3-DHCP客户端请求过程（4步请求过程）"><a href="#3-DHCP客户端请求过程（4步请求过程）" class="headerlink" title="3.DHCP客户端请求过程（4步请求过程）"></a>3.DHCP客户端请求过程（4步请求过程）</h4><p>1.搜索阶段：客户端广播方式发送报文，搜索DHCP服务器。此时网段内所有机器都收到报文，只有DHCP服务器返回消息。<br>2.提供阶段：众多DHCP服务器返回报文信息，并从地址池找一个IP提供给客户端。因为此时客户端还没有IP，所以返回信息也是以广播的方式返回的。<br>3.选择阶段：选择一个DHCP服务器，使用它提供的IP。然后发送广播包，告诉众多DHCP服务器，其已经选好DHCP服务器以及IP地址。此后没有入选的DHCP就可以将原本想分配的IP分配给其他主机。<br>客户端选择第一个接收到的IP。谁的IP先到客户端的速度是不可控的。但是如果在配置文件里开启了authoritative选项则表示该服务器是权威服务器，其他DHCP服务器将失效，如果多台服务器都配置了这个权威选项，则还是竞争机制；通过MAC地址给客户端配置固定IP也会优先于普通的动态DHCP分配。另外Windows的DHCP服务端回应Windows客户端比Linux更快。<br>4.确认阶段：DHCP服务器收到回应，向客户端发送一个包含IP的数据包，确认租约，并指定租约时长。  </p>
+<h4 id="4-DHCP客户机自动更新IP租约"><a href="#4-DHCP客户机自动更新IP租约" class="headerlink" title="4. DHCP客户机自动更新IP租约"></a>4. DHCP客户机自动更新IP租约</h4><p>客户机租约期限已过去50%，自动尝试更新租约；当期限过去87.5%时，发出广播再次更新租约；若租约已经到期(100%)，客户机必须立即停止使用当前的IP地址。然后客户机开始新的DHCP租约过程，尝试租用新的IP地址。</p>
+<h4 id="实验：搭建DHCP服务器"><a href="#实验：搭建DHCP服务器" class="headerlink" title="实验：搭建DHCP服务器"></a>实验：搭建DHCP服务器</h4><p><strong>准备工作：</strong></p>
+<blockquote>
+<p>关闭防火墙</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# systemctl disable firewalld</div></pre></td></tr></table></figure>
+<blockquote>
+<p>清空iptables规则</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# iptables -F</div></pre></td></tr></table></figure>
+<blockquote>
+<p>关闭selinux</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# vim /etc/selinux/config </div><div class="line">SELINUX=disabled</div></pre></td></tr></table></figure>
+<p>1.在服务器端安装DHCP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# yum install dhcp</div></pre></td></tr></table></figure>
+<p><strong>DHCP配置文件目录:/etc/dhcp/dhcpd.conf<br>分配IP记录文件:/var/lib/dhcpd/dhcpd.leases</strong>  </p>
+<p>2.配置dhcpd.conf配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#</div><div class="line"># DHCP Server Configuration file.</div><div class="line">#   see /usr/share/doc/dhcp*/dhcpd.conf.example</div><div class="line">#   see dhcpd.conf(5) man page</div><div class="line">#</div></pre></td></tr></table></figure>
+<p><strong>首先按照要求将模板文件覆盖当前配置文件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# cp /usr/share/doc/dhcp-4.2.5/dhcpd.conf.example /etc/dhcp/dhcpd.conf </div><div class="line">cp: overwrite ‘/etc/dhcp/dhcpd.conf’? y</div></pre></td></tr></table></figure>
+<p>编辑配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">subnet 192.168.3.0 netmask 255.255.255.0 &#123;     # 192.168.3.0 255.255.255.0代表分配的网段及子网掩码</div><div class="line">  range 192.168.3.50 192.168.3.60;             # 地址池范围，代表分配给客户机的ip地址的范围，最好不要包含DHCP服务器的IP</div><div class="line">  option domain-name-servers 8.8.8.8;          # DNS服务器的地址</div><div class="line">  option domain-name &quot;godben.com&quot;;             # DNS服务器域名</div><div class="line">  option routers 192.168.3.33;                 # 配置分配给客户机的路由网关</div><div class="line">  option broadcast-address 192.168.3.255;      # 给客户机指定广播地址</div><div class="line">  default-lease-time 600;                      # 指定租约时间，秒为单位</div><div class="line">  max-lease-time 7200;                         # 指定最大租约时间，秒为单位</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3.重启DHCP服务，并设置开机自启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# systemctl restart dhcpd</div><div class="line">[root@localhost ~]# systemctl enable dhcpd</div></pre></td></tr></table></figure>
+<p>4.客户机验证<br>首先将客户机网卡设置为dhcp模式，重启网络，此时查看客户机IP为DHCP服务器地址池中第一个ip</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000</div><div class="line">    link/ether 00:0c:29:7f:b0:2c brd ff:ff:ff:ff:ff:ff</div><div class="line">    inet 192.168.3.50/24 brd 192.168.3.255 scope global eth0</div></pre></td></tr></table></figure>
+<p>5.ip绑定，让客户机获取指定ip地址</p>
+<p>首先在配置文件末尾添加如下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">host Client &#123;</div><div class="line">    hardware ethernet 00:0c:29:7f:b0:2c;        #客户机MAC地址</div><div class="line">    fixed-address 192.168.3.55;                 #固定获取的IP地址</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>服务器重启DHCP服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# systemctl restart dhcpd</div></pre></td></tr></table></figure>
+<p>客户机重启网络</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# service network restart</div></pre></td></tr></table></figure>
+<p>查看IP，此时客户机已经获取了指定的IP地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000</div><div class="line">    link/ether 00:0c:29:7f:b0:2c brd ff:ff:ff:ff:ff:ff</div><div class="line">    inet 192.168.3.55/24 brd 192.168.3.255 scope global eth0</div></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2018/05/28/搭建DHCP服务器/" data-title="搭建DHCP服务器 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2018/05/28/OpenSSH及端口转发实验/" title="OpenSSH及端口转发实验">
+  <strong>上一篇：</strong><br/>
+  <span>
+  OpenSSH及端口转发实验</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/05/28/签署和自建CA/"  title="签署和自建CA">
+ <strong>下一篇：</strong><br/> 
+ <span>签署和自建CA
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2018/05/28/搭建DHCP服务器/" data-title="搭建DHCP服务器" data-url="http://yoursite.com/2018/05/28/搭建DHCP服务器/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>33</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/FileSystem/" title="FileSystem">FileSystem<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Kernel/" title="Kernel">Kernel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/TCP-IP/" title="TCP/IP">TCP/IP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ssh/" title="ssh">ssh<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux-regex/" title="Linux,regex">Linux,regex<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://godben.blog.51cto.com/" target="_blank" title="我的51CTO博客">我的51CTO博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://linux.cn/" target="_blank" title="Linux中国">Linux中国</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.liaoxuefeng.com/" target="_blank" title="廖雪峰官网">廖雪峰官网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.ruanyifeng.com/home.html" target="_blank" title="阮一峰博客">阮一峰博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.csdn.net/" target="_blank" title="CSDN">CSDN</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://bbs.ithome.com/" target="_blank" title="IT之家">IT之家</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.itpub.net/" target="_blank" title="ITPUB">ITPUB</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=1783437385&verifier=9cb9c6df&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m CAO BEN. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/caoben88" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/godben" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/godben" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:godben@sina.cn" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="godben">godben</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"godben"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?f6dbd6c2451b74e4a750f748a54d11e9";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

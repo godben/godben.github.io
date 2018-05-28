@@ -80,31 +80,31 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/05/19/CentOS7编译安装内核/" title="CentOS7编译安装内核" itemprop="url">CentOS7编译安装内核</a>
+      <a href="/2018/05/28/sudo/" title="sudo" itemprop="url">sudo</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2018-05-19T02:06:08.709Z" itemprop="datePublished"> 发表于 2018-05-19</time>
+    <time datetime="2018-05-28T13:57:00.328Z" itemprop="datePublished"> 发表于 2018-05-28</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <h4 id="准备工作："><a href="#准备工作：" class="headerlink" title="准备工作："></a>准备工作：</h4><blockquote>
-<pre><code>1.下载最新源码包：www.kernel.org
-2.安装编译工具:yum groups install Development Tools
-3.安装依赖工具：yum install hmaccalc zlib-develbinutils-devel elfutils-libelf-devel ncurses-devel
-4.安装openssl: yum install openssl 
-              yum install openssl-devel
+        <h4 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h4><blockquote>
+<p>  sudo命令能让一个用户以某个用户的身份去执行命令，例如可以让普通用户以root身份查看/etc/shadow文件<br>    sudo与直接用root身份执行的区别：</p>
+<pre><code>1. 使用sudo可以不需要知道root密码，可以给某用户在一段时间内拥有某些命令的root操作权限。
+2. sudo可以保持当前用户的环境变量
+3. sudo便于审计，系统审计日志会记录具体对应用户执行的命令
+4. sudo使用时间戳文件来完成类似“检票”的系统，默认存活期为5分钟的“入场券” 
 </code></pre></blockquote>
         
         
         <p class="article-more-link">
           
-            <a href="/2018/05/19/CentOS7编译安装内核/#more">阅读更多</a>
+            <a href="/2018/05/28/sudo/#more">阅读更多</a>
           
        </p>
     </div>
@@ -125,7 +125,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2018/05/19/CentOS7编译安装内核/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/19/CentOS7编译安装内核/" data-count-type="comments">&nbsp;</a>
+		<a href="/2018/05/28/sudo/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/28/sudo/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -145,25 +145,28 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/05/16/Linux使用脚本批量添加用户/" title="Linux下使用脚本批量添加用户" itemprop="url">Linux下使用脚本批量添加用户</a>
+      <a href="/2018/05/28/PXE+kickstart安装CentOS6，7/" title="PXE+kickstart安装CentOS6，7" itemprop="url">PXE+kickstart安装CentOS6，7</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2018-05-16T11:23:57.117Z" itemprop="datePublished"> 发表于 2018-05-16</time>
+    <time datetime="2018-05-28T13:55:37.265Z" itemprop="datePublished"> 发表于 2018-05-28</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <h3 id="方法一：useradd-passwd-具体代码如下-在user-list-txt中每行存入想要批量添加的用户名，此方法适用于批量添加密码相同的用户"><a href="#方法一：useradd-passwd-具体代码如下-在user-list-txt中每行存入想要批量添加的用户名，此方法适用于批量添加密码相同的用户" class="headerlink" title="方法一：useradd+passwd,具体代码如下,在user_list.txt中每行存入想要批量添加的用户名，此方法适用于批量添加密码相同的用户"></a>方法一：useradd+passwd,具体代码如下,在user_list.txt中每行存入想要批量添加的用户名，此方法适用于批量添加密码相同的用户</h3>
+        <h4 id="一、PEX简介："><a href="#一、PEX简介：" class="headerlink" title="一、PEX简介："></a>一、PEX简介：</h4><p>PXE(Preboot Execution Environment)：预启动执行环境</p>
+<p>PXE是由Intel设计的协议，它可以使计算机通过网络而不是从本地硬盘、光驱等设备启动。</p>
+<p>基于Client/Server的网络模式，支持远程主机通过网络从远端服务器下载映像，并由此支持通过网络启动操作系统</p>
+<p>PXE可以引导和安装Windows,linux等多种操作系统</p>
         
         
         <p class="article-more-link">
           
-            <a href="/2018/05/16/Linux使用脚本批量添加用户/#more">阅读更多</a>
+            <a href="/2018/05/28/PXE+kickstart安装CentOS6，7/#more">阅读更多</a>
           
        </p>
     </div>
@@ -184,7 +187,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2018/05/16/Linux使用脚本批量添加用户/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/16/Linux使用脚本批量添加用户/" data-count-type="comments">&nbsp;</a>
+		<a href="/2018/05/28/PXE+kickstart安装CentOS6，7/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/28/PXE+kickstart安装CentOS6，7/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -204,25 +207,28 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/05/07/ 如何保证程序在后台稳定运行/" title="如何保证程序在后台稳定运行" itemprop="url">如何保证程序在后台稳定运行</a>
+      <a href="/2018/05/28/cobbler无人值守批量安装Linux系统/" title="cobbler无人值守批量安装Linux系统" itemprop="url">cobbler无人值守批量安装Linux系统</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2018-05-07T12:35:20.510Z" itemprop="datePublished"> 发表于 2018-05-07</time>
+    <time datetime="2018-05-28T13:54:47.364Z" itemprop="datePublished"> 发表于 2018-05-28</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <p><strong>通常情况下，我们都是通过ssh登陆到远程服务器，当我们关闭终端时，正在运行的程序就会中断，或者运行一些耗时较长的任务时，我们不可能一直盯着直至结束。下面的方法就能帮我们解决这种窘况。</strong></p>
+        <h3 id="1-cobbler简介"><a href="#1-cobbler简介" class="headerlink" title="1.cobbler简介"></a>1.cobbler简介</h3><p>Cobbler是一个Linux服务器安装的服务，可以通过网络启动(PXE)的方式来快速安装、重装物理服务器和虚拟机，同时还可以管理DHCP，DNS等。</p>
+<p>　　Cobbler可以使用命令行方式管理，也提供了基于Web的界面管理工具(cobbler-web)，还提供了API接口，可以方便二次开发使用。</p>
+<p>　　Cobbler是较早前的kickstart的升级版，优点是比较容易配置，还自带web界面比较易于管理。</p>
+<p>　　Cobbler内置了一个轻量级配置管理系统，但它也支持和其它配置管理系统集成，如Puppet，暂时不支持SaltStack。</p>
         
         
         <p class="article-more-link">
           
-            <a href="/2018/05/07/ 如何保证程序在后台稳定运行/#more">阅读更多</a>
+            <a href="/2018/05/28/cobbler无人值守批量安装Linux系统/#more">阅读更多</a>
           
        </p>
     </div>
@@ -243,7 +249,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2018/05/07/ 如何保证程序在后台稳定运行/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/07/ 如何保证程序在后台稳定运行/" data-count-type="comments">&nbsp;</a>
+		<a href="/2018/05/28/cobbler无人值守批量安装Linux系统/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/28/cobbler无人值守批量安装Linux系统/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -263,27 +269,27 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/05/06/Linux任务计划、周期性任务/" title="Linux任务计划、周期性任务" itemprop="url">Linux任务计划、周期性任务</a>
+      <a href="/2018/05/28/OpenSSH及端口转发实验/" title="OpenSSH及端口转发实验" itemprop="url">OpenSSH及端口转发实验</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2018-05-06T12:48:45.243Z" itemprop="datePublished"> 发表于 2018-05-06</time>
+    <time datetime="2018-05-28T13:54:04.344Z" itemprop="datePublished"> 发表于 2018-05-28</time>
     
   </p>
 </header>
     <div class="article-content">
         
         <blockquote>
-<p>在未来的某时间点执行一次任务: at, batch<br>周期性运行某任务: cron</p>
+<p>ssh: secure shell, protocol, 22/tcp, 安全的远程登陆,ssh协议有v1和v2两个版本，现在使用的都是v2版，v1已经不安全了</p>
 </blockquote>
         
         
         <p class="article-more-link">
           
-            <a href="/2018/05/06/Linux任务计划、周期性任务/#more">阅读更多</a>
+            <a href="/2018/05/28/OpenSSH及端口转发实验/#more">阅读更多</a>
           
        </p>
     </div>
@@ -304,7 +310,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2018/05/06/Linux任务计划、周期性任务/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/06/Linux任务计划、周期性任务/" data-count-type="comments">&nbsp;</a>
+		<a href="/2018/05/28/OpenSSH及端口转发实验/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/28/OpenSSH及端口转发实验/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -324,27 +330,25 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/05/03/使用Wireshark分析TCP三次握手及四次挥手/" title="使用Wireshark分析TCP三次握手及四次挥手" itemprop="url">使用Wireshark分析TCP三次握手及四次挥手</a>
+      <a href="/2018/05/28/搭建DHCP服务器/" title="搭建DHCP服务器" itemprop="url">搭建DHCP服务器</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2018-05-03T02:59:34.785Z" itemprop="datePublished"> 发表于 2018-05-03</time>
+    <time datetime="2018-05-28T13:52:25.655Z" itemprop="datePublished"> 发表于 2018-05-28</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <h3 id="1-为什么使用wireshark"><a href="#1-为什么使用wireshark" class="headerlink" title="1.为什么使用wireshark"></a>1.为什么使用wireshark</h3><blockquote>
-<p>Wireshark 是最著名的网络通讯抓包分析工具。功能十分强大，可以截取各种网络封包，显示网络封包的详细信息。</p>
-</blockquote>
+        <h4 id="1-DHCP介绍"><a href="#1-DHCP介绍" class="headerlink" title="1.DHCP介绍"></a>1.DHCP介绍</h4><p>DHCP(Dynamic Host Configuration Protocol),动态主机配置协议，DHCP 协议主要是用来自动为局域网中的客户机分配 TCP/IP 信息的网络协议，并完成每台客户机的 TCP/IP协议配置。当我们将局域网中客户机IP地址设置为动态获取方式时，DHCP服务器就会根据DHCP协议给客户机自动分配IP地址，使得客户机能够使用这个IP地址。</p>
         
         
         <p class="article-more-link">
           
-            <a href="/2018/05/03/使用Wireshark分析TCP三次握手及四次挥手/#more">阅读更多</a>
+            <a href="/2018/05/28/搭建DHCP服务器/#more">阅读更多</a>
           
        </p>
     </div>
@@ -354,7 +358,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/TCP-IP/">TCP/IP</a><a href="/tags/Wireshark/">Wireshark</a>
+  <span></span> <a href="/tags/Linux/">Linux</a>
   </div>
 
 </div>
@@ -365,7 +369,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2018/05/03/使用Wireshark分析TCP三次握手及四次挥手/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/03/使用Wireshark分析TCP三次握手及四次挥手/" data-count-type="comments">&nbsp;</a>
+		<a href="/2018/05/28/搭建DHCP服务器/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/28/搭建DHCP服务器/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -381,7 +385,7 @@
 
 
   <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
@@ -399,7 +403,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>27</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>33</sup></a></li>
 			
 		
 			
