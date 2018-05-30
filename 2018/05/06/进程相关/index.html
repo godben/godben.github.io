@@ -1,0 +1,808 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Linux进程相关 | godben&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="godben">
+    
+
+    
+    <meta name="description" content="进程和程序的区别程序是二进制文件，是静态存放在磁盘上的，不会占用系统运行资源(cpu/内存)。
+进程是用户执行程序或者触发程序的结果，可以认为进程是程序的一个运行实例。进程是动态的，会申请和使用系统资源，并与操作系统内核进行交互。在后文中，不少状态统计工具的结果中显示的是system类的状态，其实system状态的同义词就是内核状态。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux进程相关">
+<meta property="og:url" content="http://yoursite.com/2018/05/06/进程相关/index.html">
+<meta property="og:site_name" content="godben's blog">
+<meta property="og:description" content="进程和程序的区别程序是二进制文件，是静态存放在磁盘上的，不会占用系统运行资源(cpu/内存)。
+进程是用户执行程序或者触发程序的结果，可以认为进程是程序的一个运行实例。进程是动态的，会申请和使用系统资源，并与操作系统内核进行交互。在后文中，不少状态统计工具的结果中显示的是system类的状态，其实system状态的同义词就是内核状态。">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/733013/201706/733013-20170621111849804-2044669562.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/733013/201706/733013-20170621111904241-1535274291.png">
+<meta property="og:updated_time" content="2018-05-30T13:51:17.616Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux进程相关">
+<meta name="twitter:description" content="进程和程序的区别程序是二进制文件，是静态存放在磁盘上的，不会占用系统运行资源(cpu/内存)。
+进程是用户执行程序或者触发程序的结果，可以认为进程是程序的一个运行实例。进程是动态的，会申请和使用系统资源，并与操作系统内核进行交互。在后文中，不少状态统计工具的结果中显示的是system类的状态，其实system状态的同义词就是内核状态。">
+<meta name="twitter:image" content="https://images2015.cnblogs.com/blog/733013/201706/733013-20170621111849804-2044669562.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="godben&#39;s blog" title="godben&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="godben&#39;s blog">godben&#39;s blog</a></h1>
+				<h2 class="blog-motto">博观而约取 厚积而薄发</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/photo/index.html">摄影</a></li>
+					
+						<li><a href="/about">留言板</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/05/06/进程相关/" title="Linux进程相关" itemprop="url">Linux进程相关</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
+		
+  <p class="article-time">
+    <time datetime="2018-05-05T16:00:00.000Z" itemprop="datePublished"> 发表于 2018-05-06</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<h3 id="进程和程序的区别"><a href="#进程和程序的区别" class="headerlink" title="进程和程序的区别"></a>进程和程序的区别</h3><p>程序是二进制文件，是静态存放在磁盘上的，不会占用系统运行资源(cpu/内存)。</p>
+<p>进程是用户执行程序或者触发程序的结果，可以认为进程是程序的一个运行实例。进程是动态的，会申请和使用系统资源，并与操作系统内核进行交互。在后文中，不少状态统计工具的结果中显示的是system类的状态，其实system状态的同义词就是内核状态。</p>
+<a id="more"></a>
+<h3 id="进程的状态"><a href="#进程的状态" class="headerlink" title="进程的状态"></a>进程的状态</h3><p><img src="https://images2015.cnblogs.com/blog/733013/201706/733013-20170621111849804-2044669562.png" alt=""><br><img src="https://images2015.cnblogs.com/blog/733013/201706/733013-20170621111904241-1535274291.png" alt=""></p>
+<p>运行态：进程正在运行，也即是cpu正在它身上。</p>
+<p>就绪(等待)态：进程可以运行，已经处于等待队列中，也就是说调度类下次可能会选中它</p>
+<p>睡眠(阻塞)态：进程睡眠了，不可运行。</p>
+<p>各状态之间的转换方式为：</p>
+<p>(1)新状态－＞就绪态：当等待队列允许接纳新进程时，内核便把新进程移入等待队列。</p>
+<p>(2)就绪态－＞运行态：调度类选中等待队列中的某个进程，该进程进入运行态。</p>
+<p>(3)运行态－＞睡眠态：正在运行的进程因需要等待某事件(如IO等待、信号等待等)的出现而无法执行，进入睡眠态。</p>
+<p>(4)睡眠态－＞就绪态：进程所等待的事件发生了，进程就从睡眠态排入等待队列，等待下次被选中执行。</p>
+<p>(5)运行态－＞就绪态：正在执行的进程因时间片用完而被暂停执行；或者在抢占式调度方式中，高优先级进程强制抢占了正在执行的低优先级进程。</p>
+<p>(6)运行态－＞终止态：一个进程已完成或发生某种特殊事件，进程将变为终止状态。对于命令来说，一般都会返回退出状态码。</p>
+<h3 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">SIGHUP        1      终端退出时，此终端内的进程都将被终止</div><div class="line">SIGINT        2      中断进程，可被捕捉和忽略，几乎等同于sigterm，所以也会尽可能的释放执行clean-up，释放资源，保存状态等(CTRL+C)</div><div class="line">SIGQUIT       3      从键盘发出杀死(终止)进程的信号</div><div class="line"></div><div class="line">SIGKILL       9      强制杀死进程，该信号不可被捕捉和忽略，进程收到该信号后不会执行任何clean-up行为，所以资源不会释放，状态不会保存</div><div class="line">SIGTERM      15      杀死(终止)进程，可被捕捉和忽略，几乎等同于sigint信号，会尽可能的释放执行clean-up，释放资源，保存状态等</div><div class="line">SIGCHLD      17      当子进程中断或退出时，发送该信号告知父进程自己已完成，父进程收到信号将告知内核清理进程列表。所以该信号可以解除僵尸进</div><div class="line">                     程，也可以让非正常退出的进程工作得以正常的clean-up，释放资源，保存状态等。</div><div class="line"> </div><div class="line">SIGSTOP      19      该信号是不可被捕捉和忽略的进程停止信息，收到信号后会进入stopped状态</div><div class="line">SIGTSTP      20      该信号是可被忽略的进程停止信号(CTRL+Z)</div><div class="line">SIGCONT      18      发送此信号使得stopped进程进入running，该信号主要用于jobs，例如bg &amp; fg 都会发送该信号。</div><div class="line">                     可以直接发送此信号给stopped进程使其运行起来</div></pre></td></tr></table></figure>
+<h4 id="Linux的作业控制"><a href="#Linux的作业控制" class="headerlink" title="Linux的作业控制"></a>Linux的作业控制</h4><p>前台作业：通过终端启动，且启动后一直占据终端；<br>后台作业：可以通过终端启动，但启动后即转入后台运行（释放终端）；</p>
+<p>如何让作业运行于后台？<br>    (1) 运行中的作业<br>        Ctrl+z<br>    (2) 尚未启动的作业</p>
+<pre><code># COMMAND &amp;
+</code></pre><p>此类作业虽然被送往后台运行，但其依然与终端相关；如果希望送往后台后，剥离与终端的关系：</p>
+<pre><code># nohup COMMAND &amp;
+</code></pre><p>查看所有作业：</p>
+<pre><code># jobs
+</code></pre><p>作业控制：</p>
+<pre><code># fg [作业号]：把指定的后台作业调回前台；
+# bg [JOB_NUM]：让送往后台的作业在后台继续运行；
+# kill [%JOB_NUM][PID]：终止指定的作业,再次用fg时就会结束该进程/作业； 
+</code></pre><h4 id="kill命令"><a href="#kill命令" class="headerlink" title="kill命令"></a>kill命令</h4><blockquote>
+<pre><code>kill命令用来删除执行中的程序或工作。kill可将指定的信息送至程序。预设的信息为SIGTERM(15),可将指定程序终止。若仍无法终止该程序，可使用SIGKILL(9)信息尝试强制删除程序。程序或工作的编号可利用ps指令或job指令查看。
+
+kill(选项)(参数)
+</code></pre></blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-a：当处理当前进程时，不限制命令名和进程号的对应关系；</div><div class="line">-l &lt;信息编号&gt;：若不加&lt;信息编号&gt;选项，则-l参数会列出全部的信息名称；</div><div class="line">-p：指定kill 命令只打印相关进程的进程号，而不发送任何信号；</div><div class="line">-s &lt;信息名称或编号&gt;：指定要送出的信息；</div><div class="line">-u：指定用户。</div></pre></td></tr></table></figure>
+<pre><code>shell&gt; kill -9 pid1 pid2...
+shell&gt; kill -TREM pid1 pid2...   
+shell&gt; kill -s TREM pid1 pid2...
+使用-s或-signal都可以发送信号，不给定发送的信号时，默认为TREM信号，即kill -15。
+</code></pre><h4 id="pkill和killall"><a href="#pkill和killall" class="headerlink" title="pkill和killall"></a>pkill和killall</h4><p><strong>pkill</strong></p>
+<blockquote>
+<p>pkill能够指定模式匹配，所以可以使用进程名来删除，想要删除指定pid的进程，反而还要使用”-s”选项来指定。默认发送的信号是SIGTERM即数值为15的信号</p>
+<p>pkill [-signal] [-v] [-P ppid,…] [-s pid,…][-U uid,…] [-t term,…] [pattern]</p>
+</blockquote>
+<pre><code>-P ppid,... ：匹配PPID为指定值的进程
+-s pid,...  ：匹配PID为指定值的进程
+-U uid,...  ：匹配UID为指定值的进程，可以使用数值UID，也可以使用用户名称
+-t term,... ：匹配给定终端，终端名称不能带上&quot;/dev/&quot;前缀，其实&quot;w&quot;命令获得终端名就满足此处条件了，所以pkill可以直接杀掉整个终端
+-v          ：反向匹配
+-signal     ：指定发送的信号，可以是数值也可以是字符代表的信号
+
+-F, --pidfile file：匹配进程时，读取进程的pid文件从中获取进程的pid值。这样就不用去写获取进程pid命令的匹配模式
+-L, --logpidfile  ：如果&quot;-F&quot;选项读取的pid文件未加锁，则pkill或pgrep将匹配失败。
+</code></pre><p><strong>killall</strong>   </p>
+<blockquote>
+<p>killall主要用于杀死一批进程，例如杀死整个进程组。其强大之处还体现在可以通过指定文件来搜索哪个进程打开了该文件，然后对该进程发送信号，在这一点上，fuser和lsof命令也一样能实现。</p>
+<p>killall [-r,–regexp] [-s,–signal signal] [-u,–user user] [-v,–verbose] [-w,–wait] [-I,–ignore-case] [–] name …</p>
+</blockquote>
+<pre><code>-I           ：匹配时不区分大小写
+-r           ：使用扩展正则表达式进行模式匹配
+-s, --signal ：发送信号的方式可以是-HUP或-SIGHUP，或数值的&quot;-1&quot;，或使用&quot;-s&quot;选项指定信号
+-u, --user   ：匹配该用户的进程
+-v,          ：给出详细信息
+-w, --wait   ：等待直到该杀的进程完全死透了才返回。默认killall每秒检查一次该杀的进程是否还存在，只有不存在了才会给出退出状态码。
+               如果一个进程忽略了发送的信号、信号未产生效果、或者是僵尸进程将永久等待下去
+</code></pre><h4 id="fuser和lsof"><a href="#fuser和lsof" class="headerlink" title="fuser和lsof"></a>fuser和lsof</h4><blockquote>
+<p>fuser可以查看文件或目录所属进程的pid，即由此知道该文件或目录被哪个进程使用。例如，umount的时候提示the device busy可以判断出来哪个进程在使用。而lsof则反过来，它是通过进程来查看进程打开了哪些文件，但要注意的是，一切皆文件，包括普通文件、目录、链接文件、块设备、字符设备、套接字文件、管道文件，所以lsof出来的结果可能会非常多。</p>
+</blockquote>
+<p><strong>fuser</strong></p>
+<blockquote>
+<p>fuser [-ki] [-signal] file/dir</p>
+</blockquote>
+<pre><code>-k：找出文件或目录的pid，并试图kill掉该pid。发送的信号是SIGKILL
+-i：一般和-k一起使用，指的是在kill掉pid之前询问。
+-signal：发送信号，如-1 -15，如果不写，默认-9，即kill -9
+不加选项：直接显示出文件或目录的pid
+</code></pre><p><strong>lsof</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@godben backup]# lsof -u root | grep bash</div><div class="line">ksmtuned    713 root  txt       REG                8,2    960472     140990 /usr/bin/bash</div><div class="line">bash      20143 root  cwd       DIR                8,2      4096   50331713 /root</div><div class="line">bash      20143 root  rtd       DIR                8,2       277         64 /</div><div class="line">bash      20143 root  txt       REG                8,2    960472     140990 /usr/bin/bash</div><div class="line">bash      20143 root  mem       REG                8,2     62184   17016183 /usr/lib64/libnss_files-2.17.so</div><div class="line">bash      20143 root  mem       REG                8,2 106070960     140981 /usr/lib/locale/locale-archive</div></pre></td></tr></table></figure>
+<p>输出信息中各列意义：</p>
+<pre><code>COMMAND：进程的名称
+PID：进程标识符
+USER：进程所有者
+FD：文件描述符，应用程序通过文件描述符识别该文件。如cwd、txt等
+TYPE：文件类型，如DIR、REG等
+DEVICE：指定磁盘的名称
+SIZE/OFF：文件的大小或文件的偏移量(单位kb)(size and offset)
+NODE：索引节点（文件在磁盘上的标识）
+NAME：打开文件的确切名称
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@godben backup]# lsof -i :22</div><div class="line">COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</div><div class="line">sshd      918 root    3u  IPv4  22252      0t0  TCP *:ssh (LISTEN)</div><div class="line">sshd      918 root    4u  IPv6  22254      0t0  TCP *:ssh (LISTEN)</div><div class="line">sshd    37684 root    3u  IPv4 195543      0t0  TCP godben:ssh-&gt;172.20.108.10:58185 (ESTABLISHED)</div></pre></td></tr></table></figure>
+<h3 id="查看进程信息"><a href="#查看进程信息" class="headerlink" title="查看进程信息"></a>查看进程信息</h3><h4 id="pstree命令："><a href="#pstree命令：" class="headerlink" title="pstree命令："></a>pstree命令：</h4><blockquote>
+<p>以树的形式显示进程信息，默认树的分支是收拢的，也不显示pid，要显示这些信息需要指定对应的选项。</p>
+<p>pstree [-a] [-c] [-h] [-l] [-p] [pid]</p>
+</blockquote>
+<pre><code>选项说明：
+-a：显示进程的命令行
+-c：展开分支
+-h：高亮当前正在运行的进程及其父进程
+-p：显示进程pid，此选项也将展开分支
+-l：允许显示长格式进程。默认在显示结果中超过132个字符时将截断后面的字符。
+</code></pre><h4 id="ps命令："><a href="#ps命令：" class="headerlink" title="ps命令："></a>ps命令：</h4><blockquote>
+<p>查看当前这一刻的进程信息，注意查看的是静态进程信息。  </p>
+<p>对于BSD风格的选项，只需知道一个用法ps aux足以，选项”a”表示列出依赖于终端的进程，选项”x”表示列出不依赖于终端的进程，所以两者结合就表示列出所有进程，选项”u”表示展现的进程信息是以用户为导向的，不用管它什么是以用户为导向，用ps aux就没错。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[root@godben backup]# ps aux |  tail</div><div class="line">postfix   39500  0.0  0.3  91732  4024 ?        S    10:19   0:00 pickup -l -t unix -u</div><div class="line">root      39578  0.0  0.0      0     0 ?        S    10:23   0:02 [kworker/1:2]</div><div class="line">root      39708  0.0  0.0      0     0 ?        S    10:28   0:00 [kworker/1:0]</div><div class="line">root      40278  0.0  0.0      0     0 ?        S    11:17   0:00 [kworker/0:2]</div><div class="line">root      40434  0.0  0.0      0     0 ?        S    11:31   0:00 [kworker/0:0]</div><div class="line">root      40545  0.0  0.0      0     0 ?        S    11:37   0:00 [kworker/0:1]</div><div class="line">root      40577  0.0  0.0 107904   608 ?        S    11:40   0:00 sleep 60</div><div class="line">root      40578  0.0  0.0      0     0 ?        S    11:40   0:00 [kworker/0:3]</div><div class="line">root      40581  0.0  0.1 151064  1808 pts/1    R+   11:41   0:00 ps aux</div><div class="line">root      40582  0.0  0.0 107940   656 pts/1    S+   11:41   0:00 tail</div></pre></td></tr></table></figure>
+<p><strong>各列的意义：</strong></p>
+<pre><code>%CPU：表示CPU占用百分比，注意，CPU的衡量方式是占用时间，所以百分比的计算方式是&quot;进程占用cpu时间/cpu总时间&quot;，而不是cpu工作强度的状态。
+%MEM：表示各进程所占物理内存百分比。
+VSZ：表示各进程占用的虚拟内存，也就是其在线性地址空间中实际占用的内存。单位为kb。
+RSS：表示各进程占用的实际物理内存。单位为Kb。
+TTY：表示属于哪个终端的进程，&quot;?&quot;表示不依赖于终端的进程。
+STAT：进程所处的状态。
+    D：不可中断睡眠
+    R：运行中或等待队列中的进程(running/runnable)
+    S：可中断睡眠
+    T：进程处于stopped状态
+    Z：僵尸进程
+
+    对于BSD风格的ps选项，进程的状态还会显示下面几个组合信息
+    &lt;：高优先级进程
+    N：低优先级进程
+    L：该进程在内存中有被锁定的页
+    s：表示该进程是session leader，即进程组的首进程。例如管道左边的进程，shell脚本中的shell进程
+    l：表示该进程是一个线程
+    +：表示是前段进程。前段进程一般来说都是依赖于终端的
+START：表示进程是何时被创建的
+TIME：表示各进程占用的CPU时间
+COMMAND：表示进程的命令行。如果是内核线程，则使用方括号&quot;[]&quot;包围
+</code></pre><blockquote>
+<p>常用的ps选项是ps -elf。其中”-e”表示输出全部进程信息，”-f”和”-l”分别表示全格式输出和长格式输出。全格式会输出cmd的全部参数。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[root@godben ~]# ps -elf</div><div class="line">F S UID         PID   PPID  C PRI  NI ADDR SZ WCHAN  STIME TTY          TIME CMD</div><div class="line">4 S root          1      0  0  80   0 - 11507 ep_pol May04 ?        00:00:15 /usr/lib/systemd/system</div><div class="line">1 S root          2      0  0  80   0 -     0 kthrea May04 ?        00:00:00 [kthreadd]</div><div class="line">1 S root          3      2  0  80   0 -     0 smpboo May04 ?        00:00:01 [ksoftirqd/0]</div><div class="line">1 S root          5      2  0  60 -20 -     0 worker May04 ?        00:00:00 [kworker/0:0H]</div><div class="line">1 S root          7      2  0 -40   - -     0 smpboo May04 ?        00:00:00 [migration/0]</div><div class="line">1 S root          8      2  0  80   0 -     0 rcu_gp May04 ?        00:00:00 [rcu_bh]</div><div class="line">1 S root          9      2  0  80   0 -     0 rcu_gp May04 ?        00:00:06 [rcu_sched]</div><div class="line">5 S root         10      2  0 -40   - -     0 smpboo May04 ?        00:00:00 [watchdog/0]</div><div class="line">5 S root         11      2  0 -40   - -     0 smpboo May04 ?        00:00:00 [watchdog/1]</div><div class="line">1 S root         12      2  0 -40   - -     0 smpboo May04 ?        00:00:00 [migration/1]</div><div class="line">1 S root         13      2  0  80   0 -     0 smpboo May04 ?        00:00:00 [ksoftirqd/1]</div><div class="line">1 S root         15      2  0  60 -20 -     0 worker May04 ?        00:00:00 [kworker/1:0H]</div></pre></td></tr></table></figure>
+<p><strong>各列的意义：</strong></p>
+<pre><code>F：程序的标志位。0表示该程序只有普通权限，4表示具有root超级管理员权限，1表示该进程被创建的时候只进行了fork，没有进行exec
+S：进程的状态位，注意ps选项加了&quot;-&quot;的是非BSD风格选项，不会有&quot;s&quot;&quot;&lt;&quot;&quot;N&quot;&quot;+&quot;等的状态标识位
+C：CPU的百分比，注意衡量方式是时间
+PRI：进程的优先级，值越小，优先级越高，越早被调度类选中运行
+NI：进程的NICE值，值为-20到19，影响优先级的方式是PRI(new)=PRI(old)+NI，所以NI为负数的时候，越小将导致进程优先级越高。
+    ：但要注意，NICE值只能影响非实时进程。
+ADDR：进程在物理内存中哪个地方。
+SZ：进程占用的实际物理内存
+WCHAN：若进程处于睡眠状态，将显示其对应内核线程的名称，若进程为R状态，则显示&quot;-&quot;
+</code></pre><h4 id="uptime命令"><a href="#uptime命令" class="headerlink" title="uptime命令"></a>uptime命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@godben ~]# uptime</div><div class="line"> 14:20:35      up 23:22,           4 users,                  load average: 0.00, 0.01, 0.05</div><div class="line"> </div><div class="line"> 显示当前时间  已开机运行多少时间  当前有多少用户已登录系统  以及3个平均负载值</div></pre></td></tr></table></figure>
+<blockquote>
+<p>所谓负载率(load)，即特定时间长度内，cpu运行队列中的平均进程数(包括线程)，一般平均每分钟每核的进程数小于3都认为正常，大于5时负载已经非常高。在UNIX系统中，运行队列包括cpu正在执行的进程和等待cpu的进程(即所谓的可运行runable)。在Linux系统中，还包括不可中断睡眠态(IO等待)的进程。运行队列中每出现一个进程，load就加1，进程每退出运行队列，Load就减1。如果是多核cpu，则还要除以核数。</p>
+</blockquote>
+<p>例如，单核cpu上的负载值为”1.73 0.60 7.98”时，表示：</p>
+<p>最近1分钟：1.73表示平均可运行的进程数，这一分钟要一直不断地执行这1.73个进程。0.73个进程等待该核cpu。</p>
+<p>最近5分钟：平均进程数还不足1，表示该核cpu在过去5分钟空闲了40%的时间。</p>
+<p>最近15分钟：7.98表示平均可运行的进程数，这15分钟要一直不断地执行这7.98个进程。</p>
+<p>结合前5分钟的结果，说明前15-前10分钟时间间隔内，该核cpu的负载非常高。</p>
+<p>如果是多核cpu，则还要将结果除以核数。例如4核时，某个最近一分钟的负载值为3.73，则意味着有3.73个进程在运行队列中，这些进程可被调度至4核中的任何一个核上运行。最近1分钟的负载值为1.6，表示这一分钟内每核cpu都空闲(1-1.6/4)=60%的时间。<br>所以，load的理想值是正好等于CPU的核数，小于核数的时候表示cpu有空闲，超出核数的时候表示有进程在等待cpu，即系统资源不足。</p>
+<h4 id="top命令"><a href="#top命令" class="headerlink" title="top命令"></a>top命令</h4><blockquote>
+<p>top命令查看动态进程状态，默认每5秒刷新一次。</p>
+</blockquote>
+<pre><code>-d：指定top刷新的时间间隔，默认是5 秒
+-b：批处理模式，每次刷新分批显示
+-n：指定top刷新几次就退出，可以配合-b使用
+-p：指定监控的pid，指定方式为-pN1 -pN2 ...或-pN1, N2 [,...]
+-u：指定要监控的用户的进程，可以是uid也可以是user_name
+</code></pre><p>在top动态模式下，按下各种键可以进行不同操作。使用”h”或”?”可以查看相关键的说明。</p>
+<pre><code>1     ：(数字一)表示是否要在top的头部显示出多个cpu信息
+H     ：表示是否要显示线程，默认不显示
+c,S   ： c表示是否要展开进程的命令行，S表示显示的cpu时间是否是累积模式，cpu累积模式下已死去的子进程cpu时间会累积到父进程中
+x,y   ：x高亮排序的列，y表示高亮running进程
+u     ：仅显示指定用户的进程
+n or #：设置要显示最大的进程数量
+k     ：杀进程
+q     ：退出top
+P ：以CPU 的使用资源排序显示
+M ：以Memory 的使用资源排序显示
+N ：以PID 来排序
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">top - 16:41:48 up 1 day,  1:44,  3 users,  load average: 0.00, 0.01, 0.05</div><div class="line">Tasks: 191 total,   2 running, 189 sleeping,   0 stopped,   0 zombie</div><div class="line">%Cpu(s):  0.0 us,  0.2 sy,  0.0 ni, 99.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st</div><div class="line">KiB Mem :  1151272 total,   106960 free,   628092 used,   416220 buff/cache</div><div class="line">KiB Swap:  2098172 total,  1965432 free,   132740 used.   287504 avail Mem</div><div class="line"></div><div class="line">   PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND</div><div class="line">   624 root      20   0   21624    580    424 S   0.3  0.1   0:05.42 irqbalance</div><div class="line">   638 root      20   0  305080   1668   1336 S   0.3  0.1   1:16.16 vmtoolsd</div><div class="line">     1 root      20   0   46028   4992   2372 S   0.0  0.4   0:15.75 systemd</div><div class="line">     2 root      20   0       0      0      0 S   0.0  0.0   0:00.04 kthreadd</div><div class="line">     3 root      20   0       0      0      0 S   0.0  0.0   0:01.35 ksoftirqd/0</div><div class="line">     5 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/0:0H</div><div class="line">     7 root      rt   0       0      0      0 S   0.0  0.0   0:00.31 migration/0</div><div class="line">     8 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcu_bh</div></pre></td></tr></table></figure>
+<pre><code>第1行：和w命令的第一行一样，也和uptime命令的结果一样。此行各列分别表示&quot;当前时间&quot;、&quot;已开机时长&quot;、&quot;当前在线用户&quot;、&quot;前1、5、15分钟平均负载率&quot;。
+第2行：分别表示总进程数、running状态的进程数、睡眠状态的进程数、停止状态进程数、僵尸进程数。
+第3-6行：每颗cpu的状况。
+     us = user mode
+     sy = system mode
+     ni = low priority user mode (nice)(用户空间中低优先级进程的cpu占用百分比)
+     id = idle task
+     wa = I/O waiting
+     hi = servicing IRQs(不可中断睡眠，hard interruptible)
+     si = servicing soft IRQs(可中断睡眠，soft interruptible)
+     st = steal (time given to other DomU instances)(被偷走的cpu时间，一般被虚拟化软件偷走)
+第7-8行：从字面意思理解即可。
+VIRT：虚拟内存总量
+RES：实际内存总量
+SHR：共享内存量
+TIME：进程占用的cpu时间(若开启了时间累积模式，则此处显示的是累积时间)
+</code></pre><h4 id="vmstat命令"><a href="#vmstat命令" class="headerlink" title="vmstat命令"></a>vmstat命令</h4><blockquote>
+<pre><code>vmstat命令的含义为显示虚拟内存状态（“Viryual Memor Statics”），但是它可以报告关于进程、内存、I/O等系统整体运行状态。
+</code></pre><p>vmstat [-d] [delay [ count]]<br>vmstat [-f]</p>
+</blockquote>
+<p><strong>选项说明：</strong></p>
+<pre><code>-f：统计自开机起fork的次数。包括fork、clone、vfork的次数。但不包括exec次数。
+-d：显示磁盘统计信息。
+delay：刷新时间间隔，若不指定，则只统计一次信息就退出vmstat。
+count：总共要统计的次数。
+</code></pre><h4 id="iostat命令"><a href="#iostat命令" class="headerlink" title="iostat命令"></a>iostat命令</h4><blockquote>
+<p>iostat主要统计磁盘或分区的整体使用情况。也可以输出cpu信息，甚至是NFS网络文件系统的信息。同vmstat/sar一样，第一次统计的都是自系统开机起的平均统计信息。</p>
+<p>iostat [ -c ] [ -d ] [ -n -h ][ -k | -m ] [ -p [device][,…] ] [ interval [ count ] ]</p>
+</blockquote>
+<p>选项说明：<br>    -c：统计cpu信息<br>    -d：统计磁盘信息<br>    -n：统计NFS文件系统信息<br>    -h：使NFS统计信息更人类可读化<br>    -k：指定以kb/s为单位显示<br>    -m：指定以mb/s为单位显示<br>    -p：指定要统计的设备名称<br>    -y：指定不显示第一次统计信息，即不显示自开机起的统计信息。<br>    interval：刷新时间间隔<br>    count：总统计次数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[root@godben ~]# iostat</div><div class="line">Linux 3.10.0-693.el7.x86_64 (godben)    05/05/2018      _x86_64_        (2 CPU)</div><div class="line"></div><div class="line">avg-cpu:  %user   %nice %system %iowait  %steal   %idle</div><div class="line">           0.12    0.01    0.13    0.32    0.00   99.43</div><div class="line"></div><div class="line">Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn</div><div class="line">sda               0.96        49.58         3.76    4601542     348853</div><div class="line">sdb               0.00         0.06         0.00       5110          0</div><div class="line">scd0              0.00         0.01         0.00       1050          0</div><div class="line">dm-0              0.00         0.01         0.00       1036          0</div><div class="line">dm-1              0.00         0.01         0.00       1036          0</div></pre></td></tr></table></figure>
+<pre><code>tps：每秒transfer速率(transfers per second),一次对物理设备的IO请求为一个transfer，但多个逻辑请求可能只组成一个transfer
+Blk_read/s：每秒读取的block数量
+Blk_wrtn/s：每秒写入的block总数
+Blk_read：读取的总block数量
+Blk_wrtn：写入的总block数量
+</code></pre><h4 id="sar命令"><a href="#sar命令" class="headerlink" title="sar命令"></a>sar命令</h4><blockquote>
+<p>sar是一个非常强大的性能分析工具，它可以获取系统的cpu/等待队列/磁盘IO/内存/网络等性能指标。</p>
+<p>sar [options] [-o filename] [delay [count] ]</p>
+</blockquote>
+<p><strong>选项说明：</strong></p>
+<pre><code>-A：显示系统所有资源运行状况
+-b：显示磁盘IO和tranfer速率信息，和iostat的信息一样，是总体IO统计信息
+-d：显示磁盘在刷新时间间隔内的活跃情况，可以指定一个或多个设备，和-b不同的是，它显示的是单设备的IO、transfer信息。
+  ：建议配合-p使用显示友好的设备名，否则默认显示带主次设备号的设备名
+-P：显示指定的某颗或某几颗cpu的使用情况。指定方式为，-P 0,1,2,3或ALL。
+-u：显示每颗cpu整体平均使用情况。-u和-P的区别通过下面的示例很容易区分。
+-r：显示内存在刷新时间间隔内的使用情况
+-n：显示网络运行状态。后可接DEV/NFS/NFSD/FULL等多种参数。
+  ：DEV表示显示网路接口信息，NFS和NFSD分别表示显示NFS客户端服务端的流量信息，FULL表示显示所有信息。
+-q：显示等待队列大小
+-o filename：将结果存入到文件中
+delay：状态刷新时间间隔
+count：总共刷新几次
+</code></pre><h4 id="dstat命令："><a href="#dstat命令：" class="headerlink" title="dstat命令："></a>dstat命令：</h4><pre><code>dstat [-afv] [options..] [delay [count]]
+
+    -c:显示cpu相关信息:
+        -C #,#,...,total
+    -d:显示disk相关信息
+        -D total,sda,sdb,...
+    -g:显示page相关统计数据
+    -m:显示memory相关统计数据
+    -n:显示network相关统计数据
+    -p:显示process相关统计数据
+    -r:显示io请求相关的统计数据
+    -s:显示swapped相关的统计数据
+
+    --tcp
+    --udp
+    --unix
+    --raw
+    --socket
+
+    --ipc
+
+    --top-cpu:显示最占用cpu的进程
+    --top-io:显示最占用io的进程
+    --top-mem:显示最占内存的进程
+    --top-lantency:显示延迟最大的进程
+</code></pre><p>进程优先级调整:<br>    静态优先级：100-139</p>
+<pre><code>进程默认启动时的nice值为0， 优先级为120；
+
+nice命令:
+    nice [OPTION] [COMMAND [ARG]...]
+
+renice命令:
+    renice [-n] priority pid...
+
+查看:
+    ps axo pid, comm, ni
+</code></pre>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2018/05/06/进程相关/" data-title="Linux进程相关 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2018/05/06/Linux任务计划、周期性任务/" title="Linux任务计划、周期性任务">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Linux任务计划、周期性任务</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/05/03/使用Wireshark分析TCP三次握手及四次挥手/"  title="使用Wireshark分析TCP三次握手及四次挥手">
+ <strong>下一篇：</strong><br/> 
+ <span>使用Wireshark分析TCP三次握手及四次挥手
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2018/05/06/进程相关/" data-title="Linux进程相关" data-url="http://yoursite.com/2018/05/06/进程相关/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>35</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/FileSystem/" title="FileSystem">FileSystem<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/自动化/" title="自动化">自动化<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Kernel/" title="Kernel">Kernel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/TCP-IP/" title="TCP/IP">TCP/IP<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Wireshark/" title="Wireshark">Wireshark<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ssh/" title="ssh">ssh<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux-regex/" title="Linux,regex">Linux,regex<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://godben.blog.51cto.com/" target="_blank" title="我的51CTO博客">我的51CTO博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://linux.cn/" target="_blank" title="Linux中国">Linux中国</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.liaoxuefeng.com/" target="_blank" title="廖雪峰官网">廖雪峰官网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.ruanyifeng.com/home.html" target="_blank" title="阮一峰博客">阮一峰博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.cnblogs.com/f-ck-need-u/" target="_blank" title="骏马金龙">骏马金龙</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=1783437385&verifier=9cb9c6df&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m CAO BEN. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/caoben88" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/godben" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/godben" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:godben@sina.cn" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+
+ 
+		<p class="copyright">
+		 <span>Hosted by <a href="https://pages.coding.me" >Coding Pages</a></span>
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="godben">godben</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"godben"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?f6dbd6c2451b74e4a750f748a54d11e9";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
