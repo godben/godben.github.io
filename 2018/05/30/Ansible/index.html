@@ -4,19 +4,29 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>godben&#39;s blog</title>
+    <title>Ansible | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta property="og:type" content="website">
-<meta property="og:title" content="godben's blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+    <meta name="description" content="一、简介Ansible是一个配置管理和应用部署工具，功能类似于目前业界的配置管理工具 Chef,Puppet,Saltstack。Ansible是通过Python语言开发。Ansible平台由Michael DeHaan创建，他同时也是知名软件Cobbler与Func的作者。Ansible的第一个版本发布于2012年2月。Ansible 默认通过SSH协议管理机器，所以Ansible不需要安装客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ansible">
+<meta property="og:url" content="http://yoursite.com/2018/05/30/Ansible/index.html">
 <meta property="og:site_name" content="godben's blog">
+<meta property="og:description" content="一、简介Ansible是一个配置管理和应用部署工具，功能类似于目前业界的配置管理工具 Chef,Puppet,Saltstack。Ansible是通过Python语言开发。Ansible平台由Michael DeHaan创建，他同时也是知名软件Cobbler与Func的作者。Ansible的第一个版本发布于2012年2月。Ansible 默认通过SSH协议管理机器，所以Ansible不需要安装客">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/28/C41xhj.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/29/C4XFsO.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/29/C4v4de.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/30/C5omVI.md.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/30/C5ossJ.md.png">
+<meta property="og:updated_time" content="2018-05-30T13:16:02.668Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="godben's blog">
+<meta name="twitter:title" content="Ansible">
+<meta name="twitter:description" content="一、简介Ansible是一个配置管理和应用部署工具，功能类似于目前业界的配置管理工具 Chef,Puppet,Saltstack。Ansible是通过Python语言开发。Ansible平台由Michael DeHaan创建，他同时也是知名软件Cobbler与Func的作者。Ansible的第一个版本发布于2012年2月。Ansible 默认通过SSH协议管理机器，所以Ansible不需要安装客">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/05/28/C41xhj.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -72,12 +82,10 @@
 </div>
     </header>
     <div id="container">
-      <div id="main">
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
   <h1 itemprop="name">
     
       <a href="/2018/05/30/Ansible/" title="Ansible" itemprop="url">Ansible</a>
@@ -91,9 +99,9 @@
     
   </p>
 </header>
-    <div class="article-content">
-        
-        <p><img src="https://s1.ax1x.com/2018/05/28/C41xhj.jpg" alt=""></p>
+	<div class="article-content">
+		
+		<p><img src="https://s1.ax1x.com/2018/05/28/C41xhj.jpg" alt=""></p>
 <h3 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h3><p>Ansible是一个配置管理和应用部署工具，功能类似于目前业界的配置管理工具 Chef,Puppet,Saltstack。<br>Ansible是通过Python语言开发。Ansible平台由Michael DeHaan创建，他同时也是知名软件Cobbler与Func的作者。<br>Ansible的第一个版本发布于2012年2月。Ansible 默认通过SSH协议管理机器，所以Ansible不需要安装客户端程序在服务器上。</p>
 <h4 id="二、Ansible特性"><a href="#二、Ansible特性" class="headerlink" title="二、Ansible特性"></a>二、Ansible特性</h4><ul>
 <li>模块化，调用特定的模块，完成特定的任务</li>
@@ -165,14 +173,9 @@
 <h5 id="Roles各目录作用"><a href="#Roles各目录作用" class="headerlink" title="Roles各目录作用"></a>Roles各目录作用</h5><p>/roles/project/ :项目名称,有以下子目录<br>files/ ：存放由copy或script模块等调用的文件<br>templates/：template模块查找所需要模板文件的目录<br>tasks/：定义task,role的基本元素，至少应该包含一个名为main.yml的文件；其它的文件需要在此文件中通过include进行包含<br>handlers/：至少应该包含一个名为main.yml的文件；其它的文件需要在此文件中通过include进行包含<br>vars/：定义变量，至少应该包含一个名为main.yml的文件；其它的文件需要在此文件中通过include进行包含<br>meta/：定义当前角色的特殊设定及其依赖关系,至少应该包含一个名为main.yml的文件，其它文件需在此文件中通过include进行包含<br>default/：设定默认变量时使用此目录中的main.yml文件    </p>
 <h5 id="创建role"><a href="#创建role" class="headerlink" title="创建role"></a>创建role</h5><p>(1) 创建以roles命名的目录<br>(2) 在roles目录中分别创建以各角色名称命名的目录，如webservers等<br>(3) 在每个角色命名的目录中分别创建files、handlers、meta、tasks、 templates和vars目录；用不到的目录可以创建为空目录，也可以不创建<br>(4) 在playbook文件中，调用各角色 </p>
 <h5 id="针对大型项目使用Roles进行编排"><a href="#针对大型项目使用Roles进行编排" class="headerlink" title="针对大型项目使用Roles进行编排:"></a>针对大型项目使用Roles进行编排:</h5><p><img src="https://s1.ax1x.com/2018/05/30/C5ossJ.md.png" alt=""></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
+  
+	</div>
+		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 
@@ -185,286 +188,39 @@
 
 
 
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2018/05/30/Ansible/" data-title="Ansible | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  </div>
+	
+	</div>
 
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2018/05/30/Ansible/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/30/Ansible/" data-count-type="comments">&nbsp;</a>
-	
-</div>
 
 </footer>
 
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/05/28/cobbler无人值守批量安装Linux系统/" title="cobbler无人值守批量安装Linux系统" itemprop="url">cobbler无人值守批量安装Linux系统</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2018-05-28T14:14:20.179Z" itemprop="datePublished"> 发表于 2018-05-28</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="1-cobbler简介"><a href="#1-cobbler简介" class="headerlink" title="1.cobbler简介"></a>1.cobbler简介</h3><p>Cobbler是一个Linux服务器安装的服务，可以通过网络启动(PXE)的方式来快速安装、重装物理服务器和虚拟机，同时还可以管理DHCP，DNS等。</p>
-<p>Cobbler可以使用命令行方式管理，也提供了基于Web的界面管理工具(cobbler-web)，还提供了API接口，可以方便二次开发使用。</p>
-<p>Cobbler是较早前的kickstart的升级版，优点是比较容易配置，还自带web界面比较易于管理。</p>
-<p>Cobbler内置了一个轻量级配置管理系统，但它也支持和其它配置管理系统集成，如Puppet，暂时不支持SaltStack。</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2018/05/28/cobbler无人值守批量安装Linux系统/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/自动化/">自动化</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
+   	       
+	</article>
 	
-	  	<span></span>
-		<a href="/2018/05/28/cobbler无人值守批量安装Linux系统/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/28/cobbler无人值守批量安装Linux系统/" data-count-type="comments">&nbsp;</a>
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/05/28/cobbler无人值守批量安装Linux系统/"  title="cobbler无人值守批量安装Linux系统">
+ <strong>下一篇：</strong><br/> 
+ <span>cobbler无人值守批量安装Linux系统
+</span>
+</a>
+</div>
+
+</nav>
+
 	
-</div>
-
-</footer>
-
-
-    </article>
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2018/05/30/Ansible/" data-title="Ansible" data-url="http://yoursite.com/2018/05/30/Ansible/"></div>
+</section>
 
 
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/05/28/sudo/" title="sudo" itemprop="url">sudo</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2018-05-28T13:57:00.328Z" itemprop="datePublished"> 发表于 2018-05-28</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h4 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h4><blockquote>
-<p>  sudo命令能让一个用户以某个用户的身份去执行命令，例如可以让普通用户以root身份查看/etc/shadow文件</p>
-</blockquote>
-<pre><code>sudo与直接用root身份执行的区别：
-1. 使用sudo可以不需要知道root密码，可以给某用户在一段时间内拥有某些命令的root操作权限。
-2. sudo可以保持当前用户的环境变量
-3. sudo便于审计，系统审计日志会记录具体对应用户执行的命令
-4. sudo使用时间戳文件来完成类似“检票”的系统，默认存活期为5分钟的“入场券” 
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2018/05/28/sudo/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2018/05/28/sudo/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/28/sudo/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/05/28/PXE+kickstart安装CentOS6，7/" title="PXE+kickstart安装CentOS6，7" itemprop="url">PXE+kickstart安装CentOS6，7</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2018-05-28T13:55:37.265Z" itemprop="datePublished"> 发表于 2018-05-28</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h4 id="一、PEX简介："><a href="#一、PEX简介：" class="headerlink" title="一、PEX简介："></a>一、PEX简介：</h4><p>PXE(Preboot Execution Environment)：预启动执行环境</p>
-<p>PXE是由Intel设计的协议，它可以使计算机通过网络而不是从本地硬盘、光驱等设备启动。</p>
-<p>基于Client/Server的网络模式，支持远程主机通过网络从远端服务器下载映像，并由此支持通过网络启动操作系统</p>
-<p>PXE可以引导和安装Windows,linux等多种操作系统</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2018/05/28/PXE+kickstart安装CentOS6，7/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/自动化/">自动化</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2018/05/28/PXE+kickstart安装CentOS6，7/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/28/PXE+kickstart安装CentOS6，7/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/05/28/OpenSSH及端口转发实验/" title="OpenSSH及端口转发实验" itemprop="url">OpenSSH及端口转发实验</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
-		
-  <p class="article-time">
-    <time datetime="2018-05-28T13:54:04.344Z" itemprop="datePublished"> 发表于 2018-05-28</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <blockquote>
-<p>ssh: secure shell, protocol, 22/tcp, 安全的远程登陆,ssh协议有v1和v2两个版本，现在使用的都是v2版，v1已经不安全了</p>
-</blockquote>
-<p>OpenSSH： ssh协议的开源实现</p>
-<blockquote>
-<p>ssh两种方式的用户登录认证：<br>    基于password<br>    基于key</p>
-</blockquote>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2018/05/28/OpenSSH及端口转发实验/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2018/05/28/OpenSSH及端口转发实验/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/28/OpenSSH及端口转发实验/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-
-  <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
-  </nav>
-
-</div>
+</div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
 <div id="asidepart">
@@ -697,8 +453,95 @@ $(document).ready(function(){
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
 
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"godben"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
 
 
 
@@ -767,4 +610,4 @@ var _hmt = _hmt || [];
 <!-- Tiny_search End -->
 
   </body>
- </html>
+</html>
