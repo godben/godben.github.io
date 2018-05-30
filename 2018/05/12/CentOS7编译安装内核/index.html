@@ -4,40 +4,35 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>使用Wireshark分析TCP三次握手及四次挥手 | godben&#39;s blog</title>
+    <title>CentOS7编译安装内核 | godben&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="godben">
     
 
     
-    <meta name="description" content="1.为什么使用wireshark
-Wireshark 是最著名的网络通讯抓包分析工具。功能十分强大，可以截取各种网络封包，显示网络封包的详细信息。">
+    <meta name="description" content="准备工作：
+1.下载最新源码包：www.kernel.org
+2.安装编译工具:yum groups install Development Tools
+3.安装依赖工具：yum install hmaccalc zlib-develbinutils-devel elfutils-libelf-devel ncurses-devel
+4.安装openssl: yum install openssl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Wireshark分析TCP三次握手及四次挥手">
-<meta property="og:url" content="http://yoursite.com/2018/05/03/使用Wireshark分析TCP三次握手及四次挥手/index.html">
+<meta property="og:title" content="CentOS7编译安装内核">
+<meta property="og:url" content="http://yoursite.com/2018/05/12/CentOS7编译安装内核/index.html">
 <meta property="og:site_name" content="godben's blog">
-<meta property="og:description" content="1.为什么使用wireshark
-Wireshark 是最著名的网络通讯抓包分析工具。功能十分强大，可以截取各种网络封包，显示网络封包的详细信息。">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWBTI.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWg1S.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWwmd.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWfmj.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWJfK.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWtSO.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWNlD.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWrkt.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYW00A.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWstP.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYW26g.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWcp8.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/03/CYWyff.png">
-<meta property="og:updated_time" content="2018-05-03T03:08:51.903Z">
+<meta property="og:description" content="准备工作：
+1.下载最新源码包：www.kernel.org
+2.安装编译工具:yum groups install Development Tools
+3.安装依赖工具：yum install hmaccalc zlib-develbinutils-devel elfutils-libelf-devel ncurses-devel
+4.安装openssl: yum install openssl">
+<meta property="og:updated_time" content="2018-05-30T14:11:46.084Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Wireshark分析TCP三次握手及四次挥手">
-<meta name="twitter:description" content="1.为什么使用wireshark
-Wireshark 是最著名的网络通讯抓包分析工具。功能十分强大，可以截取各种网络封包，显示网络封包的详细信息。">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/05/03/CYWBTI.png">
+<meta name="twitter:title" content="CentOS7编译安装内核">
+<meta name="twitter:description" content="准备工作：
+1.下载最新源码包：www.kernel.org
+2.安装编译工具:yum groups install Development Tools
+3.安装依赖工具：yum install hmaccalc zlib-develbinutils-devel elfutils-libelf-devel ncurses-devel
+4.安装openssl: yum install openssl">
 
     
     <link rel="alternative" href="/atom.xml" title="godben&#39;s blog" type="application/atom+xml">
@@ -99,68 +94,51 @@ Wireshark 是最著名的网络通讯抓包分析工具。功能十分强大，�
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/05/03/使用Wireshark分析TCP三次握手及四次挥手/" title="使用Wireshark分析TCP三次握手及四次挥手" itemprop="url">使用Wireshark分析TCP三次握手及四次挥手</a>
+      <a href="/2018/05/12/CentOS7编译安装内核/" title="CentOS7编译安装内核" itemprop="url">CentOS7编译安装内核</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="godben" target="_blank" itemprop="author">godben</a>
 		
   <p class="article-time">
-    <time datetime="2018-05-03T02:59:34.785Z" itemprop="datePublished"> 发表于 2018-05-03</time>
+    <time datetime="2018-05-11T16:00:00.000Z" itemprop="datePublished"> 发表于 2018-05-12</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<h3 id="1-为什么使用wireshark"><a href="#1-为什么使用wireshark" class="headerlink" title="1.为什么使用wireshark"></a>1.为什么使用wireshark</h3><blockquote>
-<p>Wireshark 是最著名的网络通讯抓包分析工具。功能十分强大，可以截取各种网络封包，显示网络封包的详细信息。</p>
-</blockquote>
-<a id="more"></a>
-<h3 id="2-通过抓包查看TCP包结构"><a href="#2-通过抓包查看TCP包结构" class="headerlink" title="2.通过抓包查看TCP包结构"></a>2.通过抓包查看TCP包结构</h3><p><strong>TCP报文首部如下图所示：</strong></p>
-<p><img src="https://s1.ax1x.com/2018/05/03/CYWBTI.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">1. 源端口号：数据发起者的端口号，16bit</div><div class="line">2. 目的端口号：数据接收者的端口号，16bit</div><div class="line">3. 序号：32bit的序列号，由发送方使用</div><div class="line">4. 确认序号：32bit的确认号，是接收数据方期望收到发送方的下一个报文段的序号，因此确认序号应当是上次已成功收到数据字节序号加1。</div><div class="line">5. 首部长度：首部中32bit字的数目，可表示15*32bit=60字节的首部。一般首部长度为20字节。</div><div class="line">6. 保留：6bit, 均为0</div><div class="line">7. 紧急URG：当URG=1时，表示报文段中有紧急数据，应尽快传送。</div><div class="line">8. 确认比特ACK：ACK = 1时代表这是一个确认的TCP包，取值0则不是确认包。</div><div class="line">9. 推送比特PSH：当发送端PSH=1时，接收端尽快的交付给应用进程。</div><div class="line">10. 复位比特（RST）：当RST=1时，表明TCP连接中出现严重差错，必须释放连接，再重新建立连接。</div><div class="line">11. 同步比特SYN：在建立连接是用来同步序号。SYN=1， ACK=0表示一个连接请求报文段。SYN=1，ACK=1表示同意建立连接。</div><div class="line">12. 终止比特FIN：FIN=1时，表明此报文段的发送端的数据已经发送完毕，并要求释放传输连接。</div><div class="line">13. 窗口：用来控制对方发送的数据量，通知发放已确定的发送窗口上限。</div><div class="line">14. 检验和：该字段检验的范围包括首部和数据这两部分。由发端计算和存储，并由收端进行验证。</div><div class="line">15. 紧急指针：紧急指针在URG=1时才有效，它指出本报文段中的紧急数据的字节数。</div><div class="line">16. 选项：长度可变，最长可达40字节。</div></pre></td></tr></table></figure>
-<p><strong>通过Wireshark抓取的TCP数据包各部分如下图所示：</strong></p>
-<p><img src="https://s1.ax1x.com/2018/05/03/CYWg1S.png" alt=""></p>
-<h3 id="3-通过Wireshark抓包理解三次握手"><a href="#3-通过Wireshark抓包理解三次握手" class="headerlink" title="3.通过Wireshark抓包理解三次握手"></a>3.通过Wireshark抓包理解三次握手</h3><blockquote>
-<p>启动Wireshark捕获功能，在浏览器输入www.godben.com，返回到Wireshark中查看数据包获取情况，如下图红框中的数据包即为三次握手的过程，三次握手结束后捕获的数据包为HTTP数据包，表示客户端与服务器成功建立联系并开始传输网页数据。</p>
-</blockquote>
-<p><img src="https://s1.ax1x.com/2018/05/03/CYWwmd.png" alt=""></p>
-<p><strong>三次握手示意图：</strong></p>
-<p><img src="https://s1.ax1x.com/2018/05/03/CYWfmj.png" alt=""></p>
+		<h4 id="准备工作："><a href="#准备工作：" class="headerlink" title="准备工作："></a>准备工作：</h4><blockquote>
+<pre><code>1.下载最新源码包：www.kernel.org
+2.安装编译工具:yum groups install Development Tools
+3.安装依赖工具：yum install hmaccalc zlib-develbinutils-devel elfutils-libelf-devel ncurses-devel
+4.安装openssl: yum install openssl 
+              yum install openssl-devel
+</code></pre></blockquote>
+<a id="more"></a>    
 <blockquote>
-<p>第一次握手，客户端向服务器发送连接请求包，标志位SYN置为1，序号为seq x=0</p>
+<p>第一步：解压源码包，进入该目录</p>
 </blockquote>
-<p><img src="https://s1.ax1x.com/2018/05/03/CYWJfK.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@godben ~]# tar -Jxf linux-4.16.8.tar.xz</div><div class="line">[root@godben ~]# cd linux-4.16.8/</div></pre></td></tr></table></figure>
 <blockquote>
-<p>第二次握手，服务器收到客户端发过来报文，由SYN=1知道客户端要求建立联机。向客户端发送一个SYN和ACK都置为1的TCP报文，设置初始序号seq y=0，将确认序号(Acknowledgement Number)设置为客户的序列号加1，即x+1=0+1=1</p>
+<p>第二步：由于内核的配置选项太多，过于繁琐，为了避免错误，方便快捷，可以直接将我们原系统内核中的配置文件保存到当前目录下</p>
 </blockquote>
-<p><img src="https://s1.ax1x.com/2018/05/03/CYWtSO.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@godben linux-4.16.8]# cp /boot/config-3.10.0-693.el7.x86_64 .config</div></pre></td></tr></table></figure>
 <blockquote>
-<p>第三次握手，客户端收到服务器发来的包后检查确认序号(Acknowledgement Number)是否正确，即第一次发送的序号加1（x+1=1）。以及标志位ACK是否为1。若正确，服务器再次发送确认包，ACK标志位为1，SYN标志位为0。确认序号(Acknowledgement Number)=y+1=0+1=1，发送序号为x+1=1。客户端收到后确认序号值与ACK=1则连接建立成功，可以传送数据了。</p>
+<p>第三步：开始编译，步骤：生成内核—&gt; 生成模块—&gt; 安装模块—&gt;安装内核</p>
 </blockquote>
-<p><img src="https://s1.ax1x.com/2018/05/03/CYWNlD.png" alt=""></p>
-<h3 id="4-通过Wireshark抓包理解四次挥手"><a href="#4-通过Wireshark抓包理解四次挥手" class="headerlink" title="4.通过Wireshark抓包理解四次挥手"></a>4.通过Wireshark抓包理解四次挥手</h3><blockquote>
-<p>TCP断开连接时，会有四次挥手过程，如下图所示，wireshark截获到了四次挥手的四个数据包。</p>
-</blockquote>
-<p><img src="https://s1.ax1x.com/2018/05/03/CYWrkt.png" alt=""></p>
-<p><strong>TCP四次挥手过程如下图所示：</strong></p>
-<p><img src="https://s1.ax1x.com/2018/05/03/CYW00A.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@godben linux-4.16.8]# make bzImage          #生成内核 </div><div class="line">[root@godben linux-4.16.8]# make modules -j 4     #生成模块 </div><div class="line">[root@godben linux-4.16.8]# make modules_install  #安装模块 </div><div class="line">[root@godben linux-4.16.8]# make install          #安装内核</div></pre></td></tr></table></figure>
+<p><strong>每步执行完后可使用命令echo $?检查是否执行成功，结果为0则为成功</strong></p>
 <blockquote>
-<p>第一次挥手：客户端给服务器发送TCP包，用来关闭客户端到服务器的数据传送。将标志位FIN和ACK置为1，序号为X=2221，确认序号为Z=3806</p>
+<p>第四步：设置默认启动内核</p>
 </blockquote>
-<p><img src="https://s1.ax1x.com/2018/05/03/CYWstP.png" alt=""></p>
-<blockquote>
-<p>第二次挥手：服务器收到FIN后，发回一个ACK(标志位ACK=1),确认序号为收到的序号加1，即X=X+1=2222。序号为收到的确认序号=Z。</p>
-</blockquote>
-<p><img src="https://s1.ax1x.com/2018/05/03/CYW26g.png" alt=""></p>
-<blockquote>
-<p>第三次挥手：服务器关闭与客户端的连接，发送一个FIN。标志位FIN和ACK置为1，序号为Y=3806，确认序号为X=2222。</p>
-</blockquote>
-<p><img src="https://s1.ax1x.com/2018/05/03/CYWcp8.png" alt=""></p>
-<blockquote>
-<p>第四次挥手：客户端收到服务器发送的FIN之后，发回ACK确认(标志位ACK=1),确认序号为收到的序号加1，即Y+1=2222。序号为收到的确认序号X=3087。</p>
-</blockquote>
-<p><img src="https://s1.ax1x.com/2018/05/03/CYWyff.png" alt=""></p>
+<p>1.查看系统存在内核情况：cat /boot/grub2/grub.cfg | grep menuentry<br>输出结果如下所示：表示当前系统存在两个内核，分别为CentOS Linux (4.16.8) 7 (Core)和CentOS Linux (3.10.0-693.el7.x86_64) 7 (Core)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">if [ x&quot;$&#123;feature_menuentry_id&#125;&quot; = xy ]; then</div><div class="line">  menuentry_id_option=&quot;--id&quot;</div><div class="line">  menuentry_id_option=&quot;&quot;</div><div class="line">export menuentry_id_option</div><div class="line">menuentry &apos;CentOS Linux (4.16.8) 7 (Core)&apos; --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option &apos;gnulinux-3.10.0-693.el7.x86_64-advanced-1586482f-d1bc-4e81-a95d-3dc83bc507a3&apos; &#123;</div><div class="line">menuentry &apos;CentOS Linux (3.10.0-693.el7.x86_64) 7 (Core)&apos; --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option &apos;gnulinux-3.10.0-693.el7.x86_64-advanced-1586482f-d1bc-4e81-a95d-3dc83bc507a3&apos; &#123;</div><div class="line">menuentry &apos;CentOS Linux (0-rescue-37a236ebe26e4f20891155b2afa6dac5) 7 (Core)&apos; --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option &apos;gnulinux-0-rescue-37a236ebe26e4f20891155b2afa6dac5-advanced-1586482f-d1bc-4e81-a95d-3dc83bc507a3&apos; &#123;</div></pre></td></tr></table></figure>
+<p>2.设置CentOS Linux (4.16.8) 7 (Core)为默认启动内核</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@godben ~]# grub2-set-default &quot;CentOS Linux (4.16.8) 7 (Core)&quot;</div></pre></td></tr></table></figure>
+<p>3.验证是否设置成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@godben ~]# grub2-editenv list</div><div class="line">saved_entry=CentOS Linux (4.16.8) 7 (Core)</div></pre></td></tr></table></figure>
+<p>第五步：重启系统后查看内核版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@godben ~]# uname -r</div><div class="line">4.16.8</div></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -169,7 +147,7 @@ Wireshark 是最著名的网络通讯抓包分析工具。功能十分强大，�
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/TCP-IP/">TCP/IP</a><a href="/tags/Wireshark/">Wireshark</a>
+  <span></span> <a href="/tags/Linux/">Linux</a>
   </div>
 
 </div>
@@ -178,7 +156,7 @@ Wireshark 是最著名的网络通讯抓包分析工具。功能十分强大，�
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2018/05/03/使用Wireshark分析TCP三次握手及四次挥手/" data-title="使用Wireshark分析TCP三次握手及四次挥手 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
+	  <div data-url="http://yoursite.com/2018/05/12/CentOS7编译安装内核/" data-title="CentOS7编译安装内核 | godben&#39;s blog" data-tsina="1783437385" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -192,18 +170,18 @@ Wireshark 是最著名的网络通讯抓包分析工具。功能十分强大，�
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2018/05/06/进程相关/" title="Linux进程相关">
+ <a href="/2018/05/16/Linux使用脚本批量添加用户/" title="Linux下使用脚本批量添加用户">
   <strong>上一篇：</strong><br/>
   <span>
-  Linux进程相关</span>
+  Linux下使用脚本批量添加用户</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2018/04/26/CentOS7迁移HOME目录到独立分区/"  title="CentOS7迁移HOME目录到独立分区">
+<a href="/2018/05/07/ 如何保证程序在后台稳定运行/"  title="如何保证程序在后台稳定运行">
  <strong>下一篇：</strong><br/> 
- <span>CentOS7迁移HOME目录到独立分区
+ <span>如何保证程序在后台稳定运行
 </span>
 </a>
 </div>
@@ -212,7 +190,7 @@ Wireshark 是最著名的网络通讯抓包分析工具。功能十分强大，�
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2018/05/03/使用Wireshark分析TCP三次握手及四次挥手/" data-title="使用Wireshark分析TCP三次握手及四次挥手" data-url="http://yoursite.com/2018/05/03/使用Wireshark分析TCP三次握手及四次挥手/"></div>
+	<div class="ds-thread" data-thread-key="2018/05/12/CentOS7编译安装内核/" data-title="CentOS7编译安装内核" data-url="http://yoursite.com/2018/05/12/CentOS7编译安装内核/"></div>
 </section>
 
 
