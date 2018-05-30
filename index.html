@@ -94,81 +94,11 @@
     <div class="article-content">
         
         <p><img src="https://s1.ax1x.com/2018/05/28/C41xhj.jpg" alt=""></p>
-<h3 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h3><p>Ansible是一个配置管理和应用部署工具，功能类似于目前业界的配置管理工具 Chef,Puppet,Saltstack。<br>Ansible是通过Python语言开发。Ansible平台由Michael DeHaan创建，他同时也是知名软件Cobbler与Func的作者。<br>Ansible的第一个版本发布于2012年2月。Ansible 默认通过SSH协议管理机器，所以Ansible不需要安装客户端程序在服务器上。</p>
-<h4 id="二、Ansible特性"><a href="#二、Ansible特性" class="headerlink" title="二、Ansible特性"></a>二、Ansible特性</h4><ul>
-<li>模块化，调用特定的模块，完成特定的任务</li>
-<li>基于Python语言实现，由Paramiko、PyYAML和Jinja2三个关键模块</li>
-<li>部署简单，agentless</li>
-<li>主从模式</li>
-<li>支持自定义模式</li>
-<li>支持Playbook</li>
-</ul>
-<h4 id="三、Ansible架构图"><a href="#三、Ansible架构图" class="headerlink" title="三、Ansible架构图"></a>三、Ansible架构图</h4><p><img src="https://s1.ax1x.com/2018/05/29/C4XFsO.png" alt=""></p>
-<h4 id="四、Ansible执行过程"><a href="#四、Ansible执行过程" class="headerlink" title="四、Ansible执行过程"></a>四、Ansible执行过程</h4><ol>
-<li>加载自己的配置文件 默认/etc/ansible/ansible.cfg </li>
-<li>加载自己对应的模块文件，如command </li>
-<li>通过ansible将模块或命令生成对应的临时py文件，并将该文件传输至远程服务器的对应执行用户$HOME/.ansible/tmp/ansible-tmp-数字/XXX.PY文件</li>
-<li>给文件+x执行</li>
-<li>执行并返回结果</li>
-<li>删除临时py文件，sleep 0退出 </li>
-</ol>
-<h4 id="五、安装配置Ansible"><a href="#五、安装配置Ansible" class="headerlink" title="五、安装配置Ansible"></a>五、安装配置Ansible</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install ansible -y</div></pre></td></tr></table></figure>
-<p><strong>配置文件：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/etc/ansible/ansible.cfg     #主配置文件，配置ansible工作特性 </div><div class="line">/etc/ansible/hosts           #主机清单 </div><div class="line">/etc/ansible/roles/          #存放角色的目录</div></pre></td></tr></table></figure></p>
-<p><strong>程序：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ansible 主程序，临时命令执行工具 </div><div class="line">/usr/bin/ansible-doc 查看配置文档，模块功能查看工具 </div><div class="line">/usr/bin/ansible-galaxy 下载/上传优秀代码或Roles模块的官网平台 </div><div class="line">/usr/bin/ansible-playbook 定制自动化任务，编排剧本工具</div><div class="line">/usr/bin/ansible-pull 远 程执行命令的工具 </div><div class="line">/usr/bin/ansible-vault  文件加密工具 </div><div class="line">/usr/bin/ansible-console  基于Console界面与用户交互的执行工具</div></pre></td></tr></table></figure>
-<h5 id="配置和被管理的主机直接建立基于ssh的密钥认证"><a href="#配置和被管理的主机直接建立基于ssh的密钥认证" class="headerlink" title="配置和被管理的主机直接建立基于ssh的密钥认证"></a>配置和被管理的主机直接建立基于ssh的密钥认证</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -P &apos;&apos;</div><div class="line">ssh-copy-id -i .ssh/id_rsa.pub root@192.168.3.100</div></pre></td></tr></table></figure>
-<h5 id="主机清单inventory，定义主机，将所有被管理的主机加入到-etc-ansible-hosts中，否则无法管理"><a href="#主机清单inventory，定义主机，将所有被管理的主机加入到-etc-ansible-hosts中，否则无法管理" class="headerlink" title="主机清单inventory，定义主机，将所有被管理的主机加入到/etc/ansible/hosts中，否则无法管理"></a>主机清单inventory，定义主机，将所有被管理的主机加入到/etc/ansible/hosts中，否则无法管理</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@localhost ansible]# vim /etc/ansible/hosts</div><div class="line">[webservs]</div><div class="line">192.168.3.100</div><div class="line">192.168.3.33</div><div class="line"></div><div class="line">[dbsrvs]</div><div class="line">192.168.3.102</div></pre></td></tr></table></figure>
-<h4 id="六、命令格式"><a href="#六、命令格式" class="headerlink" title="六、命令格式"></a>六、命令格式</h4><blockquote>
-<p>ansible <host-pattern> [-f forks] [-m module_name] [-a args]</host-pattern></p>
-</blockquote>
-<pre><code>-m NAME,–module-name=NAME：指定执行使用的模块
--u USERNAME,–user=USERNAME：指定远程主机以USERNAME运行命令
--s,–sudo：相当于Linux系统下的sudo命令
--USUDO_USERNAME,–sudo-user=SUDO_USERNAME：使用sudo，相当于Linux下的sudo命令
--C -check只检查不实际执行
--e EXTRA_VARS，引用外部参数
--i INVENTORY，指定仓库列表，默认/etc/ansible/hosts
-–list-hosts,列出执行主机列
-</code></pre><h4 id="七、常用模块"><a href="#七、常用模块" class="headerlink" title="七、常用模块"></a>七、常用模块</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">command</div><div class="line">    -a &apos;COMMAND&apos;</div><div class="line">    [root@localhost ansible]# ansible 192.168.3.100 -m command -a &apos;ifconfig&apos;</div><div class="line">    </div><div class="line">user</div><div class="line">    -a &apos;name= state=&#123;present|absent&#125; system= uid=&apos;</div><div class="line">     ansible srv -m user -a &apos;name=user1 comment=“test user” uid=2048 home=/app/user1 group=root&apos;</div><div class="line">     ansible srv  -m user -a &apos;name=sysuser1 system=yes home=/app/sysuser1&apos;</div><div class="line">     ansible srv -m user -a &apos;name=user1 state=absent remove=yes&apos; </div><div class="line"></div><div class="line">group</div><div class="line">    -a &apos;nam= gid= state= system=&apos;</div><div class="line">    ansible  srv -m group -a &quot;name=testgroup system=yes&quot;</div><div class="line">    ansible  srv -m group -a &quot;name=testgroup state=absent&quot; </div><div class="line"></div><div class="line">cron</div><div class="line">    -a &apos;name= minute= hour= day= month= weekday= job= user= state=&apos;</div><div class="line">    [root@localhost ~]# ansible all -m cron -a &apos;name=&quot;sync time from ntpserver&quot; minute=&quot;*/10&quot; job=&quot;/sbin/ntpdate 172.16.0.1 &amp;&gt; /dev/null&quot;&apos;</div><div class="line">    [root@localhost ~]# ansible all -m cron -a &apos;name=&quot;sync time from ntpserver&quot; state=absent&apos;</div><div class="line"></div><div class="line">copy</div><div class="line">    -a &apos;dest= src= mode= owner= group=&apos;</div><div class="line">    ansible srv -m copy -a “src=/root/f1.sh dest=/tmp/f2.sh owner=wang  mode=600 backup=yes” </div><div class="line"></div><div class="line">file</div><div class="line">    -a &apos;path= mode= owner= group= state=&#123;directory|link|present|absent&#125; src=&apos;</div><div class="line">    ansible srv -m file -a &quot;path=/root/a.sh owner=wang mode=755“</div><div class="line">    ansible web  -m file  -a &apos;src=/app/testfile  dest=/app/testfile-link state=link&apos;</div><div class="line">    </div><div class="line">ping</div><div class="line">    no argument</div><div class="line"></div><div class="line">yum </div><div class="line">    -a &apos;name= state=&#123;presnet|latest|absent&#125;&apos;</div><div class="line">    ansible srv -m yum -a &apos;name=httpd state=latest&apos;  #安装 </div><div class="line">    ansible srv -m yum -a &apos;name=httpd state=absent&apos;  #删除 </div><div class="line"></div><div class="line">service</div><div class="line">    -a &apos;name= state=&#123;started|stoped|restarted&#125; enabled=&apos;</div><div class="line">    ansible srv -m service -a &apos;name=httpd state=stopped&apos;</div><div class="line">    ansible srv -m service -a &apos;name=httpd state=started&apos;</div><div class="line">    ansible srv –m service –a &apos;name=httpd state=reloaded&apos;</div><div class="line">    ansible srv -m service -a &apos;name=httpd state=restarted&apos; </div><div class="line"></div><div class="line">shell</div><div class="line">    -a &apos;COMMAND&apos;</div><div class="line"></div><div class="line">script</div><div class="line">    -a &apos;/path/to/script&apos;</div><div class="line">    ansible websrvs -m script -a f1.sh </div><div class="line"></div><div class="line">setup</div></pre></td></tr></table></figure>
-<h3 id="八、playbook"><a href="#八、playbook" class="headerlink" title="八、playbook"></a>八、playbook</h3><p>playbook是由一个或多个“play”组成的列表。<br>play的主要功能在于将事先归并为一组的主机装扮成事先通过ansible中的task 定义好的角色。从根本上来讲，所谓task无非是调用ansible的一个module。将多个play组织在一个playbook中，即可以让它们联同起来按事先编排的机制同唱一台大戏。<br>playbook采用YAML语言编写<br><img src="https://s1.ax1x.com/2018/05/29/C4v4de.png" alt=""></p>
-<h5 id="playbook的组成结构"><a href="#playbook的组成结构" class="headerlink" title="playbook的组成结构"></a>playbook的组成结构</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Inventory</div><div class="line">Modules</div><div class="line">Ad Hoc Comands</div><div class="line">Playbooks</div><div class="line">    tasks: 任务,即调用模块完成的某操作  </div><div class="line">    variables：变量   </div><div class="line">    templates：模板   </div><div class="line">    handlers：处理器，由某事件触发执行的操作   </div><div class="line">    roles：角色</div></pre></td></tr></table></figure>
-<h4 id="tasks"><a href="#tasks" class="headerlink" title="tasks"></a>tasks</h4><p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# cat nginx.yml </div><div class="line"> - hosts: websrvs</div><div class="line">   remote_user: root</div><div class="line">   tasks:</div><div class="line">   - name: create nginx group</div><div class="line">     group: name=nginx system=yes gid=208</div><div class="line">   - name: create nginx user</div><div class="line">     user: name=nginx uid=208 group=nginx system=yes</div><div class="line"></div><div class="line"> - hosts: dbsrvs</div><div class="line">   remote_user: root</div><div class="line">   tasks:</div><div class="line">   - name: copy file to dbsrvs</div><div class="line">     copy: src=/etc/inittab dest=/tmp/inittab.ans</div></pre></td></tr></table></figure></p>
-<h4 id="Handlers"><a href="#Handlers" class="headerlink" title="Handlers"></a>Handlers</h4><p>Handlers 是task列表，这些task与前述的task并没有本质上的不同,用于当关注的资源发生变化时，才会采取一定的操作。</p>
-<p>notify这个action可用于在每个play的最后被触发，这样可以避免多次有改变发生时每次都执行指定的操作，仅在所有的变化发生完成后一次性地执行指定操作。在notify中列出的操作称为handler，也即notify中调用handler中定义的操作 </p>
-<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# cat httpd.yml</div><div class="line"> - hosts: websrvs</div><div class="line">   remote_user: root</div><div class="line">   tasks:</div><div class="line">   - name: install httpd package</div><div class="line">     yum: name=httpd state=latest</div><div class="line">   - name: install configuration file for httpd</div><div class="line">     copy: src=/root/conf/httpd.conf dest=/etc/httpd/conf/httpd.conf</div><div class="line">     notify:</div><div class="line">     - restart httpd</div><div class="line">   - name: start httpd service</div><div class="line">     service: enabled=true name=httpd state=started</div><div class="line">   handlers:</div><div class="line">   - name: restart httpd</div><div class="line">     service: name=httpd state=restarted</div></pre></td></tr></table></figure></p>
-<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p><strong>变量名：</strong> 仅能由字母、数字和下划线组成，且只能以字母开头  </p>
-<p><strong>变量定义方式：</strong><br>1.ansible setup facts 远程主机的所有变量都可直接调用<br>2.在/etc/ansible/hosts中定义        </p>
-<ul>
-<li>普通变量：主机组中主机单独定义，优先级高于公共变量        </li>
-<li>公共（组）变量：针对主机组中所有主机定义统一变量  </li>
-</ul>
-<p>3.通过命令行指定变量，优先级最高  ansible-playbook –e varname=value<br>4.在playbook中定义 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vars: </div><div class="line">    - var1: value1 </div><div class="line">    - var2: value2</div></pre></td></tr></table></figure>
-<p>5.在role中定义 </p>
-<p><strong>优先级：</strong> 命令行&gt;playbook&gt;主机清单<br><strong>变量调用方式:</strong></p>
-<ul>
-<li>通过 调用变量，且变量名前后必须有空格，有时用 “”才生效 </li>
-<li>ansible-playbook –e 选项指定  </li>
-</ul>
-<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# cat httpd.yml</div><div class="line"> - hosts: websrvs</div><div class="line">   remote_user: root</div><div class="line">   tasks:</div><div class="line">   - name: install httpd package</div><div class="line">     yum: name=httpd state=latest</div><div class="line">   - name: install configuration file for httpd</div><div class="line">     copy: src=/root/conf/httpd.conf dest=/etc/httpd/conf/httpd.conf</div><div class="line">     notify:</div><div class="line">     - restart httpd</div><div class="line">   - name: start httpd service</div><div class="line">     service: enabled=true name=httpd state=started</div><div class="line">   handlers:</div><div class="line">   - name: restart httpd</div><div class="line">     service: name=httpd state=restarted</div></pre></td></tr></table></figure></p>
-<h6 id="条件测试：when"><a href="#条件测试：when" class="headerlink" title="条件测试：when"></a>条件测试：when</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# cat cond.yml </div><div class="line"> - hosts: all</div><div class="line">   remote_user: root</div><div class="line">   vars:</div><div class="line">   - username: user10</div><div class="line">   tasks:</div><div class="line">   - name: create &#123;&#123; username &#125;&#125; user</div><div class="line">     user: name=&#123;&#123; username &#125;&#125; </div><div class="line">     when: ansible_fqdn == &quot;godben&quot;</div></pre></td></tr></table></figure>
-<p>迭代：重复同类task时使用<br>    调用: item<br>    定义循环列表：with_items</p>
-<pre><code>注意：with_items中的列表也可以是字典，但引用时要使用item.KEY 
-
- - name: add several users   
-   user: name={{ item }} state=present groups=wheel   
-   with_items:     
-    - testuser1      
-    - testuser2 
-</code></pre><p><strong>tags:</strong>  在playboos可以为某个或某些任务定义一个“标签”，在执行此playbook时，通过为ansible-playbook命令使用–tags选项能实现仅运行指定的tasks而非所有。特殊tags:always<br>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# ansible-playbook httpd.yml --tags=&quot;conf&quot;</div><div class="line"></div><div class="line"></div><div class="line">[root@localhost ~]# cat httpd.yml</div><div class="line"> - hosts: websrvs</div><div class="line">   remote_user: root</div><div class="line">   tasks:</div><div class="line">   - name: install httpd package</div><div class="line">     yum: name=httpd state=latest</div><div class="line">   - name: install configuration file for httpd</div><div class="line">     copy: src=/root/conf/httpd.conf dest=/etc/httpd/conf/httpd.conf</div><div class="line">     tags:</div><div class="line">     - conf</div><div class="line">     notify:</div><div class="line">     - restart httpd</div><div class="line">   - name: start httpd service</div><div class="line">     service: enabled=true name=httpd state=started</div><div class="line">   handlers:</div><div class="line">   - name: restart httpd</div><div class="line">     service: name=httpd state=restarted</div></pre></td></tr></table></figure></p>
-<h4 id="Roles"><a href="#Roles" class="headerlink" title="Roles"></a>Roles</h4><p><img src="https://s1.ax1x.com/2018/05/30/C5omVI.md.png" alt=""></p>
-<h5 id="Roles各目录作用"><a href="#Roles各目录作用" class="headerlink" title="Roles各目录作用"></a>Roles各目录作用</h5><p>/roles/project/ :项目名称,有以下子目录<br>files/ ：存放由copy或script模块等调用的文件<br>templates/：template模块查找所需要模板文件的目录<br>tasks/：定义task,role的基本元素，至少应该包含一个名为main.yml的文件；其它的文件需要在此文件中通过include进行包含<br>handlers/：至少应该包含一个名为main.yml的文件；其它的文件需要在此文件中通过include进行包含<br>vars/：定义变量，至少应该包含一个名为main.yml的文件；其它的文件需要在此文件中通过include进行包含<br>meta/：定义当前角色的特殊设定及其依赖关系,至少应该包含一个名为main.yml的文件，其它文件需在此文件中通过include进行包含<br>default/：设定默认变量时使用此目录中的main.yml文件    </p>
-<h5 id="创建role"><a href="#创建role" class="headerlink" title="创建role"></a>创建role</h5><p>(1) 创建以roles命名的目录<br>(2) 在roles目录中分别创建以各角色名称命名的目录，如webservers等<br>(3) 在每个角色命名的目录中分别创建files、handlers、meta、tasks、 templates和vars目录；用不到的目录可以创建为空目录，也可以不创建<br>(4) 在playbook文件中，调用各角色 </p>
-<h5 id="针对大型项目使用Roles进行编排"><a href="#针对大型项目使用Roles进行编排" class="headerlink" title="针对大型项目使用Roles进行编排:"></a>针对大型项目使用Roles进行编排:</h5><p><img src="https://s1.ax1x.com/2018/05/30/C5ossJ.md.png" alt=""></p>
-
         
         
         <p class="article-more-link">
+          
+            <a href="/2018/05/30/Ansible/#more">阅读更多</a>
           
        </p>
     </div>
@@ -511,7 +441,7 @@
 			
 		
 			
-				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
 			
 		
 			
@@ -519,15 +449,15 @@
 			
 		
 			
-				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Linux-regex/" title="Linux,regex">Linux,regex<sup>1</sup></a></li>
+				<li><a href="/tags/Linux运维/" title="Linux运维">Linux运维<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Regex/" title="Regex">Regex<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux-regex/" title="Linux,regex">Linux,regex<sup>1</sup></a></li>
 			
 		
 			
