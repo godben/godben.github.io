@@ -322,7 +322,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/05/22/OpenSSH及端口转发实验/" title="OpenSSH及端口转发实验" itemprop="url">OpenSSH及端口转发实验</a>
+      <a href="/2018/05/22/sudo/" title="sudo" itemprop="url">sudo</a>
   </h1>
   <p class="article-author">By
        
@@ -335,18 +335,20 @@
 </header>
     <div class="article-content">
         
-        <blockquote>
-<p>ssh: secure shell, protocol, 22/tcp, 安全的远程登陆,ssh协议有v1和v2两个版本，现在使用的都是v2版，v1已经不安全了</p>
+        <h4 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h4><blockquote>
+<p>  sudo命令能让一个用户以某个用户的身份去执行命令，例如可以让普通用户以root身份查看/etc/shadow文件</p>
 </blockquote>
-<p>OpenSSH： ssh协议的开源实现</p>
-<blockquote>
-<p>ssh两种方式的用户登录认证：<br>    基于password<br>    基于key</p>
-</blockquote>
+<pre><code>sudo与直接用root身份执行的区别：
+1. 使用sudo可以不需要知道root密码，可以给某用户在一段时间内拥有某些命令的root操作权限。
+2. sudo可以保持当前用户的环境变量
+3. sudo便于审计，系统审计日志会记录具体对应用户执行的命令
+4. sudo使用时间戳文件来完成类似“检票”的系统，默认存活期为5分钟的“入场券” 
+</code></pre>
         
         
         <p class="article-more-link">
           
-            <a href="/2018/05/22/OpenSSH及端口转发实验/#more">阅读更多</a>
+            <a href="/2018/05/22/sudo/#more">阅读更多</a>
           
        </p>
     </div>
@@ -367,7 +369,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2018/05/22/OpenSSH及端口转发实验/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/22/OpenSSH及端口转发实验/" data-count-type="comments">&nbsp;</a>
+		<a href="/2018/05/22/sudo/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/05/22/sudo/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
